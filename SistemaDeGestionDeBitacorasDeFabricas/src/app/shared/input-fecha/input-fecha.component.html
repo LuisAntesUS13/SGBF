@@ -1,0 +1,43 @@
+
+<div class="d-flex justify-content-end container" [formGroup]="Formulario">
+    <div class="input-group" >
+        <input type="text" class="form-control" placeholder="dd/mm/yyyy"  (input)="cambioFechaManual()"  
+        (blur)="onBlur($event)"  [ngClass]="{'is-invalid': mostrarTooltip}" formControlName="fecha_string">
+        <span   class="input-group-text" id="basic-addon2" style="cursor: pointer;" (click)="mostrarCalendario()"
+        [style.cursor]="!campoHabilitado ? 'auto' : 'pointer'" [style.opacity]="!campoHabilitado ? '0.3' : '1'" >
+        <em class="bi bi-calendar-event" ></em></span>
+    </div>
+    <div class="fragment" *ngIf="mostrarMensaje">
+        <b>Fecha invalida</b>
+    </div>
+    <div class="border" *ngIf="mostrar">
+        <div class="contenido-botones">
+            <div class="col-sm-1 izquierda" (click)="changeMount(-1)">
+                <em class="bi bi-chevron-left"></em>
+            </div>
+            <div class="col-sm-4 anios">
+                <select class="form-select texto_tamano" aria-label="Default select example" formControlName="anio"  (change)="cambioAnio($event)">
+                    <option *ngFor="let anio of anios" [value]="anio">{{ anio }}</option>
+                </select>
+            </div>
+            <div class="col-sm-6 meses">
+                <select class="form-select texto_tamano" aria-label="Default select example" formControlName="mes" (change)="cambioMes($event)">
+                    <option *ngFor="let mes of meses" [value]="mes.id">{{ mes.mes }}</option>
+                </select>
+            </div>
+            <div class="col-sm-1 derecha" (click)="changeMount(1)">
+                <em class="bi bi-chevron-right"></em>
+            </div>
+        </div>
+        <ol>
+            <li *ngFor="let dia of semana" class="day-name"> {{dia | slice:0:3}}</li>
+            <li (click)="clickDay(day)" *ngFor="let day of mountSelect;let first = first"
+                [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"  class="day" 
+                [class.activo]="day?.value == this.Formulario.get('dia')?.value ? 'activo' : ''"  class="day" >
+                <span>{{day?.value}}</span>
+            </li>
+            
+        </ol>
+    </div>
+</div>
+
