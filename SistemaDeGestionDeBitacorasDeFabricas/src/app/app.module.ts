@@ -6,11 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { LoginComponent } from './components/auth/login/login.component';
-import { UsuariosComponent } from './components/content/usuarios/usuarios.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UsuariosComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
