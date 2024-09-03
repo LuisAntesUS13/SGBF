@@ -1,0 +1,18 @@
+
+<div class="col-sm-12 valoresDerecha pdt5" >
+  <div class="btn-group me-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-light" style="padding: 0px; margin-right: 5px;" >
+      <select class="form-select" [(ngModel)]="registros_por_pagina" (change)="CambioPaginador()">
+        <option valuee="10" selected> 10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+      </select>
+    </button>
+    <button type="button" class="btn btn-light" [title]="primero? 'Al primero': ''" [disabled]="!primero" (click)="Paginador(1)"><i class="bi bi-chevron-double-left"></i></button>
+    <button type="button" class="btn btn-light" [title]="atras? 'Anterior': ''" [disabled]="!atras" (click)="Paginador(2)"><i class="bi bi-chevron-left"></i></button>
+    <button type="button" class="btn btn-light"  disabled>{{registro_inicial}} - {{registro_final}} de {{total_registros}} </button>
+    <button type="button" class="btn btn-light" [title]="siguiente? 'Siguente': ''" [disabled]="!siguiente" (click)="Paginador(3)"><i class="bi bi-chevron-right"></i></button>
+    <button type="button" class="btn btn-light" [title]="ultimo? 'Al ultimo': ''" [disabled]="!ultimo" (click)="Paginador(4)"><i class="bi bi-chevron-double-right"></i></button>
+  </div>
+</div>
