@@ -5,7 +5,7 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
   selector: 'us-admin',
   template: `
      <app-menu></app-menu>
-    <div class="">
+    <div class="contenido_principal">
       <!-- <sg-breadcrumbs style="padding:0px;"></sg-breadcrumbs> -->
       <router-outlet></router-outlet>
     </div>
