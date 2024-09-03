@@ -51,31 +51,50 @@ h1,h2,h3,h4,h5 {
     padding-top: 10px;
 }
 
+
 .btn-principal {
+    background-color: #F80000;
+    color: white;
+    border-color: white;
+   margin-bottom: 1px;
+}
+
+.btn-principal:hover {
+    background-color:white;
+    color:  #F80000;
+    border-color:  #F80000;
+}
+
+.btn-principal:active {
+    background-color:white;
+    color:  #F80000;
+    border-color:  #F80000;
+}
+
+.btn-secundario {
     background-color: white;
     color: #F80000;
     border-color: #F80000;
    margin-bottom: 1px;
-  }
-  
-  .btn-principal:hover {
+}
+
+.btn-secundario:hover {
     background-color:#F80000;
     color:  white;
     border-color:  white;
-  }
-  
-  .btn-principal:active {
+}
+
+.btn-secundario:active {
     background-color:#F80000;
     color:  white;
     border-color:  white;
-  }
+}
 
-
-  label {
+label {
     font-weight: bold;
     margin-bottom: 1px !important;
     margin-top: 5px !important;
-  }
+}
 
 
   /* Estilos para pantallas pequeñas */
@@ -102,10 +121,10 @@ h1,h2,h3,h4,h5 {
     } 
   
   
-  }
+}
   
   /* Estilos para pantallas medianas */
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     
     .offcanvas.offcanvas-end.canvasPrimario.show  {
       width: 75%;
@@ -118,10 +137,10 @@ h1,h2,h3,h4,h5 {
     .offcanvas.offcanvas-end.canvasTerciario.show {
       width: 69%;
     } 
-  }
+}
   
   /* Estilos para pantallas grandes */
-  @media screen and (min-width: 1024px) and (max-width: 1535px) {
+@media screen and (min-width: 1024px) and (max-width: 1535px) {
     
     .offcanvas.offcanvas-end.canvasPrimario.show  {
       width: 60%;
@@ -136,10 +155,10 @@ h1,h2,h3,h4,h5 {
     } 
   
   
-  }
+}
   
   /* Estilos para pantallas extra grandes */
-  @media screen and (min-width: 1536px) {
+@media screen and (min-width: 1536px) {
   
     .offcanvas.offcanvas-end.canvasPrimario.show  {
       width: 50%;
@@ -154,4 +173,9 @@ h1,h2,h3,h4,h5 {
     } 
   
   
-  }
+}
+
+
+.card-footer {margin: 0px !important;
+
+}

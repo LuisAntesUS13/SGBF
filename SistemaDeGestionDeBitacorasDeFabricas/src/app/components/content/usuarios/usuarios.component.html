@@ -16,7 +16,7 @@
     </div>
     <div class="card-footer row" style="margin: 0px;">
         <div class="col-sm-3">
-            <button type="button" class="btn btn-principal" (click)="abrirModal()">Nuevo usuario</button>
+            <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
         </div>
     </div>
 </div>
@@ -38,7 +38,8 @@
                 <th scope="row">{{i+1}}</th>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.correo}}</td>
-                <td class="valoresCentrados">{{dato.activo? 'Si': 'NO'}}</td>
+                <td class="valoresCentrados">{{dato.activo? 'Si': 'NO'}}
+                </td>
                 <td style="color:green" *ngIf="dato.conectado" class="valoresCentrados"> <i class="bi bi-check-circle"></i> </td>
                 <td style="color: red;" *ngIf="!dato.conectado" class="valoresCentrados"> <i class="bi bi-x-circle"></i></td>
               </tr>
@@ -59,48 +60,59 @@
       (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
   </div>
   <div class="offcanvas-body">
-    <div class="row">
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="Correo" placeholder="">
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Primer apellido</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Segundo apellido</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Usuario/Correo</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+         
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Contraseña</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-principal" (click)="abrirModal()"  style="margin-top: 30px;">Generar contraseña</button>
+            </div>
+            <div class="col-sm-12">
+              <hr>
+            </div>
+    
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione el rol del usuario</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una  opción</option>
+                    <option value="1">Gestor de contratos</option>
+                    <option value="2">Lider tecnico</option>
+                    <option value="3">Responsable</option>
+                    <option value="4">Reportes</option>
+                    <option value="4">Administrador</option>
+                  </select>
+            </div>
+          
         </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Primer apellido</label>
-            <input type="text" class="form-control" id="Correo" placeholder="">
-        </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Segundo apellido</label>
-            <input type="text" class="form-control" id="Correo" placeholder="">
-        </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Usuario/Correo</label>
-            <input type="text" class="form-control" id="Correo" placeholder="">
-        </div>
-     
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Contraseña</label>
-            <input type="text" class="form-control" id="Correo" placeholder="">
-        </div>
-        <div class="col-sm-6">
-            <button type="button" class="btn btn-principal" (click)="abrirModal()"  style="margin-top: 30px;">Generar contraseña</button>
-        </div>
-        <div class="col-sm-12">
-         <hr>
-        </div>
-
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Seleccione el rol del usuario</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Seleccione  una  opción</option>
-                <option value="1">Gestor de contratos</option>
-                <option value="2">Lider tecnico</option>
-                <option value="3">Responsable</option>
-                <option value="4">Reportes</option>
-                <option value="4">Administrador</option>
-              </select>
+        <div class="card-footer row">
+            <div class="col-sm-12">
+                <label for="Correo" class="form-label">Acceso del usuario al sistema</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="check" (change)="clickchek()">
+                    <label class="form-check-label" for="flexSwitchCheckDefault" style="margin-top: 1px !important;">{{tituloCheck}}</label>
+                  </div>
+            </div>
         </div>
     </div>
-   
   </div>
   <div class="offcanvas-footer">
     <div class="text-end">

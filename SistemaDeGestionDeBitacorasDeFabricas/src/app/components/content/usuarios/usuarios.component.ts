@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 export class UsuariosComponent {
   showCamvasPrimario :boolean = false;
   tituloPrimario: string = "";
+
+
+  tituloCheck: string = "Permitido";
+  check: boolean = true;
   constructor(){
 
   
@@ -79,5 +83,10 @@ export class UsuariosComponent {
 
   guardar(){
     this.showCamvasPrimario = false;
+  }
+
+  clickchek(){
+    this.check = !this.check;
+    this.tituloCheck = this.check? "Permitido":"Bloqueado";
   }
 }
