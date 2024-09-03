@@ -1,8 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
-import { LoginComponent } from '../auth/login/login.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 const routes: Routes = [
   {
     path: '',
@@ -22,7 +22,7 @@ const routes: Routes = [
           title: 'Administración usuarios',
           breadcrumbs: [],
         },
-        component: LoginComponent,
+        component: UsuariosComponent,
       },
       // {
       //   path: 'notificaciones',

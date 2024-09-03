@@ -1,0 +1,19 @@
+.btn-light {
+    background: rgb(253, 253, 253);
+    background: radial-gradient(circle, rgba(198,198,198,0.09707633053221287) 0%, rgb(255, 255, 255) 50%);
+}
+
+.btn-light:hover {
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, rgba(0,0,0,0.09707633053221287) 0%, rgba(244,245,254,1) 80%);
+    border: none;
+}
+
+.btn-light:focus {
+    border: none;
+
+}
+
+.btn-light:not(:focus) {
+    border: none;
+}

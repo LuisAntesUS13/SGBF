@@ -4,8 +4,8 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 @Component({
   selector: 'us-admin',
   template: `
-    <!-- <sg-menu></sg-menu> -->
-    <div class="row tamaño-contenedor contenedor-principal">
+     <app-menu></app-menu>
+    <div class="contenido_principal">
       <!-- <sg-breadcrumbs style="padding:0px;"></sg-breadcrumbs> -->
       <router-outlet></router-outlet>
     </div>
