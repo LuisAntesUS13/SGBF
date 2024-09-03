@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'sg-input-fecha',
+  selector: 'app-input-fecha',
   templateUrl: './input-fecha.component.html',
   styleUrls: ['./input-fecha.component.scss'],
 })

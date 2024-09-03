@@ -1,0 +1,149 @@
+<h3>Administración de contratos</h3>
+<hr>
+<div class="card">
+    <div class="card-body row">
+        <div class="col-sm-3">
+            <label for="contrato" class="form-label">No. contrato</label>
+            <input type="text" class="form-control" id="contrato" placeholder="SG0909">
+        </div>
+        <div class="col-sm-3">
+            <label for="consulta" class="form-label">Consultora</label>
+            <input type="text" class="form-control" id="consulta" placeholder="ultra">
+        </div>
+         <div class="col-sm-3">
+            <button type="button" class="btn btn-principal" (click)="buscar(1)" style="margin-top: 26px;">Buscar</button>
+        </div>
+    </div>
+    <div class="card-footer row" style="margin: 0px;">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo contrato</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <app-paginador (cambio)="obtenerEvento($event)" [datos]="datosEnviar"></app-paginador>
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+              <tr class="valoresCentrados">
+                <th scope="col" class="valoresCentrados">#</th>
+                <th scope="col" class="valoresCentrados">No. Contrato</th>
+                <th scope="col" class="valoresCentrados">Fecha  inicio</th>
+                <th scope="col" class="valoresCentrados">Fecha termino</th>
+                <th scope="col" class="valoresCentrados">Monto</th>
+                <th scope="col" class="valoresCentrados">Consultora</th>
+                <th scope="col" class="valoresCentrados">Metodo de pago</th>
+                <th scope="col" class="valoresCentrados">Forma pago</th>
+                <th scope="col" class="valoresCentrados">Estatus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
+                <th scope="row">{{i+1}}</th>
+                <td>{{dato.no_contrato}}</td>
+                <td>{{dato.fecha_inicio}}</td>
+                <td>-</td>
+                <td>{{dato.monto}}</td>
+                <td>{{dato.consultora}}</td>
+                <td>{{dato.metodo_pago}}</td>
+                <td>{{dato.Formapago}}</td>
+                <td>Activo</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario" id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloPrimario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">No.contrato</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <br>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Fecha de inicio</label>
+                <app-input-fecha></app-input-fecha>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Fecha de termino</label>
+                <app-input-fecha></app-input-fecha>
+            </div>
+           
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione forma de pago</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Mensual</option>
+                    <option value="2">Bimestral</option>
+                    <option value="3">Trimestral</option>
+                    <option value="4">Anual</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione tipo de contrato</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Monto fijo</option>
+                    <option value="2">Monto variable</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione la consultora</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Ultra</option>
+                    <option value="2">Sistemas informaticos</option>
+                    <option value="2">Sistemas computacionales</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto variable</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto fijo</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto total</label>
+                <input type="text" class="form-control" id="monto" placeholder="" disabled>
+            </div>
+
+            <div class="col-sm-12">
+                <label for="formFileMultiple" class="form-label">Carga de contrato</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+          
+        </div>
+    </div>
+
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()"> Guardar &nbsp;<i
+          class="bi bi-save"></i></button>
+      <button type="button" class="btn btn-principal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="adminRequerimientos()"> 
+            Administrar requerimientos&nbsp;<i class="bi bi-arrow-right"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>

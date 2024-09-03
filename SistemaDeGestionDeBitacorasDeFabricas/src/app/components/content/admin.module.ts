@@ -8,6 +8,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdminComponent } from './admin.component';
+import { ContratosComponent } from './contratos/contratos.component';
+import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,7 @@ import { AdminComponent } from './admin.component';
     SharedModule,
   ],
   providers: [CurrencyPipe, DatePipe, DecimalPipe],
-  declarations: [AdminComponent, InicioComponent, UsuariosComponent],
+  declarations: [AdminComponent, InicioComponent, UsuariosComponent, ContratosComponent, RequerimientosComponent],
   exports: [],
 })
 export class AdminModule {}
