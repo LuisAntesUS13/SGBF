@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,7 +13,7 @@ export class UsuariosComponent {
 
   tituloCheck: string = "Permitido";
   check: boolean = true;
-  constructor(){
+  constructor(private toastrService: ToastrService,){
 
   
   }
@@ -83,6 +84,7 @@ export class UsuariosComponent {
 
   guardar(){
     this.showCamvasPrimario = false;
+    this.toastrService.success("Datos guardados correctamente");
   }
 
   clickchek(){
