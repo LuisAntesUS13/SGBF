@@ -77,6 +77,11 @@
   <div class="offcanvas-body">
     <div class="card">
         <div class="card-body row">
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">Busca y selecciona el contrato</label>
+              <app-buscador [datos]="datosEnviar"  [llaveBusqueda]="llaveBusqueda"  [llaveResultado]="llaveResultado"
+              (valor)="eventoBuscar($event)"></app-buscador>
+          </div>
             <!-- <div class="col-sm-6">
                 <label for="Correo" class="form-label">No.contrato</label>
                 <input type="text" class="form-control" id="Correo" placeholder="">
@@ -136,8 +141,7 @@
             <div class="col-sm-12">
                 <label for="formFileMultiple" class="form-label">Carga de contrato</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple>
-            </div>
-          -->
+            </div> -->
         </div> 
     </div>
   </div>

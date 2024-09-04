@@ -14,12 +14,15 @@ export class RequerimientosComponent {
 
   contrato:string | null = null;
 
+  llaveResultado: string[] = ["identificador","nombre"];
+  llaveBusqueda: string = "identificador";
+
   datos1 = [
     {
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
-      identificador: 'S-1066361',
+      identificador: 'S-SDFR61',
       nombre: 'Gestion de bitacora',
       descripcion: 'Descripcion del sistema de bitacora 1',
       no_consultores: 150,
@@ -33,7 +36,7 @@ export class RequerimientosComponent {
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
-      identificador: 'S-1066362',
+      identificador: 'S-CVFG62',
       nombre: 'Auditoria de sistema',
       descripcion: 'Descripcion del sistema de auditoria',
       no_consultores: 120,
@@ -47,7 +50,7 @@ export class RequerimientosComponent {
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
-      identificador: 'S-1066363',
+      identificador: 'S-1RTGF63',
       nombre: 'Monitoreo de red',
       descripcion: 'Descripcion del sistema de monitoreo de red',
       no_consultores: 200,
@@ -61,7 +64,7 @@ export class RequerimientosComponent {
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
-      identificador: 'S-1066364',
+      identificador: 'S-CVDFG64',
       nombre: 'Gestion de recursos',
       descripcion: 'Descripcion del sistema de gestion de recursos',
       no_consultores: 180,
@@ -75,7 +78,7 @@ export class RequerimientosComponent {
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
-      identificador: 'S-1066365',
+      identificador: 'S-1RYMK65',
       nombre: 'Control de inventario',
       descripcion: 'Descripcion del sistema de control de inventario',
       no_consultores: 140,
@@ -108,6 +111,11 @@ export class RequerimientosComponent {
     this.datosEnviar = this.datos1;
   }
 
+  eventoBuscar(event: any) {
+
+    console.log(event)
+  }
+
   obtenerEvento(event: any) {
     const pageSize = event.registros_por_pagina;
     const page = event.pagina_actual;
@@ -119,6 +127,8 @@ export class RequerimientosComponent {
   abrirModal() {
     this.tituloPrimario = 'Registro de requerimientos';
     this.showCamvasPrimario = true;
+    this.datosEnviar = [];
+    this.datosEnviar = this.datos1;
   }
 
   cerrarCamvasPrimario() {

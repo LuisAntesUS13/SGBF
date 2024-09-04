@@ -90,6 +90,44 @@ h1,h2,h3,h4,h5 {
     border-color:  white;
 }
 
+.btn-accion {
+  background-color: #0e159d;
+  color: white;
+  border-color: white;
+  margin-bottom: 1px;
+}
+
+.btn-accion:hover {
+  background-color:white;
+  color:  #0e159d;
+  border-color:  #0e159d;
+}
+
+.btn-accion:active {
+  background-color:white;
+  color: #0e159d;
+  border-color:  #0e159d;
+}
+
+.btn-accion-sec {
+  background-color: white;
+  color: #0e159d;
+  border-color:#0e159d;
+ margin-bottom: 1px;
+}
+
+.btn-accion-sec:hover {
+  background-color:#0e159d;
+  color:  white;
+  border-color:  white;
+}
+
+.btn-accion-sec:active {
+  background-color:#0e159d;
+  color:  white;
+  border-color:  white;
+}
+
 label {
     font-weight: bold;
     margin-bottom: 1px !important;

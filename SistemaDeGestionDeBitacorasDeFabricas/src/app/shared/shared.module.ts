@@ -5,18 +5,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { InputFechaComponent } from './input-fecha/input-fecha.component';
 import { PaginadorComponent } from './paginador/paginador.component';
+import { BuscadorComponent } from './buscador/buscador.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     InputFechaComponent,
-    PaginadorComponent
+    PaginadorComponent,
+    BuscadorComponent
   ],
   exports: [
     MenuComponent,
     InputFechaComponent,
     ReactiveFormsModule,
-    PaginadorComponent
+    PaginadorComponent,
+    BuscadorComponent
   ],
   imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
 })
