@@ -33,6 +33,13 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: LidertecnicoBitacorasComponent,
+      },{
+        path: 'consultor',
+        data: {
+          title: 'Bitacoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoBitacorasComponent,
       },
       {
         path: 'contratos',

@@ -1,21 +1,15 @@
 <div class="h3">
   <h3>Autorización de bitácoras</h3>
-
 </div>
 <hr>
 <div class="input-container">
     <div class="card-body row">
-        <div class="col-sm-3">
-            <label for="nombre" class="form-label">Estado de bitácoras</label>
-            <select class="form-select" aria-label="Default select example">
-                <option value="1">Bitácoras por autorizar</option>
-            </select>
-        </div>
+        
         <div class="col-sm-3">
             <label for="Correo" class="form-label">Nombre del consultor</label>
             <input type="text" class="form-control" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1">
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 button-buscar">
             <button type="button" class="btn btn-principal" style="margin-top: 26px;">Buscar</button>
         </div>
     </div>
@@ -43,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="rows" *ngFor="let persona of personas"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <tr class="rows" *ngFor="let persona of personas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <td>{{persona.folio}}</td>
                 <td>{{persona.consultor}}</td>
                 <td>{{persona.lider}}</td>
@@ -64,7 +58,7 @@
 <!-- offCanvas para visualizar datos del registro seleccionado y hacer observaciones, de parte del líder técnico -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Detalles</h5>
+    <h3>Detalles</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -94,14 +88,28 @@
             <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
           </div>
         </div>
-        <div class="row">
-          <label class="label-observaciones">Observaciones</label>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
+
         
       
+        <div class="row ">
+          <label class="label-evidencias">Evidencias</label>
+          <div class="evidencias">
+            
+          </div>
+
+        </div>
+
+        <div class="row">
+          <label class="label-observaciones">Observaciones</label>
+          <textarea class="form-control textarea" aria-label="With textarea"></textarea>
+        </div>  
+        <div class="contenedor-boton-guardar"> 
+          <button type="button" class="btn btn-principal">Enviar</button>
+        </div>
       </div>
-      
+     
+
+
     </form>
   </div>
 </div>
