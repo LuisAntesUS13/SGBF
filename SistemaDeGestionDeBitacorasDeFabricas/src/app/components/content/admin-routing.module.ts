@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 const routes: Routes = [
@@ -25,6 +26,20 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: UsuariosComponent,
+      }, {
+        path: 'lidertecnico',
+        data: {
+          title: 'Autorización de bitácoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoBitacorasComponent,
+      },{
+        path: 'consultor',
+        data: {
+          title: 'Bitacoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoBitacorasComponent,
       },
       {
         path: 'contratos',
