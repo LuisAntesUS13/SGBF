@@ -1,0 +1,156 @@
+<h3>Administración de requerimientos</h3>
+<hr>
+<div class="card">
+    <div class="card-body row">
+        <div class="col-sm-2">
+            <label for="contrato" class="form-label">No. contrato</label>
+            <input type="text" class="form-control" id="contrato" placeholder="SG0909" [(ngModel)]="contrato">
+        </div>
+        <div class="col-sm-2">
+            <label for="consulta" class="form-label">Identificador requerimiento</label>
+            <input type="text" class="form-control" id="consulta" placeholder="123">
+        </div>
+        <div class="col-sm-2">
+            <label for="consulta" class="form-label">Nombre requerimiento</label>
+            <input type="text" class="form-control" id="consulta" placeholder="Bitacora">
+        </div>
+        <div class="col-sm-2">
+            <label for="consulta" class="form-label">Lider</label>
+            <input type="text" class="form-control" id="consulta" placeholder="Joel">
+        </div>
+         <div class="col-sm-2">
+            <button type="button" class="btn btn-principal" (click)="buscar(1)" style="margin-top: 26px;">Buscar</button>
+        </div>
+    </div>
+    <div class="card-footer row" style="margin: 0px;">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo requerimiento</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <app-paginador (cambio)="obtenerEvento($event)" [datos]="datosEnviar"></app-paginador>
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+              <tr class="valoresCentrados">
+                <th scope="col" class="valoresCentrados">#</th>
+                <th scope="col" class="valoresCentrados">Identificador</th>
+                <th scope="col" class="valoresCentrados">Nombre requerimiento</th>
+                <th scope="col" class="valoresCentrados">Lider proyecto</th>
+                <th scope="col" class="valoresCentrados">Responsable</th>
+                <th scope="col" class="valoresCentrados">Area</th>
+                <th scope="col" class="valoresCentrados">Tipo accion</th>
+                <th scope="col" class="valoresCentrados">Modulo</th>
+                <th scope="col" class="valoresCentrados">Total consultores</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
+                <th scope="row">{{i+1}}</th>
+                <td>{{dato.identificador}}</td>
+                <td>{{dato.nombre}}</td>
+                <td>{{dato.lider_proyecto}}</td>
+                <td>{{dato.responsable}}</td>
+                <td>{{dato.area}}</td>
+                <td>{{dato.tipo_accion}}</td>
+                <td>{{dato.modulo}}</td>
+                <td>{{dato.no_consultores}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+
+
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario" id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloPrimario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+        <div class="card-body row">
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">Busca y selecciona el contrato</label>
+              <app-buscador [datos]="datosEnviar"  [llaveBusqueda]="llaveBusqueda"  [llaveResultado]="llaveResultado"
+              (valor)="eventoBuscar($event)"></app-buscador>
+          </div>
+            <!-- <div class="col-sm-6">
+                <label for="Correo" class="form-label">No.contrato</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <br>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Fecha de inicio</label>
+                <app-input-fecha></app-input-fecha>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Fecha de termino</label>
+                <app-input-fecha></app-input-fecha>
+            </div>
+           
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione forma de pago</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Mensual</option>
+                    <option value="2">Bimestral</option>
+                    <option value="3">Trimestral</option>
+                    <option value="4">Anual</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione tipo de contrato</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Monto fijo</option>
+                    <option value="2">Monto variable</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione la consultora</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Ultra</option>
+                    <option value="2">Sistemas informaticos</option>
+                    <option value="2">Sistemas computacionales</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto variable</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto fijo</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="monto" class="form-label">Monto total</label>
+                <input type="text" class="form-control" id="monto" placeholder="" disabled>
+            </div>
+
+            <div class="col-sm-12">
+                <label for="formFileMultiple" class="form-label">Carga de contrato</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div> -->
+        </div> 
+    </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()"> Guardar &nbsp;<i
+          class="bi bi-save"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>

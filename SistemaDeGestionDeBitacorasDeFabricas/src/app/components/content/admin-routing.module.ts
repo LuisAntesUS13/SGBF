@@ -4,6 +4,8 @@ import { AdminComponent } from './admin.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
+import { ContratosComponent } from './contratos/contratos.component';
+import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +33,30 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: LidertecnicoBitacorasComponent,
+      },
+      {
+        path: 'contratos',
+        data: {
+          title: 'Administración contratos',
+          breadcrumbs: [],
+        },
+        component: ContratosComponent,
+      },
+      {
+        path: 'requerimientos/:contrato',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: RequerimientosComponent,
+      },
+      {
+        path: 'requerimientos',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: RequerimientosComponent,
       },
       // {
       //   path: 'notificaciones',

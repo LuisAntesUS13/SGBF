@@ -9,6 +9,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdminComponent } from './admin.component';
 import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
+import { ContratosComponent } from './contratos/contratos.component';
+import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,7 @@ import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/liderte
     SharedModule
   ],
   providers: [CurrencyPipe, DatePipe, DecimalPipe],
-  declarations: [AdminComponent, InicioComponent, UsuariosComponent, LidertecnicoBitacorasComponent],
+  declarations: [AdminComponent, InicioComponent, UsuariosComponent, ContratosComponent, RequerimientosComponent, LidertecnicoBitacorasComponent],
   exports: [],
 })
 export class AdminModule {}
