@@ -112,15 +112,11 @@ export class RequerimientosComponent {
   }
 
   eventoBuscar(event: any) {
-
-    console.log(event)
   }
 
   obtenerEvento(event: any) {
     const pageSize = event.registros_por_pagina;
     const page = event.pagina_actual;
-
-    console.log(event.pagina_actual);
     this.buscar(page);
   }
 

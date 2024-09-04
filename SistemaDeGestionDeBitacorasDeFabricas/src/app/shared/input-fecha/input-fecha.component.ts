@@ -56,7 +56,6 @@ export class InputFechaComponent {
   }
 
   ngOnChanges() {
-    console.log(this.setFecha);
     if (this.setFecha != '' && this.setFecha != null) {
       try{
         const fecha = this.setFecha.split('/');
