@@ -67,90 +67,324 @@
 
 
 
-<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario" id="offcanvasRight"
-  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario"  [class.offcanvas-bajar]="showCamvaPerfiles || showCamvaConsultores" 
+id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
   <div class="offcanvas-header">
     <h3>{{tituloPrimario}}</h3>
     <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
       (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
   </div>
   <div class="offcanvas-body">
-    <div class="card">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+      <ul class="nav nav-underline">
+          <li class="nav-item" *ngFor="let item of pestanas" (click)="cambioSeleccion(item.id)">
+              <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="seleccionado == 1">
         <div class="card-body row">
           <div class="col-sm-6">
               <label for="Correo" class="form-label">Busca y selecciona el contrato</label>
               <app-buscador [datos]="datosEnviar"  [llaveBusqueda]="llaveBusqueda"  [llaveResultado]="llaveResultado"
               (valor)="eventoBuscar($event)"></app-buscador>
           </div>
-            <!-- <div class="col-sm-6">
-                <label for="Correo" class="form-label">No.contrato</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-            <br>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Fecha de inicio</label>
-                <app-input-fecha></app-input-fecha>
+          <div class="col-sm-12">
+            <hr>
+          </div>
+             <div class="col-sm-6">
+                <label for="identificador" class="form-label">Identificador del requerimiento</label>
+                <input type="text" class="form-control" id="identificador" placeholder="S-1066361">
             </div>
             <div class="col-sm-6">
-                <label for="Correo" class="form-label">Fecha de termino</label>
-                <app-input-fecha></app-input-fecha>
+                <label for="nombre" class="form-label">Nombre requerimiento</label>
+                <input type="text" class="form-control" id="nombre" placeholder="">
             </div>
-           
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Seleccione forma de pago</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione  una opción</option>
-                    <option value="1">Mensual</option>
-                    <option value="2">Bimestral</option>
-                    <option value="3">Trimestral</option>
-                    <option value="4">Anual</option>
-                  </select>
-            </div>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Seleccione tipo de contrato</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione  una opción</option>
-                    <option value="1">Monto fijo</option>
-                    <option value="2">Monto variable</option>
-                  </select>
-            </div>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Seleccione la consultora</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione  una opción</option>
-                    <option value="1">Ultra</option>
-                    <option value="2">Sistemas informaticos</option>
-                    <option value="2">Sistemas computacionales</option>
-                  </select>
-            </div>
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
-                <label for="monto" class="form-label">Monto variable</label>
-                <input type="text" class="form-control" id="monto" placeholder="">
-            </div>
-            <div class="col-sm-6">
-                <label for="monto" class="form-label">Monto fijo</label>
-                <input type="text" class="form-control" id="monto" placeholder="">
-            </div>
-            <div class="col-sm-6">
-                <label for="monto" class="form-label">Monto total</label>
-                <input type="text" class="form-control" id="monto" placeholder="" disabled>
-            </div>
-
             <div class="col-sm-12">
-                <label for="formFileMultiple" class="form-label">Carga de contrato</label>
-                <input class="form-control" type="file" id="formFileMultiple" multiple>
-            </div> -->
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea type="text" class="form-control" id="descripcion" ></textarea>
+            </div>
+       
+            <div class="col-sm-6">
+              <label for="lider_tecnico" class="form-label">Lider tecnico</label>
+              <!-- <input type="text" class="form-control" id="lider_tecnico" placeholder=""> -->
+              <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-6">
+              <label for="responsable" class="form-label">Responsable</label>
+              <!-- <input type="text" class="form-control" id="responsable" placeholder=""> -->
+              <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione tipo de acción</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione una opción</option>
+                    <option value="1">Administrativo</option>
+                    <option value="2">Apoyo operativo</option>
+                    <option value="3">SMAX</option>
+                    <option value="4">Incidente</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione el modulo o aplicativo</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una opción</option>
+                    <option value="1">Agenda de  investigacion</option>
+                    <option value="2">Aplicacion movil</option>
+                    <option value="3">Apoyo infonavit</option>
+                  </select>
+            </div>
+            <div class="col-sm-6">
+              <label for="Correo" class="form-label">Seleccione el área solicitante</label>
+              <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccione  una opción</option>
+                  <option value="1">Direccion de informatica</option>
+                  <option value="2">Subdireccion de sistemas</option>
+                  <option value="3">Area de recursos humanos</option>
+                </select>
+          </div>
+
+            <div class="col-sm-6">
+              <label for="consultoires" class="form-label">No. de consultores requeridos</label>
+              <input type="number" class="form-control" id="nombre" placeholder="">
+            </div>
         </div> 
+    </div>
+    <div class="card" *ngIf="seleccionado == 2">
+      <div class="card-body row">
+        <div class="col-sm-3" style="margin-bottom: 3px;">
+          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalPerfiles(1)"> Asignar perfil &nbsp;
+            <i class="bi bi-plus-circle-dotted"></i></button>
+        </div>
+        <hr>
+        <div class="row">
+          <app-paginador (cambio)="obtenerEvento($event)" [datos]="datosEnviar"></app-paginador>
+          <div class="col-sm-12">
+              <table class="table table-hover">
+                  <thead>
+                    <tr class="valoresCentrados">
+                      <th scope="col" class="valoresCentrados">#</th>
+                      <th scope="col" class="valoresCentrados">Perfil</th>
+                      <th scope="col" class="valoresCentrados">Cantidad</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let dato of datosPefil;let i = index"  style="cursor: pointer;"  (click)="abrirModalPerfiles(2)" class="valoresCentrados">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{dato.perfil}}</td>
+                      <td>{{dato.cantidad}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="seleccionado == 3">
+      <div class="card-body row">
+        <div class="col-sm-3" style="margin-bottom: 3px;">
+          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalConsultores(1)"> Agregar consultor &nbsp;
+            <i class="bi bi-plus-circle-dotted"></i></button>
+        </div>
+        <hr>
+        <div class="row">
+          <app-paginador (cambio)="obtenerEvento($event)" [datos]="datosEnviar"></app-paginador>
+          <div class="col-sm-12">
+              <table class="table table-hover">
+                  <thead>
+                    <tr class="valoresCentrados">
+                      <th scope="col" class="valoresCentrados">#</th>
+                      <th scope="col" class="valoresCentrados">Perfil</th>
+                      <th scope="col" class="valoresCentrados">Consultor</th>
+                      <th scope="col" class="valoresCentrados">Fecha inicio</th>
+                      <th scope="col" class="valoresCentrados">Fecha termino</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let dato of datosConsultores;let i = index"  style="cursor: pointer;"  (click)="abrirModalConsultores(2)" class="valoresCentrados">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{dato.perfil}}</td>
+                      <td>{{dato.consultor}}</td>
+                      <td>{{dato.fecha_inicio}}</td>
+                      <td>{{dato.fecha_termino}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      </div>
+      </div>
     </div>
   </div>
   <div class="offcanvas-footer">
     <div class="text-end">
-      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()"> Guardar &nbsp;<i
-          class="bi bi-save"></i></button>
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()" *ngIf="seleccionado == 1"> Guardar &nbsp;<i
+          class="bi bi-floppy"></i></button>
     </div>
   </div>
 </div>
 
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showCamvaPerfiles"
+id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloSecundario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasPerfiles()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+      <ul class="nav nav-underline">
+          <li class="nav-item" *ngFor="let item of pestanasPerfiles" (click)="cambioSeleccionPerfiles(item.id)">
+              <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 1">
+        <div class="card-body row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
+               <b> Busque, seleccione y agrege la cantidad de recursos que se requieren en ese perfil.</b><br>
+                NOTA: En caso de no localizar el perfil deseado, haga click en pestaña <b>Registro perfiles</b> para agregar  uno nuevo.
+              </div>
+            </div>
+             <div class="col-sm-8">
+                <label for="identificador" class="form-label">Perfil</label>
+                <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-4">
+                <label for="monto" class="form-label">Cantidad</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+        </div> 
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 2">
+      <div class="card-body row">
+           <div class="col-sm-6">
+              <label for="identificador" class="form-label">Perfil</label>
+              <input type="text" class="form-control" id="consulta" placeholder="Programador analista">
+          </div>
+          <div class="col-sm-6">
+            <label for="monto" class="form-label">Monto</label>
+            <input type="text" class="form-control" id="monto" placeholder="10,000">
+          </div>
+          <div class="col-sm-612">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <textarea type="text" class="form-control" id="descripcion" placeholder="Descripcion"></textarea>
+          </div>
+      </div> 
+  </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Guardar &nbsp;<i
+          class="bi bi-floppy"></i></button>
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Eliminar asignación &nbsp;<i
+        class="bi bi-floppy"></i></button>
+    </div>
+  </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showCamvaConsultores"
+id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloSecundario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasConsultores()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+      <ul class="nav nav-underline">
+          <li class="nav-item" *ngFor="let item of pestanasConsultores" (click)="cambioSeleccionConsultores(item.id)">
+              <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 1">
+        <div class="card-body row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
+               <b> Busque, seleccione al usuario que  desea asignar como consultor.</b><br>
+                NOTA: En caso de no localizar al consultor deseado, haga click en <b>Registro de consultor</b> para agregar  uno nuevo.
+              </div>
+            </div>
+             <div class="col-sm-6">
+                <label for="identificador" class="form-label">Consultor</label>
+                <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-6">
+              <label for="Correo" class="form-label">Seleccione el perfil</label>
+              <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccione  una  opción</option>
+                  <option value="1">Programador Sr Java</option>
+                  <option value="2">Programador Jr Java</option>
+                  <option value="3">Analista</option>
+                  <option value="4">Tester</option>
+              </select>
+            </div>
+            <div class="col-sm-12">
+              <hr>
+            </div>
+            <div class="col-sm-12">
+               <h5>Agrega los documentos del ecpediente</h5>
+            </div>
+            
+            <div class="col-sm-12">
+              <label for="formFileMultiple" class="form-label">Curriculum</label>
+              <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          
+          <div class="col-sm-12">
+            <label for="formFileMultiple" class="form-label">Certificados</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          
+          <div class="col-sm-12">
+            <label for="formFileMultiple" class="form-label">Otros</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+           </div>
+        </div> 
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 2">
+      <div class="card-body row">
+        <div class="col-sm-6">
+          <label for="Correo" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Primer apellido</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Segundo apellido</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Usuario/Correo</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+    
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Contraseña</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-principal" (click)="abrirModal()"  style="margin-top: 30px;">Generar contraseña</button>
+        </div>
+      </div> 
+  </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Guardar &nbsp;<i
+          class="bi bi-floppy"></i></button>
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Eliminar consultor &nbsp;<i
+        class="bi bi-floppy"></i></button>
+    </div>
+  </div>
+</div>
+
+
 <div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvaPerfiles || showCamvaConsultores"></div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,8 +8,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class BuscadorComponent {
   @Input() datos: any[] | null = null; //Datos para realizar busqueda
+  @Input() setValor!: string; 
   @Input() llaveBusqueda: string = ''; // llave del campo de busqueda
   @Input() llaveResultado: string[] = []; // llaves del campo de resultado, el primero debera ser el resultado que buscas y los demas solo referencias visuales
+  @Input() campoHabilitado: boolean = true; 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   Formulario!: FormGroup;
   mostrar: boolean = false;
@@ -17,6 +19,25 @@ export class BuscadorComponent {
   datosFiltrados: any[] = [];
   constructor(private fb: FormBuilder) {
     this.generarFormulario();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['setValor'].currentValue != undefined &&
+      changes['setValor'].currentValue != null &&
+      changes['setValor'].currentValue != ""
+    ) {
+      this.generarFormulario();
+      this.Formulario.get('busqueda')?.setValue(this.setValor);
+    } else {
+      this.Formulario.get('busqueda')?.setValue("");
+    }
+
+    if (this.campoHabilitado) {
+      this.Formulario.get('busqueda')?.enable();
+    } else {
+      this.Formulario.get('busqueda')?.disable();
+    }
   }
 
   generarFormulario() {
@@ -31,6 +52,7 @@ export class BuscadorComponent {
         this.mostrar = false;
         this.valor.emit("");
       } else {
+        this.datosFiltrados = [];
         if(this.validandoExisteCampo() && this.validandoExisteCampoBuqueda()){
           this.mostrar = true;
           const regex = new RegExp(this.Formulario.get('busqueda')?.value, 'i');
@@ -46,7 +68,7 @@ export class BuscadorComponent {
       }
     } else {
       this.mostrar = false;
-      this.Formulario.get('busqueda')?.setValue("")
+     // this.Formulario.get('busqueda')?.setValue("")
       this.valor.emit("");
     }
   }
@@ -78,4 +100,7 @@ export class BuscadorComponent {
       item.hasOwnProperty(this.llaveBusqueda)
     );; // Retorna true si todos los parámetros existen
   }
+
+
+
 }

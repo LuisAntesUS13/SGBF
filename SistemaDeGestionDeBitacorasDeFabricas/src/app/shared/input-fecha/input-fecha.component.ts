@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -55,8 +55,12 @@ export class InputFechaComponent {
     this.generarFormulario(ObjectDate);
   }
 
-  ngOnChanges() {
-    if (this.setFecha != '' && this.setFecha != null) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['setFecha'].currentValue != undefined &&
+      changes['setFecha'].currentValue != null &&
+      changes['setFecha'].currentValue != ""
+    ) {
       try{
         const fecha = this.setFecha.split('/');
         const ObjectDate = moment.utc(`${fecha[2]}-${fecha[1]}-${fecha[0]}`);
@@ -68,8 +72,7 @@ export class InputFechaComponent {
       }catch (ex) {
 
       }
-    } 
-    if(this.setFecha == '' || this.setFecha == null){
+    }  else {
       this.Formulario.get('fecha_string')?.setValue("");
     }
 

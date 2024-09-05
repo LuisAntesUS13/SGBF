@@ -134,7 +134,9 @@ label {
     margin-top: 5px !important;
 }
 
-
+.offcanvas-bajar{
+  z-index: 1000;
+}
   /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 767px) {
 
