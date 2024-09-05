@@ -221,9 +221,8 @@ export class RequerimientosComponent {
 
   buscar(page: number) {
     this.datosEnviar = this.datos1;
-    console.log('LLego aui');
+    
     this.spinnerService.mostrarSpinner();
-
     // Simulate an async operation
     setTimeout(() => {
       this.spinnerService.ocultarSpinner();
@@ -299,7 +298,7 @@ export class RequerimientosComponent {
     }
 
     this.confirmarModalService
-      .abriraModalPregunta('Estas seguro d e guardar  la informacion')
+      .abriraModalPregunta('Estas seguro de ...')
       .subscribe(async (result) => {
         if (result) {
           this.toastrService.success('Datos guardados correctamente');
