@@ -1,4 +1,5 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { ProlongaSesionService } from 'src/app/services/prolonga-sesion/prolonga-sesion.service';
 // import { ProlongaSesionService } from 'src/app/services/prolonga-sesion/prolonga-sesion.service';
 
 @Component({
@@ -8,12 +9,14 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
     <div class="contenido_principal">
       <!-- <sg-breadcrumbs style="padding:0px;"></sg-breadcrumbs> -->
       <router-outlet></router-outlet>
+
     </div>
+    <<app-spinner></app-spinner>
   `,
 })
 export class AdminComponent implements OnChanges {
   // constructor(private prolongaSesionService: ProlongaSesionService) {
-  constructor() {
+  constructor(private prolongaSesionService: ProlongaSesionService) {
     // this.prolongaSesionService.iniciarIntervalo();
   }
 

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-requerimientos',
@@ -14,74 +16,81 @@ export class RequerimientosComponent {
   showCamvaConsultores: boolean = false;
   tituloPrimario: string = '';
   tituloSecundario: string = '';
-  seleccionado:number = 1;
-  seleccionadoPerfil:number = 1;
+  seleccionado: number = 1;
+  seleccionadoPerfil: number = 1;
 
-  contrato:string | null = null;
+  contrato: string | null = null;
 
-  llaveResultado: string[] = ["identificador","nombre"];
-  llaveBusqueda: string = "identificador";
+  llaveResultado: string[] = ['identificador', 'nombre'];
+  llaveBusqueda: string = 'identificador';
 
   pestanas = [
     { id: 1, nombre: 'Requerimiento', activo: true },
     { id: 2, nombre: 'Perfiles requeridos', activo: false },
-    { id: 3, nombre: 'Registro de consultores', activo: false}
+    { id: 3, nombre: 'Registro de consultores', activo: false },
   ];
 
   pestanasPerfiles = [
     { id: 1, nombre: 'Seleccion de perfil', activo: true },
-    { id: 2, nombre: 'Registro perfiles', activo: false }
+    { id: 2, nombre: 'Registro perfiles', activo: false },
   ];
 
   pestanasConsultores = [
     { id: 1, nombre: 'Asignacion de consultor', activo: true },
-    { id: 2, nombre: 'Registro de consultor', activo: false }
+    { id: 2, nombre: 'Registro de consultor', activo: false },
   ];
 
-  datosPefil = [{ total_paginas: 1,
-                  total_registros: 10,
-                  pagina_actual: 1,
-                  perfil: " Programador Sr Java",
-                  cantidad: 5
-                },
-                { total_paginas: 1,
-                  total_registros: 10,
-                  pagina_actual: 1,
-                  perfil: " Programador Jr Java",
-                  cantidad: 2
-                },
-                { total_paginas: 1,
-                  total_registros: 10,
-                  pagina_actual: 1,
-                  perfil: "Analista",
-                  cantidad: 1
-                },
-                { total_paginas: 1,
-                  total_registros: 10,
-                  pagina_actual: 1,
-                  perfil: "Tester",
-                  cantidad: 2
-                }
+  datosPefil = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      cantidad: 5,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Jr Java',
+      cantidad: 2,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Analista',
+      cantidad: 1,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Tester',
+      cantidad: 2,
+    },
   ];
 
-  datosConsultores = [{
-     total_paginas: 1,
-    total_registros: 10,
-    pagina_actual: 1,
-    perfil: " Programador Sr Java",
-    consultor: "Juan Manuel",
-    fecha_inicio: "31/05/2024",
-    fecha_termino: ""
-  },
-  { total_paginas: 1,
-    total_registros: 10,
-    pagina_actual: 1,
-    perfil: " Programador Sr Java",
-    consultor: "Jose Antonio",
-    fecha_inicio: "15/05/2024",
-    fecha_termino: ""
-  },
-];
+  datosConsultores = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Juan Manuel',
+      fecha_inicio: '31/05/2024',
+      fecha_termino: '',
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Jose Antonio',
+      fecha_inicio: '15/05/2024',
+      fecha_termino: '',
+    },
+  ];
   datos1 = [
     {
       total_paginas: 1,
@@ -155,7 +164,12 @@ export class RequerimientosComponent {
     },
   ];
 
-  constructor(private route: ActivatedRoute, private toastrService: ToastrService) {
+  constructor(
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
+    private confirmarModalService: ConfirmarModalService,
+    private spinnerService: SpinnerService
+  ) {
     this.buscar(1);
   }
 
@@ -163,8 +177,8 @@ export class RequerimientosComponent {
     // Obtener el parámetro de la ruta si existe
     this.route.paramMap.subscribe((params) => {
       this.contrato = params.get('contrato');
-      if ( this.contrato) {
-        console.log(`Parámetro contrato: ${ this.contrato}`);
+      if (this.contrato) {
+        console.log(`Parámetro contrato: ${this.contrato}`);
         this.buscar(1);
       } else {
         console.log('El parámetro contrato no está presente en la ruta');
@@ -181,7 +195,6 @@ export class RequerimientosComponent {
         element.activo = false;
       }
     });
-
   }
 
   cambioSeleccionPerfiles(id: number) {
@@ -193,7 +206,6 @@ export class RequerimientosComponent {
         element.activo = false;
       }
     });
-
   }
 
   cambioSeleccionConsultores(id: number) {
@@ -205,15 +217,20 @@ export class RequerimientosComponent {
         element.activo = false;
       }
     });
-
   }
 
   buscar(page: number) {
     this.datosEnviar = this.datos1;
+    console.log('LLego aui');
+    this.spinnerService.mostrarSpinner();
+
+    // Simulate an async operation
+    setTimeout(() => {
+      this.spinnerService.ocultarSpinner();
+    }, 2000);
   }
 
-  eventoBuscar(event: any) {
-  }
+  eventoBuscar(event: any) {}
 
   obtenerEvento(event: any) {
     const pageSize = event.registros_por_pagina;
@@ -228,20 +245,20 @@ export class RequerimientosComponent {
     this.datosEnviar = this.datos1;
   }
 
-  abrirModalPerfiles(num:number) {
-    if(num == 1){
-       this.tituloSecundario = "Asignación de perfiles"
-    } else if(num == 2){
-       this.tituloSecundario = "Actualización de perfiles"
+  abrirModalPerfiles(num: number) {
+    if (num == 1) {
+      this.tituloSecundario = 'Asignación de perfiles';
+    } else if (num == 2) {
+      this.tituloSecundario = 'Actualización de perfiles';
     }
     this.showCamvaPerfiles = true;
   }
 
-  abrirModalConsultores(num:number) {
-    if(num == 1){
-       this.tituloSecundario = "Asignación de consultores"
-    } else if(num == 2){
-       this.tituloSecundario = "Actualización de consultores"
+  abrirModalConsultores(num: number) {
+    if (num == 1) {
+      this.tituloSecundario = 'Asignación de consultores';
+    } else if (num == 2) {
+      this.tituloSecundario = 'Actualización de consultores';
     }
     this.showCamvaConsultores = true;
   }
@@ -250,31 +267,26 @@ export class RequerimientosComponent {
     this.showCamvasPrimario = false;
   }
 
-  
   cerrarCamvasPerfiles() {
     this.showCamvaPerfiles = false;
   }
 
-
-   
-  cerrarCamvasConsultores () {
+  cerrarCamvasConsultores() {
     this.showCamvaConsultores = false;
   }
 
-
   guardar() {
-    if(this.seleccionado == 1){
-    } else if(this.seleccionado == 2){
-    } else if(this.seleccionado == 3){
+    if (this.seleccionado == 1) {
+    } else if (this.seleccionado == 2) {
+    } else if (this.seleccionado == 3) {
     }
     this.toastrService.success('Datos guardados correctamente');
     this.showCamvasPrimario = false;
   }
 
-
   guardarSecundario() {
-    if(this.seleccionadoPerfil == 1){
-    } else if(this.seleccionadoPerfil == 2){
+    if (this.seleccionadoPerfil == 1) {
+    } else if (this.seleccionadoPerfil == 2) {
       this.seleccionadoPerfil = 1;
       this.pestanasPerfiles.forEach((element) => {
         if (element.id == this.seleccionadoPerfil) {
@@ -283,14 +295,20 @@ export class RequerimientosComponent {
           element.activo = false;
         }
       });
-    } else if(this.seleccionadoPerfil == 3){
+    } else if (this.seleccionadoPerfil == 3) {
     }
-    this.toastrService.success('Datos guardados correctamente');
-    // this.showCamvasPrimario = false;
+
+    this.confirmarModalService
+      .abriraModalPregunta('Estas seguro d e guardar  la informacion')
+      .subscribe(async (result) => {
+        if (result) {
+          this.toastrService.success('Datos guardados correctamente');
+        }
+      });
   }
 
-  nuevoPerfil(){
-    this.seleccionadoPerfil = 2
+  nuevoPerfil() {
+    this.seleccionadoPerfil = 2;
     this.pestanasPerfiles.forEach((element) => {
       if (element.id == this.seleccionadoPerfil) {
         element.activo = true;
@@ -298,6 +316,5 @@ export class RequerimientosComponent {
         element.activo = false;
       }
     });
-
   }
 }
