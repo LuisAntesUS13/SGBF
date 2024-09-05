@@ -1,0 +1,18 @@
+
+<div class="modal-header valoresCentrados">
+    <div class="row">
+        <div class="col-sm-12" *ngIf="icono != ''">
+            <strong class="rotating-symbol"><i [class]="icono"></i></strong>
+        </div>
+        <div class="col-sm-12">
+            <strong>{{ textoPergunta }}</strong>
+        </div>
+    </div>
+</div>
+<div class="modal-body valoresCentrados" *ngIf="textoCuerpoHtml != ''">
+    <div [innerHTML]="textoHtml"></div>
+</div>
+<div class="modal-footer valoresCentrados">
+    <button type="button" class="btn btn-principal" (click)="closeModal(true)">{{ textoBotonAceptar }}</button>
+    <button type="button" class="btn btn-accion" (click)="closeModal(false)">{{ textoBotonRechazar }}</button>
+</div>

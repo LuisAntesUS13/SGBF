@@ -1,0 +1,19 @@
+.line-with-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+  
+.line-with-text hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 1px solid #000; /* Estilo de la línea */
+    margin: 0 10px; /* Espacio entre la línea y el texto */
+}
+  
+.line-with-text span {
+    padding: 0 10px;
+    background-color: white; /* Color de fondo para "cortar" la línea */
+}

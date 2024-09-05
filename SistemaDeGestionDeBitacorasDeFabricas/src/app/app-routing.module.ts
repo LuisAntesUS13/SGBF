@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { proteccionRutasGuard } from './services/guards/proteccion-rutas.guard';
 
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'content',
-    // canActivate: [ProtectRoutesGuard],
+    canActivate: [proteccionRutasGuard],
     loadChildren: () =>
       import('./components/content/admin.module').then((m) => m.AdminModule),
   },

@@ -14,7 +14,7 @@ export class UsuariosComponent {
   tituloCheck: string = "Permitido";
   check: boolean = true;
   constructor(private toastrService: ToastrService,){
-
+    this.datosEnviar = this.datos1;
   
   }
 
@@ -65,7 +65,7 @@ export class UsuariosComponent {
     }
   }
 
-  obtenerSolicitudes(event: any) {
+  obtenerEvento(event: any) {
     const pageSize = event.registros_por_pagina;
     const page = event.pagina_actual
 

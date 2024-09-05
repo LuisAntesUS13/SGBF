@@ -1,0 +1,33 @@
+
+.container {
+    position: relative;
+    display: inline-block;
+    padding: 0px;
+  }
+
+  
+.border {
+    background-color: white;
+    border: 1px solid #000;
+    padding: 2px;
+    border-radius: 3%;
+    position: absolute;
+    text-align: center;
+    width: auto;
+    max-height: 300px;
+    margin-top: 37px;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    overflow-y: auto;  /* Habilita el desplazamiento vertical */
+  }
+
+  th {
+    padding-top: 1px !important; 
+    padding-bottom: 1px !important;
+    font-weight: normal;
+    text-align: left;
+  }
+
+  tr {
+    cursor: pointer;
+  }

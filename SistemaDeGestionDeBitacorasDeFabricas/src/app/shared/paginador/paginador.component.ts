@@ -42,10 +42,6 @@ export class PaginadorComponent {
       this.total_paginas = this.datos[0].total_paginas;
       this.total_registros = this.datos[0].total_registros;
       this.pagina_actual = this.datos[0].pagina_actual;
-      console.log(this.registros_por_pagina);
-      console.log(this.pagina_actual);
-      console.log(this.registros_por_pagina * this.pagina_actual);
-      console.log(((this.registros_por_pagina * this.pagina_actual) - this.registros_por_pagina) + 1);
       this.registro_inicial = (((this.registros_por_pagina * this.pagina_actual) - this.registros_por_pagina) + 1);
       this.registro_final = ((this.registros_por_pagina * this.pagina_actual) > this.total_registros) ? this.total_registros : (this.registros_por_pagina * this.pagina_actual);
 

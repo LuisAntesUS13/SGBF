@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
     <div class="">
       <router-outlet></router-outlet>
     </div>
+    <app-spinner></app-spinner>
   `,
 })
 export class AuthComponent {

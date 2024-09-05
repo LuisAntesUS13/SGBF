@@ -5,6 +5,9 @@ import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.component';
 import { PermisosComponent } from './permisos/permisos.component';
+import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
+import { ContratosComponent } from './contratos/contratos.component';
+import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +28,44 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: UsuariosComponent,
+      }, {
+        path: 'lidertecnico',
+        data: {
+          title: 'Autorización de bitácoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoBitacorasComponent,
+      },{
+        path: 'consultor',
+        data: {
+          title: 'Bitacoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoBitacorasComponent,
+      },
+      {
+        path: 'contratos',
+        data: {
+          title: 'Administración contratos',
+          breadcrumbs: [],
+        },
+        component: ContratosComponent,
+      },
+      {
+        path: 'requerimientos/:contrato',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: RequerimientosComponent,
+      },
+      {
+        path: 'requerimientos',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: RequerimientosComponent,
       },
       {
         path: 'asistencia',

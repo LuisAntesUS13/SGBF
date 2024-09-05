@@ -1,0 +1,79 @@
+.input-container{
+    display: flex;
+    gap: 20px;
+
+}
+
+tr{
+    text-align: center;
+}
+
+.rows{
+    cursor: pointer;
+}
+
+.col-sm-3 > label{
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.title-container{
+    background-color: #EBEBEB;
+}
+
+.container{
+    display: grid;
+    gap: 20px 0px;
+}
+
+.offcanvas{
+    max-width: 600px;
+    width: 100%;;
+}
+
+.label-observaciones{
+    text-align: left;
+}
+
+.nav{
+    --bs-nav-link-color: black ;
+    cursor: pointer;
+}
+
+.ejecucion{
+    --bs-nav-link-hover-color: red;
+}
+
+.revision{
+    --bs-nav-link-hover-color: orange;
+}
+
+.autorizacion{
+    --bs-nav-link-hover-color: rgb(128, 255, 0);
+}
+
+.finalizado{
+    --bs-nav-link-hover-color: green;
+}
+
+.rechazado{
+    --bs-nav-link-hover-color: rgb(0, 0, 0);
+}
+
+.contenedor-boton-guardar{
+    text-align: right;
+}
+
+.evidencias{
+    border: 1px solid rgb(189, 189, 189);
+    height: 80px;
+}
+
+.textarea{
+    resize: none;
+}
+
+.label-evidencias{
+    text-align: left;
+}
+
