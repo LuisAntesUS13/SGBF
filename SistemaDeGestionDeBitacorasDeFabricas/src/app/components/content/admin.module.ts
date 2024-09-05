@@ -8,8 +8,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AdminComponent } from './admin.component';
+import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
+import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 
 @NgModule({
   imports: [
@@ -18,10 +20,10 @@ import { RequerimientosComponent } from './requerimientos/requerimientos.compone
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [CurrencyPipe, DatePipe, DecimalPipe],
-  declarations: [AdminComponent, InicioComponent, UsuariosComponent, ContratosComponent, RequerimientosComponent],
+  declarations: [AdminComponent, InicioComponent, UsuariosComponent, ContratosComponent, RequerimientosComponent, LidertecnicoBitacorasComponent, ConsultorBitacorasComponent],
   exports: [],
 })
 export class AdminModule {}
