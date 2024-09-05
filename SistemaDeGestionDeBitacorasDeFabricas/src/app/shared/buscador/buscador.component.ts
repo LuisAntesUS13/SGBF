@@ -8,9 +8,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class BuscadorComponent {
   @Input() datos: any[] | null = null; //Datos para realizar busqueda
-  @Input() setValor!: string; 
-  @Input() llaveBusqueda: string = ''; // llave del campo de busqueda
-  @Input() llaveResultado: string[] = []; // llaves del campo de resultado, el primero debera ser el resultado que buscas y los demas solo referencias visuales
+  @Input() setValor: string = "";
+  @Input() llaves: string[] = []; // El primer valor sera la llave a obtener, los  demas son los  campos que se  mostraran visualmente y el filtro aplica a todos  los campos  
   @Input() campoHabilitado: boolean = true; 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   Formulario!: FormGroup;
@@ -22,11 +21,7 @@ export class BuscadorComponent {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['setValor'].currentValue != undefined &&
-      changes['setValor'].currentValue != null &&
-      changes['setValor'].currentValue != ""
-    ) {
+    if ( this.setValor != "") {
       this.generarFormulario();
       this.Formulario.get('busqueda')?.setValue(this.setValor);
     } else {
@@ -47,7 +42,7 @@ export class BuscadorComponent {
   }
 
   cambioBusqueda() {
-    if (this.datos != null && this.datos.length > 0) {
+    if (this.datos != null && this.datos.length > 1) {
       if (this.Formulario.get('busqueda')?.value == '') {
         this.mostrar = false;
         this.valor.emit("");
@@ -57,11 +52,13 @@ export class BuscadorComponent {
           this.mostrar = true;
           const regex = new RegExp(this.Formulario.get('busqueda')?.value, 'i');
           this.datosFiltrados = this.datos
-          .filter(dato => regex.test(dato[this.llaveBusqueda])) // Filtrar datos
+          .filter(dato => 
+            this.llaves.some(campo => regex.test(dato[campo])) // Filtrar datos por varios campos
+          )
           .map(dato => {
-            // Crear una cadena concatenando todos los valores de las claves en llaveResultado
-            const valores = this.llaveResultado.map(key => dato[key]).filter(value => value !== undefined);
-            return { identificador: dato[this.llaveResultado[0]], valor: valores.join(' - ') }; // Unir los valores con un espacio
+            // Crear una cadena concatenando todos los valores de las claves en llaves
+            const valores = this.llaves.slice(1).map(key => dato[key]).filter(value => value !== undefined);
+            return { identificador: dato[this.llaves[0]], valor: valores.join(' - ') }; // Unir los valores con un espacio
           });
           this.mostrar = this.datosFiltrados.length > 0? true: false;
         }
@@ -80,7 +77,7 @@ export class BuscadorComponent {
   }
 
   validandoExisteCampo() {
-    for (const elemento of this.llaveResultado) {
+    for (const elemento of this.llaves) {
       let arreglo = this.datos != null ? this.datos : [];
       const existeTipoAccion = arreglo.some((item) =>
         item.hasOwnProperty(elemento)
@@ -95,10 +92,18 @@ export class BuscadorComponent {
   }
 
   validandoExisteCampoBuqueda() {
-    let arreglo = this.datos != null ? this.datos : [];
-    return  arreglo.some((item) =>
-      item.hasOwnProperty(this.llaveBusqueda)
-    );; // Retorna true si todos los parámetros existen
+    for (const elemento of this.llaves) {
+      let arreglo = this.datos != null ? this.datos : [];
+      const existeTipoAccion = arreglo.some((item) =>
+        item.hasOwnProperty(elemento)
+      );
+  
+      if (!existeTipoAccion) {
+        return false; // Retorna false si algún parámetro no existe
+      }
+    }
+  
+    return true; // Retorna true si todos los parámetros existen
   }
 
 

@@ -87,8 +87,7 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
         <div class="card-body row">
           <div class="col-sm-6">
               <label for="Correo" class="form-label">Busca y selecciona el contrato</label>
-              <app-buscador [datos]="datosEnviar"  [llaveBusqueda]="llaveBusqueda"  [llaveResultado]="llaveResultado"
-              (valor)="eventoBuscar($event)"></app-buscador>
+              <app-buscador [datos]="datosEnviar" [llaves]="llavesBuscador" (valor)="eventoBuscar($event)"></app-buscador>
           </div>
           <div class="col-sm-12">
             <hr>
