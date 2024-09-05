@@ -9,17 +9,11 @@ import { ProlongaSesionService } from 'src/app/services/prolonga-sesion/prolonga
     <div class="contenido_principal">
       <!-- <sg-breadcrumbs style="padding:0px;"></sg-breadcrumbs> -->
       <router-outlet></router-outlet>
-
     </div>
-    <<app-spinner></app-spinner>
+    <app-spinner></app-spinner>
   `,
 })
-export class AdminComponent implements OnChanges {
-  // constructor(private prolongaSesionService: ProlongaSesionService) {
+export class AdminComponent {
   constructor(private prolongaSesionService: ProlongaSesionService) {
-    // this.prolongaSesionService.iniciarIntervalo();
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ngOnChanges(changes: SimpleChanges): void {}
 }

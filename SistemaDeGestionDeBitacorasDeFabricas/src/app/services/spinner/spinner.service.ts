@@ -12,8 +12,6 @@ export class SpinnerService {
   constructor() { }
 
   mostrarSpinner() {
-
-    console.log("Llegamos al servicio")
     this.spinnerSubject.next(true);
   }
 

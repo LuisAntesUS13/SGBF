@@ -7,8 +7,9 @@ import { ProlongaSesionComponent } from 'src/app/shared/prolonga-sesion/prolonga
   providedIn: 'root',
 })
 export class ProlongaSesionService {
-  private inactivityTime: number = 6000000; // 10 minutos => 1000 = 1 segundo
+  private inactivityTime: number = 6000000; // 10 minutos = 6000000 => 1000 = 1 segundo  
   private timeoutId: any;
+  private inactivity: boolean = false;
 
   constructor(
     private modal: NgbModal,
@@ -31,11 +32,14 @@ export class ProlongaSesionService {
   
     // Función que se ejecuta cuando el tiempo de inactividad se cumple
     private onInactivity() {
+      this.inactivity = true;
       const modalref = this.modal.open(ProlongaSesionComponent);
       modalref.result.then((result) => {
         if (result === 'extender') {
+          this.inactivity = false;
           this.resetTimer();
         } else {
+          this.inactivity = false;
           this.router.navigate(['/content/login']);
         }
       });
@@ -51,7 +55,9 @@ export class ProlongaSesionService {
   
     // Reinicia el temporizador cuando hay actividad
     private resetTimer() {
-      this.startInactivityTimer();
+      if(!this.inactivity){
+        this.startInactivityTimer();
+      }
     }
   
     // Limpia el temporizador
