@@ -26,7 +26,8 @@
         <div class="col-sm-3">
             <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo requerimiento</button>
         </div>
-    </div>
+    </div>    
+
 </div>
 
 <div class="row">
@@ -153,8 +154,8 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
     <div class="card" *ngIf="seleccionado == 2">
       <div class="card-body row">
         <div class="col-sm-3" style="margin-bottom: 3px;">
-          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalPerfiles(1)"> Asignar perfil &nbsp;
-            <i class="bi bi-plus-circle-dotted"></i></button>
+          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalPerfiles(1)">
+            <i class="bi bi-plus-circle-dotted"></i>&nbsp;Asignar perfil</button>
         </div>
         <hr>
         <div class="row">
@@ -183,8 +184,8 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
     <div class="card" *ngIf="seleccionado == 3">
       <div class="card-body row">
         <div class="col-sm-3" style="margin-bottom: 3px;">
-          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalConsultores(1)"> Agregar consultor &nbsp;
-            <i class="bi bi-plus-circle-dotted"></i></button>
+          <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalConsultores(1)">
+            <i class="bi bi-plus-circle-dotted"></i>&nbsp;Agregar consultor </button> 
         </div>
         <hr>
         <div class="row">
@@ -244,7 +245,6 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
         <div class="card-body row">
             <div class="col-sm-12">
               <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
-               <b> Busque, seleccione y agrege la cantidad de recursos que se requieren en ese perfil.</b><br>
                 NOTA: En caso de no localizar el perfil deseado, haga click en pestaña <b>Registro perfiles</b> para agregar  uno nuevo.
               </div>
             </div>
@@ -305,7 +305,6 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
         <div class="card-body row">
             <div class="col-sm-12">
               <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
-               <b> Busque, seleccione al usuario que  desea asignar como consultor.</b><br>
                 NOTA: En caso de no localizar al consultor deseado, haga click en <b>Registro de consultor</b> para agregar  uno nuevo.
               </div>
             </div>
@@ -327,7 +326,7 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
               <hr>
             </div>
             <div class="col-sm-12">
-               <h5>Agrega los documentos del ecpediente</h5>
+               <h5>Agrega los documentos del expediente</h5>
             </div>
             
             <div class="col-sm-12">

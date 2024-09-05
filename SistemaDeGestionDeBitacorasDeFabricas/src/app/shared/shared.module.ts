@@ -8,6 +8,7 @@ import { PaginadorComponent } from './paginador/paginador.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { ConfirmarModalComponent } from './confirmar-modal/confirmar-modal.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { SeparadorConTextoComponent } from './separador-con-texto/separador-con-texto.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     PaginadorComponent,
     BuscadorComponent,
     ConfirmarModalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SeparadorConTextoComponent
   ],
   exports: [
     MenuComponent,
@@ -25,7 +27,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     PaginadorComponent,
     BuscadorComponent,
     ConfirmarModalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SeparadorConTextoComponent
   ],
   imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
 })
