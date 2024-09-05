@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.component';
+import { PermisosComponent } from './permisos/permisos.component';
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +25,22 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: UsuariosComponent,
+      },
+      {
+        path: 'asistencia',
+        data: {
+          title: 'Lista de Asistencia',
+          breadcrumbs: [],
+        },
+        component: AsistenciaComponent,
+      },
+      {
+        path: 'permisos',
+        data: {
+          title: 'Permisos',
+          breadcrumbs: [],
+        },
+        component: PermisosComponent,
       },
       // {
       //   path: 'notificaciones',

@@ -1,0 +1,149 @@
+<h3>Permisos
+</h3>
+<hr>
+<div class="row">
+
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID del Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Perfil</th>
+                <th scope="col" >CURP</th>
+                <th scope="col" >Ver</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr >
+                <td>
+                      <p type="text">5465</p>
+                </td>
+                <td>
+                      <p type="text">Omar</p>
+                </td>
+                <td>
+                      <p type="text">Desarrollador Java Sr</p>
+                </td>
+                <td>
+                      <p type="text">CARO981216</p>
+                </td>
+                <td >
+                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
+
+                </td>
+              </tr>
+              <tr >
+                <td>
+                      <p type="text">5465</p>
+                </td>
+                <td>
+                      <p type="text">Miguel Angel</p>
+                </td>
+                <td>
+                      <p type="text">Desarrollador Java Sr</p>
+                </td>
+                <td>
+                      <p type="text">MAEL981216</p>
+                </td>
+                <td >
+                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
+
+                </td>
+              </tr>
+              <tr >
+                <td>
+                      <p type="text">5465</p>
+                </td>
+                <td>
+                      <p type="text">Luis</p>
+                </td>
+                <td>
+                      <p type="text">Desarrollador Java Sr</p>
+                </td>
+                <td>
+                      <p type="text">MAEL981216</p>
+                </td>
+                <td >
+                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+
+</div>
+
+
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario" id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloPrimario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+        <div class="card-body row">
+            <div class="col-sm-6" enabled>
+                <label for="Correo" class="form-label">ID del Usuario</label>
+                <input type="text" class="form-control" id="Correo" placeholder="" enabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">CURP</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Correo</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Perfil</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+
+            <div class="col-sm-12">
+              <hr>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Seleccione el rol del usuario</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione  una  opción</option>
+                    <option value="1">Gestor de contratos</option>
+                    <option value="2">Lider tecnico</option>
+                    <option value="3">Responsable</option>
+                    <option value="4">Reportes</option>
+                    <option value="4">Administrador</option>
+                  </select>
+            </div>
+
+        </div>
+        <div class="card-footer row">
+            <div class="col-sm-12">
+                <label for="Correo" class="form-label">Acceso del usuario al sistema</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="check" (change)="clickchek()">
+                    <label class="form-check-label" for="flexSwitchCheckDefault" style="margin-top: 1px !important;">{{tituloCheck}}</label>
+                  </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()"> Guardar &nbsp;<em
+          class="bi bi-save"></em></button>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>
