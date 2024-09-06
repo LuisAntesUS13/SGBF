@@ -6,8 +6,8 @@
     <div class="card-body row">
         
         <div class="col-sm-3">
-            <label for="Correo" class="form-label">Nombre del consultor</label>
-            <input type="text" class="form-control" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1">
+            <label class="form-label">Nombre del consultor</label>
+            <input type="text" class="form-control" placeholder="Luis Eduardo Antes Villa" [(ngModel)]="inputValue" (change)="onInputChange($event)" aria-describedby="basic-addon1">
         </div>
         <div class="col-sm-3 button-buscar">
             <button type="button" class="btn btn-principal" style="margin-top: 26px;">Buscar</button>
@@ -37,16 +37,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="rows" *ngFor="let persona of personas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <td>{{persona.folio}}</td>
-                <td>{{persona.consultor}}</td>
-                <td>{{persona.lider}}</td>
-                <td>{{persona.proyecto}}</td>
-                <td>{{persona.actividad}}</td>
-                <td>{{persona.horas}}</td>
-                <td>{{persona.fecha}}</td>
+              <tr class="rows" *ngFor="let actividad of actividadesFiltradas" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <td class="registro">{{actividad.folio}}</td>
+                <td class="registro">{{actividad.consultor}}</td>
+                <td class="registro">{{actividad.lider}}</td>
+                <td class="registro">{{actividad.proyecto}}</td>
+                <td class="registro">{{actividad.actividad}}</td>
+                <td class="registro">{{actividad.horas}}</td>
+                <td class="registro">{{actividad.fecha}}</td>
               </tr>
-                
             </tbody> 
           </table>
     </div>
@@ -89,44 +88,25 @@
           </div>
         </div>
 
-        
+        <hr>
       
         <div class="row ">
           <label class="label-evidencias">Evidencias</label>
           <div class="evidencias">
-            
           </div>
-
         </div>
+
+        <hr>
 
         <div class="row">
           <label class="label-observaciones">Observaciones</label>
           <textarea class="form-control textarea" aria-label="With textarea"></textarea>
         </div>  
         <div class="contenedor-boton-guardar"> 
-          <button type="button" class="btn btn-principal">Enviar</button>
+          <button type="button" class="btn btn-principal btn-modal">Autorizar</button>
+          <button type="button" class="btn btn-principal btn-modal">Enviar</button>
         </div>
       </div>
-     
-
-
     </form>
   </div>
 </div>
-
-<!-- cambioSeleccion(id: number) {
-  this.seleccionado = id;
-  this.listadoEstatus.forEach((element) => {
-    if (element.id == id) {
-      element.activo = true;
-    } else {
-      element.activo = false;
-    }
-  });
-
-  this.listaActividadesFiltro = this.listaActividades.filter(
-    (actividad) => actividad.estatus === this.seleccionado
-  );
-} -->
-
-
