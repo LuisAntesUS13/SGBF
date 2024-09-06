@@ -6,6 +6,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
+import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
+import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+
+
 const routes: Routes = [
   {
     path: '',
@@ -34,12 +38,19 @@ const routes: Routes = [
         },
         component: LidertecnicoBitacorasComponent,
       },{
-        path: 'consultor',
+        path: 'consultor/bitacora',
         data: {
           title: 'Bitacoras',
           breadcrumbs: [],
         },
-        component: LidertecnicoBitacorasComponent,
+        component: ConsultorBitacorasComponent,
+      },{
+        path: 'consultor/bitacora/actividades/:periodo',
+        data: {
+          title: 'Actividades',
+          breadcrumbs: [],
+        },
+        component: ConsultorActividadesBitacoraComponent,
       },
       {
         path: 'contratos',
