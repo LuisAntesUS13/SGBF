@@ -2,84 +2,30 @@
 </h3>
 <hr>
 <div class="row">
-
-    <div class="col-sm-12">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">ID del Usuario</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Perfil</th>
-                <th scope="col" >CURP</th>
-                <th scope="col" >Ver</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr >
-                <td>
-                      <p type="text">5465</p>
-                </td>
-                <td>
-                      <p type="text">Omar</p>
-                </td>
-                <td>
-                      <p type="text">Desarrollador Java Sr</p>
-                </td>
-                <td>
-                      <p type="text">CARO981216</p>
-                </td>
-                <td >
-                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
-
-                </td>
-              </tr>
-              <tr >
-                <td>
-                      <p type="text">5465</p>
-                </td>
-                <td>
-                      <p type="text">Miguel Angel</p>
-                </td>
-                <td>
-                      <p type="text">Desarrollador Java Sr</p>
-                </td>
-                <td>
-                      <p type="text">MAEL981216</p>
-                </td>
-                <td >
-                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
-
-                </td>
-              </tr>
-              <tr >
-                <td>
-                      <p type="text">5465</p>
-                </td>
-                <td>
-                      <p type="text">Luis</p>
-                </td>
-                <td>
-                      <p type="text">Desarrollador Java Sr</p>
-                </td>
-                <td>
-                      <p type="text">MAEL981216</p>
-                </td>
-                <td >
-                    <button type="button" class="btn btn-secundario" (click)="abrirModal()">Nuevo usuario</button>
-
-                </td>
-              </tr>
-            </tbody>
-          </table>
-    </div>
-
-
+  <div class="col-sm-12">
+      <table class="table table-hover">
+          <thead>
+            <tr class="valoresCentrados">
+              <th scope="col" class="valoresCentrados">#</th>
+              <th scope="col" class="valoresCentrados">Rol</th>
+              <th scope="col" class="valoresCentrados">Estatus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let dato of datosPermisos;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
+              <th scope="row">{{i+1}}</th>
+              <td>{{dato.roles}}</td>
+              <td>Activo</td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
 </div>
 
 
 
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario" id="offcanvasRight"
-  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  aria-labelledby="offcanvasRightLabel" style="padding-left: 0px; width: 52%;">
   <div class="offcanvas-header">
     <h3>{{tituloPrimario}}</h3>
     <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
@@ -88,54 +34,34 @@
   <div class="offcanvas-body">
     <div class="card">
         <div class="card-body row">
-            <div class="col-sm-6" enabled>
-                <label for="Correo" class="form-label">ID del Usuario</label>
-                <input type="text" class="form-control" id="Correo" placeholder="" enabled>
-            </div>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">CURP</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Correo</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Perfil</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-
-            <div class="col-sm-12">
-              <hr>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">Seleccione el rol del usuario</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione  una  opción</option>
-                    <option value="1">Gestor de contratos</option>
-                    <option value="2">Lider tecnico</option>
-                    <option value="3">Responsable</option>
-                    <option value="4">Reportes</option>
-                    <option value="4">Administrador</option>
-                  </select>
-            </div>
-
+          <table class="table table-hover">
+            <thead>
+              <tr class="valoresCentrados">
+                <th scope="col" class="valoresCentrados">#</th>
+                <th scope="col" class="valoresCentrados">Menu</th>
+                <th scope="col" class="valoresCentrados">Descripcion</th>
+                <th scope="col" class="valoresCentrados">Ver</th>
+                <th scope="col" class="valoresCentrados">Alta</th>
+                <th scope="col" class="valoresCentrados">Baja</th>
+                <th scope="col" class="valoresCentrados">Cambio</th>
+                <th scope="col" class="valoresCentrados">Descarga</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let dato of datosPermisos2;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
+                <th scope="row">{{i+1}}</th>
+                <td>{{dato.menu}}</td>
+                <td>{{dato.descripcion}}</td>
+                <td *ngIf="dato.permisos1" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos1" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 1)" >Asignar</button></td>
+                <td *ngIf="dato.permisos2" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos2" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 2)" >Asignar</button></td>
+                <td *ngIf="dato.permisos3" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos3" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 3)" >Asignar</button></td>
+                <td *ngIf="dato.permisos4" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos4" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 4)" >Asignar</button></td>
+                <td *ngIf="dato.permisos5" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos5" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 5)" >Asignar</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="card-footer row">
-            <div class="col-sm-12">
-                <label for="Correo" class="form-label">Acceso del usuario al sistema</label>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [checked]="check" (change)="clickchek()">
-                    <label class="form-check-label" for="flexSwitchCheckDefault" style="margin-top: 1px !important;">{{tituloCheck}}</label>
-                  </div>
-            </div>
-        </div>
+
     </div>
   </div>
   <div class="offcanvas-footer">

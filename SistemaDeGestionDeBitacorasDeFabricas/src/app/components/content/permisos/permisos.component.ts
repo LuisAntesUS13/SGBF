@@ -11,32 +11,33 @@ export class PermisosComponent {
   tituloPrimario: string = "";
 
 
-  tituloCheck: string = "Permitido";
-  check: boolean = true;
+
   constructor(private toastrService: ToastrService,){
 
 
   }
 
-  datosEnviar :any= [];
+  datoPermisos :any= [];
 
-  datos = [
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "02/09/2024", "correo": "daniel@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "03/09/2024", "correo": "lucia@example.com", "activo": false, "conectado": false},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "04/09/2024", "correo": "diego@example.com", "activo": true, "conectado": false},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "05/09/2024", "correo": "clara@example.com", "activo": false, "conectado": true},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "06/09/2024", "correo": "javier@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "09/09/2024", "correo": "maria@example.com", "activo": false, "conectado": false},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "10/09/2024", "correo": "fernando@example.com", "activo": true, "conectado": false},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "11/09/2024", "correo": "carmen@example.com", "activo": false, "conectado": true},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "12/09/2024", "correo": "andres@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "pagina_actual": 1, "fecha": "13/09/2024", "correo": "isabel@example.com", "activo": false, "conectado": false},
+  datosPermisos = [
+    {"total_paginas": 1, "pagina_actual": 1, "roles": "Gestor de Contratos", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "roles": "Lider Tecnico", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "roles": "Responsable", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "roles": "Reportes", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "roles": "Administrador", "modal": true},
+  ]
+  datosPermisos2 = [
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Usuarios", "descripcion": "asignar a usuarios permisos", "permisos1": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Asistencia", "descripcion": "asignar a asistencias permisos", "permisos2": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Contratos y Requerimientos", "descripcion": "asignar permisos", "permisos3": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Permisos", "descripcion": "asignar permisos", "permisos4": false, "asignarPermisos": "", "permisos5": false, "asignarPermisos2": ""},
+
   ]
 
 
   buscar(page: number){
     if (page == 1){
-      this.datosEnviar = this.datos;
+      this.datoPermisos = this.datosPermisos;
     }
   }
 
@@ -50,7 +51,7 @@ export class PermisosComponent {
 
 
   abrirModal(){
-    this.tituloPrimario = "Asignar Rol";
+    this.tituloPrimario = "Asignar Permisos";
     this.showCamvasPrimario = true;
   }
   cerrarCamvasPrimario(){
@@ -62,8 +63,23 @@ export class PermisosComponent {
     this.toastrService.success("Datos guardados correctamente");
   }
 
-  clickchek(){
-    this.check = !this.check;
-    this.tituloCheck = this.check? "Permitido":"Bloqueado";
+  marcarPermisos(dato: any, Permisos: number){
+    this.toastrService.success("Permiso asignado correctamente");
+    if(Permisos == 1){
+      dato.permisos1 = true;
+      dato.asignarPermisos = "asignado"
+    }else if(Permisos == 2){
+      dato.permisos2 = true;
+      dato.asignarPermisos = "asignado"
+    }else if(Permisos == 3){
+      dato.permisos3 = true;
+      dato.asignarPermisos = "asignado"
+    }else if(Permisos == 4){
+      dato.permisos4 = true;
+      dato.asignarPermisos = "asignado"
+    }else if(Permisos == 5){
+      dato.permisos5 = true;
+      dato.asignarPermisos = "asignado"
+  }
   }
 }

@@ -19,25 +19,18 @@ export class AsistenciaComponent {
 
   }
 
-  datosEnviar :any= [];
+  datosAsistencia :any= [];
 
   datos1 = [
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "02/09/2024", "correo": "daniel@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "03/09/2024", "correo": "lucia@example.com", "activo": false, "conectado": false},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "04/09/2024", "correo": "diego@example.com", "activo": true, "conectado": false},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "05/09/2024", "correo": "clara@example.com", "activo": false, "conectado": true},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "06/09/2024", "correo": "javier@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "09/09/2024", "correo": "maria@example.com", "activo": false, "conectado": false},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "10/09/2024", "correo": "fernando@example.com", "activo": true, "conectado": false},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "11/09/2024", "correo": "carmen@example.com", "activo": false, "conectado": true},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "12/09/2024", "correo": "andres@example.com", "activo": true, "conectado": true},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "13/09/2024", "correo": "isabel@example.com", "activo": false, "conectado": false},
+    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "02/09/2024", "inicio": true, "FechaInicio": "02/09/2024 8:55", "salidaComer": true, "FechaSalidaComida": "02/09/2024 15:05", "RegresoComer": true, "FechaRegresoComer": "02/09/2024 15:55", "Salida": true, "FechaSalida": "02/09/2024 19:03",},
+    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "03/09/2024", "inicio": true, "FechaInicio": "03/09/2024 8:50", "salidaComer": true, "FechaSalidaComida": "03/09/2024 15:00", "RegresoComer": false, "FechaRegresoComer": "", "Salida": false, "FechaSalida": "",},
+    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "04/09/2024", "inicio": false, "FechaInicio": "", "salidaComer": false, "FechaSalidaComida": "", "RegresoComer": false, "FechaRegresoComer": "", "Salida": false, "FechaSalida": "",},
   ]
 
 
   buscar(page: number){
     if (page == 1){
-      this.datosEnviar = this.datos1;
+      this.datosAsistencia = this.datos1;
     }
   }
 
@@ -49,26 +42,24 @@ export class AsistenciaComponent {
     this.buscar(page);
   }
 
-
-  abrirModal(){
-    this.tituloPrimario = "Registro de usuario";
-    this.showCamvasPrimario = true;
-  }
-  cerrarCamvasPrimario(){
-    this.showCamvasPrimario = false;
-  }
-
-  guardar(){
-    this.showCamvasPrimario = false;
-    this.toastrService.success("Datos guardados correctamente");
-  }
-
-  clickchek(){
-    this.check = !this.check;
-    this.tituloCheck = this.check? "Permitido":"Bloqueado";
-  }
   asistencia(){
     this.dateFlagIA = false;
+  }
+  marcarAsistencia(dato: any, numero: number){
+    this.toastrService.success("Asistencia registrada correctamente");
+    if(numero == 1){
+      dato.inicio = true;
+      dato.FechaInicio = "04/09/2024 8:57"
+    }else if(numero == 2){
+      dato.salidaComer = true;
+      dato.FechaSalidaComida = "04/09/2024 15:10"
+    }else if(numero == 3){
+      dato.RegresoComer = true;
+      dato.FechaRegresoComer = "03/09/2024 16:00"
+    }else if(numero == 4){
+      dato.Salida = true;
+      dato.FechaSalida = "03/09/2024 19:06"
+    }
   }
 
 }
