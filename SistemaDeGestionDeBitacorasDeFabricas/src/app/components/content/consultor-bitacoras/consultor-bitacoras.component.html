@@ -1,1 +1,43 @@
-<p>consultor-bitasdasdacoras works!</p>
+<div>
+    
+    <h3>Bitacoras</h3>
+</div>
+<hr>
+<div class="card">
+    <div class="card-body row">
+        <div class="col-sm-3">
+            <label for="Correo" class="form-label">Proyecto</label>
+            <select class="form-select" [(ngModel)]="selectedOption"  aria-label="Default select example">
+                <option *ngFor="let option of options" [value]="option.value" selected>{{option.value}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-footer row" style="margin: 0px;">
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-secundario">Agregar</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Número de consultor</th>
+                <th scope="col">Proyecto</th>
+                <th scope="col">Año</th>
+                <th scope="col">Periodo</th>
+            </tr>
+            </thead>
+                <tbody>
+                <tr class="rows" *ngFor="let bitacora of filtrarBitacorasPorProyecto()" (click)="detail(bitacora.periodo)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <td>{{bitacora.numConsultor}}</td>
+                    <td>{{bitacora.proyecto}}</td>
+                    <td>{{bitacora.anho}}</td>
+                    <td>{{bitacora.periodo}}</td>
+                </tr>
+            </tbody> 
+        </table>
+    </div>
+</div>

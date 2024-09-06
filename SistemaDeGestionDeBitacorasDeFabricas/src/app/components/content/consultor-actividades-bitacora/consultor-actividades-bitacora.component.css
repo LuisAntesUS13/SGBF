@@ -1,22 +1,26 @@
-.col-sm-3 > label{
-    font-weight: 400;
-    font-size: 14px;
-}
 
-tr{
-    text-align: center;
-}
-
-td{
-    vertical-align: middle;
-    cursor: pointer;
-}
 
 .nav{
     --bs-nav-link-color: black ;
+}
+
+a{
+    
+}
+
+.nav-link {
+    color: black !important;
+}
+  
+.nav-link:hover {
+    color: #0e159d !important;
     cursor: pointer;
 }
 
+.nav-link.active {
+    color: #F80000 !important;
+}
+/* 
 .ejecucion{
     --bs-nav-link-hover-color: red;
 }
@@ -35,4 +39,13 @@ td{
 
 .rechazado{
     --bs-nav-link-hover-color: rgb(0, 0, 0);
+} */
+
+table{
+    text-align: center;
+    vertical-align: middle;
+}
+
+td{
+    cursor: pointer;
 }

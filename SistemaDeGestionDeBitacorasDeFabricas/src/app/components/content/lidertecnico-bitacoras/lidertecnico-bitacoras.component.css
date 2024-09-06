@@ -1,3 +1,5 @@
+
+/*Estilos del contenido prinicpal*/
 .input-container{
     display: flex;
     gap: 20px;
@@ -8,7 +10,12 @@ tr{
     text-align: center;
 }
 
-.rows{
+td{
+    vertical-align: middle;
+}
+
+
+.registro{
     cursor: pointer;
 }
 
@@ -35,8 +42,14 @@ tr{
     text-align: left;
 }
 
+
+/* Estilos del filtro de estados */
+
 .nav{
     --bs-nav-link-color: black ;
+}
+
+.nav-link{
     cursor: pointer;
 }
 
@@ -60,8 +73,26 @@ tr{
     --bs-nav-link-hover-color: rgb(0, 0, 0);
 }
 
+
+
+/* Estilos del offcanvas*/
 .contenedor-boton-guardar{
-    text-align: right;
+    display: flex;
+    gap: 8px;
+}
+
+.contenedor-boton-guardar button:first-child{
+    background-color: rgb(55, 228, 95);
+}
+
+.contenedor-boton-guardar button:first-child:hover{
+    background-color:white;
+    color:  rgb(55, 228, 95);
+    border-color:  rgb(55, 228, 95);
+}
+
+.btn-modal{
+    width: 100%;
 }
 
 .evidencias{

@@ -12,6 +12,7 @@ import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/liderte
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
+import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,16 @@ import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bit
     SharedModule
   ],
   providers: [CurrencyPipe, DatePipe, DecimalPipe],
-  declarations: [AdminComponent, InicioComponent, UsuariosComponent, ContratosComponent, RequerimientosComponent, LidertecnicoBitacorasComponent, ConsultorBitacorasComponent],
+  declarations: [AdminComponent,
+                  InicioComponent, 
+                  UsuariosComponent, 
+                  ContratosComponent, 
+                  RequerimientosComponent, 
+                  LidertecnicoBitacorasComponent, 
+                  ConsultorBitacorasComponent, 
+                  ConsultorActividadesBitacoraComponent,
+                  
+                ],
   exports: [],
 })
 export class AdminModule {}
