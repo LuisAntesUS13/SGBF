@@ -21,8 +21,7 @@ export class RequerimientosComponent {
 
   contrato: string | null = null;
 
-  llaveResultado: string[] = ['identificador', 'nombre'];
-  llaveBusqueda: string = 'identificador';
+  llavesBuscador: string[] = ['identificador','identificador', 'nombre'];
 
   pestanas = [
     { id: 1, nombre: 'Requerimiento', activo: true },
@@ -229,7 +228,9 @@ export class RequerimientosComponent {
     }, 2000);
   }
 
-  eventoBuscar(event: any) {}
+  eventoBuscar(event: any) {
+    console.log(event)
+  }
 
   obtenerEvento(event: any) {
     const pageSize = event.registros_por_pagina;
