@@ -33,15 +33,13 @@ td{
     gap: 20px 0px;
 }
 
-.offcanvas{
-    max-width: 600px;
-    width: 100%;;
+.contenedor-observaciones{
+    margin-bottom: 8px;
 }
 
-.label-observaciones{
-    text-align: left;
+textarea{
+    resize: none;
 }
-
 
 /* Estilos del filtro de estados */
 
@@ -73,22 +71,26 @@ td{
     --bs-nav-link-hover-color: rgb(0, 0, 0);
 }
 
-
+.contenedor-evidencias{
+    margin-top: 8px;
+}
 
 /* Estilos del offcanvas*/
-.contenedor-boton-guardar{
+.contenedor-boton-enviar{
+
     display: flex;
-    gap: 8px;
+    justify-content: right;
+    gap: 8px 8px;
 }
 
-.contenedor-boton-guardar button:first-child{
-    background-color: rgb(55, 228, 95);
+.contenedor-boton-enviar button:first-child{
+    background-color: rgb(66, 72, 186);
 }
 
-.contenedor-boton-guardar button:first-child:hover{
+.contenedor-boton-enviar button:first-child:hover{
     background-color:white;
-    color:  rgb(55, 228, 95);
-    border-color:  rgb(55, 228, 95);
+    color:  rgb(66, 72, 186);
+    border-color:  rgb(66, 72, 186);
 }
 
 .btn-modal{
@@ -98,6 +100,13 @@ td{
 .evidencias{
     border: 1px solid rgb(189, 189, 189);
     height: 80px;
+}
+
+.contenedor-evidencias-observaciones{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .textarea{
