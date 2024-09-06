@@ -38,23 +38,14 @@ export class LidertecnicoBitacorasComponent {
 
   actividades = [
     { folio: 1, periodo:'Mayo', consultor: 'Luis Antes', lider: 'Daniel Salazar', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/05/2021', estado:'ejecucion' },
-    { folio: 1, periodo:'Mayo', consultor: 'Luis Antes', lider: 'Daniel Salazar', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Revisión de requerimientos', horas: 8, fecha: '14/05/2021', estado: 'revision' },
     { folio: 2, periodo:'Julio', consultor: 'Javier Martínez', lider: 'Maria López', proyecto: 'Sistema de control de inventarios', actividad: 'Diseño de base de datos', horas: 8, fecha: '10/07/2021', estado: 'autorizacion' },
-    { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Desarrollo del backend', horas: 8, fecha: '15/08/2021', estado:'ejecucion' },
-    { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Desarrollo del backend', horas: 8, fecha: '17/08/2021', estado:'revision' },
-    { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Desarrollo del backend', horas: 8, fecha: '18/08/2021', estado:'autorizacion' },
     { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Desarrollo del backend', horas: 8, fecha: '19/08/2021', estado:'finalizado' },
     { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Configuración de hardware', horas: 8, fecha: '20/08/2021', estado:'rechazado' },
     { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '15/09/2021', estado:'revision' },
     { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '16/09/2021', estado:'revision' },
-    { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '17/09/2021', estado:'revision' },
-    { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '18/09/2021', estado:'revision' },
-    { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '19/09/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '05/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '06/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '07/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '08/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '09/11/2021', estado:'revision' },
+    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 3, fecha: '09/11/2021', estado:'revision' },
+    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 4, fecha: '09/11/2021', estado:'revision' },
+    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 1, fecha: '09/11/2021', estado:'revision' },
   ]
 }
 

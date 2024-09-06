@@ -10,7 +10,7 @@
             <input type="text" class="form-control" placeholder="Luis Eduardo Antes Villa" [(ngModel)]="inputValue" (change)="onInputChange($event)" aria-describedby="basic-addon1">
         </div>
         <div class="col-sm-3 button-buscar">
-            <button type="button" class="btn btn-principal" style="margin-top: 26px;">Buscar</button>
+            <!-- <button type="button" class="btn btn-principal" (click)="todasLasActividades()" style="margin-top: 26px;">Todas</button> -->
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
 
 </div>
 
-<div class="offcanvas offcanvas-end canvasPrimario" id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding: 12px;">
+<div class="offcanvas offcanvas-end canvasPrimario" id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding: 0px 12px;">
   <div class="offcanvas-header">
     <h3>Detalles</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -114,7 +114,10 @@
           </div>
           <div class="col-sm-12">
             <label for="formFileMultiple" class="form-label">Evidencia de actividades</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple>
+            <div class="evidencias">
+
+            </div>
+            
           </div>
           
         </div> 
