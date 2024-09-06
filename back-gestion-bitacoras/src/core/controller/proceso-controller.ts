@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpStatus } from '@nestjs/common';
 
 import { ApiResponse } from '../model/interface/respuesta.interface';
 import { AccionService } from '../services/prueba.service';
@@ -14,7 +14,7 @@ export class ProcesoController {
     const resultado = {
       message: 'Todo correcto',
       data: datos,
-      statusCode: 200,
+      statusCode: HttpStatus.ACCEPTED,
     };
     return resultado;
   }
