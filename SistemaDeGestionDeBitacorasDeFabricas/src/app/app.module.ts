@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
       preventDuplicates: true,
       progressBar: true,
     }),
+    NgbModule,
   ],
   providers: [
     // { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

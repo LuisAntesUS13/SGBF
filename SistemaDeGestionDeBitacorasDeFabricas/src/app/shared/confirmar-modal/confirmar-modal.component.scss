@@ -1,0 +1,16 @@
+.rotating-symbol {
+    font-size: 70px; /* Ajusta el tamaño */
+    display: inline-block;
+    animation: rotateX 2s linear 1; /* Animación de rotación horizontal (1 vuelta) */
+    color: red;
+  }
+
+  /* Definición de la animación de rotación en el eje X */
+  @keyframes rotateX {
+    0% {
+      transform: rotatey(0deg);
+    }
+    100% {
+      transform: rotatey(360deg); /* Da una vuelta completa */
+    }
+  }
