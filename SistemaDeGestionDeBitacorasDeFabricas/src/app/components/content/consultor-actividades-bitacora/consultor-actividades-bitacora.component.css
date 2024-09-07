@@ -20,32 +20,41 @@ a{
 .nav-link.active {
     color: #F80000 !important;
 }
-/* 
-.ejecucion{
-    --bs-nav-link-hover-color: red;
+
+
+
+.contenedor-boton-guardar button{
+    background-color: #F80000;
 }
 
-.revision{
-    --bs-nav-link-hover-color: orange;
+.contenedor-boton-guardar button:hover{
+    background-color:white;
+    color:  #F80000;
+    border-color:  #F80000;
 }
-
-.autorizacion{
-    --bs-nav-link-hover-color: rgb(128, 255, 0);
-}
-
-.finalizado{
-    --bs-nav-link-hover-color: green;
-}
-
-.rechazado{
-    --bs-nav-link-hover-color: rgb(0, 0, 0);
-} */
-
 table{
     text-align: center;
     vertical-align: middle;
 }
 
+.titulo-boton{
+    display: flex;
+    gap: 8px;
+}
+
+.dato{
+    margin-bottom: 30px;
+}
+
 td{
     cursor: pointer;
+}
+
+.contenedor-boton-guardar{
+    margin-top: 12px;
+    text-align: right;
+}
+
+textarea{
+    resize: none;
 }
