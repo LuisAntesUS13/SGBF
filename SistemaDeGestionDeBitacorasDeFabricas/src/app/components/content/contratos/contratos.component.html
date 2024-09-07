@@ -69,7 +69,14 @@
       (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
   </div>
   <div class="offcanvas-body">
-    <div class="card">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+        <ul class="nav nav-underline">
+            <li class="nav-item" *ngFor="let item of pestanasContratos" (click)="cambioSeleccionConsultores(item.id)">
+                <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+            </li>
+        </ul>
+      </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 1">
         <div class="card-body row">
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">No.contrato</label>
@@ -105,12 +112,7 @@
             </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Seleccione la consultora</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione  una opción</option>
-                    <option value="1">Ultra</option>
-                    <option value="2">Sistemas informaticos</option>
-                    <option value="2">Sistemas computacionales</option>
-                  </select>
+                <app-buscador></app-buscador>
             </div>
             <div class="col-sm-6">
             </div>
@@ -134,6 +136,50 @@
           
         </div>
     </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 2">
+        <div class="card-body row">
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Nombre consultora</label>
+                <input type="text" class="form-control" id="Correo" placeholder="">
+            </div>
+            <div class="col-sm-12">
+                <label for="Correo" class="form-label">Descripcion</label>
+                <textarea type="text" class="form-control"></textarea>
+            </div>
+          
+        </div>
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 3">
+        <div class="card-body row">
+          <div class="col-sm-3" style="margin-bottom: 3px;">
+            <button style="margin-left: 2px;" class="btn btn-accion" (click)="abrirModalPerfiles(1)">
+              <i class="bi bi-plus-circle-dotted"></i>&nbsp;Asignar perfil</button>
+          </div>
+          <hr>
+          <div class="row">
+            <app-paginador (cambio)="obtenerEvento($event)" [datos]="datosEnviar"></app-paginador>
+            <div class="col-sm-12">
+                <table class="table table-hover">
+                    <thead>
+                      <tr class="valoresCentrados">
+                        <th scope="col" class="valoresCentrados">#</th>
+                        <th scope="col" class="valoresCentrados">Perfil</th>
+                        <th scope="col" class="valoresCentrados">Cantidad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  *ngFor="let dato of datosPefil;let i = index"  style="cursor: pointer;"  (click)="abrirModalPerfiles(2)" class="valoresCentrados">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{dato.perfil}}</td>
+                        <td>{{dato.cantidad}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        </div>
+      </div>
+
 
   </div>
   <div class="offcanvas-footer">
@@ -145,5 +191,168 @@
     </div>
   </div>
 </div>
+
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showCamvaConsultores"
+id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloSecundario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasConsultores()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+      <ul class="nav nav-underline">
+          <li class="nav-item" *ngFor="let item of pestanasConsultores" (click)="cambioSeleccionConsultores(item.id)">
+              <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 1">
+        <div class="card-body row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
+                NOTA: En caso de no localizar al consultor deseado, haga click en <b>Registro de consultor</b> para agregar  uno nuevo.
+              </div>
+            </div>
+             <div class="col-sm-6">
+                <label for="identificador" class="form-label">Consultor</label>
+                <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-6">
+              <label for="Correo" class="form-label">Seleccione el perfil</label>
+              <select class="form-select" aria-label="Default select example">
+                  <option selected>Seleccione  una  opción</option>
+                  <option value="1">Programador Sr Java</option>
+                  <option value="2">Programador Jr Java</option>
+                  <option value="3">Analista</option>
+                  <option value="4">Tester</option>
+              </select>
+            </div>
+            <div class="col-sm-12">
+              <hr>
+            </div>
+            <div class="col-sm-12">
+               <h5>Agrega los documentos del expediente</h5>
+            </div>
+            
+            <div class="col-sm-12">
+              <label for="formFileMultiple" class="form-label">Curriculum</label>
+              <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          
+          <div class="col-sm-12">
+            <label for="formFileMultiple" class="form-label">Certificados</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+          </div>
+          
+          <div class="col-sm-12">
+            <label for="formFileMultiple" class="form-label">Otros</label>
+            <input class="form-control" type="file" id="formFileMultiple" multiple>
+           </div>
+        </div> 
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 2">
+      <div class="card-body row">
+        <div class="col-sm-6">
+          <label for="Correo" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Primer apellido</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Segundo apellido</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Usuario/Correo</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+    
+        <div class="col-sm-6">
+            <label for="Correo" class="form-label">Contraseña</label>
+            <input type="text" class="form-control" id="Correo" placeholder="">
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-principal" (click)="abrirModal()"  style="margin-top: 30px;">Generar contraseña</button>
+        </div>
+      </div> 
+  </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Guardar &nbsp;<i
+          class="bi bi-floppy"></i></button>
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Eliminar consultor &nbsp;
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showCamvaPerfiles"
+id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
+  <div class="offcanvas-header">
+    <h3>{{tituloSecundario}}</h3>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarCamvasPerfiles()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="col-sm-12" style="margin-bottom: 3px;">
+      <ul class="nav nav-underline">
+          <li class="nav-item" *ngFor="let item of pestanasPerfiles" (click)="cambioSeleccionPerfiles(item.id)">
+              <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
+          </li>
+      </ul>
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 1">
+        <div class="card-body row">
+            <div class="col-sm-12">
+              <div class="alert alert-primary" style="padding-top: 3px; padding-bottom: 3px;" role="alert">
+                NOTA: En caso de no localizar el perfil deseado, haga click en pestaña <b>Registro perfiles</b> para agregar  uno nuevo.
+              </div>
+            </div>
+             <div class="col-sm-8">
+                <label for="identificador" class="form-label">Perfil</label>
+                <app-buscador></app-buscador>
+            </div>
+            <div class="col-sm-4">
+                <label for="monto" class="form-label">Cantidad</label>
+                <input type="text" class="form-control" id="monto" placeholder="">
+            </div>
+        </div> 
+    </div>
+    <div class="card" *ngIf="seleccionadoPerfil == 2">
+      <div class="card-body row">
+           <div class="col-sm-6">
+              <label for="identificador" class="form-label">Perfil</label>
+              <input type="text" class="form-control" id="consulta" placeholder="Programador analista">
+          </div>
+          <div class="col-sm-6">
+            <label for="monto" class="form-label">Monto</label>
+            <input type="text" class="form-control" id="monto" placeholder="10,000">
+          </div>
+          <div class="col-sm-612">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <textarea type="text" class="form-control" id="descripcion" placeholder="Descripcion"></textarea>
+          </div>
+      </div> 
+  </div>
+  </div>
+  <div class="offcanvas-footer">
+    <div class="text-end">
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Guardar &nbsp;
+        <i class="bi bi-floppy"></i></button>
+      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarSecundario()"> Eliminar asignación &nbsp;
+        <i class="bi bi-trash"></i></button>
+    </div>
+  </div>
+</div>
+
 
 <div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>
