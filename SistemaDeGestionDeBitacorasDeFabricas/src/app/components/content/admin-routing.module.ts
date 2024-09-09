@@ -8,6 +8,7 @@ import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 
 
 const routes: Routes = [
@@ -31,9 +32,16 @@ const routes: Routes = [
         },
         component: UsuariosComponent,
       }, {
-        path: 'lidertecnico',
+        path: 'lidertecnico/bitacora/actividades/:periodo',
         data: {
-          title: 'Autorización de bitácoras',
+          title: 'Aturización de bitácoras',
+          breadcrumbs: [],
+        },
+        component: LidertecnicoActividadesBitacorasComponent,
+      }, {
+        path: 'lidertecnico/bitacora',
+        data: {
+          title: 'Bitacoras',
           breadcrumbs: [],
         },
         component: LidertecnicoBitacorasComponent,
