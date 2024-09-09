@@ -18,7 +18,7 @@ import { SeparadorConTextoComponent } from './separador-con-texto/separador-con-
     BuscadorComponent,
     ConfirmarModalComponent,
     SpinnerComponent,
-    SeparadorConTextoComponent
+    SeparadorConTextoComponent,
   ],
   exports: [
     MenuComponent,
