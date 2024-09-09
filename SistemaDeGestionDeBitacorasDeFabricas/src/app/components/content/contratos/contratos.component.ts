@@ -12,6 +12,47 @@ export class ContratosComponent {
   tituloPrimario: string = '';
 
   datosEnviar: any = [];
+  tituloSecundario: string = '';
+  seleccionadoPerfil: number = 1;
+  showCamvaConsultores: boolean = false;
+  showCamvaPerfiles:boolean = false;
+
+  pestanasContratos = [
+    { id: 1, nombre: 'Registro contrato', activo: true },
+    { id: 3, nombre: 'Perfiles requeridos', activo: false },
+    { id: 2, nombre: 'Registro de consultora', activo: false },
+  ];
+
+  datosPefil = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      cantidad: 5,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Jr Java',
+      cantidad: 2,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Analista',
+      cantidad: 1,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Tester',
+      cantidad: 2,
+    },
+  ];
 
   datos1 = [
     {
@@ -136,14 +177,57 @@ export class ContratosComponent {
     },
   ];
 
+  
+  pestanasPerfiles = [
+    { id: 1, nombre: 'Seleccion de perfil', activo: true },
+    { id: 2, nombre: 'Registro perfiles', activo: false },
+  ];
+
+
+  pestanasConsultores = [
+    { id: 1, nombre: 'Asignacion de consultor', activo: true },
+    { id: 2, nombre: 'Registro de consultor', activo: false },
+  ];
+
   constructor(private toastrService: ToastrService, private router: Router) {
     this.datosEnviar = this.datos1;
+  }
+
+  cerrarCamvasConsultores() {
+    this.showCamvaConsultores = false;
   }
 
   abrirModal() {
     this.tituloPrimario = 'Registro de contrato';
     this.showCamvasPrimario = true;
   }
+
+  cerrarCamvasPerfiles() {
+    this.showCamvaPerfiles = false;
+  }
+
+  cambioSeleccionConsultores(id: number) {
+    this.seleccionadoPerfil = id;
+    this.pestanasContratos.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
+  cambioSeleccionPerfiles(id: number) {
+    this.seleccionadoPerfil = id;
+    this.pestanasPerfiles.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
 
   cerrarCamvasPrimario() {
     this.showCamvasPrimario = false;
@@ -168,5 +252,40 @@ export class ContratosComponent {
 
   adminRequerimientos() {
     this.router.navigate(['/content/requerimientos']);
+  }
+
+  abrirModalPerfiles(num: number) {
+    if (num == 1) {
+      this.tituloSecundario = 'Asignación de perfiles';
+    } else if (num == 2) {
+      this.tituloSecundario = 'Actualización de perfiles';
+    } else if (num == 3) {
+      this.tituloSecundario = 'Actualización de perfiles';
+    
+    }
+    this.showCamvaPerfiles = true;
+  }
+
+  guardarSecundario() {
+    // if (this.seleccionadoPerfil == 1) {
+    // } else if (this.seleccionadoPerfil == 2) {
+    //   this.seleccionadoPerfil = 1;
+    //   this.pestanasPerfiles.forEach((element) => {
+    //     if (element.id == this.seleccionadoPerfil) {
+    //       element.activo = true;
+    //     } else {
+    //       element.activo = false;
+    //     }
+    //   });
+    // } else if (this.seleccionadoPerfil == 3) {
+    // }
+    this.toastrService.success('Datos guardados correctamente');
+    // this.confirmarModalService
+    //   .abriraModalPregunta('Estas seguro de ...')
+    //   .subscribe(async (result) => {
+    //     if (result) {
+    //       this.toastrService.success('Datos guardados correctamente');
+    //     }
+    //   });
   }
 }

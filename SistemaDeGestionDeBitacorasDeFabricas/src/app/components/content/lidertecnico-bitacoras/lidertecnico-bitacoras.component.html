@@ -10,7 +10,7 @@
             <input type="text" class="form-control" placeholder="Luis Eduardo Antes Villa" [(ngModel)]="inputValue" (change)="onInputChange($event)" aria-describedby="basic-addon1">
         </div>
         <div class="col-sm-3 button-buscar">
-            <button type="button" class="btn btn-principal" style="margin-top: 26px;">Buscar</button>
+            <!-- <button type="button" class="btn btn-principal" (click)="todasLasActividades()" style="margin-top: 26px;">Todas</button> -->
         </div>
     </div>
 </div>
@@ -53,60 +53,85 @@
 
 </div>
 
-
-<!-- offCanvas para visualizar datos del registro seleccionado y hacer observaciones, de parte del líder técnico -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas offcanvas-end canvasPrimario" id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding: 0px 12px;">
   <div class="offcanvas-header">
     <h3>Detalles</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <form>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+    
+    <div class="card">
+        <div class="card-body row">
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">Detalles de actividad</label>
           </div>
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+          <div class="col-sm-12">
+            <hr>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+          <div class="col-sm-6">
+            <label for="identificador" class="form-label">Identificador del requerimiento</label>
+            <input type="text" class="form-control"value="S-1066361" disabled>
           </div>
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+          <div class="col-sm-6">
+            <label for="nombre" class="form-label">Subdireccion/Generencia</label>
+            <input type="text" class="form-control"  value="Jorge Missael López Gutiérrez" disabled>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">Proyecto</label>
+              <input type="text" class="form-control"value="Continuidad operativa" disabled>
           </div>
-          <div class="col">
-            <input type="text" class="form-control input-grid" placeholder="Luis Eduardo Antes Villa" aria-describedby="basic-addon1" disabled>
+          <div class="col-sm-6">
+            <label for="responsable" class="form-label">Líder</label>
+            <input type="text" class="form-control"value="Luis Eduardo Antes Villa" disabled>
           </div>
-        </div>
+          <div class="col-sm-6">
+            <label for="lider_tecnico" class="form-label">Responsable</label>
+            <input type="text" class="form-control"  value="Daniel Herrera Figueroa" disabled>
+          </div>
+          <div class="col-sm-6">
+            <label for="nombre" class="form-label">Tipo de acción</label>
+            <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
+          </div>
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">Modulo o aplicativo</label>
+              <input type="text" class="form-control" value="SMAX" disabled>
+          </div>
+          <div class="col-sm-6">
+            <label for="Correo" class="form-label">Area solicitante</label>
+            <input type="text" class="form-control" value="Dirección informática" disabled>
+          </div>
+          <div class="col-sm-6">
+            <label for="consultoires" class="form-label">Actividad asignada</label>
+            <input type="text" class="form-control" value="Revisión de requerimientos" id="nombre" disabled>
+          </div>
+          <div class="col-sm-6">
+            <label for="consultoires" class="form-label">Horas requeridas</label>
+            <input type="number" class="form-control" value="8" id="nombre" disabled>
+          </div>
+          <div class="col-sm-12">
+            <label for="consultoires" class="form-label">Actividad realizada</label>
+            <textarea class="form-control" aria-label="With textarea" disabled>Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos</textarea>
+          </div>
+          <div class="col-sm-12">
+            <label for="formFileMultiple" class="form-label">Evidencia de actividades</label>
+            <div class="evidencias">
 
-        <hr>
-      
-        <div class="row ">
-          <label class="label-evidencias">Evidencias</label>
-          <div class="evidencias">
+            </div>
+            
           </div>
-        </div>
+          
+        </div> 
+    </div>
 
-        <hr>
-
-        <div class="row">
-          <label class="label-observaciones">Observaciones</label>
-          <textarea class="form-control textarea" aria-label="With textarea"></textarea>
-        </div>  
-        <div class="contenedor-boton-guardar"> 
-          <button type="button" class="btn btn-principal btn-modal">Autorizar</button>
-          <button type="button" class="btn btn-principal btn-modal">Enviar</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    <div class="contenedor-evidencias-observaciones">
+      <div class="contenedor-observaciones">
+        <label class="label-observaciones">Observaciones</label>
+        <textarea class="form-control textarea" aria-label="With textarea"></textarea>
+      </div>  
+    </div>
+    <div class="contenedor-boton-enviar"> 
+      <button type="button" class="btn btn-principal btn-modal">Autorizar</button>
+      <button type="button" class="btn btn-principal btn-modal">Enviar observación</button>
+    </div>
 </div>
+
