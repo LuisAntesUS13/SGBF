@@ -37,7 +37,6 @@
           <table class="table table-hover">
             <thead>
               <tr class="valoresCentrados">
-                <th scope="col" class="valoresCentrados">#</th>
                 <th scope="col" class="valoresCentrados">Menu</th>
                 <th scope="col" class="valoresCentrados">Descripcion</th>
                 <th scope="col" class="valoresCentrados">Ver</th>
@@ -49,7 +48,7 @@
             </thead>
             <tbody>
               <tr  *ngFor="let dato of datosPermisos2;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
-                <th scope="row">{{i+1}}</th>
+                
                 <td>{{dato.menu}}</td>
                 <td>{{dato.descripcion}}</td>
                 <td *ngIf="dato.permisos1" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos1" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 1)" >Asignar</button></td>
