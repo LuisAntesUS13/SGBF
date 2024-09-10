@@ -32,7 +32,7 @@ const routes: Routes = [
         },
         component: UsuariosComponent,
       }, {
-        path: 'lidertecnico/bitacora/actividades/:periodo',
+        path: 'lidertecnico/bitacora/actividades/:periodo/:nombreProyecto',
         data: {
           title: 'Aturización de bitácoras',
           breadcrumbs: [],
