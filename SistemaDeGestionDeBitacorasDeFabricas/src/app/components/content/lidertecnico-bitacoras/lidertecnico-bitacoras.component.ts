@@ -12,13 +12,13 @@ export class LidertecnicoBitacorasComponent {
 
   constructor(private router: Router) {}
 
-  navigateWithPeriodo(periodo: string) {
-    this.router.navigate(['/content/lidertecnico/bitacora/actividades/' + periodo])
+  navigateWithPeriodo(periodo: string, nombreProyecto: string) {
+    this.router.navigate(['/content/lidertecnico/bitacora/actividades/' + periodo + '/' + nombreProyecto])
   }
 
   proyectos = [
-    {idProyecto: 1, nombre: 'Proyecto 1', lider: 'Juan Guitérrez', responsable: 'Azir Aguilar'},
-    {idProyecto: 2, nombre: 'Proyecto 2', lider: 'María Pérez', responsable: 'Luis Gómez'},
+    {idProyecto: 1, nombreProyecto: 'Proyecto 1', lider: 'Juan Guitérrez', responsable: 'Azir Aguilar'},
+    {idProyecto: 2, nombreProyecto: 'Proyecto 2', lider: 'María Pérez', responsable: 'Luis Gómez'},
   ];
 
   periodos = [
