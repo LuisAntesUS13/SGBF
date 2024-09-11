@@ -36,7 +36,6 @@
         <table class="table table-hover">
             <thead>
               <tr class="valoresCentrados">
-                <th scope="col" class="valoresCentrados">#</th>
                 <th scope="col" class="valoresCentrados">Identificador</th>
                 <th scope="col" class="valoresCentrados">Nombre requerimiento</th>
                 <th scope="col" class="valoresCentrados">Lider proyecto</th>
@@ -49,7 +48,6 @@
             </thead>
             <tbody>
               <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
-                <th scope="row">{{i+1}}</th>
                 <td>{{dato.identificador}}</td>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.lider_proyecto}}</td>
