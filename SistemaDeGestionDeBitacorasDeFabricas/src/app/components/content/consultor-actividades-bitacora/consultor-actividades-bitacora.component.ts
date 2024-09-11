@@ -12,44 +12,52 @@ export class ConsultorActividadesBitacoraComponent {
   actividadesFiltradas: any[] | undefined;
   showCamvasPrimario :boolean = false;
   tituloPrimario: string = "";
-  
-// `
-//   registro ={
-//     identificador: 'S-1066361',
-//     subdireccionGerencia: 'Jorge Missael López Gutiérrez',
-//     proyecto: 'SGBF',
-//     lider: 'Jorge Missael López Gutiérrez',
-//     responsable: 'Jorge Missael López Gutiérrez',
-//     tipo: 'Jorge Missael López Gutiérrez',
-//     moduloAplicativo: 'Jorge Missael López Gutiérrez',
-//     area: 'Jorge Missael López Gutiérrez',
-//     actividadAsignada: 'Revisión de requerimientos',
-//     horas: 8,
-//     actividadRealizada: 'Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos',
-//   }`
 
-  constructor(private route: ActivatedRoute){}
+  selectedProyecto: string = ''; 
+  selectedPeriodo: string = '';  
+  isButtonDisabled: boolean = true;
+
+
 
   ngOnInit(){
-    this.route.params.subscribe(params =>{
-      const periodo = params['periodo'];
-      this.filtrarActividades(periodo)
-    })
+    this.filtrarTabla();
   }
 
-  filtrarActividades(periodo: string){
-    this.actividadesFiltradas = this.actividades.filter(actividad => actividad.periodo === periodo)
+  filtrarTabla() {
+    this.actividadesFiltradas = this.actividades.filter(actividad => {
+      return actividad.proyecto === this.selectedProyecto && actividad.periodo === this.selectedPeriodo;
+    });
+
+    console.log(this.selectedPeriodo + ' y '+ this.selectedProyecto)
+
+    if(this.selectedPeriodo != '' && this.selectedProyecto != ''){
+      this.isButtonDisabled = false;
+    }
+
+    this.periodo = this.selectedPeriodo;
   }
 
+  actividadAsignada: string = '';  
+  horasRequeridas: string = ''; 
+  actividadRealizada: string = '';  
+  periodo: string = '';
+  seleccionado: number = 1;
+  isInputVisible = true;
+
+
+
+
+  limpiarInput() {
+    this.actividadAsignada = '';  
+    this.horasRequeridas = '';  
+    this.actividadRealizada = '';  
+  }
   
-  
-  abrirModal(){
-    this.tituloPrimario = "Registro de usuario";
-    this.showCamvasPrimario = true;
-  }
 
-  cerrarCamvasPrimario(){
-    this.showCamvasPrimario = false;
+  valorInput(){
+    this.actividadAsignada = 'Revisión de desarrollo';  
+    this.horasRequeridas = '8'; 
+    this.actividadRealizada = 'Junta para la discusión del desarrollo de avances del proyecto';  
   }
 
   nuevoPerfil(estatus: number) {
@@ -62,6 +70,30 @@ export class ConsultorActividadesBitacoraComponent {
     });
   }
 
+  cambioSeleccion(id: number) {
+    this.seleccionado = id;
+    this.pestanas.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+  isVisible = true; // Inicialmente visible
+
+  toggleVisibility() {
+    this.isVisible = false; 
+  }
+
+  aparecerPestanas(){
+    this.isVisible = true;
+  }
+
+  pestanas = [
+    { id: 1, nombre: 'Actividad', activo: true },
+    { id: 2, nombre: 'Observaciones', activo: false },
+  ];
 
   listadoEstatus = [
     { folio: 1, nombre: 'En ejecucion', activo: false, total: 5, class: 'ejecucion' },
@@ -72,16 +104,22 @@ export class ConsultorActividadesBitacoraComponent {
   ];
   
   actividades = [
-    { folio: 1, periodo:'Mayo', consultor: 'Luis Antes', lider: 'Daniel Salazar', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/05/2021', estado:'ejecucion' },
-    { folio: 1, periodo:'Mayo', consultor: 'Luis Antes', lider: 'Daniel Salazar', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Revisión de requerimientos', horas: 8, fecha: '14/05/2021', estado: 'revision' },
-    { folio: 2, periodo:'Julio', consultor: 'Javier Martínez', lider: 'Maria López', proyecto: 'Sistema de control de inventarios', actividad: 'Diseño de base de datos', horas: 8, fecha: '10/07/2021', estado: 'autorizacion' },
-    { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Desarrollo del backend', horas: 8, fecha: '19/08/2021', estado:'finalizado' },
-    { folio: 3, periodo:'Agosto', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Configuración de hardware', horas: 8, fecha: '20/08/2021', estado:'rechazado' },
-    { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '15/09/2021', estado:'revision' },
-    { folio: 3, periodo:'Septiembre', consultor: 'Maria Rodríguez', lider: 'Lucía Fernández', proyecto: 'Implementación de CRM', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '16/09/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 3, fecha: '09/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 4, fecha: '09/11/2021', estado:'revision' },
-    { folio: 4, periodo:'Octubre', consultor: 'Laura Pérez', lider: 'Eduardo Silva', proyecto: 'Optimización de cadena de suministro', actividad: 'Análisis de vulnerabilidades', horas: 1, fecha: '09/11/2021', estado:'revision' },
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2024', estatus:'ejecucion'},
+    { idConsultor: 2, periodo:'Enero', consultor: 'Carlos Fernández López', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Diseño de base de datos', horas: 8, fecha: '10/01/2024', estatus: 'autorizacion' },
+    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Desarrollo del backend', horas: 8, fecha: '19/02/2024', estatus:'finalizado' },
+    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Configuración de hardware', horas: 8, fecha: '20/02/2024', estatus:'rechazado' },
+    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '15/03/2024', estatus:'revision' },
+    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '16/03/2024', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchez', lider: 'Juan Gutiérrez', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '20/01/2024', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Juan Gutiérrez', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '21/01/2024', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Eduardo Silva', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '09/02/2024', estatus:'revision' },
+  
   ]
+
 
 }

@@ -37,7 +37,7 @@ const routes: Routes = [
         },
         component: UsuariosComponent,
       }, {
-        path: 'lidertecnico/bitacora/actividades/:periodo/:nombreProyecto',
+        path: 'lidertecnico/bitacora/actividades/:periodo/:nombreProyecto/:anho',
         data: {
           title: 'Aturización de bitácoras',
           breadcrumbs: [],
@@ -51,14 +51,7 @@ const routes: Routes = [
         },
         component: LidertecnicoBitacorasComponent,
       },{
-        path: 'consultor/bitacora',
-        data: {
-          title: 'Bitacoras',
-          breadcrumbs: [],
-        },
-        component: ConsultorBitacorasComponent,
-      },{
-        path: 'consultor/bitacora/actividades/:periodo',
+        path: 'consultor/bitacora/actividades',
         data: {
           title: 'Actividades',
           breadcrumbs: [],

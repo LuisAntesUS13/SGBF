@@ -1,8 +1,10 @@
 <div>
     <h3>Bitacoras</h3>
-    <h6>Proyectos y periódos</h6>
+    <p class="subtitulo">Proyectos y periódos</p>
 </div>
 <hr>
+
+<p class="subtitulo-proyecto-periodo">Despliegue un proyecto y elija el periódo que necesita.</p>
 <div class="row">
     <div class="col-sm-12">
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -11,19 +13,23 @@
                     <h2 class="accordion-header" [id]="'heading' + proyecto.idProyecto">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" [attr.data-bs-target]="'#collapse' + proyecto.idProyecto" aria-expanded="true" [attr.aria-controls]="'collapse' + proyecto.idProyecto">
                             <div class="titulo-accordion">
-                                <p>Proyecto: {{proyecto.nombreProyecto}}</p>
+                                <p class="titulo">Proyecto: </p>
+                                <p>{{proyecto.nombreProyecto}}</p>
                             </div>
                             <div class="titulo-accordion">
-                                <p>Líder: {{proyecto.lider}}</p>
+                                <p class="titulo">Líder: </p>
+                                <p>{{proyecto.lider}}</p>
                             </div>
                             <div class="titulo-accordion">
-                                <p>Responsable {{proyecto.responsable}}</p>
+                                <p class="titulo">Responsable: </p>
+                                <p>{{proyecto.responsable}}</p>
                             </div>
+                            
                         </button>
                     </h2>
-                    <div [id]="'collapse' + proyecto.idProyecto" *ngFor="let periodo of getPeriodosPorProyecto(proyecto.idProyecto)" (click)="navigateWithPeriodo(periodo.periodo, proyecto.nombreProyecto)"  class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading' + proyecto.idProyecto">
+                    <div [id]="'collapse' + proyecto.idProyecto" *ngFor="let periodo of getPeriodosPorProyecto(proyecto.idProyecto)" (click)="navigateWithPeriodo(periodo.periodo, proyecto.nombreProyecto, periodo.anho)"  class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading' + proyecto.idProyecto">
                         <div class="card card-periodo accordion-body">
-                            <div class="card-body">{{periodo.periodo}}</div>
+                            <div class="card-body">{{periodo.periodo}} - {{periodo.anho}}</div>
                         </div>
                     </div>
                 </div>
