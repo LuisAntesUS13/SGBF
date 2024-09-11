@@ -26,7 +26,6 @@
         <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
                 <th scope="col" class="valoresCentrados">Activo</th>
@@ -35,7 +34,6 @@
             </thead>
             <tbody>
               <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  (click)="abrirModal()">
-                <th scope="row">{{i+1}}</th>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.correo}}</td>
                 <td class="valoresCentrados">{{dato.activo? 'Si': 'NO'}}
@@ -76,14 +74,14 @@
                 <label for="Correo" class="form-label">Usuario/Correo</label>
                 <input type="text" class="form-control" id="Correo" placeholder="">
             </div>
-         
             <div class="col-sm-6">
-                <label for="Correo" class="form-label">Contraseña</label>
-                <input type="text" class="form-control" id="Correo" placeholder="">
-            </div>
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-principal" (click)="abrirModal()"  style="margin-top: 30px;">Generar contraseña</button>
-            </div>
+              <label for="Correo" class="form-label">CURP</label>
+              <input type="text" class="form-control" id="Correo" placeholder="">
+          </div>
+          <div class="col-sm-6">
+              <label for="Correo" class="form-label">RFC</label>
+              <input type="text" class="form-control" id="Correo" placeholder="">
+          </div>
             <div class="col-sm-12">
               <hr>
             </div>

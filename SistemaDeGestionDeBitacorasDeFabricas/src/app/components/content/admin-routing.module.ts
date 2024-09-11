@@ -8,6 +8,7 @@ import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 
 
 const routes: Routes = [
@@ -75,6 +76,14 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: RequerimientosComponent,
+      },
+      {
+        path: 'asignacionPerfiles',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: EquipoTrabajoComponent,
       },
       // {
       //   path: 'notificaciones',
