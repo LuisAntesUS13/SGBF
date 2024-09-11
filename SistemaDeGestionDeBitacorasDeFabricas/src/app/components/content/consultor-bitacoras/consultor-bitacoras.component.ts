@@ -1,22 +1,15 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-consultor-bitacoras',
   templateUrl: './consultor-bitacoras.component.html',
-  styleUrls: ['./consultor-bitacoras.component.css']
+  styleUrls: ['./consultor-bitacoras.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ConsultorBitacorasComponent {
 
   constructor(private router: Router){}
-
-  options = [
-    {value: 'Todos', label:'Todos'},
-    {value: 'Sistema de gestión de bitácoras de fábricas', label:'Sistema de gestión de bitácoras de fábricas'},
-    {value: 'Sistema de control de inventarios', label:'Sistema de control de inventarios'},
-    {value: 'Implementación de CRM', label:'Implementación de CRM'},
-    {value: 'Optimización de cadena de suministro', label:'Optimización de cadena de suministro'},
-  ]
 
   proyectos = [
     {idProyecto: 1, nombre: 'Proyecto 1', lider: 'Juan Guitérrez', responsable: 'Azir Aguilar'},

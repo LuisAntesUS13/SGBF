@@ -1,9 +1,39 @@
-<div class="h3">
-    <h3>Autorización de bitácoras</h3>
+<div class="cotnenedor-header">
+    <div class="header">
+        <a (click)="regresarALidertecnicoBitacora()"><i class="bi bi-arrow-return-left icon-100" ></i></a>
+        <h3>Autorización de bitácoras</h3>
+    </div>
+    <div class="contenedor-datos-proyecto">
+        <div class="datos-titulo-proyecto">
+            <p class="titulo-proyecto">Sistema de gestión de bitácoras de fábricas</p>
+            <p class="titulo-proyecto">({{periodoTitulo}} - {{anho}})</p>
+        </div>
+        <div class="datos">
+            <p class="datos-proyecto">Líder: </p>
+            <p>Juan Guitérrez</p>
+        </div>
+        <div class="datos">
+            <p class="datos-proyecto">Responsable: </p>
+            <p>Azir Aguilar</p>
+        </div>
+    </div>
 </div>
+
 <hr>
 
-<div class="row">
+<div class="col-sm-12 contenedor-estados" style="margin-bottom: 4px;">
+    <ul class="nav nav-underline">
+        <li class="nav-item" *ngFor="let item of listadoEstatus" (click)="cambioSeleccion(item.id)">
+            <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}} 
+                <span class="badge text-bg-light">{{item.total}}</span>
+            </a>
+        </li>
+    </ul>
+
+    
+</div>
+
+<div class="row contenedor-accordion">
     <div class="col-sm-12">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -11,9 +41,13 @@
                     <h2 class="accordion-header" [id]="'heading' + consultor.idConsultor">
                         <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" [attr.data-bs-target]="'#collapse' + consultor.idConsultor" aria-expanded="true" [attr.aria-controls]="'collapse' + consultor.idConsultor">
                             <div class="titulo-accordion">
-                                <p>Consultor: {{consultor.nombre}}</p>
+                                <p class="titulo">Consultor:</p>
+                                <p>{{consultor.nombre}}</p>
                             </div>
                         </button>
+                        <div class="contenedor-btn ">
+                            <button class="btn btn-principal" (click)="ocultar()" data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Observación</button>
+                        </div>
                     </h2>
                     <div [id]="'collapse' + consultor.idConsultor" class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading' + consultor.idConsultor">
                         <div class="row">
@@ -21,7 +55,6 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">idConsultor</th>
                                             <th scope="col">Consultor</th>
                                             <th scope="col">Líder</th>
                                             <th scope="col">Proyecto</th>
@@ -31,8 +64,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="rows" *ngFor="let actividad of getActividadesPorConsultor(consultor.idConsultor)" (click)="abrirCanvas()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                            <td class="registro">{{actividad.idConsultor}}</td>
+                                        <tr class="rows" *ngFor="let actividad of getActividadesPorConsultor(consultor.idConsultor)"  (click)="mostrar()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                                             <td class="registro">{{actividad.consultor}}</td>
                                             <td class="registro">{{actividad.lider}}</td>
                                             <td class="registro">{{actividad.proyecto}}</td>
@@ -56,80 +88,77 @@
 <div class="offcanvas-header">
     <h3>Detalles</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-</div>
+</div>  
 <div class="offcanvas-body">
     
     <div class="card">
         <div class="card-body row">
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Detalles de actividad</label>
-        </div>
-        <div class="col-sm-12">
-            <hr>
-        </div>
-        <div class="col-sm-6">
-            <label for="identificador" class="form-label">Identificador del requerimiento</label>
-            <input type="text" class="form-control"value="S-1066361" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="nombre" class="form-label">Subdireccion/Generencia</label>
-            <input type="text" class="form-control"  value="Jorge Missael López Gutiérrez" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Proyecto</label>
-            <input type="text" class="form-control"value="Continuidad operativa" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="responsable" class="form-label">Líder</label>
-            <input type="text" class="form-control"value="Luis Eduardo Antes Villa" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="lider_tecnico" class="form-label">Responsable</label>
-            <input type="text" class="form-control"  value="Daniel Herrera Figueroa" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="nombre" class="form-label">Tipo de acción</label>
-            <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Modulo o aplicativo</label>
-            <input type="text" class="form-control" value="SMAX" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="Correo" class="form-label">Area solicitante</label>
-            <input type="text" class="form-control" value="Dirección informática" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="consultoires" class="form-label">Actividad asignada</label>
-            <input type="text" class="form-control" value="Revisión de requerimientos" id="nombre" disabled>
-        </div>
-        <div class="col-sm-6">
-            <label for="consultoires" class="form-label">Horas requeridas</label>
-            <input type="number" class="form-control" value="8" id="nombre" disabled>
-        </div>
-        <div class="col-sm-12">
-            <label for="consultoires" class="form-label">Actividad realizada</label>
-            <textarea class="form-control" aria-label="With textarea" disabled>Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos</textarea>
-        </div>
-        <div class="col-sm-12">
-            <label for="formFileMultiple" class="form-label">Evidencia de actividades</label>
-            <div class="evidencias">
-
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">{{tituloModal}}</label>
             </div>
-            
-        </div>
-        
+            <div class="col-sm-12">
+            <hr>
+            </div>
+            <div class="col-sm-6">
+                <label for="identificador" class="form-label">Identificador del requerimiento</label>
+                <input type="text" class="form-control"value="S-1066361" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="nombre" class="form-label">Subdireccion/Generencia</label>
+                <input type="text" class="form-control"  value="Subdirección General de Tecnologías de Información" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Proyecto</label>
+                <input type="text" class="form-control"value="Continuidad operativa" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="responsable" class="form-label">Líder</label>
+                <input type="text" class="form-control" value="Juan Gutiérrez" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="lider_tecnico" class="form-label">Responsable</label>
+                <input type="text" class="form-control"  value="Azir Aguilar" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="nombre" class="form-label">Tipo de acción</label>
+                <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Modulo o aplicativo</label>
+                <input type="text" class="form-control" value="SMAX" disabled>
+            </div>
+            <div class="col-sm-6">
+                <label for="Correo" class="form-label">Area solicitante</label>
+                <input type="text" class="form-control" value="Dirección informática" disabled>
+            </div>
+            <div class="col-sm-6" *ngIf="mostrarInput">
+                <label for="consultoires" class="form-label">Actividad asignada</label>
+                <input type="text" class="form-control" value="Revisión de desarrollo" id="nombre" disabled>
+            </div>
+            <div class="col-sm-6" *ngIf="mostrarInput">
+                <label for="consultoires" class="form-label">Horas por actividad</label>
+                <input type="number" class="form-control" value="8" id="nombre" disabled>
+            </div>
+            <div class="col-sm-12" *ngIf="mostrarInput">
+                <label for="consultoires" class="form-label">Actividad realizada</label>
+                <textarea class="form-control" aria-label="With textarea" disabled>Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos</textarea>
+            </div>
+            <div class="col-sm-12" *ngIf="mostrarInput"> 
+                <label for="formFileMultiple" class="form-label">Evidencia de actividades</label>
+                <div class="evidencias">
+                </div>
+            </div>
         </div> 
     </div>
 
     <div class="contenedor-evidencias-observaciones">
-    <div class="contenedor-observaciones">
-        <label class="label-observaciones">Observaciones</label>
-        <textarea class="form-control textarea" aria-label="With textarea"></textarea>
-    </div>  
+        <div class="contenedor-observaciones">
+            <label class="label-observaciones">Observaciones</label>
+            <textarea class="form-control textarea" aria-label="With textarea"></textarea>
+        </div>  
     </div>
     <div class="contenedor-boton-enviar"> 
-    <button type="button" class="btn btn-principal btn-modal">Autorizar</button>
-    <button type="button" class="btn btn-principal btn-modal">Enviar observación</button>
+        <button type="button" class="btn btn-principal btn-modal" *ngIf="mostrarInput">Autorizar</button>
+        <button type="button" class="btn btn-principal btn-modal">Enviar observación</button>
     </div>
 </div>
