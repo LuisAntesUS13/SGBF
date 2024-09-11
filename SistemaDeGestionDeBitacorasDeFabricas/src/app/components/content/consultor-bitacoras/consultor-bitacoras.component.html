@@ -1,9 +1,9 @@
 <div>
-    
     <h3>Bitacoras</h3>
+    <h6>Proyectos y periódos</h6>
 </div>
 <hr>
-<div class="card">
+<!-- <div class="card">
     <div class="card-body row">
         <div class="col-sm-3">
             <label for="Correo" class="form-label">Proyecto</label>
@@ -17,27 +17,34 @@
             <button type="button" class="btn btn-secundario">Agregar</button>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="row">
     <div class="col-sm-12">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Número de consultor</th>
-                <th scope="col">Proyecto</th>
-                <th scope="col">Año</th>
-                <th scope="col">Periodo</th>
-            </tr>
-            </thead>
-                <tbody>
-                <tr class="rows" *ngFor="let bitacora of filtrarBitacorasPorProyecto()" (click)="detail(bitacora.periodo)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                    <td>{{bitacora.numConsultor}}</td>
-                    <td>{{bitacora.proyecto}}</td>
-                    <td>{{bitacora.anho}}</td>
-                    <td>{{bitacora.periodo}}</td>
-                </tr>
-            </tbody> 
-        </table>
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item" *ngFor="let proyecto of proyectos"> 
+                    <h2 class="accordion-header" [id]="'heading' + proyecto.idProyecto">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" [attr.data-bs-target]="'#collapse' + proyecto.idProyecto" aria-expanded="true" [attr.aria-controls]="'collapse' + proyecto.idProyecto">
+                            <div class="titulo-accordion">
+                                <p>Proyecto: {{proyecto.nombre}}</p>
+                            </div>
+                            <div class="titulo-accordion">
+                                <p>Líder: {{proyecto.lider}}</p>
+                            </div>
+                            <div class="titulo-accordion">
+                                <p>Responsable {{proyecto.responsable}}</p>
+                            </div>
+                        </button>
+                    </h2>
+                    <div [id]="'collapse' + proyecto.idProyecto" *ngFor="let periodo of getPeriodosPorProyecto(proyecto.idProyecto)"  class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading' + proyecto.idProyecto">
+                        <div class="card card-periodo accordion-body">
+                            <div class="card-body">{{periodo.periodo}}</div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
     </div>
 </div>

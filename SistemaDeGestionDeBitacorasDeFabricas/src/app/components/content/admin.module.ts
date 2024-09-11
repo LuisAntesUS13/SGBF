@@ -14,6 +14,7 @@ import { RequerimientosComponent } from './requerimientos/requerimientos.compone
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
 import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
+import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.componen
                   ConsultorBitacorasComponent, 
                   ConsultorActividadesBitacoraComponent, 
                   EquipoTrabajoComponent,
-                  
+                  ConsultorActividadesBitacoraComponent, 
+                  LidertecnicoActividadesBitacorasComponent,
                 ],
   exports: [],
 })

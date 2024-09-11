@@ -17,22 +17,27 @@ td{
     cursor: pointer;
 }
 
-.ejecucion{
-    --bs-nav-link-hover-color: red;
+.titulo-accordion{
+    display: flex;
 }
 
-.revision{
-    --bs-nav-link-hover-color: orange;
+.accordion-button{
+    gap: 20px;   
 }
 
-.autorizacion{
-    --bs-nav-link-hover-color: rgb(128, 255, 0);
+.accordion-body > .card-body{
+    
+    padding: 0px;
 }
 
-.finalizado{
-    --bs-nav-link-hover-color: green;
+.titulo-accordion{
+    text-align: center;
 }
 
-.rechazado{
-    --bs-nav-link-hover-color: rgb(0, 0, 0);
+.accordion-collapse{
+    cursor: pointer;
+}
+
+.card-periodo:hover{
+    background-color: rgb(228, 228, 228);
 }
