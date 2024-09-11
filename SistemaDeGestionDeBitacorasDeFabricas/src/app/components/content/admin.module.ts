@@ -16,6 +16,8 @@ import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.compone
 import { PermisosComponent } from './permisos/permisos.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
 import { LoginComponent } from './login/login.component';
+import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
+import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 
 @NgModule({
   imports: [
@@ -35,6 +37,9 @@ import { LoginComponent } from './login/login.component';
                   LidertecnicoBitacorasComponent,
                   ConsultorBitacorasComponent,
                   ConsultorActividadesBitacoraComponent,
+                  EquipoTrabajoComponent,
+                  ConsultorActividadesBitacoraComponent,
+                  LidertecnicoActividadesBitacorasComponent,
                   AsistenciaComponent,
                   PermisosComponent,
                   LoginComponent

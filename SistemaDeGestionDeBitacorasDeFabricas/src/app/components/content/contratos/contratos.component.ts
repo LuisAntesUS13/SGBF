@@ -13,14 +13,46 @@ export class ContratosComponent {
 
   datosEnviar: any = [];
   tituloSecundario: string = '';
+  seleccionado: number = 1;
   seleccionadoPerfil: number = 1;
+  seleccionadoConsultores: number = 1;
   showCamvaConsultores: boolean = false;
   showCamvaPerfiles:boolean = false;
 
   pestanasContratos = [
     { id: 1, nombre: 'Registro contrato', activo: true },
-    { id: 3, nombre: 'Perfiles requeridos', activo: false },
-    { id: 2, nombre: 'Registro de consultora', activo: false },
+    { id: 2, nombre: 'Perfiles y asignacion de consultores', activo: false }
+  ];
+
+  pestanasPerfiles = [
+    { id: 1, nombre: 'Seleccion de perfil', activo: true },
+    { id: 2, nombre: 'Registro perfiles', activo: false },
+  ];
+
+  pestanasConsultores = [
+    { id: 1, nombre: 'Registro de consultor', activo: true },
+    { id: 2, nombre: 'Registrar consultor', activo: false },
+  ];
+
+  datosConsultores = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Juan Manuel',
+      fecha_inicio: '31/05/2024',
+      fecha_termino: '',
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Jose Antonio',
+      fecha_inicio: '15/05/2024',
+      fecha_termino: '',
+    },
   ];
 
   datosPefil = [
@@ -29,6 +61,7 @@ export class ContratosComponent {
       total_registros: 10,
       pagina_actual: 1,
       perfil: ' Programador Sr Java',
+      utilizados: 1,
       cantidad: 5,
     },
     {
@@ -36,6 +69,7 @@ export class ContratosComponent {
       total_registros: 10,
       pagina_actual: 1,
       perfil: ' Programador Jr Java',
+      utilizados: 2,
       cantidad: 2,
     },
     {
@@ -43,6 +77,7 @@ export class ContratosComponent {
       total_registros: 10,
       pagina_actual: 1,
       perfil: 'Analista',
+      utilizados: 0,
       cantidad: 1,
     },
     {
@@ -50,6 +85,7 @@ export class ContratosComponent {
       total_registros: 10,
       pagina_actual: 1,
       perfil: 'Tester',
+      utilizados: 2,
       cantidad: 2,
     },
   ];
@@ -177,17 +213,6 @@ export class ContratosComponent {
     },
   ];
 
-  
-  pestanasPerfiles = [
-    { id: 1, nombre: 'Seleccion de perfil', activo: true },
-    { id: 2, nombre: 'Registro perfiles', activo: false },
-  ];
-
-
-  pestanasConsultores = [
-    { id: 1, nombre: 'Asignacion de consultor', activo: true },
-    { id: 2, nombre: 'Registro de consultor', activo: false },
-  ];
 
   constructor(private toastrService: ToastrService, private router: Router) {
     this.datosEnviar = this.datos1;
@@ -206,9 +231,21 @@ export class ContratosComponent {
     this.showCamvaPerfiles = false;
   }
 
-  cambioSeleccionConsultores(id: number) {
-    this.seleccionadoPerfil = id;
+  cambioSeleccionContratos(id: number) {
+    this.seleccionado = id;
     this.pestanasContratos.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
+
+  cambioSeleccionConsultores(id: number) {
+    this.seleccionadoConsultores = id;
+    this.pestanasConsultores.forEach((element) => {
       if (element.id == id) {
         element.activo = true;
       } else {
@@ -256,12 +293,13 @@ export class ContratosComponent {
 
   abrirModalPerfiles(num: number) {
     if (num == 1) {
-      this.tituloSecundario = 'Asignación de perfiles';
+      this.tituloSecundario = 'Carga de perfiles requeridos';
     } else if (num == 2) {
-      this.tituloSecundario = 'Actualización de perfiles';
+      this.tituloSecundario = 'Actualización de perfiles requeridos';
     } else if (num == 3) {
-      this.tituloSecundario = 'Actualización de perfiles';
-    
+      this.tituloSecundario = 'Asignacion de consultor';
+    }else if (num == 3) {
+      this.tituloSecundario = 'Actualización asignacion de consultor';
     }
     this.showCamvaPerfiles = true;
   }
@@ -288,4 +326,24 @@ export class ContratosComponent {
     //     }
     //   });
   }
+
+  mostrarConsultores (dato:any) {
+    this.tituloSecundario = dato.perfil;
+    this.showCamvaConsultores = true;
+    this.seleccionadoConsultores = 1;
+  }
+
+
+
+  cambioOpcionSelecto() {
+    this.seleccionadoConsultores = 2;
+    this.pestanasConsultores.forEach((element) => {
+      if (element.id == this.seleccionadoConsultores) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
 }
