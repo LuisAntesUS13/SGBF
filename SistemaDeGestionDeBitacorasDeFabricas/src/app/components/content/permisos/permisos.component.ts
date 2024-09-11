@@ -27,10 +27,10 @@ export class PermisosComponent {
     {"total_paginas": 1, "pagina_actual": 1, "roles": "Administrador", "modal": true},
   ]
   datosPermisos2 = [
-    {"total_paginas": 1, "pagina_actual": 1, "menu": "Usuarios", "descripcion": "asignar a usuarios permisos", "permisos1": false, "asignarPermisos": ""},
-    {"total_paginas": 1, "pagina_actual": 1, "menu": "Asistencia", "descripcion": "asignar a asistencias permisos", "permisos2": false, "asignarPermisos": ""},
-    {"total_paginas": 1, "pagina_actual": 1, "menu": "Contratos y Requerimientos", "descripcion": "asignar permisos", "permisos3": false, "asignarPermisos": ""},
-    {"total_paginas": 1, "pagina_actual": 1, "menu": "Permisos", "descripcion": "asignar permisos", "permisos4": false, "asignarPermisos": "", "permisos5": false, "asignarPermisos2": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Usuarios", "descripcion": "Asignar a usuarios permisos", "permisos1": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Asistencia", "descripcion": "Asignar a asistencias permisos", "permisos2": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Contratos y Requerimientos", "descripcion": "Asignar permisos", "permisos3": false, "asignarPermisos": ""},
+    {"total_paginas": 1, "pagina_actual": 1, "menu": "Permisos", "descripcion": "Asignar permisos", "permisos4": false, "asignarPermisos": "", "permisos5": false, "asignarPermisos2": ""},
 
   ]
 
@@ -67,19 +67,19 @@ export class PermisosComponent {
     this.toastrService.success("Permiso asignado correctamente");
     if(Permisos == 1){
       dato.permisos1 = true;
-      dato.asignarPermisos = "asignado"
+      dato.asignarPermisos = "Asignado"
     }else if(Permisos == 2){
       dato.permisos2 = true;
-      dato.asignarPermisos = "asignado"
+      dato.asignarPermisos = "Asignado"
     }else if(Permisos == 3){
       dato.permisos3 = true;
-      dato.asignarPermisos = "asignado"
+      dato.asignarPermisos = "Asignado"
     }else if(Permisos == 4){
       dato.permisos4 = true;
-      dato.asignarPermisos = "asignado"
+      dato.asignarPermisos = "Asignado"
     }else if(Permisos == 5){
       dato.permisos5 = true;
-      dato.asignarPermisos = "asignado"
+      dato.asignarPermisos = "Asignado"
   }
   }
 }

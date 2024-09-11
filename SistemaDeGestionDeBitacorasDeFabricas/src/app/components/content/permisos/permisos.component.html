@@ -5,15 +5,13 @@
   <div class="col-sm-12">
       <table class="table table-hover">
           <thead>
-            <tr class="valoresCentrados">
-              <th scope="col" class="valoresCentrados">#</th>
-              <th scope="col" class="valoresCentrados">Rol</th>
-              <th scope="col" class="valoresCentrados">Estatus</th>
+            <tr>
+              <th scope="col" >Rol</th>
+              <th scope="col">Estatus</th>
             </tr>
           </thead>
           <tbody>
-            <tr  *ngFor="let dato of datosPermisos;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
-              <th scope="row">{{i+1}}</th>
+            <tr  *ngFor="let dato of datosPermisos;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" >
               <td>{{dato.roles}}</td>
               <td>Activo</td>
             </tr>
@@ -48,14 +46,14 @@
             </thead>
             <tbody>
               <tr  *ngFor="let dato of datosPermisos2;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
-                
+
                 <td>{{dato.menu}}</td>
                 <td>{{dato.descripcion}}</td>
-                <td *ngIf="dato.permisos1" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos1" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 1)" >Asignar</button></td>
-                <td *ngIf="dato.permisos2" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos2" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 2)" >Asignar</button></td>
-                <td *ngIf="dato.permisos3" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos3" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 3)" >Asignar</button></td>
-                <td *ngIf="dato.permisos4" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos4" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 4)" >Asignar</button></td>
-                <td *ngIf="dato.permisos5" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos5" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 5)" >Asignar</button></td>
+                <td *ngIf="dato.permisos1" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos1" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 1)" ><i class="bi bi-check2-circle" ></i></button></td>
+                <td *ngIf="dato.permisos2" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos2" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 2)" ><i class="bi bi-check2-circle"></i></button></td>
+                <td *ngIf="dato.permisos3" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos3" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 3)" ><i class="bi bi-check2-circle"></i></button></td>
+                <td *ngIf="dato.permisos4" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos4" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 4)" ><i class="bi bi-check2-circle"></i></button></td>
+                <td *ngIf="dato.permisos5" class="valoresCentrados">{{dato.asignarPermisos}}</td><td *ngIf="!dato.permisos5" class="valoresCentrados"><button type="button" class="btn btn-secundario" title="Registrar Permisos" (click)="marcarPermisos(dato, 5)" ><i class="bi bi-check2-circle"></i></button></td>
               </tr>
             </tbody>
           </table>

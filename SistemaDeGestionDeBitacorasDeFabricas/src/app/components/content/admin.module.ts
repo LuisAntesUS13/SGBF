@@ -15,6 +15,7 @@ import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bit
 import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-b
                   ConsultorBitacorasComponent,
                   ConsultorActividadesBitacoraComponent,
                   AsistenciaComponent,
-                  PermisosComponent
+                  PermisosComponent,
+                  LoginComponent
                 ],
   exports: [],
 })

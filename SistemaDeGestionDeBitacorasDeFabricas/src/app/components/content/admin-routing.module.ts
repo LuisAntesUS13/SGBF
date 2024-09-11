@@ -10,6 +10,7 @@ import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
@@ -93,6 +94,14 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: PermisosComponent,
+      },
+      {
+        path: 'login',
+        data: {
+          title: 'Login',
+          breadcrumbs: [],
+        },
+        component: LoginComponent,
       },
       // {
       //   path: 'notificaciones',
