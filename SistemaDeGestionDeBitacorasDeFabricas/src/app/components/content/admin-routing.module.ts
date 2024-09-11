@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.component';
+import { PermisosComponent } from './permisos/permisos.component';
 import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/lidertecnico-bitacoras.component';
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { LoginComponent } from './login/login.component';
+import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 
 
@@ -76,6 +80,38 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: RequerimientosComponent,
+      },
+      {
+        path: 'asistencia',
+        data: {
+          title: 'Lista de Asistencia',
+          breadcrumbs: [],
+        },
+        component: AsistenciaComponent,
+      },
+      {
+        path: 'permisos',
+        data: {
+          title: 'Permisos',
+          breadcrumbs: [],
+        },
+        component: PermisosComponent,
+      },
+      {
+        path: 'login',
+        data: {
+          title: 'Login',
+          breadcrumbs: [],
+        },
+        component: LoginComponent,
+      },
+      {
+        path: 'asignacionPerfiles',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: EquipoTrabajoComponent,
       },
       // {
       //   path: 'notificaciones',

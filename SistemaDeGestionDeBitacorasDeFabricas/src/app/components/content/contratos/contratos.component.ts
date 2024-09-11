@@ -12,6 +12,83 @@ export class ContratosComponent {
   tituloPrimario: string = '';
 
   datosEnviar: any = [];
+  tituloSecundario: string = '';
+  seleccionado: number = 1;
+  seleccionadoPerfil: number = 1;
+  seleccionadoConsultores: number = 1;
+  showCamvaConsultores: boolean = false;
+  showCamvaPerfiles:boolean = false;
+
+  pestanasContratos = [
+    { id: 1, nombre: 'Registro contrato', activo: true },
+    { id: 2, nombre: 'Perfiles y asignacion de consultores', activo: false }
+  ];
+
+  pestanasPerfiles = [
+    { id: 1, nombre: 'Seleccion de perfil', activo: true },
+    { id: 2, nombre: 'Registro perfiles', activo: false },
+  ];
+
+  pestanasConsultores = [
+    { id: 1, nombre: 'Registro de consultor', activo: true },
+    { id: 2, nombre: 'Registrar consultor', activo: false },
+  ];
+
+  datosConsultores = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Juan Manuel',
+      fecha_inicio: '31/05/2024',
+      fecha_termino: '',
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Jose Antonio',
+      fecha_inicio: '15/05/2024',
+      fecha_termino: '',
+    },
+  ];
+
+  datosPefil = [
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      utilizados: 1,
+      cantidad: 5,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Jr Java',
+      utilizados: 2,
+      cantidad: 2,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Analista',
+      utilizados: 0,
+      cantidad: 1,
+    },
+    {
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Tester',
+      utilizados: 2,
+      cantidad: 2,
+    },
+  ];
 
   datos1 = [
     {
@@ -136,14 +213,58 @@ export class ContratosComponent {
     },
   ];
 
+
   constructor(private toastrService: ToastrService, private router: Router) {
     this.datosEnviar = this.datos1;
+  }
+
+  cerrarCamvasConsultores() {
+    this.showCamvaConsultores = false;
   }
 
   abrirModal() {
     this.tituloPrimario = 'Registro de contrato';
     this.showCamvasPrimario = true;
   }
+
+  cerrarCamvasPerfiles() {
+    this.showCamvaPerfiles = false;
+  }
+
+  cambioSeleccionContratos(id: number) {
+    this.seleccionado = id;
+    this.pestanasContratos.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
+
+  cambioSeleccionConsultores(id: number) {
+    this.seleccionadoConsultores = id;
+    this.pestanasConsultores.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
+  cambioSeleccionPerfiles(id: number) {
+    this.seleccionadoPerfil = id;
+    this.pestanasPerfiles.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
 
   cerrarCamvasPrimario() {
     this.showCamvasPrimario = false;
@@ -169,4 +290,60 @@ export class ContratosComponent {
   adminRequerimientos() {
     this.router.navigate(['/content/requerimientos']);
   }
+
+  abrirModalPerfiles(num: number) {
+    if (num == 1) {
+      this.tituloSecundario = 'Carga de perfiles requeridos';
+    } else if (num == 2) {
+      this.tituloSecundario = 'Actualización de perfiles requeridos';
+    } else if (num == 3) {
+      this.tituloSecundario = 'Asignacion de consultor';
+    }else if (num == 3) {
+      this.tituloSecundario = 'Actualización asignacion de consultor';
+    }
+    this.showCamvaPerfiles = true;
+  }
+
+  guardarSecundario() {
+    // if (this.seleccionadoPerfil == 1) {
+    // } else if (this.seleccionadoPerfil == 2) {
+    //   this.seleccionadoPerfil = 1;
+    //   this.pestanasPerfiles.forEach((element) => {
+    //     if (element.id == this.seleccionadoPerfil) {
+    //       element.activo = true;
+    //     } else {
+    //       element.activo = false;
+    //     }
+    //   });
+    // } else if (this.seleccionadoPerfil == 3) {
+    // }
+    this.toastrService.success('Datos guardados correctamente');
+    // this.confirmarModalService
+    //   .abriraModalPregunta('Estas seguro de ...')
+    //   .subscribe(async (result) => {
+    //     if (result) {
+    //       this.toastrService.success('Datos guardados correctamente');
+    //     }
+    //   });
+  }
+
+  mostrarConsultores (dato:any) {
+    this.tituloSecundario = dato.perfil;
+    this.showCamvaConsultores = true;
+    this.seleccionadoConsultores = 1;
+  }
+
+
+
+  cambioOpcionSelecto() {
+    this.seleccionadoConsultores = 2;
+    this.pestanasConsultores.forEach((element) => {
+      if (element.id == this.seleccionadoConsultores) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+  }
+
 }

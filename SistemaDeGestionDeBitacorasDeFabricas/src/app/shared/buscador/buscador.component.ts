@@ -10,7 +10,7 @@ export class BuscadorComponent {
   @Input() datos: any[] | null = null; //Datos para realizar busqueda
   @Input() setValor: string = "";
   @Input() llaves: string[] = []; // El primer valor sera la llave a obtener, los  demas son los  campos que se  mostraran visualmente y el filtro aplica a todos  los campos  
-  @Input() campoHabilitado: boolean = true; 
+  @Input() campoHabilitado: boolean = false; 
   @Output() valor: EventEmitter<string> = new EventEmitter();
   Formulario!: FormGroup;
   mostrar: boolean = false;
@@ -28,7 +28,9 @@ export class BuscadorComponent {
       this.Formulario.get('busqueda')?.setValue("");
     }
 
-    if (this.campoHabilitado) {
+    console.log(changes);
+
+    if (!this.campoHabilitado) {
       this.Formulario.get('busqueda')?.enable();
     } else {
       this.Formulario.get('busqueda')?.disable();

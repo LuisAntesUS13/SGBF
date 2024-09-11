@@ -25,8 +25,8 @@ export class RequerimientosComponent {
 
   pestanas = [
     { id: 1, nombre: 'Requerimiento', activo: true },
-    { id: 2, nombre: 'Perfiles requeridos', activo: false },
-    { id: 3, nombre: 'Registro de consultores', activo: false },
+    // { id: 2, nombre: 'Perfiles requeridos', activo: false },
+    // { id: 3, nombre: 'Registro de consultores', activo: false },
   ];
 
   pestanasPerfiles = [

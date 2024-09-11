@@ -221,3 +221,38 @@ label {
 .card-footer {
   margin: 0px !important;
 }
+
+
+/* .delete {
+  color: red!important;
+}
+
+.update {
+  color: blue!important;
+}
+
+.download {
+  color: green!important;
+} */
+
+
+.delete:hover {
+  color: red!important;
+  size: 25px!important;
+  background: rgba(253, 100, 100, 0.973);
+  background: radial-gradient(circle, rgba(27,104,207,0.10547969187675066) 0%, rgba(27,104,207,0) 100%)!important;
+}
+
+.update:hover {
+  color: blue!important;
+  size: 25px!important;
+  background: rgb(27,104,207)!important;
+  background: radial-gradient(circle, rgba(27,104,207,0.10547969187675066) 0%, rgba(27,104,207,0) 100%)!important;
+}
+
+.add:hover  {
+  color: green!important;
+  size: 25px!important;
+  background: rgb(52, 165, 50) !important;
+  background: radial-gradient(circle, rgba(30,135,29,0.08867296918767509) 0%, rgba(30,135,29,0) 100%)!important;
+}

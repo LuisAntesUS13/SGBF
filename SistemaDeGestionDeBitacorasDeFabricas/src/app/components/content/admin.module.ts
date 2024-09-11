@@ -12,7 +12,11 @@ import { LidertecnicoBitacorasComponent } from './lidertecnico-bitacoras/liderte
 import { ContratosComponent } from './contratos/contratos.component';
 import { RequerimientosComponent } from './requerimientos/requerimientos.component';
 import { ConsultorBitacorasComponent } from './consultor-bitacoras/consultor-bitacoras.component';
+import { AsistenciaComponent } from './lista-asistencia/lista-asistencia.component';
+import { PermisosComponent } from './permisos/permisos.component';
 import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-bitacora/consultor-actividades-bitacora.component';
+import { LoginComponent } from './login/login.component';
+import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 
 @NgModule({
@@ -26,14 +30,19 @@ import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-activi
   ],
   providers: [CurrencyPipe, DatePipe, DecimalPipe],
   declarations: [AdminComponent,
-                  InicioComponent, 
-                  UsuariosComponent, 
-                  ContratosComponent, 
-                  RequerimientosComponent, 
-                  LidertecnicoBitacorasComponent, 
-                  ConsultorBitacorasComponent, 
-                  ConsultorActividadesBitacoraComponent, LidertecnicoActividadesBitacorasComponent,
-                  
+                  InicioComponent,
+                  UsuariosComponent,
+                  ContratosComponent,
+                  RequerimientosComponent,
+                  LidertecnicoBitacorasComponent,
+                  ConsultorBitacorasComponent,
+                  ConsultorActividadesBitacoraComponent,
+                  EquipoTrabajoComponent,
+                  ConsultorActividadesBitacoraComponent,
+                  LidertecnicoActividadesBitacorasComponent,
+                  AsistenciaComponent,
+                  PermisosComponent,
+                  LoginComponent
                 ],
   exports: [],
 })

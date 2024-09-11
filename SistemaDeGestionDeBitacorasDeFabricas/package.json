@@ -26,6 +26,7 @@
     "moment": "^2.30.1",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
+    "sistema-de-gestion-de-bitacoras-de-fabricas": "file:",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

@@ -36,7 +36,6 @@
         <table class="table table-hover">
             <thead>
               <tr class="valoresCentrados">
-                <th scope="col" class="valoresCentrados">#</th>
                 <th scope="col" class="valoresCentrados">Identificador</th>
                 <th scope="col" class="valoresCentrados">Nombre requerimiento</th>
                 <th scope="col" class="valoresCentrados">Lider proyecto</th>
@@ -49,7 +48,6 @@
             </thead>
             <tbody>
               <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  (click)="abrirModal()" class="valoresCentrados">
-                <th scope="row">{{i+1}}</th>
                 <td>{{dato.identificador}}</td>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.lider_proyecto}}</td>
@@ -86,8 +84,13 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
     <div class="card" *ngIf="seleccionado == 1">
         <div class="card-body row">
           <div class="col-sm-6">
-              <label for="Correo" class="form-label">Busca y selecciona el contrato</label>
+              <label for="Correo" class="form-label">Contrato</label>
               <app-buscador [datos]="datosEnviar" [llaves]="llavesBuscador" (valor)="eventoBuscar($event)"></app-buscador>
+          </div>
+          <div class="col-sm-6">
+            <label for="lider_tecnico" class="form-label">Lider tecnico</label>
+            <!-- <input type="text" class="form-control" id="lider_tecnico" placeholder=""> -->
+            <app-buscador [campoHabilitado]="true"  [setValor]="'Pedro Ramirez'"></app-buscador>
           </div>
           <div class="col-sm-12">
             <hr>
@@ -105,11 +108,7 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
                 <textarea type="text" class="form-control" id="descripcion" ></textarea>
             </div>
        
-            <div class="col-sm-6">
-              <label for="lider_tecnico" class="form-label">Lider tecnico</label>
-              <!-- <input type="text" class="form-control" id="lider_tecnico" placeholder=""> -->
-              <app-buscador></app-buscador>
-            </div>
+         
             <div class="col-sm-6">
               <label for="responsable" class="form-label">Responsable</label>
               <!-- <input type="text" class="form-control" id="responsable" placeholder=""> -->
@@ -143,11 +142,6 @@ id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding-left: 
                   <option value="3">Area de recursos humanos</option>
                 </select>
           </div>
-
-            <div class="col-sm-6">
-              <label for="consultoires" class="form-label">No. de consultores requeridos</label>
-              <input type="number" class="form-control" id="nombre" placeholder="">
-            </div>
         </div> 
     </div>
     <div class="card" *ngIf="seleccionado == 2">
