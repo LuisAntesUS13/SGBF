@@ -27,18 +27,6 @@ export class ContratosComponent {
 
 
 
-  // showCamvasPrimario: boolean = false;
-  // tituloPrimario: string = '';
-
-
-  // tituloSecundario: string = '';
-  // seleccionado: number = 1;
-  // seleccionadoPerfil: number = 1;
-  // seleccionadoConsultores: number = 1;
-  // showCamvaConsultores: boolean = false;
-  // showCamvaPerfiles: boolean = false;
-
-
   datosConsultores = [
     {
       total_paginas: 1,

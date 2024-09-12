@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
   selector: 'app-equipo-trabajo',
@@ -7,28 +11,10 @@ import { Component } from '@angular/core';
 })
 export class EquipoTrabajoComponent {
 
-  datosConsultores = [
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: ' Programador Sr Java',
-      consultor: 'Juan Manuel',
-      fecha_inicio: '31/05/2024',
-      fecha_termino: '',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: ' Programador Sr Java',
-      consultor: 'Jose Antonio',
-      fecha_inicio: '15/05/2024',
-      fecha_termino: '',
-    },
+  datosConsultores : any= [
   ];
 
-  datosConsultoresDisponibles = [
+  datosConsultoresDisponibles : any = [
     {
       total_paginas: 1,
       total_registros: 10,
@@ -70,6 +56,7 @@ export class EquipoTrabajoComponent {
 
   datosPefil = [
     {
+      id: 1,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -78,6 +65,7 @@ export class EquipoTrabajoComponent {
       cantidad: 5,
     },
     {
+      id: 2,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -86,6 +74,7 @@ export class EquipoTrabajoComponent {
       cantidad: 2,
     },
     {
+      id: 3,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -94,6 +83,7 @@ export class EquipoTrabajoComponent {
       cantidad: 1,
     },
     {
+      id: 4,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -103,43 +93,40 @@ export class EquipoTrabajoComponent {
     },
   ];
 
-  datos1 = [
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      lider_texnico: "Juan Manuel",
-      no_contrato: 'C-1017',
-      consultora: 'Tech Solutions S.A.',
-      no_consultores: 5,
-      responsable: "Mario Alberto",
-      total_integrantes : 5
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      lider_texnico: "Juan Manuel",
-      no_contrato: 'C-1018',
-      consultora: 'Innovative Tech Group',
-      responsable: "-",
-      total_integrantes : 25
-    }
-  ];
+  datos1:any = [];
 
   tituloPrimario: string = '';
   seleccionado: number = 1;
- mostrarConsultores: boolean = false;
+  mostrarConsultores: boolean = false;
+  mostrarLider: boolean = false;
 
   pestanasEquipos = [
     { id: 1, nombre: 'Equipo', activo: true },
     { id: 2, nombre: 'Consultores disponibles', activo: false }
   ];
 
-  
 
-  constructor() {
+  tipoSeleccionLider:boolean = false;
+  guardadoLider:boolean = false;
+  formularioLider!: FormGroup;
 
+  constructor(
+    private toastrService: ToastrService,
+    private router: Router,
+    private fb: FormBuilder,
+    private confirmarModalService: ConfirmarModalService
+  ) {
+   this.createFormPerfil();
+  }
+
+
+  createFormPerfil() {
+    this.formularioLider = this.fb.group({
+      no_contrato: [''],
+      lider_texnico: [''],
+      nuevo_lider_texnico: [''],
+      observaciones: [''],
+    });
   }
 
   obtenerEvento(event: any) {
@@ -150,7 +137,11 @@ export class EquipoTrabajoComponent {
     this.buscar(page);
   }
   
-  regresar(){
+  regresarInicio(){
+    this.mostrarLider = false;
+  }
+
+  regresarLider(){
     this.mostrarConsultores = false;
   }
 
@@ -158,11 +149,31 @@ export class EquipoTrabajoComponent {
 
   }
 
-  abrirModal(){
-    this.mostrarConsultores = true;
-    this.tituloPrimario = "Administracion equipo"
+  mostrarSeccionLider(tipo:boolean, datos:any){
+    this.createFormPerfil();
+    this.tipoSeleccionLider = tipo;
 
+    this.mostrarLider = true;
+
+    this.guardadoLider = false;
+
+    if(!tipo){
+      this.guardadoLider = true;
+      this.formularioLider.get('lider_texnico')?.setValue(datos.lider_texnico);
+      this.formularioLider.get('no_contrato')?.setValue(datos.no_contrato);
+      this.formularioLider.get('nuevo_lider_texnico')?.setValue(datos.nuevo_lider_texnico);
+      this.formularioLider.get('observaciones')?.setValue(datos.observaciones);
+
+
+
+    }
   }
+
+  mostrarSeccionConsultores(){
+    this.mostrarConsultores = true;
+  }
+
+
   cerrarCamvasPrimario(){
     this.mostrarConsultores = false;
   }
@@ -181,5 +192,41 @@ export class EquipoTrabajoComponent {
 
   guardar(){
 
+  }
+
+  guardarLider(){
+    this.guardadoLider = true;
+    this.toastrService.success('Lidear asignado correctamente');
+
+    this.datos1.push({
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      lider_texnico: this.formularioLider.get('lider_texnico')?.value,
+      no_contrato: this.formularioLider.get('no_contrato')?.value,
+      nuevo_lider_texnico: this.formularioLider.get('nuevo_lider_texnico')?.value,
+      observaciones:this.formularioLider.get('observaciones')?.value ,
+      total_integrantes : 5
+    });
+
+    console.log(this.datos1);
+  }
+
+  agregarConsultor(id: number){
+
+     // Remueve el objeto de array1 y lo almacena en una variable
+    let objetoRemovido = this.datosConsultoresDisponibles.splice(id, 1)[0];
+    
+    // Añade el objeto removido a array2
+    this.datosConsultores.push(objetoRemovido);
+
+  }
+
+  quitarConsultor(id: number){
+        // Remueve el objeto de array1 y lo almacena en una variable
+        let objetoRemovido = this.datosConsultores.splice(id, 1)[0];
+    
+        // Añade el objeto removido a array2
+        this.datosConsultoresDisponibles.push(objetoRemovido);
   }
 }
