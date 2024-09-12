@@ -5,8 +5,7 @@
     </div>
     <div class="contenedor-datos-proyecto">
         <div class="datos-titulo-proyecto">
-            <p class="titulo-proyecto">Sistema de gestión de bitácoras de fábricas</p>
-            <p class="titulo-proyecto">({{periodoTitulo}} - {{anho}})</p>
+            <p class="titulo-proyecto">Sistema de gestión de bitácoras de fábricas. ({{periodoTitulo}} - {{anho}})</p>
         </div>
         <div class="datos">
             <p class="datos-proyecto">Líder: </p>
@@ -33,7 +32,7 @@
     
 </div>
 
-<div class="row contenedor-accordion">
+<div class="row contenedor-accordion contenedor-tabla" >
     <div class="col-sm-12">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -51,7 +50,7 @@
                     </h2>
                     <div [id]="'collapse' + consultor.idConsultor" class="accordion-collapse collapse"  [attr.aria-labelledby]="'heading' + consultor.idConsultor">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" >
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -90,11 +89,22 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 </div>  
 <div class="offcanvas-body">
-    
     <div class="card">
         <div class="card-body row">
-            <div class="col-sm-6">
-                <label for="Correo" class="form-label">{{tituloModal}}</label>
+            <div class="titulo-Modal">
+                <div>
+                    <label for="Correo" class="form-label">{{tituloModal}} </label>
+                </div>
+                <div>
+                    <div class="contenedor-periodo">
+                        <label class="form-label">Periodo:</label>
+                        <label class="form-label periodo" >{{periodoTitulo}} - {{anho}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="contenedor-periodo" *ngIf="isVisible">
+                <label class="form-label">Fecha de actividad:</label>
+                <label class="form-label periodo" >{{fechaActividad}}</label>
             </div>
             <div class="col-sm-12">
             <hr>
@@ -153,7 +163,7 @@
 
     <div class="contenedor-evidencias-observaciones">
         <div class="contenedor-observaciones">
-            <label class="label-observaciones">Observaciones</label>
+            <label class="label-observaciones">Observaciones de la actividad.</label>
             <textarea class="form-control textarea" aria-label="With textarea"></textarea>
         </div>  
     </div>

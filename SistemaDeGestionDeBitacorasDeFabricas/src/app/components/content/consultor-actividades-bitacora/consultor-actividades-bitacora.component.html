@@ -1,5 +1,5 @@
 <div class="titulo-boton">
-    <h3>Actividades</h3>
+    <h3>Actividades  </h3>
 </div>
 <hr>
 <div class="card">
@@ -19,8 +19,8 @@
 
         </div>
 
-        <div  class="col-sm-3" style="margin-top: 29px;">
-            <!-- <button class="btn btn-principal" (click)="toggleVisibility()" data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Observaciones</button> -->
+        <div class="col-sm-3" style="margin-top: 29px;">
+            <button class="btn btn-principal" [disabled]="isButtonDisabled" (click)="toggleVisibility(); ocultarModal(); mostrarObservaciones();" data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Observaciones</button>
         </div>
         
 
@@ -28,7 +28,7 @@
     </div>
     <div class="card-footer row" style="margin: 0px;">
         <div class="col-sm-3">
-            <button type="button" (click)="limpiarInput(); toggleVisibility();" [disabled]="isButtonDisabled" class="btn btn-principal"  data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Agregar actividad</button>
+            <button type="button" (click)="limpiarInput(); toggleVisibility(); resetDate()"  [disabled]="isButtonDisabled" class="btn btn-principal"  data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Agregar actividad</button>
         </div>
     </div>
 </div>
@@ -80,15 +80,17 @@
                 <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
             </li>
         </ul>
-        <div class="card">
-            <div class="card-body row" *ngIf="pestanas[0].activo">
+        <div class="card" *ngIf="cardIsVisible">
+            <div class="card-body row" *ngIf="pestanas[0].activo" >
                 <div class="col-sm-6 subtitulo-modal">
                     <label class="form-label">Detalles de actividad.</label>
                     <div class="contenedor-periodo">
                         <label class="form-label">Periodo:</label>
                         <label class="form-label periodo">{{periodo}}</label>
                     </div>
+                    
                 </div>
+                
                 <div class="col-sm-12">
                 <hr>
                 </div>
@@ -113,24 +115,28 @@
                     <input type="text" class="form-control"  value="Daniel Herrera Figueroa" disabled>
                 </div>
                 <div class="col-sm-6">
-                    <label for="nombre" class="form-label">Tipo de acción</label>
+                    <label for="tipo" class="form-label">Tipo de acción</label>
                     <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
                 </div>
                 <div class="col-sm-6">
-                    <label for="Correo" class="form-label">Modulo o aplicativo</label>
+                    <label for="moduloAplicativo" class="form-label">Modulo o aplicativo</label>
                     <input type="text" class="form-control" value="SMAX" disabled>
                 </div>
                 <div class="col-sm-6">
-                    <label for="Correo" class="form-label">Area solicitante</label>
+                    <label for="Area" class="form-label">Area solicitante</label>
                     <input type="text" class="form-control" value="Dirección informática" disabled>
                 </div>
                 <div class="col-sm-6">
-                    <label for="consultoires" class="form-label">Actividad asignada</label>
+                    <label for="actividadAsignada" class="form-label">Actividad asignada</label>
                     <input type="text" class="form-control" value="Revisión de requerimientos"  [(ngModel)]="actividadAsignada" >
                 </div>
                 <div class="col-sm-6">
-                    <label for="consultoires" class="form-label">Horas requeridas</label>
+                    <label for="horasRequeridas" class="form-label">Horas requeridas</label>
                     <input type="number" class="form-control"  [(ngModel)]="horasRequeridas">
+                </div>
+                <div class="col-sm-6">
+                    <label for="fechaActividad" class="form-label">Fecha de la actividad</label>
+                    <input type="date" [(ngModel)]="selectedDate" class="form-control">
                 </div>
                 <div class="col-sm-12">
                     <label for="consultoires" class="form-label">Actividad realizada</label>
@@ -161,6 +167,24 @@
             
             </div>
         </div>
+
+    </div>
+        <div class="card" *ngIf="visualizarObservaciones">
+            <div class="card-body row">
+                <div class="col-sm-6 subtitulo-modal">
+                    <label class="form-label">Obsevaciones.</label>
+                    <div class="contenedor-periodo">
+                        <label class="form-label">Periodo:</label>
+                        <label class="form-label periodo">{{periodo}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                <hr>
+                </div>
+                <div class="col-sm-12">
+                    <label for="identificador" class="form-label">1.- He revisado tu bitácora y tengo algunas observaciones que podrían ayudarte a mejorarla. En primer lugar, he notado que algunas entradas son bastante esporádicas y faltan detalles importantes, como el contexto o el impacto de las actividades registradas </label>
+                </div>                
+        </div> 
     </div>
 
     <div class="contenedor-boton-guardar" *ngIf="pestanas[0].activo"> 
