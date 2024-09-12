@@ -58,3 +58,17 @@ td{
 textarea{
     resize: none;
 }
+
+.contenedor-periodo{
+    display: flex;
+    gap: 4px
+}
+
+.periodo{
+    font-weight: 500;
+}
+
+.subtitulo-modal{
+    display: flex;
+    gap: 8px
+}

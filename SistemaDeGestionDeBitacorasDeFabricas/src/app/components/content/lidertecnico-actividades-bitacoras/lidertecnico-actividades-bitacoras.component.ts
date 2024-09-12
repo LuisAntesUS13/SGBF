@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute,Params } from '@angular/router';
+import { ActivatedRoute,Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lidertecnico-actividades-bitacoras',
@@ -7,22 +7,35 @@ import { ActivatedRoute,Params } from '@angular/router';
   styleUrls: ['./lidertecnico-actividades-bitacoras.component.css']
 })
 export class LidertecnicoActividadesBitacorasComponent {
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
   
   actividadesFiltradas: any[] | undefined;
   
   inputValue: string = '';
   periodo: string | null = null;
   nombreProyecto: string | null = null;
+  mostrarInput: boolean = true;
+  anho: string | null = null;
+
+  tituloModal: string = "";
+
+  periodoTitulo: string | null = null;
 
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
       this.periodo = params.get('periodo');
       this.nombreProyecto = params.get('nombreProyecto');
+      this.anho = params.get('anho');
     });
+
+    
+    this.periodoTitulo = this.periodo;
   }
 
-  abrirCanvas(){
+  
+  
+  regresarALidertecnicoBitacora() {
+    this.router.navigate(['/content/lidertecnico/bitacora']);
   }
 
   getConsultoresPorProyecto(){
@@ -33,25 +46,71 @@ export class LidertecnicoActividadesBitacorasComponent {
     return this.actividades.filter(actividad => (actividad.idConsultor === idConsultor &&  actividad.periodo === this.periodo ));
   }
 
+  ocultar() {
+    this.mostrarInput = false; // Oculta el input
+    this.tituloModal = "Observaciones para el consultor";
+  }
+
+  mostrar() {
+    this.mostrarInput = true; // Oculta el input
+    this.tituloModal = "Detalles de la actividad ";
+  }
+
+  seleccionado: number | any;
+
+  listaActividadesFiltro: number | any;
+
+  cambioSeleccion(id: number) {
+    this.seleccionado = id;
+    this.listadoEstatus.forEach((element) => {
+      if (element.id == id) {
+        element.activo = true;
+      } else {
+        element.activo = false;
+      }
+    });
+    
+
+    this.listaActividadesFiltro = this.actividades.filter(
+      (actividad) => actividad.estatus === this.seleccionado
+    );
+  }
+
+  
+  listadoEstatus = [
+    { id: 1, nombre: 'Actividades registradas', activo: true, total: 0 },
+    { id: 2, nombre: 'En ejecucion', activo: false, total: 0 },
+    { id: 3, nombre: 'Espera de revisión', activo: false, total: 0 },
+    { id: 4, nombre: 'Espera de autorización', activo: false, total: 0 },
+    { id: 5, nombre: 'Rechazados', activo: false, total: 0 },
+    { id: 6, nombre: 'Finalizados', activo: false, total: 0 },
+  ];
+
+
 
   consultores = [
-    { idConsultor: 1, nombre: 'Luis Eduardo Antes Villa', proyecto:'Proyecto 1' },
-    { idConsultor: 2, nombre: 'Carlos Fernández López', proyecto:'Proyecto 1' },
-    { idConsultor: 3, nombre: 'Ana Martínez Ruiz', proyecto:'Proyecto 1'},
+    { idConsultor: 1, nombre: 'Luis Eduardo Antes Villa', proyecto:'Sistema de gestión de bitácoras de fábricas' },
+    { idConsultor: 2, nombre: 'Carlos Fernández López', proyecto:'Sistema de gestión de bitácoras de fábricas' },
+    { idConsultor: 3, nombre: 'Ana Martínez Ruiz', proyecto:'Sistema de gestión de bitácoras de fábricas'},
     { idConsultor: 4, nombre: 'Javier Rodríguez Sánchez', proyecto:'Proyecto 2' },
     { idConsultor: 5, nombre: 'Laura Martínez Ortega', proyecto:'Proyecto 2' }
   ];
 
   actividades = [
-    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Daniel Salazar', proyecto: 'Proyecto 1',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estado:'ejecucion'},
-    { idConsultor: 2, periodo:'Enero', consultor: 'Carlos Fernández López', lider: 'Maria López', proyecto: 'Proyecto 1', actividad: 'Diseño de base de datos', horas: 8, fecha: '10/01/2021', estado: 'autorizacion' },
-    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Lucía Fernández', proyecto: 'Proyecto 1', actividad: 'Desarrollo del backend', horas: 8, fecha: '19/02/2021', estado:'finalizado' },
-    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Lucía Fernández', proyecto: 'Proyecto 1', actividad: 'Configuración de hardware', horas: 8, fecha: '20/02/2021', estado:'rechazado' },
-    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Lucía Fernández', proyecto: 'Proyecto 1', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '15/03/2021', estado:'revision' },
-    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Lucía Fernández', proyecto: 'Proyecto 1', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '16/03/2021', estado:'revision' },
-    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchez', lider: 'Eduardo Silva', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 3, fecha: '09/04/2021', estado:'revision' },
-    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Eduardo Silva', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 4, fecha: '09/04/2021', estado:'revision' },
-    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Eduardo Silva', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 1, fecha: '09/05/2021', estado:'revision' },
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 1, periodo:'Enero', consultor: 'Luis Eduardo Antes Villa', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas',actividad: 'Revisión de desarrollo', horas: 8, fecha: '13/01/2021', estatus:'ejecucion'},
+    { idConsultor: 2, periodo:'Enero', consultor: 'Carlos Fernández López', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Diseño de base de datos', horas: 8, fecha: '10/01/2021', estatus: 'autorizacion' },
+    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Desarrollo del backend', horas: 8, fecha: '19/02/2021', estatus:'finalizado' },
+    { idConsultor: 3, periodo:'Febrero', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Configuración de hardware', horas: 8, fecha: '20/02/2021', estatus:'rechazado' },
+    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '15/03/2021', estatus:'revision' },
+    { idConsultor: 3, periodo:'Marzo', consultor: 'Ana Martínez Ruiz', lider: 'Juan Gutiérrez', proyecto: 'Sistema de gestión de bitácoras de fábricas', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '16/03/2021', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchez', lider: 'Juan Gutiérrez', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '20/01/2021', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Juan Gutiérrez', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '21/01/2021', estatus:'revision' },
+    { idConsultor: 4, periodo:'Enero-Febrero', consultor: 'Javier Rodríguez Sánchezs', lider: 'Eduardo Silva', proyecto: 'Proyecto 2', actividad: 'Análisis de vulnerabilidades', horas: 8, fecha: '09/02/2021', estatus:'revision' },
   
   ]
 

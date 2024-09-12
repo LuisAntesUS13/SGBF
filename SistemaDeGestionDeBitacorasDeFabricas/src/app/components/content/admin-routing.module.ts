@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 import { PerfilesConsultoresComponent } from './perfiles-consultores/perfiles-consultores.component';
+import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-tecnico/lista-asistencia-lider-tecnico.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,7 @@ const routes: Routes = [
         },
         component: UsuariosComponent,
       }, {
-        path: 'lidertecnico/bitacora/actividades/:periodo/:nombreProyecto',
+        path: 'lidertecnico/bitacora/actividades/:periodo/:nombreProyecto/:anho',
         data: {
           title: 'Aturización de bitácoras',
           breadcrumbs: [],
@@ -51,14 +52,7 @@ const routes: Routes = [
         },
         component: LidertecnicoBitacorasComponent,
       },{
-        path: 'consultor/bitacora',
-        data: {
-          title: 'Bitacoras',
-          breadcrumbs: [],
-        },
-        component: ConsultorBitacorasComponent,
-      },{
-        path: 'consultor/bitacora/actividades/:periodo',
+        path: 'consultor/bitacora/actividades',
         data: {
           title: 'Actividades',
           breadcrumbs: [],
@@ -128,10 +122,15 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: PerfilesConsultoresComponent,
+      },{
+        path: 'listaAsistenciaLiderTecnico',
+        data: {
+          title: 'Lista de Asistencia Lider Tecnico',
+          breadcrumbs: [],
+        },
+        component: ListaAsistenciaLiderTecnicoComponent,
       },
 
-
-      
       // {
       //   path: 'notificaciones',
       //   data: {

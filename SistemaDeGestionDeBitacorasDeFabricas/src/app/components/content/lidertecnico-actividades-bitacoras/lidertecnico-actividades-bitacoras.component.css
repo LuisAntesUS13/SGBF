@@ -33,13 +33,6 @@ td{
     gap: 20px 0px;
 }
 
-.contenedor-observaciones{
-    margin-bottom: 8px;
-}
-
-textarea{
-    resize: none;
-}
 
 /* Estilos del filtro de estados */
 
@@ -51,33 +44,32 @@ textarea{
     cursor: pointer;
 }
 
-.ejecucion{
-    --bs-nav-link-hover-color: red;
+.nav-underline .nav-link.active, .nav-underline .show>.nav-link {
+    font-weight: 700;
+    color: #f80000;
+    border-bottom-color: currentcolor;
 }
 
-.revision{
-    --bs-nav-link-hover-color: orange;
+.contenedor-estados{
+    display: flex;
 }
 
-.autorizacion{
-    --bs-nav-link-hover-color: rgb(128, 255, 0);
+.contenedor-btn{
+    margin-left: auto;
 }
 
-.finalizado{
-    --bs-nav-link-hover-color: green;
-}
-
-.rechazado{
-    --bs-nav-link-hover-color: rgb(0, 0, 0);
-}
-
-.contenedor-evidencias{
-    margin-top: 8px;
-}
 
 /* Estilos del offcanvas*/
-.contenedor-boton-enviar{
+.contenedor-observaciones{
+    margin-bottom: 8px;
+}
 
+textarea{
+    resize: none;
+}
+
+
+.contenedor-boton-enviar{
     display: flex;
     justify-content: right;
     gap: 8px 8px;
@@ -98,6 +90,7 @@ textarea{
 }
 
 .contenedor-evidencias{
+    margin-top: 8px;
     border: 1px solid red;
 
     width: 100%;
@@ -124,3 +117,86 @@ textarea{
     text-align: left;
 }
 
+/* Estilos del accordion */
+
+.contenedor-accordion{
+    padding: 16px 0px;
+}
+
+.titulo-accordion{
+    display: flex;
+    gap: 4px;
+}
+
+.titulo{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.titulo-accordion > p {
+    margin: 0px;
+    
+}
+
+.accordion-header{
+    display: flex;
+}
+
+.contenedor-btn{
+    display: flex;
+    justify-content: center;  
+    align-items: center; 
+
+    margin: 0px 12px;
+}
+
+/* Estilos del header y su descripción */
+
+.datos-titulo-proyecto{
+    display: flex;
+    gap: 4px;
+}
+
+.bi{
+    cursor: pointer;
+}
+
+.bi:hover{
+    color: red;
+}
+
+.contenedor-datos-proyecto{
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 16px;
+
+}
+
+.datos-proyecto{
+    font-weight: 500;
+}
+
+.datos{
+    display: flex;
+    gap: 4px;
+}
+
+.titulo-proyecto{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.titulo-proyecto, .datos > p {
+    margin: 0;
+}
+
+.icon-100 { 
+    font-size: 24px;
+    font-weight: 500; 
+}
+
+.header{
+    display: flex;
+    gap: 8px;
+}
