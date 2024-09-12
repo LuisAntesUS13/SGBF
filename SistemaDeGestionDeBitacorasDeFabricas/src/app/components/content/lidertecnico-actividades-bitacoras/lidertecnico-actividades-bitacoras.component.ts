@@ -16,10 +16,13 @@ export class LidertecnicoActividadesBitacorasComponent {
   nombreProyecto: string | null = null;
   mostrarInput: boolean = true;
   anho: string | null = null;
+  fechaActividad: string | null = null;
 
   tituloModal: string = "";
 
   periodoTitulo: string | null = null;
+
+  isVisible: boolean = true;
 
   ngOnInit(){
     this.route.paramMap.subscribe(params => {
@@ -30,6 +33,7 @@ export class LidertecnicoActividadesBitacorasComponent {
 
     
     this.periodoTitulo = this.periodo;
+    this.fechaActividad = '13/01/2024';
   }
 
   
@@ -48,12 +52,17 @@ export class LidertecnicoActividadesBitacorasComponent {
 
   ocultar() {
     this.mostrarInput = false; // Oculta el input
-    this.tituloModal = "Observaciones para el consultor";
+    this.tituloModal = "Observaciones para el consultor.";
+    this.isVisible = false;
+
+    
+
   }
 
   mostrar() {
     this.mostrarInput = true; // Oculta el input
     this.tituloModal = "Detalles de la actividad ";
+    this.isVisible = true;
   }
 
   seleccionado: number | any;
