@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
   selector: 'app-contratos',
@@ -8,31 +10,22 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./contratos.component.css'],
 })
 export class ContratosComponent {
-  showCamvasPrimario: boolean = false;
-  tituloPrimario: string = '';
+  contratoTipo: boolean = false;
+  mostrarFormContrato: boolean = false;
+
+  mostrarAgregarPerfil: boolean = false;
+
+  formularioContrato!: FormGroup;
+  formularioPerfil!: FormGroup;
+
+  contratoGuardado: boolean = false;
+
+  datosPefil:any = [];
+
 
   datosEnviar: any = [];
-  tituloSecundario: string = '';
-  seleccionado: number = 1;
-  seleccionadoPerfil: number = 1;
-  seleccionadoConsultores: number = 1;
-  showCamvaConsultores: boolean = false;
-  showCamvaPerfiles:boolean = false;
 
-  pestanasContratos = [
-    { id: 1, nombre: 'Registro contrato', activo: true },
-    { id: 2, nombre: 'Perfiles y asignacion de consultores', activo: false }
-  ];
 
-  pestanasPerfiles = [
-    { id: 1, nombre: 'Seleccion de perfil', activo: true },
-    { id: 2, nombre: 'Registro perfiles', activo: false },
-  ];
-
-  pestanasConsultores = [
-    { id: 1, nombre: 'Registro de consultor', activo: true },
-    { id: 2, nombre: 'Registrar consultor', activo: false },
-  ];
 
   datosConsultores = [
     {
@@ -55,228 +48,149 @@ export class ContratosComponent {
     },
   ];
 
-  datosPefil = [
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: ' Programador Sr Java',
-      utilizados: 1,
-      cantidad: 5,
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: ' Programador Jr Java',
-      utilizados: 2,
-      cantidad: 2,
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: 'Analista',
-      utilizados: 0,
-      cantidad: 1,
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      perfil: 'Tester',
-      utilizados: 2,
-      cantidad: 2,
-    },
-  ];
+  
 
-  datos1 = [
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1017',
-      fecha_inicio: '2024-02-15',
-      fecha_termino: '2024-05-20',
-      monto: 18000,
-      consultora: 'Tech Solutions S.A.',
-      metodo_pago: 'Transferencia',
-      Formapago: 'Pago Único',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1018',
-      fecha_inicio: '2024-03-10',
-      fecha_termino: '2024-06-15',
-      monto: 17000,
-      consultora: 'Innovative Tech Group',
-      metodo_pago: 'Tarjeta de Crédito',
-      Formapago: 'Mensual',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1019',
-      fecha_inicio: '2024-01-20',
-      fecha_termino: '2024-04-25',
-      monto: 16000,
-      consultora: 'SoftTech Solutions',
-      metodo_pago: 'Cheque',
-      Formapago: 'Pago Único',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1020',
-      fecha_inicio: '2024-04-01',
-      fecha_termino: '2024-07-05',
-      monto: 18500,
-      consultora: 'NextGen IT Services',
-      metodo_pago: 'Transferencia',
-      Formapago: 'Trimestral',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1021',
-      fecha_inicio: '2024-05-05',
-      fecha_termino: '2024-08-10',
-      monto: 19000,
-      consultora: 'Digital Innovators Ltd.',
-      metodo_pago: 'Tarjeta de Débito',
-      Formapago: 'Mensual',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1022',
-      fecha_inicio: '2024-02-25',
-      fecha_termino: '2024-05-30',
-      monto: 17500,
-      consultora: 'Cloud Computing Corp.',
-      metodo_pago: 'Efectivo',
-      Formapago: 'Pago Único',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1023',
-      fecha_inicio: '2024-03-20',
-      fecha_termino: '2024-06-25',
-      monto: 16500,
-      consultora: 'CyberTech Systems',
-      metodo_pago: 'Transferencia',
-      Formapago: 'Trimestral',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1024',
-      fecha_inicio: '2024-01-30',
-      fecha_termino: '2024-05-05',
-      monto: 15500,
-      consultora: 'Digital Solutions Co.',
-      metodo_pago: 'Tarjeta de Crédito',
-      Formapago: 'Mensual',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1025',
-      fecha_inicio: '2024-02-10',
-      fecha_termino: '2024-05-15',
-      monto: 20000,
-      consultora: 'DataSoft Technologies',
-      metodo_pago: 'Cheque',
-      Formapago: 'Pago Único',
-    },
-    {
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato: 'C-1026',
-      fecha_inicio: '2024-04-10',
-      fecha_termino: '2024-07-15',
-      monto: 19500,
-      consultora: 'InfoTech Global',
-      metodo_pago: 'Transferencia',
-      Formapago: 'Trimestral',
-    },
-  ];
-
-
-  constructor(private toastrService: ToastrService, private router: Router) {
-    this.datosEnviar = this.datos1;
+  constructor(
+    private toastrService: ToastrService,
+    private router: Router,
+    private fb: FormBuilder,
+    private confirmarModalService: ConfirmarModalService
+  ) {
+    this.createFormContrato();
+    this.createFormPerfil();
   }
 
-  cerrarCamvasConsultores() {
-    this.showCamvaConsultores = false;
-  }
-
-  abrirModal() {
-    this.tituloPrimario = 'Registro de contrato';
-    this.showCamvasPrimario = true;
-  }
-
-  cerrarCamvasPerfiles() {
-    this.showCamvaPerfiles = false;
-  }
-
-  cambioSeleccionContratos(id: number) {
-    this.seleccionado = id;
-    this.pestanasContratos.forEach((element) => {
-      if (element.id == id) {
-        element.activo = true;
-      } else {
-        element.activo = false;
-      }
+  createFormContrato() {
+    this.formularioContrato = this.fb.group({
+      no_contrato: [''],
+      fecha_inicio: [''],
+      fecha_termino: [''],
+      monto: [''],
+      consultora: [''],
+      metodo_pago: [''],
+      formapago: [''],
+      cantidad: [''],
     });
   }
 
-
-  cambioSeleccionConsultores(id: number) {
-    this.seleccionadoConsultores = id;
-    this.pestanasConsultores.forEach((element) => {
-      if (element.id == id) {
-        element.activo = true;
-      } else {
-        element.activo = false;
-      }
+  createFormPerfil() {
+    this.formularioPerfil = this.fb.group({
+      perfil: [''],
+      monto: [''],
+      desc: [''],
+      cantidad: [''],
     });
   }
 
-  cambioSeleccionPerfiles(id: number) {
-    this.seleccionadoPerfil = id;
-    this.pestanasPerfiles.forEach((element) => {
-      if (element.id == id) {
-        element.activo = true;
-      } else {
-        element.activo = false;
-      }
+  buscarContratos() {
+    this.datosEnviar = [];
+  }
+
+  mostrarFormularioContrato(tipo: boolean, dato: any) {
+    this.contratoTipo = tipo;
+    this.createFormContrato();
+
+    this.contratoGuardado = false;
+    if (!tipo) {
+      this.formularioContrato.get('no_contrato')?.setValue(dato.no_contrato);
+      this.formularioContrato.get('fecha_inicio')?.setValue(dato.fecha_inicio);
+      this.formularioContrato
+        .get('fecha_termino')
+        ?.setValue(dato.fecha_termino);
+      this.formularioContrato.get('monto')?.setValue(dato.monto);
+      this.formularioContrato.get('consultora')?.setValue(dato.consultora);
+      this.formularioContrato.get('metodo_pago')?.setValue(dato.metodo_pago);
+      this.formularioContrato.get('formapago')?.setValue(dato.formapago);
+      this.formularioContrato.get('cantidad')?.setValue(dato.cantidad);
+      this.contratoGuardado = true;
+    }
+    this.mostrarFormContrato = true;
+  }
+
+  mostrarForumarioCargaPerfil(tipo: boolean, dato: any) {
+    this.createFormPerfil();
+    if (!tipo) {
+      this.formularioPerfil.get('perfil')?.setValue(dato.perfil);
+      this.formularioPerfil.get('monto')?.setValue(dato.monto);
+      this.formularioPerfil.get('desc')?.setValue(dato.desc);
+      this.formularioPerfil.get('cantidad')?.setValue(dato.cantidad);
+    }
+    this.mostrarAgregarPerfil = true;
+  }
+
+  guardarContrato() {
+    this.toastrService.success('Datos del contrato guardado correctamente');
+    this.datosEnviar.push({
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      no_contrato: this.formularioContrato.get('no_contrato')?.value,
+      fecha_inicio: this.formularioContrato.get('fecha_inicio')?.value,
+      fecha_termino: this.formularioContrato.get('fecha_termino')?.value,
+      monto: this.formularioContrato.get('monto')?.value,
+      consultora: this.formularioContrato.get('consultora')?.value,
+      metodo_pago: this.formularioContrato.get('metodo_pago')?.value,
+      formapago: this.formularioContrato.get('formapago')?.value,
+      cantidad: this.formularioContrato.get('cantidad')?.value,
+      perfiles: []
     });
+
+    this.contratoGuardado = true;
+
+    // this.mostrarFormContrato = true;
+  }
+
+  guardarPerfil() {
+    this.toastrService.success('Perfil guardado correctamente');
+
+    let existe = this.datosPefil.some((dato : any) => dato.perfil === this.formularioPerfil.get('perfil')?.value);
+
+    if(!existe){
+      this.datosPefil.push({
+        total_paginas: 1,
+        total_registros: 10,
+        pagina_actual: 1,
+        perfil: this.formularioPerfil.get('perfil')?.value,
+        monto: this.formularioPerfil.get('monto')?.value,
+        desc: this.formularioPerfil.get('desc')?.value,
+        cantidad: this.formularioPerfil.get('cantidad')?.value,
+      });
+    }
+
+    this.mostrarAgregarPerfil = false;
   }
 
 
-  cerrarCamvasPrimario() {
-    this.showCamvasPrimario = false;
+  eliminarPerfil() {
+    this.mostrarAgregarPerfil = false;
+    this.confirmarModalService
+      .abriraModalPregunta('Estas seguro de eliminar el perfil')
+      .subscribe(async (result) => {
+        if (result) {
+          this.toastrService.success('Perfil eliminado correctamente');
+          this.datosPefil.shift();
+        }
+      });
   }
 
-  guardar() {
-    this.showCamvasPrimario = false;
-    this.toastrService.success('Datos guardados correctamente');
+
+
+  recibeValorFechaInicio(nuevoValor: string) {
+    this.formularioContrato.get('fecha_inicio')?.setValue(nuevoValor);
+  }
+
+  recibeValorFechaTermino(nuevoValor: string) {
+    this.formularioContrato.get('fecha_termino')?.setValue(nuevoValor);
+  }
+
+
+  regresar() {
+    this.mostrarFormContrato = false;
+    this.mostrarAgregarPerfil = false;
   }
 
   buscar(page: number) {
-    this.datosEnviar = this.datos1;
+    this.datosEnviar = [];
   }
 
   obtenerEvento(event: any) {
@@ -285,65 +199,6 @@ export class ContratosComponent {
 
     console.log(event.pagina_actual);
     this.buscar(page);
-  }
-
-  adminRequerimientos() {
-    this.router.navigate(['/content/requerimientos']);
-  }
-
-  abrirModalPerfiles(num: number) {
-    if (num == 1) {
-      this.tituloSecundario = 'Carga de perfiles requeridos';
-    } else if (num == 2) {
-      this.tituloSecundario = 'Actualización de perfiles requeridos';
-    } else if (num == 3) {
-      this.tituloSecundario = 'Asignacion de consultor';
-    }else if (num == 3) {
-      this.tituloSecundario = 'Actualización asignacion de consultor';
-    }
-    this.showCamvaPerfiles = true;
-  }
-
-  guardarSecundario() {
-    // if (this.seleccionadoPerfil == 1) {
-    // } else if (this.seleccionadoPerfil == 2) {
-    //   this.seleccionadoPerfil = 1;
-    //   this.pestanasPerfiles.forEach((element) => {
-    //     if (element.id == this.seleccionadoPerfil) {
-    //       element.activo = true;
-    //     } else {
-    //       element.activo = false;
-    //     }
-    //   });
-    // } else if (this.seleccionadoPerfil == 3) {
-    // }
-    this.toastrService.success('Datos guardados correctamente');
-    // this.confirmarModalService
-    //   .abriraModalPregunta('Estas seguro de ...')
-    //   .subscribe(async (result) => {
-    //     if (result) {
-    //       this.toastrService.success('Datos guardados correctamente');
-    //     }
-    //   });
-  }
-
-  mostrarConsultores (dato:any) {
-    this.tituloSecundario = dato.perfil;
-    this.showCamvaConsultores = true;
-    this.seleccionadoConsultores = 1;
-  }
-
-
-
-  cambioOpcionSelecto() {
-    this.seleccionadoConsultores = 2;
-    this.pestanasConsultores.forEach((element) => {
-      if (element.id == this.seleccionadoConsultores) {
-        element.activo = true;
-      } else {
-        element.activo = false;
-      }
-    });
   }
 
 }

@@ -18,6 +18,7 @@ import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-b
 import { LoginComponent } from './login/login.component';
 import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
+import { PerfilesConsultoresComponent } from './perfiles-consultores/perfiles-consultores.component';
 import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-tecnico/lista-asistencia-lider-tecnico.component';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-t
                   AsistenciaComponent,
                   PermisosComponent,
                   LoginComponent,
+                  PerfilesConsultoresComponent,
                   ListaAsistenciaLiderTecnicoComponent
                 ],
   exports: [],

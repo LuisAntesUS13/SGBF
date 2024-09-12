@@ -1,0 +1,156 @@
+<h3>Carga de consultores</h3>
+<hr>
+<div class="card" *ngIf="!mostrarCargaCunsultor">
+    <div class="card-body row">
+        <div class="col-sm-3">
+            <label for="contrato" class="form-label">No. contrato</label>
+            <input type="text" class="form-control" id="contrato" placeholder="SG0909">
+        </div>
+         <div class="col-sm-3">
+            <button type="button" class="btn btn-principal"  style="margin-top: 30px;" title="Buscar" (click)="buscar()"><i class="bi bi-search"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 10px;" *ngIf="!mostrarCargaCunsultor">
+    <div class="card-body row">
+      <app-paginador [datos]="[]"></app-paginador>
+      <div class="col-sm-12">
+          <table class="table table-hover">
+              <thead>
+                <tr class="valoresCentrados">
+                  <th scope="col" class="valoresCentrados">Nombre</th>
+                  <th scope="col" class="valoresCentrados">Descipcion</th>
+                  <th scope="col" class="valoresCentrados">Total perfiles</th>
+                  <th scope="col" class="valoresCentrados">Asignados</th>
+                  <th scope="col" class="valoresCentrados">Estatus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let dato of datosPefilDIsp;let i = index"  style="cursor: pointer;" (click)="abrirCargaConsultor(dato)" class="valoresCentrados">
+                  <td>{{dato.perfil}}</td>
+                  <td>{{dato.desc}}</td>
+                  <td>{{dato.cantidad}}</td>
+                  <td>{{dato.asignados}}</td>
+                  <td>Activo</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+
+  
+<div class="row" *ngIf="mostrarCargaCunsultor">
+    <div [ngClass]="mostrarRegistroConsultor? 'col-sm-12' : 'col-sm-8'">
+      <div class="card" style="margin-bottom: 10px;">
+        <div class="card-body row" style="padding: 5px;">
+          <div class="col-sm-3">
+            <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresar()">
+              <i class="bi bi-arrow-90deg-left"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="mostrarCargaCunsultor">
+    <div [ngClass]="mostrarRegistroConsultor? 'col-sm-6' : 'col-sm-8'">
+        <div class="card" style="margin-top: 10px;">
+            <div class="card-header">
+                <button style="margin-left: 2px;" class="btn btn-principal" (click)="nuevoConsultor(null)"> 
+                    <i class="bi bi-plus-lg"></i> Nuevo consultor
+                </button>
+            </div>
+            <div class="card-body row">
+                <div class="col-sm-12">
+                    <app-separador-texto [texto]=" 'Consultores registrados como: ' + datoSeleccionado.perfil"></app-separador-texto>
+                </div>
+                <div class="col-sm-12">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr class="valoresCentrados">
+                            <th scope="col" class="valoresCentrados">Consultor</th>
+                            <th scope="col" class="valoresCentrados">Correo</th>
+                            <th scope="col" class="valoresCentrados">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr  *ngFor="let dato of datosConsultores;let i = index" class="valoresCentrados">
+                            <td>{{dato.nombre}} {{dato.primer_apellido}} {{dato.segundo_apellido}}</td>
+                            <td>{{dato.correo}}</td>
+                            <td>
+                              <button type="button" class="btn btn-light add" title="Actualizar" (click)="nuevoConsultor(dato)">
+                                <i class="bbi bi-arrow-counterclockwise" ></i>
+                              </button>
+                              <button type="button" class="btn btn-light delete" title="Quitar consultor" (click)="eliminarConsultor()" >
+                                <i class="bi bi-trash3" ></i>
+                              </button>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm-6" *ngIf="mostrarRegistroConsultor">
+        <div class="card" style="margin-top: 10px;" [formGroup]="formularioConsultor">
+            <div class="card-body row">
+                <div class="col-sm-12">
+                    <app-separador-texto [texto]=" ' Datos del consultor para perfil: ' + datoSeleccionado.perfil"></app-separador-texto>
+                </div>
+                <div class="col-sm-6">
+                    <label for="Correo" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="Correo" placeholder="" formControlName="nombre">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="Correo" class="form-label">Primer apellido</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="primer_apellido">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="Correo" class="form-label">Segundo apellido</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="segundo_apellido">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="Correo" class="form-label">Correo</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="correo">
+                  </div>
+                    <div class="col-sm-6">
+                      <label for="Correo" class="form-label">CURP</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="curp">
+                  </div>
+                  <div class="col-sm-6">
+                      <label for="Correo" class="form-label">RFC</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="rfc"> 
+                  </div>
+                  <div class="col-sm-12">
+                    <hr>
+                  </div>
+                  <div class="col-sm-12">
+                    <app-separador-texto [texto]=" 'Documentacion que sustenta el perfil ' "></app-separador-texto>
+                </div>
+                  <div class="col-sm-12">
+                    <label for="formFileMultiple" class="form-label">Curriculum</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="formFileMultiple" class="form-label">Certificados</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div>
+                  <div class="col-sm-12">
+                    <label for="formFileMultiple" class="form-label">Otros</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple>
+                  </div>
+            </div>
+            <div class="offcanvas-footer">
+                <div class="text-end">
+                  <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarConsultor()"> Guardar &nbsp;<i
+                      class="bi bi-floppy"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+
+  

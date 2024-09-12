@@ -1,6 +1,6 @@
 <h3>Administración equipos de  trabajo</h3>
 <hr>
-<div class="card">
+<div class="card" *ngIf="!mostrarLider">
     <div class="card-body row">
         <div class="col-sm-3">
             <label for="contrato" class="form-label">No. contrato</label>
@@ -20,13 +20,13 @@
     </div>
     <div class="card-footer row" style="margin: 0px;">
         <div class="col-sm-3">
-            <button type="button" class="btn btn-secundario"  (click)="abrirModal()">Nuevo Equipo</button>
+            <button type="button" class="btn btn-secundario"  (click)="mostrarSeccionLider(true, null)">Nuevo Equipo</button>
         </div>
     </div>
 </div>
 
-
-<div class="row">
+<div class="card"  style="margin-top: 10px;" *ngIf="!mostrarLider">
+  <div class="card-body row">
     <app-paginador (cambio)="obtenerEvento($event)" [datos]="datos1"></app-paginador>
     <div class="col-sm-12">
         <table class="table table-hover">
@@ -34,61 +34,94 @@
               <tr class="valoresCentrados">
                 <th scope="col" class="valoresCentrados">No. Contrato</th>
                 <th scope="col" class="valoresCentrados">Liber tecnico</th>
-                <th scope="col" class="valoresCentrados">Consultora</th>
-                <th scope="col" class="valoresCentrados">Resposable</th>
                 <th scope="col" class="valoresCentrados">Total integrantes</th>
                 <th scope="col" class="valoresCentrados">Estatus</th>
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor="let dato of datos1;let i = index"  style="cursor: pointer;"  class="valoresCentrados" (click)="abrirModal()">
+              <tr  *ngFor="let dato of datos1;let i = index"  style="cursor: pointer;"  class="valoresCentrados" (click)="mostrarSeccionLider(false, dato)">
                 <td>{{dato.no_contrato}}</td>
                 <td>{{dato.lider_texnico}}</td>
-                <td>{{dato.consultora}}</td>
-                <td>{{dato.responsable}}</td>
                 <td>{{dato.total_integrantes}}</td>
                 <td>Activo</td>
               </tr>
             </tbody>
           </table>
     </div>
+  </div>
 </div>
 
-
-<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrimario"  id="offcanvasRight"
-  aria-labelledby="offcanvasRightLabel" style="padding-left: 10px;">
-  <div class="offcanvas-header">
-    <h3>{{tituloPrimario}}</h3>
-    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
-      (click)="cerrarCamvasPrimario()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-  </div>
-  <div class="offcanvas-body">
-    <div class="col-sm-12" style="margin-bottom: 3px;">
-        <ul class="nav nav-underline">
-            <li class="nav-item" *ngFor="let item of pestanasEquipos" (click)="cambioSeleccionEquipo(item.id)">
-                <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}</a>
-            </li>
-        </ul>
+<div class="row" *ngIf="mostrarLider || mostrarConsultores">
+  <div [ngClass]="(mostrarLider && !mostrarConsultores)? 'col-sm-8' : 'col-sm-12'">
+    <div class="card" style="margin-bottom: 10px; margin-top: 10px;">
+      <div class="card-body row" style="padding: 5px;">
+        <div class="col-sm-3">
+            <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarInicio()" *ngIf="mostrarLider && !mostrarConsultores">
+            <i class="bi bi-arrow-90deg-left"></i></button>
+            <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarLider()"  *ngIf="mostrarConsultores">
+              <i class="bi bi-arrow-90deg-left"></i></button>
+        </div>
       </div>
-      <div class="card" *ngIf="seleccionado == 1">
-        <div class="card-body row">
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="mostrarLider && !mostrarConsultores">
+  <div class="col-sm-8">
+      <div class="card" style="margin-top: 10px;">
+        <div class="card-header">
+          <button style="margin-left: 2px;" class="btn btn-principal"  title="Agregar consultores" (click)="mostrarSeccionConsultores()" *ngIf="guardadoLider">
+            <i class="bi bi-plus-lg"></i> Administrar consultores
+          </button>
+        </div>
+        <div class="card-body row"  [formGroup]="formularioLider">
+            <div class="col-sm-12">
+              <app-separador-texto [texto]="'Datos del contrato y lider'"></app-separador-texto>
+            </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Contrato</label>
-                <app-buscador></app-buscador>
+                <input type="text" class="form-control" id="consulta" placeholder="" formControlName="no_contrato">
+            </div>
+            <div class="col-sm-12"  *ngIf="!tipoSeleccionLider">
+              <hr>
             </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Lider tecnico</label>
-                <app-buscador></app-buscador>
+                <input type="text" class="form-control" id="consulta" placeholder="" formControlName="lider_texnico">
             </div>
+            <div class="col-sm-6" *ngIf="!tipoSeleccionLider">
+              <label for="Correo" class="form-label">Nuevo Lider tecnico</label>
+              <input type="text" class="form-control" id="consulta" placeholder="" formControlName="nuevo_lider_texnico">
+            </div>
+            <div class="col-sm-12"*ngIf="!tipoSeleccionLider">
+              <label for="Correo" class="form-label">Observaciones de cambio</label>
+              <textarea type="text" class="form-control" formControlName="observaciones"></textarea>
+            </div>
+
+        </div>
+        <div class="card-footer">
+          <div class="text-end" style="margin: 0px; padding: 0px;">
+            <button style="margin-left: 2px;" class="btn btn-principal"  title="Guardar" (click)="guardarLider()">
+              <i class="bi bi-floppy"></i> 
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="mostrarConsultores">
+  <div class="col-sm-6">
+      <div class="card" style="margin-top: 10px;">
+          <div class="card-header">
+
+          </div>
+          <div class="card-body row">
             <div class="col-sm-12">
-                <app-separador-texto [texto]="'Integrantes del equipo'"></app-separador-texto>
+                <app-separador-texto [texto]="'Consultores integrantes del equipo'"></app-separador-texto>
             </div>
-            <!-- <div class="col-sm-12">
-                <h5>Integrantes del equipo</h5>
-            </div> -->
             <div class="col-sm-3">
                 <label for="consulta" class="form-label">Consultor</label>
-                <input type="text" class="form-control" id="consulta" placeholder="NOmbre">
+                <input type="text" class="form-control" id="consulta" placeholder="Nombre">
             </div>
             <div class="col-sm-3">
                 <label for="consulta" class="form-label">Perfil</label>
@@ -109,17 +142,13 @@
                           <tr class="valoresCentrados">
                             <th scope="col" class="valoresCentrados">Consultor</th>
                             <th scope="col" class="valoresCentrados">Perfil</th>
-                            <th scope="col" class="valoresCentrados">Fecha inicio</th>
-                            <th scope="col" class="valoresCentrados">Fecha termino</th>
                             <th scope="col" class="valoresCentrados">Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr  *ngFor="let dato of datosConsultores;let i = index"  style="cursor: pointer;"  class="valoresCentrados" (click)="abrirModal()">
+                          <tr  *ngFor="let dato of datosConsultores;let i = index"  style="cursor: pointer;"  (click)="quitarConsultor(dato.id)" >
                             <td>{{dato.consultor}}</td>
                             <td>{{dato.perfil}}</td>
-                            <td>{{dato.fecha_inicio}}</td>
-                            <td>-</td>
                             <td>
                                 <button type="button" class="btn btn-light delete" title="Quitar" ><i class="bi bi-trash3" ></i></button>
                             </td>
@@ -129,61 +158,61 @@
                 </div>
             </div>
         </div> 
+    </div>
+</div>
+  <div class="col-sm-6">
+    <div class="card" style="margin-top: 10px;">
+        <div class="card-header">
+
         </div>
-      <div class="card" *ngIf="seleccionado == 2">
         <div class="card-body row">
-            <div class="col-sm-3">
-                <label for="consulta" class="form-label">Consultor</label>
-                <input type="text" class="form-control" id="consulta" placeholder="NOmbre">
-            </div>
-            <div class="col-sm-3">
-                <label for="consulta" class="form-label">Perfil</label>
-                <input type="text" class="form-control" id="consulta" placeholder="Programador">
-            </div>
-            <div class="col-sm-3">
-                <button style="margin-left: 2px;" class="btn btn-accion"   style="margin-top: 30px;">
-                    <i class="bi bi-search"></i>&nbsp;Buscar</button>
-            </div>
-            <div class="col-sm-12">
-                <hr>
-            </div>
-         
-          <div class="row">
-            <app-paginador (cambio)="obtenerEvento($event)"></app-paginador>
-            <div class="col-sm-12">
-                <table class="table table-hover">
-                    <thead>
-                      <tr class="valoresCentrados">
-                        <th scope="col" class="valoresCentrados">Consultor</th>
-                        <th scope="col" class="valoresCentrados">Perfil</th>
-                        <th scope="col" class="valoresCentrados">Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr  *ngFor="let dato of datosConsultoresDisponibles;let i = index"  style="cursor: pointer;"  class="valoresCentrados" (click)="abrirModal()">
-                        <td>{{dato.consultor}}</td>
-                        <td>{{dato.perfil}}</td>
-                        <td>
-                            <button type="button" class="btn btn-light add" title="Agregar" ><i class="bi bi-person-plus"></i></button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-        </div>
+          <div class="col-sm-12">
+            <app-separador-texto [texto]="'Consultores disponibles'"></app-separador-texto>
+          </div>
+          <div class="col-sm-3">
+              <label for="consulta" class="form-label">Consultor</label>
+              <input type="text" class="form-control" id="consulta" placeholder="Nombre">
+          </div>
+          <div class="col-sm-3">
+              <label for="consulta" class="form-label">Perfil</label>
+              <input type="text" class="form-control" id="consulta" placeholder="Programador">
+          </div>
+          <div class="col-sm-3">
+              <button style="margin-left: 2px;" class="btn btn-accion"   style="margin-top: 30px;">
+                  <i class="bi bi-search"></i>&nbsp;Buscar</button>
+          </div>
+          <div class="col-sm-12">
+              <hr>
+          </div>
+       
+        <div class="row">
+          <app-paginador (cambio)="obtenerEvento($event)"></app-paginador>
+          <div class="col-sm-12">
+              <table class="table table-hover">
+                  <thead>
+                    <tr class="valoresCentrados">
+                      <th scope="col" class="valoresCentrados">Consultor</th>
+                      <th scope="col" class="valoresCentrados">Perfil</th>
+                      <th scope="col" class="valoresCentrados">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr  *ngFor="let dato of datosConsultoresDisponibles;let i = index"  style="cursor: pointer;"  class="valoresCentrados">
+                      <td>{{dato.consultor}}</td>
+                      <td>{{dato.perfil}}</td>
+                      <td>
+                          <button type="button" class="btn btn-light add" title="Agregar" (click)="agregarConsultor(dato.id)"><i class="bi bi-person-plus"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
         </div>
       </div>
-    
-  </div>
-  <div class="offcanvas-footer">
-    <div class="text-end">
-      <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardar()" *ngIf="seleccionado == 1"> Guardar &nbsp;<i
-          class="bi bi-save"></i></button>
-      <!-- <button type="button" class="btn btn-accion" data-bs-dismiss="offcanvas" aria-label="Close" (click)="adminRequerimientos()"> 
-            Administrar requerimientos&nbsp;<i class="bi bi-arrow-right"></i></button> -->
-    </div>
-  </div>
+   </div>
+</div>
 </div>
 
 
-<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrimario"></div>
+
+
