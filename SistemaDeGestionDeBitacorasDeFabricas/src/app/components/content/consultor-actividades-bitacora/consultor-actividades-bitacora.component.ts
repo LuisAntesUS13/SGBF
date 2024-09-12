@@ -16,6 +16,10 @@ export class ConsultorActividadesBitacoraComponent {
   selectedProyecto: string = ''; 
   selectedPeriodo: string = '';  
   isButtonDisabled: boolean = true;
+  cardIsVisible: boolean = true;
+  visualizarObservaciones: boolean = false;
+  mostrarFecha: boolean = true;
+  
 
 
 
@@ -43,8 +47,7 @@ export class ConsultorActividadesBitacoraComponent {
   periodo: string = '';
   seleccionado: number = 1;
   isInputVisible = true;
-
-
+  selectedDate: string | null = null; 
 
 
   limpiarInput() {
@@ -57,7 +60,13 @@ export class ConsultorActividadesBitacoraComponent {
   valorInput(){
     this.actividadAsignada = 'Revisión de desarrollo';  
     this.horasRequeridas = '8'; 
-    this.actividadRealizada = 'Junta para la discusión del desarrollo de avances del proyecto';  
+    this.actividadRealizada = 'Junta para la discusión del desarrollo de avances del proyecto';
+    const newDate = new Date('2024-01-13T00:00:00');   // Establecer cualquier fecha
+    const year = newDate.getFullYear();
+    const month = ('0' + (newDate.getMonth() + 1)).slice(-2);  // Asegura dos dígitos en el mes
+    const day = ('0' + newDate.getDate()).slice(-2);  // Asegura dos dígitos en el día
+
+    this.selectedDate = `${year}-${month}-${day}`;
   }
 
   nuevoPerfil(estatus: number) {
@@ -80,14 +89,37 @@ export class ConsultorActividadesBitacoraComponent {
       }
     });
   }
+
   isVisible = true; // Inicialmente visible
+  
+
+  ocultarModal(){
+    this.cardIsVisible = !this.cardIsVisible;
+  }
+
+  mostrarObservaciones(){
+    this.visualizarObservaciones = true;
+  }
 
   toggleVisibility() {
     this.isVisible = false; 
+    this.cardIsVisible = true;
+    this.visualizarObservaciones = false;
+    this.mostrarFecha = false;
   }
 
   aparecerPestanas(){
     this.isVisible = true;
+    this.cardIsVisible = true;
+    this.visualizarObservaciones = false;
+    this.mostrarFecha = true;
+  }
+
+ // Inicializa con null para que esté vacío
+
+  // Función para establecer la fecha predeterminada en formato yyyy-mm-dd
+  resetDate() {
+    this.selectedDate = null;  // También puedes usar '' (cadena vacía)
   }
 
   pestanas = [

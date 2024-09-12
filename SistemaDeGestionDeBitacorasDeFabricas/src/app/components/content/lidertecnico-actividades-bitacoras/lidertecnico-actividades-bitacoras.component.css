@@ -200,3 +200,34 @@ textarea{
     display: flex;
     gap: 8px;
 }
+
+.contenedor-periodo{
+    display: flex;
+    gap: 4px
+}
+
+.periodo{
+    font-weight: 500;
+}
+
+.contenedor-accordion {
+    width: 100%;
+  }
+
+  .contenedor-tabla {
+    overflow-x: auto; 
+  }
+  @media (max-width: 730px) {
+    .contenedor-accordion {
+        width: 100vw; 
+        box-sizing: border-box; 
+      }
+      
+      .contenedor-tabla {
+        width: 100vw;
+      }
+    
+      .accordion-item {
+        width: 100vw;
+      }
+  }
