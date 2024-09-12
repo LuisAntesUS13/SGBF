@@ -129,7 +129,7 @@ export class EquipoTrabajoComponent {
 
   tituloPrimario: string = '';
   seleccionado: number = 1;
-  showCamvasPrimario: boolean = false;
+ mostrarConsultores: boolean = false;
 
   pestanasEquipos = [
     { id: 1, nombre: 'Equipo', activo: true },
@@ -149,18 +149,22 @@ export class EquipoTrabajoComponent {
     console.log(event.pagina_actual);
     this.buscar(page);
   }
+  
+  regresar(){
+    this.mostrarConsultores = false;
+  }
 
   buscar(numero:number){
 
   }
 
   abrirModal(){
-    this.showCamvasPrimario = true;
+    this.mostrarConsultores = true;
     this.tituloPrimario = "Administracion equipo"
 
   }
   cerrarCamvasPrimario(){
-    this.showCamvasPrimario = false;
+    this.mostrarConsultores = false;
   }
 
   cambioSeleccionEquipo(id: number){

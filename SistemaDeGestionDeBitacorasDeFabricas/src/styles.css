@@ -140,6 +140,39 @@ label {
 .text-end {
   margin: 5px 10px;
 }
+
+  /* Estilo del contenedor */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: blue;
+}
+
+/* Estilo del texto del tooltip */
+.tooltip::after {
+    content: attr(data-tooltip); /* El texto del tooltip viene del atributo data-tooltip */
+    position: absolute;
+    left: 50%;
+    bottom: 125%; /* Posiciona el tooltip encima */
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}
+
+/* Muestra el tooltip al pasar el ratón por encima */
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+
   /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 767px) {
 

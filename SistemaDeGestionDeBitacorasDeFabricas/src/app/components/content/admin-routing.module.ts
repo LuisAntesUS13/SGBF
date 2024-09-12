@@ -13,6 +13,7 @@ import { ConsultorActividadesBitacoraComponent } from './consultor-actividades-b
 import { LoginComponent } from './login/login.component';
 import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.component';
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
+import { PerfilesConsultoresComponent } from './perfiles-consultores/perfiles-consultores.component';
 
 
 const routes: Routes = [
@@ -120,6 +121,17 @@ const routes: Routes = [
         },
         component: EquipoTrabajoComponent,
       },
+      {
+        path: 'perfilesConsultores',
+        data: {
+          title: 'Administración requeriminetos',
+          breadcrumbs: [],
+        },
+        component: PerfilesConsultoresComponent,
+      },
+
+
+      
       // {
       //   path: 'notificaciones',
       //   data: {
