@@ -100,11 +100,6 @@ export class EquipoTrabajoComponent {
   mostrarConsultores: boolean = false;
   mostrarLider: boolean = false;
 
-  pestanasEquipos = [
-    { id: 1, nombre: 'Equipo', activo: true },
-    { id: 2, nombre: 'Consultores disponibles', activo: false }
-  ];
-
 
   tipoSeleccionLider:boolean = false;
   guardadoLider:boolean = false;
@@ -177,18 +172,6 @@ export class EquipoTrabajoComponent {
   cerrarCamvasPrimario(){
     this.mostrarConsultores = false;
   }
-
-  cambioSeleccionEquipo(id: number){
-    this.seleccionado = id;
-    this.pestanasEquipos.forEach((element) => {
-      if (element.id == id) {
-        element.activo = true;
-      } else {
-        element.activo = false;
-      }
-    });
-  }
-
 
   guardar(){
 
