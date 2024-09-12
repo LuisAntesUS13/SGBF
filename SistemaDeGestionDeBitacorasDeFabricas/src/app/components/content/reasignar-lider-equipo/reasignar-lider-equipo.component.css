@@ -1,0 +1,22 @@
+.nav-link {
+    color: black !important;
+}
+  
+.nav-link:hover {
+    color: #0e159d !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.nav-link.active {
+    color: #F80000 !important;
+    font-weight: bold;
+}
+
+
+.btn-light {
+    padding:  0px 3px;
+    margin-right: 3px;
+    size: 30px;
+}

@@ -58,8 +58,6 @@
         <div class="col-sm-3">
             <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarInicio()" *ngIf="mostrarLider && !mostrarConsultores">
             <i class="bi bi-arrow-90deg-left"></i></button>
-            <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarLider()"  *ngIf="mostrarConsultores">
-              <i class="bi bi-arrow-90deg-left"></i></button>
         </div>
       </div>
     </div>
@@ -69,9 +67,6 @@
   <div class="col-sm-8">
       <div class="card" style="margin-top: 10px;">
         <div class="card-header">
-          <button style="margin-left: 2px;" class="btn btn-principal"  title="Agregar consultores" (click)="mostrarSeccionConsultores()" *ngIf="guardadoLider">
-            <i class="bi bi-plus-lg"></i> Administrar consultores
-          </button>
         </div>
         <div class="card-body row"  [formGroup]="formularioLider">
             <div class="col-sm-12">
@@ -101,7 +96,7 @@
         <div class="card-footer">
           <div class="text-end" style="margin: 0px; padding: 0px;">
             <button style="margin-left: 2px;" class="btn btn-principal"  title="Guardar" (click)="guardarLider()">
-              <i class="bi bi-floppy"></i> 
+              <i class="bi bi-floppy"></i> Guardar
             </button>
           </div>
         </div>
@@ -109,12 +104,9 @@
   </div>
 </div>
 
-<div class="row" *ngIf="mostrarConsultores">
+<div class="row" *ngIf="guardadoLider">
   <div class="col-sm-6">
       <div class="card" style="margin-top: 10px;">
-          <div class="card-header">
-
-          </div>
           <div class="card-body row">
             <div class="col-sm-12">
                 <app-separador-texto [texto]="'Consultores integrantes del equipo'"></app-separador-texto>
@@ -162,9 +154,6 @@
 </div>
   <div class="col-sm-6">
     <div class="card" style="margin-top: 10px;">
-        <div class="card-header">
-
-        </div>
         <div class="card-body row">
           <div class="col-sm-12">
             <app-separador-texto [texto]="'Consultores disponibles'"></app-separador-texto>

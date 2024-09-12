@@ -4,12 +4,15 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
+
 @Component({
-  selector: 'app-equipo-trabajo',
-  templateUrl: './equipo-trabajo.component.html',
-  styleUrls: ['./equipo-trabajo.component.css']
+  selector: 'app-reasignar-lider-equipo',
+  templateUrl: './reasignar-lider-equipo.component.html',
+  styleUrls: ['./reasignar-lider-equipo.component.css']
 })
-export class EquipoTrabajoComponent {
+
+
+export class ReasignarLiderEquipoComponent {
 
   datosConsultores : any= [
   ];
@@ -159,9 +162,6 @@ export class EquipoTrabajoComponent {
       this.formularioLider.get('no_contrato')?.setValue(datos.no_contrato);
       this.formularioLider.get('nuevo_lider_texnico')?.setValue(datos.nuevo_lider_texnico);
       this.formularioLider.get('observaciones')?.setValue(datos.observaciones);
-
-
-
     }
   }
 

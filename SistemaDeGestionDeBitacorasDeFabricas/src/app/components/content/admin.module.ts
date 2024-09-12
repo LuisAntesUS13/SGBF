@@ -20,6 +20,7 @@ import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.componen
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 import { PerfilesConsultoresComponent } from './perfiles-consultores/perfiles-consultores.component';
 import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-tecnico/lista-asistencia-lider-tecnico.component';
+import { ReasignarLiderEquipoComponent } from './reasignar-lider-equipo/reasignar-lider-equipo.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-t
                   PermisosComponent,
                   LoginComponent,
                   PerfilesConsultoresComponent,
-                  ListaAsistenciaLiderTecnicoComponent
+                  ListaAsistenciaLiderTecnicoComponent,
+                  ReasignarLiderEquipoComponent
                 ],
   exports: [],
 })

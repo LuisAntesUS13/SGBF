@@ -15,6 +15,7 @@ import { EquipoTrabajoComponent } from './equipo-trabajo/equipo-trabajo.componen
 import { LidertecnicoActividadesBitacorasComponent } from './lidertecnico-actividades-bitacoras/lidertecnico-actividades-bitacoras.component';
 import { PerfilesConsultoresComponent } from './perfiles-consultores/perfiles-consultores.component';
 import { ListaAsistenciaLiderTecnicoComponent } from './lista-asistencia-lider-tecnico/lista-asistencia-lider-tecnico.component';
+import { ReasignarLiderEquipoComponent } from './reasignar-lider-equipo/reasignar-lider-equipo.component';
 
 
 const routes: Routes = [
@@ -122,7 +123,8 @@ const routes: Routes = [
           breadcrumbs: [],
         },
         component: PerfilesConsultoresComponent,
-      },{
+      },
+      {
         path: 'listaAsistenciaLiderTecnico',
         data: {
           title: 'Lista de Asistencia Lider Tecnico',
@@ -130,20 +132,14 @@ const routes: Routes = [
         },
         component: ListaAsistenciaLiderTecnicoComponent,
       },
-
-      // {
-      //   path: 'notificaciones',
-      //   data: {
-      //     title: 'Administración de notificaciones',
-      //     breadcrumbs: [
-      //       {
-      //         text: 'Notificacioes',
-      //         active: true,
-      //       },
-      //     ],
-      //   },
-      //   component: NotificacionesComponent,
-      // },
+      {
+        path: 'reasignacionLider',
+        data: {
+          title: 'Reasignacion lider',
+          breadcrumbs: [],
+        },
+        component: ReasignarLiderEquipoComponent,
+      },
       {
         path: '',
         redirectTo: 'inicio',
