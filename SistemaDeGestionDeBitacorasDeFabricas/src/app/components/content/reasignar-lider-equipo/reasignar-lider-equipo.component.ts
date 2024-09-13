@@ -96,7 +96,12 @@ export class ReasignarLiderEquipoComponent {
     },
   ];
 
-  datos1:any = [];
+  datos1:any = [{
+
+    no_contrato:"CT-0015-24",
+    lider_texnico:"Joel Cuevas Carbajal",
+    total_integrantes:  3
+  }];
 
   tituloPrimario: string = '';
   seleccionado: number = 1;
