@@ -21,8 +21,8 @@
                 <tr class="valoresCentrados">
                   <th scope="col" class="valoresCentrados">Nombre</th>
                   <th scope="col" class="valoresCentrados">Descipcion</th>
-                  <th scope="col" class="valoresCentrados">Total perfiles</th>
-                  <th scope="col" class="valoresCentrados">Asignados</th>
+                  <th scope="col" class="valoresCentrados">Total recursos</th>
+                  <th scope="col" class="valoresCentrados">Recursos asignados</th>
                   <th scope="col" class="valoresCentrados">Estatus</th>
                 </tr>
               </thead>
@@ -116,6 +116,10 @@
                       <label for="Correo" class="form-label">Correo</label>
                       <input type="text" class="form-control" id="Correo" placeholder="" formControlName="correo">
                   </div>
+                  <div class="col-sm-6">
+                      <label for="Correo" class="form-label">Correo secundario</label>
+                      <input type="text" class="form-control" id="Correo" placeholder="" formControlName="correo">
+                  </div>
                     <div class="col-sm-6">
                       <label for="Correo" class="form-label">CURP</label>
                       <input type="text" class="form-control" id="Correo" placeholder="" formControlName="curp">
@@ -146,7 +150,7 @@
             <div class="offcanvas-footer">
                 <div class="text-end">
                   <button style="margin-left: 2px;" class="btn btn-principal" (click)="guardarConsultor()"> Guardar &nbsp;<i
-                      class="bi bi-floppy"></i></button> Guardar
+                      class="bi bi-floppy"></i></button> 
                 </div>
             </div>
         </div>

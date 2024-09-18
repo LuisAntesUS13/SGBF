@@ -1,4 +1,4 @@
-<h3>Administración equipos de  trabajo</h3>
+<h3>Reasignacion de lider</h3>
 <hr>
 <div class="card" *ngIf="!mostrarLider">
     <div class="card-body row">
@@ -70,6 +70,12 @@
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Contrato</label>
                 <input type="text" class="form-control" id="consulta" placeholder="" formControlName="no_contrato">
+                <!-- <select class="form-select" aria-label="Default select example" formControlName="no_contrato">
+                  <option value="">Seleccione  una opción</option>
+                  <option value="Agenda de investigacion">ACT-0015-24</option>
+                  <option value="Aplicacion movil">CT-0015-23</option>
+                  <option value="Apoyo infonavit">CT-0015-22</option>
+              </select> -->
             </div>
             <div class="col-sm-12"  *ngIf="!tipoSeleccionLider">
               <hr>
@@ -80,7 +86,13 @@
             </div>
             <div class="col-sm-6" *ngIf="!tipoSeleccionLider">
               <label for="Correo" class="form-label">Nuevo Lider tecnico</label>
-              <input type="text" class="form-control" id="consulta" placeholder="" formControlName="nuevo_lider_texnico">
+              <!-- <input type="text" class="form-control" id="consulta" placeholder="" formControlName="nuevo_lider_texnico"> -->
+              <select class="form-select" aria-label="Default select example" formControlName="nuevo_lider_texnico">
+                <option value="">Seleccione  una opción</option>
+                <option value="Agenda de investigacion">Joel Cuevas Carbajal</option>
+                <option value="Aplicacion movil">Verónica Franco Pérez</option>
+                <option value="Apoyo infonavit">Francisco de Jesús Vázquez Orendain</option>
+            </select>
             </div>
             <div class="col-sm-12"*ngIf="!tipoSeleccionLider">
               <label for="Correo" class="form-label">Observaciones de cambio</label>

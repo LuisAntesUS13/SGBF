@@ -16,6 +16,7 @@ export class EquipoTrabajoComponent {
 
   datosConsultoresDisponibles : any = [
     {
+      id: 1,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -23,8 +24,10 @@ export class EquipoTrabajoComponent {
       consultor: 'Manuel Antonio',
       fecha_inicio: '31/05/2024',
       fecha_termino: '',
+      estatus: false
     },
     {
+      id: 2,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -32,8 +35,10 @@ export class EquipoTrabajoComponent {
       consultor: 'Cesar Daniel',
       fecha_inicio: '15/05/2024',
       fecha_termino: '',
+      estatus: false
     },
     {
+      id: 3,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -41,8 +46,10 @@ export class EquipoTrabajoComponent {
       consultor: 'Juan Manuel',
       fecha_inicio: '31/05/2024',
       fecha_termino: '',
+      estatus: false
     },
     {
+      id: 4,
       total_paginas: 1,
       total_registros: 10,
       pagina_actual: 1,
@@ -50,6 +57,7 @@ export class EquipoTrabajoComponent {
       consultor: 'Roberto Antonio',
       fecha_inicio: '15/05/2024',
       fecha_termino: '',
+      estatus: false
     },
   ];
 
@@ -192,20 +200,22 @@ export class EquipoTrabajoComponent {
   }
 
   agregarConsultor(id: number){
-
-     // Remueve el objeto de array1 y lo almacena en una variable
-    let objetoRemovido = this.datosConsultoresDisponibles.splice(id, 1)[0];
-    
-    // Añade el objeto removido a array2
-    this.datosConsultores.push(objetoRemovido);
-
+console.log(id)
+    this.datosConsultoresDisponibles.forEach((element: any) => {
+      if(element.id == id){
+        element.estatus = true;
+      }
+    });
   }
 
   quitarConsultor(id: number){
-        // Remueve el objeto de array1 y lo almacena en una variable
-        let objetoRemovido = this.datosConsultores.splice(id, 1)[0];
-    
-        // Añade el objeto removido a array2
-        this.datosConsultoresDisponibles.push(objetoRemovido);
+    console.log(id)
+
+    this.datosConsultoresDisponibles.forEach((element: any) => {
+      if(element.id == id){
+        element.estatus = false;
+      }
+      
+    });
   }
 }
