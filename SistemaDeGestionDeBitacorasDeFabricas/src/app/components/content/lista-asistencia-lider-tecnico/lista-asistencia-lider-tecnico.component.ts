@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute,Params } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista-asistencia-lider-tecnico',
@@ -8,20 +10,98 @@ import { ActivatedRoute,Params } from '@angular/router';
 })
 export class ListaAsistenciaLiderTecnicoComponent {
 
-  datos1 = [
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "02/09/2024", "inicio": true, "FechaInicio": " 8:55", "salidaComer": true, "FechaSalidaComida": "15:05", "RegresoComer": true, "FechaRegresoComer": " 15:55", "Salida": true, "FechaSalida": "19:03",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "03/09/2024", "inicio": true, "FechaInicio": " 8:50", "salidaComer": true, "FechaSalidaComida": "15:00", "RegresoComer": false, "FechaRegresoComer": "No Registrado", "Salida": false, "FechaSalida": "19:00",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "04/09/2024", "inicio": false, "FechaInicio": "No Registrado", "salidaComer": false, "FechaSalidaComida": "15:00", "RegresoComer": false, "FechaRegresoComer": "17:00", "Salida": false, "FechaSalida": "19:02",},
+  showCamvasPrimario :boolean = false;
+
+  tituloPrimario: string = "";
+  mostrarConsultores: boolean = false;
+  mostrarHrs: boolean = false;
+  listaHoras :boolean = false;
+
+
+  tipoSeleccionLider:boolean = false;
+  guardadoLider:boolean = false;
+  formularioLider!: FormGroup;
+
+
+
+  constructor(private toastrService: ToastrService,
+    private fb: FormBuilder,
+  ){
+
+
+  }
+
+  datoPermisos :any= [];
+
+  datosAsistencia = [
+    {"total_paginas": 1, "pagina_actual": 1, "puesto": "Consultor", "nombre": "Miguel Angel Espinoza", "perfil": "Desarrollador Java Sr", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "puesto": "Consultor", "nombre": "Omar Castro Ramirez", "perfil": "Desarrollador Java Sr", "modal": true},
+    {"total_paginas": 1, "pagina_actual": 1, "puesto": "Consultor", "nombre": "Luis Eduardo Antes Villa", "perfil": "Desarrollador Java Sr", "modal": true},
   ]
-  datos2 = [
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "02/09/2024", "inicio": true, "FechaInicio": " 9:00", "salidaComer": true, "FechaSalidaComida": "15:15", "RegresoComer": true, "FechaRegresoComer": " 16:00", "Salida": true, "FechaSalida": "19:03",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "03/09/2024", "inicio": true, "FechaInicio": " 8:50", "salidaComer": true, "FechaSalidaComida": "15:00", "RegresoComer": false, "FechaRegresoComer": "15:45", "Salida": false, "FechaSalida": "19:00",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "04/09/2024", "inicio": false, "FechaInicio": "8:57", "salidaComer": false, "FechaSalidaComida": "15:10", "RegresoComer": false, "FechaRegresoComer": "15:52", "Salida": false, "FechaSalida": "19:06",},
+  datosPermisos2 = [
+    {"total_paginas": 1, "pagina_actual": 1, "fecha": "17/09/2024", "inicioact": "9:00", "iniciocom": "15:15", "regresocom": "16:00", "terminoat": "19:01"},
+    {"total_paginas": 1, "pagina_actual": 1, "fecha": "18/09/2024", "inicioact": "8:54", "iniciocom": "15:02", "regresocom": "15:53", "terminoat": "19:00"},
+    {"total_paginas": 1, "pagina_actual": 1, "fecha": "19/09/2024", "inicioact": "8:56", "iniciocom": "15:00", "regresocom": "15:50", "terminoat": "19:05"},
+
   ]
-  datos3 = [
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "02/09/2024", "inicio": true, "FechaInicio": " 9:00", "salidaComer": true, "FechaSalidaComida": "15:15", "RegresoComer": true, "FechaRegresoComer": " 16:00", "Salida": true, "FechaSalida": "19:03",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "03/09/2024", "inicio": true, "FechaInicio": " 8:50", "salidaComer": true, "FechaSalidaComida": "15:00", "RegresoComer": false, "FechaRegresoComer": "15:45", "Salida": false, "FechaSalida": "19:00",},
-    {"total_paginas": 1, "total_registros": 10, "pagina_actual": 1, "fecha": "04/09/2024", "inicio": false, "FechaInicio": "8:57", "salidaComer": false, "FechaSalidaComida": "15:10", "RegresoComer": false, "FechaRegresoComer": "", "Salida": false, "FechaSalida": "",},
-  ]
+
+  createFormPerfil() {
+    this.formularioLider = this.fb.group({
+      no_contrato: [''],
+      lider_texnico: [''],
+      nuevo_lider_texnico: [''],
+      observaciones: [''],
+    });
+  }
+
+
+  buscar(page: number){
+    if (page == 1){
+      this.datoPermisos = this.datosAsistencia;
+    }
+  }
+
+  obtenerAsistencia(event: any) {
+    const pageSize = event.registros_por_pagina;
+    const page = event.pagina_actual
+
+    console.log(event.pagina_actual);
+    this.buscar(page);
+  }
+
+
+  mostrarSeccionHoras(tipo:boolean, datos:any){
+    this.createFormPerfil();
+    this.tipoSeleccionLider = tipo;
+
+    this.mostrarHrs = true;
+
+    this.guardadoLider = false;
+  }
+
+  onSelect(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+
+    if (selectedValue === 'periodo9') {
+      this.listaHoras = true; // Cambia listaHoras a false
+    } else {
+      this.listaHoras = false; // O cualquier otra lógica que necesites
+    }
+  }
+
+  mostrarListaHoras(){
+    this.listaHoras = true;
+  }
+  cerrarCamvasPrimario(){
+    this.showCamvasPrimario = false;
+    this.mostrarHrs = false;
+    this.listaHoras = false;
+  }
+
+  guardar(){
+    this.showCamvasPrimario = false;
+    this.toastrService.success("Datos guardados correctamente");
+  }
 
 }
