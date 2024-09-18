@@ -7,15 +7,15 @@
             <input type="text" class="form-control" id="contrato" placeholder="SG0909">
         </div>
         <div class="col-sm-2">
-            <label for="consulta" class="form-label">Identificador requerimiento</label>
+            <label for="consulta" class="form-label">JIRA o SMAX ASOCIADO / ID INCIDENTE</label>
             <input type="text" class="form-control" id="consulta" placeholder="123">
         </div>
         <div class="col-sm-2">
-            <label for="consulta" class="form-label">Nombre requerimiento</label>
+            <label for="consulta" class="form-label">NDescripción Corta JIRA o SMAX/ INCIDENTE</label>
             <input type="text" class="form-control" id="consulta" placeholder="Bitacora">
         </div>
         <div class="col-sm-2">
-            <label for="consulta" class="form-label">Lider</label>
+            <label for="consulta" class="form-label">Lider proyecto</label>
             <input type="text" class="form-control" id="consulta" placeholder="Joel">
         </div>
          <div class="col-sm-2">
@@ -37,26 +37,34 @@
         <table class="table table-hover">
             <thead>
               <tr class="valoresCentrados">
-                <th scope="col" class="valoresCentrados">Contrato</th>
-                <th scope="col" class="valoresCentrados">Identificador</th>
-                <th scope="col" class="valoresCentrados">Nombre requerimiento</th>
+                <th scope="col" class="valoresCentrados"><div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 1px solid black;">
+                </div></th>
+                <th scope="col" class="valoresCentrados">Perfil</th>
+                <th scope="col" class="valoresCentrados">Consultor</th>
+                <!-- <th scope="col" class="valoresCentrados">Contrato</th> -->
+                <th scope="col" class="valoresCentrados">JIRA o SMAX ASOCIADO / ID INCIDENTE</th>
+                <th scope="col" class="valoresCentrados">Descripción Corta JIRA o SMAX/ INCIDENTE</th>
                 <th scope="col" class="valoresCentrados">Lider proyecto</th>
                 <th scope="col" class="valoresCentrados">Responsable</th>
-                <th scope="col" class="valoresCentrados">Area</th>
-                <th scope="col" class="valoresCentrados">Tipo accion</th>
-                <th scope="col" class="valoresCentrados">Modulo</th>
-                <th scope="col" class="valoresCentrados">Area solicitante</th>
+                <th scope="col" class="valoresCentrados">Tipo</th>
+                <th scope="col" class="valoresCentrados">Aplicativo / Módulo</th>
+                <th scope="col" class="valoresCentrados">Subdirección / Gerencia</th>
                 <th scope="col" class="valoresCentrados">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr  *ngFor="let dato of datosEnviar;let i = index"  style="cursor: pointer;"  class="valoresCentrados">
-                <td>{{dato.no_contrato}}</td>
+              <tr  *ngFor="let dato of datosConsultoresDisponibles;let i = index"  style="cursor: pointer;"  class="valoresCentrados">
+                <td><div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="border: 1px solid black;">
+                </div></td>
+                <td>{{dato.perfil}}</td>
+                <td>{{dato.consultor}}</td>
+                <!-- <td>{{dato.no_contrato}}</td> -->
                 <td>{{dato.identificador_req}}</td>
                 <td>{{dato.nombre_req}}</td>
                 <td>{{dato.lider_tecnico}}</td>
                 <td>{{dato.responsable}}</td>
-                <td>{{dato.area}}</td>
                 <td>{{dato.tipo_accion}}</td>
                 <td>{{dato.modulo_aplicativo}}</td>
                 <td>{{dato.area_sol}}</td>
@@ -91,13 +99,13 @@
   <div class="col-sm-8">
       <div class="card" style="margin-top: 10px;">
         <div class="card-header">
+          <div class="col-sm-6"> <b>Consultor(es):  </b>Manuel Antonio</div>
         </div>
         <div class="card-body row"  [formGroup]="formularioRequerimiento">
-             <div class="col-sm-6">
+             <!-- <div class="col-sm-6">
                 <label for="Correo" class="form-label">Contrato</label>
-                <!-- <app-buscador [datos]="datosEnviar" [llaves]="llavesBuscador" (valor)="eventoBuscar($event)"></app-buscador> -->
                 <input type="text" class="form-control" id="identificador" placeholder="S-1066361" formControlName="no_contrato">
-            </div>
+            </div> -->
             <div class="col-sm-6">
               <label for="lider_tecnico" class="form-label">Lider tecnico</label>
               <!-- <input type="text" class="form-control" id="lider_tecnico" placeholder=""> -->
@@ -107,15 +115,15 @@
               <hr>
             </div>
               <div class="col-sm-6">
-                  <label for="identificador" class="form-label">Identificador del requerimiento</label>
+                  <label for="identificador" class="form-label">JIRA o SMAX ASOCIADO / ID INCIDENTE</label>
                   <input type="text" class="form-control" id="identificador" placeholder="S-1066361" formControlName="identificador_req">
               </div>
               <div class="col-sm-6">
-                  <label for="nombre" class="form-label">Nombre requerimiento</label>
+                  <label for="nombre" class="form-label">Descripción Corta JIRA o SMAX/ INCIDENTE</label>
                   <input type="text" class="form-control" id="nombre" placeholder="" formControlName="nombre_req">
               </div>
               <div class="col-sm-12">
-                  <label for="descripcion" class="form-label">Descripción</label>
+                  <label for="descripcion" class="form-label">Actividad Asignada</label>
                   <textarea type="text" class="form-control" id="descripcion" formControlName="descripcion_req"></textarea>
               </div>
               <div class="col-sm-6">
@@ -123,7 +131,7 @@
                 <input type="text" class="form-control" id="responsable" placeholder="" formControlName="responsable">
               </div>
               <div class="col-sm-6">
-                  <label for="Correo" class="form-label">Seleccione tipo de acción</label>
+                  <label for="Correo" class="form-label">Seleccione Tipo</label>
                   <select class="form-select" aria-label="Default select example" formControlName="tipo_accion">
                       <option value="">Seleccione una opción</option>
                       <option value="Administrativo">Administrativo</option>
@@ -133,16 +141,16 @@
                     </select>
               </div>
               <div class="col-sm-6">
-                  <label for="Correo" class="form-label">Seleccione el modulo o aplicativo</label>
+                  <label for="Correo" class="form-label">Seleccione Aplicativo / Módulo</label>
                   <select class="form-select" aria-label="Default select example" formControlName="modulo_aplicativo">
                       <option value="">Seleccione  una opción</option>
                       <option value="Agenda de investigacion">Agenda de investigacion</option>
                       <option value="Aplicacion movil">Aplicacion movil</option>
                       <option value="Apoyo infonavit">Apoyo infonavit</option>
-                    </select>
+                  </select>
               </div>
               <div class="col-sm-6">
-                <label for="Correo" class="form-label">Seleccione el área solicitante</label>
+                <label for="Correo" class="form-label">Seleccione eSubdirección / Gerencia</label>
                 <select class="form-select" aria-label="Default select example" formControlName="area_sol">
                     <option value="">Seleccione  una opción</option>
                     <option value="Direccion de informatica">Direccion de informatica</option>
