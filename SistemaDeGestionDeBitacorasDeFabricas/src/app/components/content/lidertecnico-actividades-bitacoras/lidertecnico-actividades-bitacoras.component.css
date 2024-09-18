@@ -212,22 +212,16 @@ textarea{
 
 .contenedor-accordion {
     width: 100%;
-  }
+}
+.contenedor-tabla{
+    width: 100%;
+}
 
-  .contenedor-tabla {
-    overflow-x: auto; 
-  }
-  @media (max-width: 730px) {
-    .contenedor-accordion {
-        width: 100vw; 
-        box-sizing: border-box; 
-      }
-      
-      .contenedor-tabla {
-        width: 100vw;
-      }
-    
-      .accordion-item {
-        width: 100vw;
-      }
-  }
+.clase-activa > td{
+    background-color: rgba(255, 62, 62, 0.149);
+}
+
+.contenedor-btn {
+    display: flex;
+    gap: 8px;
+}
