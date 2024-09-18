@@ -20,23 +20,26 @@
 
 <hr>
 
+<div class="col-sm-3">
+    <label class="form-label">Consutlor</label>
+    <input type="text" class="form-control" [(ngModel)]='inputNombre' placeholder="Ramón López López" >
+</div>
+
 <div class="col-sm-12 contenedor-estados" style="margin-bottom: 4px;">
     <ul class="nav nav-underline">
-        <li class="nav-item" *ngFor="let item of listadoEstatus" (click)="cambioSeleccion(item.id)">
+        <li class="nav-item" *ngFor="let item of listadoEstatus" (click)="cambioSeleccion(item.idStatus)">
             <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}} 
                 <span class="badge text-bg-light">{{item.total}}</span>
             </a>
         </li>
     </ul>
-
-    
 </div>
 
 <div class="row contenedor-accordion contenedor-tabla" >
     <div class="col-sm-12">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item" *ngFor="let consultor of getConsultoresPorProyecto()"> 
+                <div class="accordion-item" *ngFor="let consultor of getConsultoresPorProyecto"> 
                     <h2 class="accordion-header" [id]="'heading' + consultor.idConsultor">
                         <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" [attr.data-bs-target]="'#collapse' + consultor.idConsultor" aria-expanded="true" [attr.aria-controls]="'collapse' + consultor.idConsultor">
                             <div class="titulo-accordion">
@@ -45,6 +48,7 @@
                             </div>
                         </button>
                         <div class="contenedor-btn ">
+                            <button class="btn btn-principal">Autorizar</button>
                             <button class="btn btn-principal" (click)="ocultar()" data-bs-toggle="offcanvas"  data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Observación</button>
                         </div>
                     </h2>
@@ -54,22 +58,24 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Consultor</th>
-                                            <th scope="col">Líder</th>
-                                            <th scope="col">Proyecto</th>
-                                            <th scope="col">Descripción de actividad</th>
-                                            <th scope="col">Horas trabajadas</th>
-                                            <th scope="col">Fecha</th>
+                                            <th scope="col">PROYECTO</th>
+                                            <th scope="col">JIRA o SMAX ASOCIADO / ID INCIDENTE</th>
+                                            <th scope="col">DESCRIPCIÓN CORTA JIRA o SMAX/ INCIDENTE</th>
+                                            <th scope="col">HACTIVIDAD ASIGNADA</th>
+                                            <th scope="col">ACTIVIDAD REALIZADA</th>
+                                            <th scope="col">HORAS REALIZADAS</th>
+                                            <th scope="col">FECHA</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="rows" *ngFor="let actividad of getActividadesPorConsultor(consultor.idConsultor)"  (click)="mostrar()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                            <td class="registro">{{actividad.consultor}}</td>
-                                            <td class="registro">{{actividad.lider}}</td>
-                                            <td class="registro">{{actividad.proyecto}}</td>
-                                            <td class="registro">{{actividad.actividad}}</td>
-                                            <td class="registro">{{actividad.horas}}</td>
-                                            <td class="registro">{{actividad.fecha}}</td>
+                                    <tbody >
+                                        <tr class="rows"  *ngFor="let actividad of getActividadesPorConsultor(consultor.idConsultor)"  [ngClass]="{'clase-activa': actividad.idStatus === 7}" (click)="mostrar()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                            <td>{{actividad.proyectoExcel}}</td>
+                                            <td>{{actividad.idIncidente}}</td>
+                                            <td>{{actividad.descripcionCorta}}</td>
+                                            <td>{{actividad.actividadAsignada}}</td>
+                                            <td>{{actividad.actividadRealizada}}</td>
+                                            <td>{{actividad.horas}}</td>
+                                            <td>{{actividad.fecha}}</td>
                                         </tr>
                                     </tbody> 
                                 </table>
@@ -93,7 +99,7 @@
         <div class="card-body row">
             <div class="titulo-Modal">
                 <div>
-                    <label for="Correo" class="form-label">{{tituloModal}} </label>
+                    <label  class="form-label">{{tituloModal}} </label>
                 </div>
                 <div>
                     <div class="contenedor-periodo">
@@ -118,7 +124,7 @@
                 <input type="text" class="form-control"  value="Subdirección General de Tecnologías de Información" disabled>
             </div>
             <div class="col-sm-6">
-                <label for="Correo" class="form-label">Proyecto</label>
+                <label  class="form-label">Proyecto</label>
                 <input type="text" class="form-control"value="Continuidad operativa" disabled>
             </div>
             <div class="col-sm-6">
@@ -130,15 +136,15 @@
                 <input type="text" class="form-control"  value="Azir Aguilar" disabled>
             </div>
             <div class="col-sm-6">
-                <label for="nombre" class="form-label">Tipo de acción</label>
+                <label for="nombre" class="form-label">Tipo</label>
                 <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
             </div>
             <div class="col-sm-6">
-                <label for="Correo" class="form-label">Modulo o aplicativo</label>
+                <label  class="form-label">Aplicativo/Modulo</label>
                 <input type="text" class="form-control" value="SMAX" disabled>
             </div>
             <div class="col-sm-6">
-                <label for="Correo" class="form-label">Area solicitante</label>
+                <label  class="form-label">Area solicitante</label>
                 <input type="text" class="form-control" value="Dirección informática" disabled>
             </div>
             <div class="col-sm-6" *ngIf="mostrarInput">
@@ -168,7 +174,6 @@
         </div>  
     </div>
     <div class="contenedor-boton-enviar"> 
-        <button type="button" class="btn btn-principal btn-modal" *ngIf="mostrarInput">Autorizar</button>
         <button type="button" class="btn btn-principal btn-modal">Enviar observación</button>
     </div>
 </div>
