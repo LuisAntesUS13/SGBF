@@ -172,7 +172,7 @@ export class RequerimientosComponent {
 
   eliminar(){
     this.confirmarModalService
-    .abriraModalPregunta('Estas seguro de eliminar este consultor')
+    .abriraModalPregunta('Estas seguro de quitar a este consulto de este requerimiento')
     .subscribe(async (result) => {
       if (result) {
         this.toastrService.success('Consultor eliminado correctamente');

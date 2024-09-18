@@ -76,11 +76,23 @@
             </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Contrato</label>
-                <input type="text" class="form-control" id="consulta" placeholder="" formControlName="no_contrato">
+                <!-- <input type="text" class="form-control" id="consulta" placeholder="" formControlName="no_contrato"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="no_contrato">
+                  <option value="">Seleccione  una opción</option>
+                  <option value="Agenda de investigacion">ACT-0015-24</option>
+                  <option value="Aplicacion movil">CT-0015-23</option>
+                  <option value="Apoyo infonavit">CT-0015-22</option>
+              </select>
             </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Lider tecnico</label>
-                <input type="text" class="form-control" id="consulta" placeholder="" formControlName="lider_texnico">
+                <!-- <input type="text" class="form-control" id="consulta" placeholder="" formControlName="lider_texnico"> -->
+                <select class="form-select" aria-label="Default select example" formControlName="lider_texnico">
+                  <option value="">Seleccione  una opción</option>
+                  <option value="Agenda de investigacion">Joel Cuevas Carbajal</option>
+                  <option value="Aplicacion movil">Verónica Franco Pérez</option>
+                  <option value="Apoyo infonavit">Francisco de Jesús Vázquez Orendain</option>
+              </select>
             </div>
       
         </div>
