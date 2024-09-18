@@ -52,7 +52,7 @@
 </div>
 
 <div class="row" *ngIf="mostrarLider || mostrarConsultores">
-  <div [ngClass]="(mostrarLider && !mostrarConsultores)? 'col-sm-8' : 'col-sm-12'">
+  <div [ngClass]="guardadoLider? 'col-sm-8' : 'col-sm-12'">
     <div class="card" style="margin-bottom: 10px; margin-top: 10px;">
       <div class="card-body row" style="padding: 5px;">
         <div class="col-sm-3">
@@ -63,8 +63,10 @@
     </div>
   </div>
 </div>
+
+
 <div class="row" *ngIf="mostrarLider && !mostrarConsultores">
-  <div class="col-sm-8">
+  <div [ngClass]="guardadoLider? 'col-sm-6' : 'col-sm-8'">
       <div class="card" style="margin-top: 10px;">
         <div class="card-header">
         </div>
@@ -76,22 +78,11 @@
                 <label for="Correo" class="form-label">Contrato</label>
                 <input type="text" class="form-control" id="consulta" placeholder="" formControlName="no_contrato">
             </div>
-            <div class="col-sm-12"  *ngIf="!tipoSeleccionLider">
-              <hr>
-            </div>
             <div class="col-sm-6">
                 <label for="Correo" class="form-label">Lider tecnico</label>
                 <input type="text" class="form-control" id="consulta" placeholder="" formControlName="lider_texnico">
             </div>
-            <div class="col-sm-6" *ngIf="!tipoSeleccionLider">
-              <label for="Correo" class="form-label">Nuevo Lider tecnico</label>
-              <input type="text" class="form-control" id="consulta" placeholder="" formControlName="nuevo_lider_texnico">
-            </div>
-            <div class="col-sm-12"*ngIf="!tipoSeleccionLider">
-              <label for="Correo" class="form-label">Observaciones de cambio</label>
-              <textarea type="text" class="form-control" formControlName="observaciones"></textarea>
-            </div>
-
+      
         </div>
         <div class="card-footer">
           <div class="text-end" style="margin: 0px; padding: 0px;">
@@ -102,61 +93,11 @@
         </div>
       </div>
   </div>
-</div>
-
-<div class="row" *ngIf="guardadoLider">
-  <div class="col-sm-6">
-      <div class="card" style="margin-top: 10px;">
-          <div class="card-body row">
-            <div class="col-sm-12">
-                <app-separador-texto [texto]="'Consultores integrantes del equipo'"></app-separador-texto>
-            </div>
-            <div class="col-sm-3">
-                <label for="consulta" class="form-label">Consultor</label>
-                <input type="text" class="form-control" id="consulta" placeholder="Nombre">
-            </div>
-            <div class="col-sm-3">
-                <label for="consulta" class="form-label">Perfil</label>
-                <input type="text" class="form-control" id="consulta" placeholder="Programador">
-            </div>
-            <div class="col-sm-3">
-                <button style="margin-left: 2px;" class="btn btn-accion" style="margin-top: 30px;">
-                    <i class="bi bi-search"></i>&nbsp;Buscar</button>
-            </div>
-            <div class="col-sm-12">
-                <hr>
-            </div>
-            <div class="row">
-                <app-paginador (cambio)="obtenerEvento($event)"></app-paginador>
-                <div class="col-sm-12">
-                    <table class="table table-hover">
-                        <thead>
-                          <tr class="valoresCentrados">
-                            <th scope="col" class="valoresCentrados">Consultor</th>
-                            <th scope="col" class="valoresCentrados">Perfil</th>
-                            <th scope="col" class="valoresCentrados">Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr  *ngFor="let dato of datosConsultores;let i = index"  style="cursor: pointer;"  (click)="quitarConsultor(dato.id)" >
-                            <td>{{dato.consultor}}</td>
-                            <td>{{dato.perfil}}</td>
-                            <td>
-                                <button type="button" class="btn btn-light delete" title="Quitar" ><i class="bi bi-trash3" ></i></button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
-        </div> 
-    </div>
-</div>
-  <div class="col-sm-6">
+  <div class="col-sm-6" *ngIf="guardadoLider">
     <div class="card" style="margin-top: 10px;">
         <div class="card-body row">
           <div class="col-sm-12">
-            <app-separador-texto [texto]="'Consultores disponibles'"></app-separador-texto>
+              <app-separador-texto [texto]="'Seleccion de consultores'"></app-separador-texto>
           </div>
           <div class="col-sm-3">
               <label for="consulta" class="form-label">Consultor</label>
@@ -167,41 +108,38 @@
               <input type="text" class="form-control" id="consulta" placeholder="Programador">
           </div>
           <div class="col-sm-3">
-              <button style="margin-left: 2px;" class="btn btn-accion"   style="margin-top: 30px;">
+              <button style="margin-left: 2px;" class="btn btn-accion" style="margin-top: 30px;">
                   <i class="bi bi-search"></i>&nbsp;Buscar</button>
           </div>
           <div class="col-sm-12">
               <hr>
           </div>
-       
-        <div class="row">
-          <app-paginador (cambio)="obtenerEvento($event)"></app-paginador>
-          <div class="col-sm-12">
-              <table class="table table-hover">
-                  <thead>
-                    <tr class="valoresCentrados">
-                      <th scope="col" class="valoresCentrados">Consultor</th>
-                      <th scope="col" class="valoresCentrados">Perfil</th>
-                      <th scope="col" class="valoresCentrados">Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr  *ngFor="let dato of datosConsultoresDisponibles;let i = index"  style="cursor: pointer;"  class="valoresCentrados">
-                      <td>{{dato.consultor}}</td>
-                      <td>{{dato.perfil}}</td>
-                      <td>
-                          <button type="button" class="btn btn-light add" title="Agregar" (click)="agregarConsultor(dato.id)"><i class="bi bi-person-plus"></i></button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+          <div class="row">
+              <app-paginador (cambio)="obtenerEvento($event)"></app-paginador>
+              <div class="col-sm-12">
+                  <table class="table table-hover">
+                      <thead>
+                        <tr class="valoresCentrados">
+                          <th scope="col" class="valoresCentrados">Consultor</th>
+                          <th scope="col" class="valoresCentrados">Perfil</th>
+                          <th scope="col" class="valoresCentrados">Estatus</th>
+                          <th scope="col" class="valoresCentrados">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr  *ngFor="let dato of datosConsultoresDisponibles;let i = index"  style="cursor: pointer;"   >
+                          <td>{{dato.consultor}}</td>
+                          <td>{{dato.perfil}}</td>
+                          <td>{{dato.estatus? 'Asignado':'No asignado'}}</td>
+                          <td>
+                              <button type="button" class="btn btn-light delete" title="Quitar" (click)="quitarConsultor(dato.id)" *ngIf="dato.estatus"><i class="bi bi-trash3" ></i></button>
+                              <button type="button" class="btn btn-light add" title="Agregar" (click)="agregarConsultor(dato.id)" *ngIf="!dato.estatus"><i class="bi bi-person-plus"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
           </div>
-        </div>
-      </div>
-   </div>
+      </div> 
+  </div>
 </div>
-</div>
-
-
-
-

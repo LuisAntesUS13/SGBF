@@ -25,6 +25,54 @@ export class RequerimientosComponent {
   llavesBuscador: string[] = ['identificador','identificador', 'nombre'];
 
 
+  datosConsultoresDisponibles : any = [
+    {
+      id: 1,
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Manuel Antonio',
+      fecha_inicio: '31/05/2024',
+      fecha_termino: '',
+      estatus: false
+    },
+    {
+      id: 2,
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Cesar Daniel',
+      fecha_inicio: '15/05/2024',
+      fecha_termino: '',
+      estatus: false
+    },
+    {
+      id: 3,
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: 'Analista',
+      consultor: 'Juan Manuel',
+      fecha_inicio: '31/05/2024',
+      fecha_termino: '',
+      estatus: false
+    },
+    {
+      id: 4,
+      total_paginas: 1,
+      total_registros: 10,
+      pagina_actual: 1,
+      perfil: ' Programador Sr Java',
+      consultor: 'Roberto Antonio',
+      fecha_inicio: '15/05/2024',
+      fecha_termino: '',
+      estatus: false
+    },
+  ];
+
+
   constructor(
     private route: ActivatedRoute,
     private toastrService: ToastrService,
@@ -32,7 +80,7 @@ export class RequerimientosComponent {
     private spinnerService: SpinnerService,
     private fb: FormBuilder,
   ) {
-    this.buscar();
+    // this.buscar();
     this.createFormPerfil();
   }
 
@@ -74,21 +122,31 @@ export class RequerimientosComponent {
   guardarRequerimiento(){
     this.toastrService.success('Requerimiento guardado con exito');
 
-    this.datosEnviar.push({
-      total_paginas: 1,
-      total_registros: 10,
-      pagina_actual: 1,
-      no_contrato:  this.formularioRequerimiento.get('no_contrato')?.value,
-      identificador_req:  this.formularioRequerimiento.get('identificador_req')?.value,
-      nombre_req:  this.formularioRequerimiento.get('nombre_req')?.value,
-      descripcion_req:  this.formularioRequerimiento.get('descripcion_req')?.value,
-      lider_tecnico:  this.formularioRequerimiento.get('lider_tecnico')?.value,
-      responsable:  this.formularioRequerimiento.get('responsable')?.value,
-      tipo_accion:  this.formularioRequerimiento.get('tipo_accion')?.value,
-      modulo_aplicativo:  this.formularioRequerimiento.get('modulo_aplicativo')?.value,
-      area_sol:  this.formularioRequerimiento.get('area_sol')?.value,
 
-    });
+    this.datosConsultoresDisponibles[0].identificador_req = this.formularioRequerimiento.get('identificador_req')?.value;
+    this.datosConsultoresDisponibles[0].nombre_req = this.formularioRequerimiento.get('nombre_req')?.value;
+    this.datosConsultoresDisponibles[0].descripcion_req = this.formularioRequerimiento.get('descripcion_req')?.value;
+    this.datosConsultoresDisponibles[0].lider_tecnico = this.formularioRequerimiento.get('lider_tecnico')?.value;
+    this.datosConsultoresDisponibles[0].responsable = this.formularioRequerimiento.get('responsable')?.value;
+    this.datosConsultoresDisponibles[0].tipo_accion = this.formularioRequerimiento.get('tipo_accion')?.value;
+    this.datosConsultoresDisponibles[0].modulo_aplicativo = this.formularioRequerimiento.get('modulo_aplicativo')?.value;
+    this.datosConsultoresDisponibles[0].area_sol = this.formularioRequerimiento.get('area_sol')?.value;
+
+    // this.datosEnviar.push({
+    //   total_paginas: 1,
+    //   total_registros: 10,
+    //   pagina_actual: 1,
+    //   no_contrato:  this.formularioRequerimiento.get('no_contrato')?.value,
+    //   identificador_req:  this.formularioRequerimiento.get('identificador_req')?.value,
+    //   nombre_req:  this.formularioRequerimiento.get('nombre_req')?.value,
+    //   descripcion_req:  this.formularioRequerimiento.get('descripcion_req')?.value,
+    //   lider_tecnico:  this.formularioRequerimiento.get('lider_tecnico')?.value,
+    //   responsable:  this.formularioRequerimiento.get('responsable')?.value,
+    //   tipo_accion:  this.formularioRequerimiento.get('tipo_accion')?.value,
+    //   modulo_aplicativo:  this.formularioRequerimiento.get('modulo_aplicativo')?.value,
+    //   area_sol:  this.formularioRequerimiento.get('area_sol')?.value,
+
+    // });
   }
 
   regresarInicio(){
