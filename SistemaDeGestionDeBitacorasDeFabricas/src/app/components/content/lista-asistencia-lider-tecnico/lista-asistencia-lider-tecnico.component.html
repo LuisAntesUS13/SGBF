@@ -1,99 +1,68 @@
-<div class="h3">
-    <h3>Control de Asistencia</h3>
-</div>
+<h3>Control de Asistencia</h3>
 <hr>
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Consultor: Miguel Angel Espinoza
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        <table class="table table-hover">
+<div class="row">
+  <div class="col-sm-12" *ngIf="!mostrarHrs">
+      <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Fecha</th>
-              <th scope="col" class="valoresCentrados">Inicio de Actividades</th>
-              <th scope="col" class="valoresCentrados">Inicio de Comida</th>
-              <th scope="col" class="valoresCentrados">Regreso de Comida</th>
-              <th scope="col" class="valoresCentrados">Termino de Actividades</th>
+              <th scope="col">Puesto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Perfil</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dato of datos1;let i = index"  style="cursor: pointer;" >
-              <td>{{dato.fecha}}</td>
-              <td class="valoresCentrados">{{dato.FechaInicio}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalidaComida}}</td>
-              <td class="valoresCentrados">{{dato.FechaRegresoComer}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalida}}</td>
+            <tr  *ngFor="let dato of datosAsistencia;let i = index"  style="cursor: pointer;"  (click)="mostrarSeccionHoras(true, null)" >
+              <td>{{dato.puesto}}</td>
+              <td>{{dato.nombre}}</td>
+              <td>{{dato.perfil}}</td>
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
   </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Consultor: Omar Castro Ramirez
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Fecha</th>
-              <th scope="col" class="valoresCentrados">Inicio de Actividades</th>
-              <th scope="col" class="valoresCentrados">Inicio de Comida</th>
-              <th scope="col" class="valoresCentrados">Regreso de Comida</th>
-              <th scope="col" class="valoresCentrados">Termino de Actividades</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dato of datos2;let i = index"  style="cursor: pointer;" >
-              <td>{{dato.fecha}}</td>
-              <td class="valoresCentrados">{{dato.FechaInicio}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalidaComida}}</td>
-              <td class="valoresCentrados">{{dato.FechaRegresoComer}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalida}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+</div>
+
+
+
+<div class="row col-sm-12" *ngIf="mostrarHrs" >
+  <div>
+    <button type="button" class="btn btn-principal ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"
+        (click)="cerrarCamvasPrimario()">
+        <i class="bi bi-arrow-return-left"></i>
+    </button>
+    <div class="btn-group">
+        <select class="form-select col-sm-13" aria-label="Default select example"
+            (change)="onSelect($event)">
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="periodo8" disabled>Periodo 8</option>
+            <option value="periodo9">Periodo 9</option>
+        </select>
     </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Consultor: Luis Eduardo Antes Villa
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Fecha</th>
-              <th scope="col" class="valoresCentrados">Inicio de Actividades</th>
-              <th scope="col" class="valoresCentrados">Inicio de Comida</th>
-              <th scope="col" class="valoresCentrados">Regreso de Comida</th>
-              <th scope="col" class="valoresCentrados">Termino de Actividades</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dato of datos3;let i = index"  style="cursor: pointer;" >
-              <td>{{dato.fecha}}</td>
-              <td class="valoresCentrados">{{dato.FechaInicio}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalidaComida}}</td>
-              <td class="valoresCentrados">{{dato.FechaRegresoComer}}</td>
-              <td class="valoresCentrados">{{dato.FechaSalida}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+</div>
+
+  <div>
+        <div class="card-body row">
+          <table class="table table-hover">
+            <thead>
+              <tr class="valoresCentrados">
+                <th scope="col" class="valoresCentrados">Fecha</th>
+                <th scope="col" class="valoresCentrados">Inicio de Actividades</th>
+                <th scope="col" class="valoresCentrados">Inicio de Comida</th>
+                <th scope="col" class="valoresCentrados">Regreso de Comida</th>
+                <th scope="col" class="valoresCentrados">Término de Actividades</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="listaHoras">
+              <tr  *ngFor="let dato of datosPermisos2;let i = index"  style="cursor: pointer;" class="valoresCentrados">
+
+                  <td>{{dato.fecha}}</td>
+                  <td>{{dato.inicioact}}</td>
+                  <td class="valoresCentrados">{{dato.iniciocom}}</td>
+                  <td class="valoresCentrados">{{dato.regresocom}}</td>
+                  <td class="valoresCentrados">{{dato.iniciocom}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
   </div>
 </div>
