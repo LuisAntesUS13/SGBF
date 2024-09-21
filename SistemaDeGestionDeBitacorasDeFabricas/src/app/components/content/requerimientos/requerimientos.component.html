@@ -1,4 +1,13 @@
-<h3>Asignacion de requerimientos</h3>
+
+<div class="row">
+      <div class="col-sm-1" *ngIf="mostrarFormularioRequerimiento">
+        <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarInicio()" >
+          <i class="bi bi-arrow-90deg-left"></i></button>
+    </div>
+    <div class="col-sm-11">
+      <h3>Asignacion de requerimientos</h3>
+    </div>
+</div>
 <hr>
 <div class="card"  *ngIf="!mostrarFormularioRequerimiento">
     <div class="card-body row">
@@ -82,7 +91,7 @@
 </div> 
 
 
-<div class="row" *ngIf="mostrarFormularioRequerimiento">
+<!-- <div class="row" *ngIf="mostrarFormularioRequerimiento">
   <div  class="col-sm-12">
     <div class="card" style="margin-bottom: 10px; margin-top: 10px;">
       <div class="card-body row" style="padding: 5px;">
@@ -93,7 +102,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="row" *ngIf="mostrarFormularioRequerimiento">
   <div class="col-sm-12">
