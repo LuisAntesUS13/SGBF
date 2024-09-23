@@ -2,6 +2,27 @@
 <hr>
 <div class="row">
   <div class="col-sm-12" *ngIf="!mostrarHrs">
+    <div class="card">
+      <div class="card-body row">
+          <div class="col-sm-3">
+            <label for="nombre" class="form-label">Periodo</label>
+            <select class="form-select" aria-label="Default select example">
+                <option value="" >Seleccione una opción</option>
+                <option>Periodo 8</option>
+                <option>Periodo 9</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+              <label for="nombre" class="form-label">Consultor</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Ingresa el consultor">
+          </div>
+
+          <div class="col-sm-3">
+              <button type="button" class="btn btn-principal"  style="margin-top: 26px;" (click)="mostrarListaHoras()">Buscar</button>
+          </div>
+      </div>
+    </div>
+    <hr>
       <table class="table table-hover">
           <thead>
             <tr>
@@ -10,7 +31,7 @@
               <th scope="col">Perfil</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="listaHoras">
             <tr  *ngFor="let dato of datosAsistencia;let i = index"  style="cursor: pointer;"  (click)="mostrarSeccionHoras(true, null)" >
               <td>{{dato.puesto}}</td>
               <td>{{dato.nombre}}</td>
@@ -29,15 +50,7 @@
         (click)="cerrarCamvasPrimario()">
         <i class="bi bi-arrow-return-left"></i>
     </button>
-    <div class="btn-group">
-        <select class="form-select col-sm-13" aria-label="Default select example"
-            (change)="onSelect($event)">
-            <option value="" disabled selected>Seleccione una opción</option>
-            <option value="periodo8" disabled>Periodo 8</option>
-            <option value="periodo9">Periodo 9</option>
-        </select>
-    </div>
-</div>
+  </div>
 
   <div>
         <div class="card-body row">
@@ -51,8 +64,8 @@
                 <th scope="col" class="valoresCentrados">Término de Actividades</th>
               </tr>
             </thead>
-            <tbody *ngIf="listaHoras">
-              <tr  *ngFor="let dato of datosPermisos2;let i = index"  style="cursor: pointer;" class="valoresCentrados">
+            <tbody>
+              <tr  *ngFor="let dato of datosPermisos2;let i = index" class="valoresCentrados">
 
                   <td>{{dato.fecha}}</td>
                   <td>{{dato.inicioact}}</td>

@@ -69,7 +69,6 @@ export class ListaAsistenciaLiderTecnicoComponent {
     this.buscar(page);
   }
 
-
   mostrarSeccionHoras(tipo:boolean, datos:any){
     this.createFormPerfil();
     this.tipoSeleccionLider = tipo;

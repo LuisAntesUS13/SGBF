@@ -23,20 +23,20 @@
 <div class="col-sm-12 contenedor-estados" style="margin-bottom: 4px;">
     <ul class="nav nav-underline">
         <li class="nav-item" *ngFor="let item of listadoEstatus" (click)="cambioSeleccion(item.id)">
-            <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}} 
+            <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.nombre}}
                 <span class="badge text-bg-light">{{item.total}}</span>
             </a>
         </li>
     </ul>
 
-    
+
 </div>
 
 <div class="row contenedor-accordion contenedor-tabla" >
     <div class="col-sm-12">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item" *ngFor="let consultor of getConsultoresPorProyecto()"> 
+                <div class="accordion-item" *ngFor="let consultor of getConsultoresPorProyecto()">
                     <h2 class="accordion-header" [id]="'heading' + consultor.idConsultor">
                         <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne" [attr.data-bs-target]="'#collapse' + consultor.idConsultor" aria-expanded="true" [attr.aria-controls]="'collapse' + consultor.idConsultor">
                             <div class="titulo-accordion">
@@ -71,7 +71,7 @@
                                             <td class="registro">{{actividad.horas}}</td>
                                             <td class="registro">{{actividad.fecha}}</td>
                                         </tr>
-                                    </tbody> 
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
 <div class="offcanvas-header">
     <h3>Detalles</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-</div>  
+</div>
 <div class="offcanvas-body">
     <div class="card">
         <div class="card-body row">
@@ -153,21 +153,21 @@
                 <label for="consultoires" class="form-label">Actividad realizada</label>
                 <textarea class="form-control" aria-label="With textarea" disabled>Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos</textarea>
             </div>
-            <div class="col-sm-12" *ngIf="mostrarInput"> 
+            <div class="col-sm-12" *ngIf="mostrarInput">
                 <label for="formFileMultiple" class="form-label">Evidencia de actividades</label>
                 <div class="evidencias">
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 
     <div class="contenedor-evidencias-observaciones">
         <div class="contenedor-observaciones">
             <label class="label-observaciones">Observaciones de la actividad.</label>
             <textarea class="form-control textarea" aria-label="With textarea"></textarea>
-        </div>  
+        </div>
     </div>
-    <div class="contenedor-boton-enviar"> 
+    <div class="contenedor-boton-enviar">
         <button type="button" class="btn btn-principal btn-modal" *ngIf="mostrarInput">Autorizar</button>
         <button type="button" class="btn btn-principal btn-modal">Enviar observación</button>
     </div>
