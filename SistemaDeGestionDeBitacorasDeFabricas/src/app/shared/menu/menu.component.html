@@ -38,18 +38,25 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/content/requerimientos">Requerimientos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/content/asistencia">Asistencia</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Bitacoras
+            </a>
+            <ul class="dropdown-menu bitacoras">
+              <li><a class="dropdown-item" routerLink="/content/consultor/bitacora/actividades">Bitacoras (Consultor)</a></li>
+              <li><a class="dropdown-item" routerLink="/content/lidertecnico/bitacora">Bitacoras y periodos (Líder técnico)</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/content/consultor/bitacora/actividades">Bitacora consultor</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Asistencia
+            </a>
+            <ul class="dropdown-menu asistencia">
+              <li><a class="dropdown-item" routerLink="/content/asistencia">Asistencia (Consultores)</a></li>
+              <li> <a class="dropdown-item" routerLink="/content/listaAsistenciaLiderTecnico">Control de Asistencia</a></li>
+            </ul>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" routerLink="/content/lidertecnico/bitacora">Líder técnico</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" routerLink="/content/listaAsistenciaLiderTecnico">Control de Asistencia</a>
-          </li>
+    
         </ul>
       </div>
       <form class="d-flex" role="search">

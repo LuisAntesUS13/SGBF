@@ -15,8 +15,8 @@
             <label for="Correo" class="form-label">Periodo</label>
             <select class="form-select" [(ngModel)]="selectedPeriodo" (change)="filtrarTabla()" aria-label="Default select example">
                 <option selected>Enero</option>
+                <option selected>Febrero</option>
             </select>
-
         </div>
 
         <div class="col-sm-3" style="margin-top: 29px;">
@@ -46,18 +46,23 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Líder</th>
-                    <th scope="col">Proyecto</th>
-                    <th scope="col">Descripción de actividad</th>
-                    <th scope="col">Horas trabajadas</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">PROYECTO</th>
+                    <th scope="col">JIRA o SMAX ASOCIADO / ID INCIDENTE</th>
+                    <th scope="col">DESCRIPCIÓN CORTA JIRA o SMAX/ INCIDENTE</th>
+                    <th scope="col">HACTIVIDAD ASIGNADA</th>
+                    <th scope="col">ACTIVIDAD REALIZADA</th>
+                    <th scope="col">HORAS REALIZADAS</th>
+                    <th scope="col">FECHA</th>
                 </tr>
             </thead>
+            
             <tbody>
                 <tr class="rows" *ngFor="let actividad of actividadesFiltradas" (click)="valorInput(); aparecerPestanas();" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                    <td>{{actividad.lider}}</td>
-                    <td>{{actividad.proyecto}}</td>
-                    <td>{{actividad.actividad}}</td>
+                    <td>{{actividad.proyectoExcel}}</td>
+                    <td>{{actividad.idIncidente}}</td>
+                    <td>{{actividad.descripcionCorta}}</td>
+                    <td>{{actividad.actividadAsignada}}</td>
+                    <td>{{actividad.actividadRealizada}}</td>
                     <td>{{actividad.horas}}</td>
                     <td>{{actividad.fecha}}</td>
                 </tr>
@@ -88,43 +93,52 @@
                         <label class="form-label">Periodo:</label>
                         <label class="form-label periodo">{{periodo}}</label>
                     </div>
-                    
                 </div>
                 
                 <div class="col-sm-12">
-                <hr>
+                    <hr>
                 </div>
+                
                 <div class="col-sm-6">
-                    <label for="identificador" class="form-label">Identificador del requerimiento</label>
-                    <input type="text" class="form-control" value="S-1066361" disabled>
+                    <label for="identificador" class="form-label">Descripción corta JIRA o SMAX/Incidente</label>
+                    <input type="text" class="form-control" value="S-1066361" [(ngModel)]="requerimiento" disabled>
                 </div>
                 <div class="col-sm-6">
                     <label for="nombre" class="form-label">Subdireccion/Generencia</label>
-                    <input type="text" class="form-control"  value="Jorge Missael López Gutiérrez" disabled>
+                    <input type="text" class="form-control"  value="Subdirección General de Tecnologías de Información" disabled>
                 </div>
                 <div class="col-sm-6">
-                    <label for="Correo" class="form-label">Proyecto</label>
-                    <input type="text" class="form-control"value="Continuidad operativa" disabled>
-                </div>
-                <div class="col-sm-6">
-                    <label for="responsable" class="form-label">Líder</label>
+                    <label for="responsable" class="form-label">Líder técnico</label>
                     <input type="text" class="form-control"value="Luis Eduardo Antes Villa" disabled>
                 </div>
                 <div class="col-sm-6">
                     <label for="lider_tecnico" class="form-label">Responsable</label>
                     <input type="text" class="form-control"  value="Daniel Herrera Figueroa" disabled>
                 </div>
-                <div class="col-sm-6">
-                    <label for="tipo" class="form-label">Tipo de acción</label>
-                    <input type="text" class="form-control"value="Desarrollo del sistema" disabled>
-                </div>
-                <div class="col-sm-6">
-                    <label for="moduloAplicativo" class="form-label">Modulo o aplicativo</label>
-                    <input type="text" class="form-control" value="SMAX" disabled>
+                <div class="col-sm-6">  
+                    <label for="Correo" class="form-label">Proyecto</label>
+                    <input type="text" class="form-control"value="Continuidad operativa" disabled>
                 </div>
                 <div class="col-sm-6">
                     <label for="Area" class="form-label">Area solicitante</label>
                     <input type="text" class="form-control" value="Dirección informática" disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="tipo_accion">
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Apoyo operativo">Apoyo operativo</option>
+                        <option value="SMAX">SMAX</option>
+                        <option value="Incidente">Incidente</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="moduloAplicativo" class="form-label">Aplicativo/Modulo</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="modulo_aplicativo">
+                        <option value="Agenda de investigacion">Agenda de investigacion</option>
+                        <option value="Aplicacion movil">Aplicacion movil</option>
+                        <option value="Apoyo infonavit">Apoyo infonavit</option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
                     <label for="actividadAsignada" class="form-label">Actividad asignada</label>
@@ -136,18 +150,23 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="fechaActividad" class="form-label">Fecha de la actividad</label>
-                    <input type="date" [(ngModel)]="selectedDate" class="form-control">
+                    <input type="date"class="form-control" [(ngModel)]="selectedDate" >
                 </div>
                 <div class="col-sm-12">
                     <label for="consultoires" class="form-label">Actividad realizada</label>
                     <textarea class="form-control" aria-label="With textarea"  [(ngModel)]="actividadRealizada">Elaboración de prototipos de las pantallas Dar de baja/reasignación y ajustes de componentes del prototipo de la pantalla Contratos</textarea>
                 </div>
+                <div class="col-sm-6">
+                    
+                </div>
                 <div class="col-sm-12">
                     <label for="formFileMultiple" class="form-label">Evidencia de actividad</label>
                     <input class="form-control" type="file" id="formFileMultiple" multiple>
-                
-            </div>
+                </div>
 
+            <div class="contenedor-boton-guardar" *ngIf="pestanas[0].activo"> 
+                <button type="button" class="btn btn-principal btn-modal btn-guardar">Guardar</button>
+            </div>
             
         </div> 
 
@@ -160,9 +179,12 @@
                 <div class="col-sm-12">
                 <hr>
                 </div>
-                
-                <div class="col-sm-12">
-                    <label for="identificador" class="form-label">1.- He revisado tu bitácora y tengo algunas observaciones que podrían ayudarte a mejorarla. En primer lugar, he notado que algunas entradas son bastante esporádicas y faltan detalles importantes, como el contexto o el impacto de las actividades registradas </label>
+                <div>
+                    <div class="contenedor-observaciones">
+                        <div class="col-sm-12">
+                            <li for="identificador" class="form-label">Juan Gutiérrez(13/01/2024): He notado que algunas entradas son bastante esporádicas y faltan detalles importantes, como el contexto o el impacto de las actividades registradas. Esto puede dificultar la comprensión completa de lo que realmente está ocurriendo y hacer que la bitácora sea menos útil para futuras referencias.</li>
+                        </div>
+                    </div>
                 </div>
             
             </div>
@@ -171,53 +193,26 @@
     </div>
         <div class="card" *ngIf="visualizarObservaciones">
             <div class="card-body row">
-                <div class="col-sm-6 subtitulo-modal">
-                    <label class="form-label">Obsevaciones.</label>
-                    <div class="contenedor-periodo">
-                        <label class="form-label">Periodo:</label>
-                        <label class="form-label periodo">{{periodo}}</label>
+                <div class="contenedor-observaciones">
+                    <div class="col-sm-6 subtitulo-modal">
+                        <label class="form-label">Observaciones</label>
+                    </div>
+                    
+                    <div class="col-sm-12">
+                    <hr>
+                    </div>
+                    <div class="contenedor-observaciones" *ngFor="let observacion of imprimirObservacionesPorPeriodo()">
+                        <div class="col-sm-12">
+                            <li for="identificador" class="form-label">{{observacion.observaciones}}</li>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                <hr>
-                </div>
-                <div class="col-sm-12">
-                    <label for="identificador" class="form-label">1.- He revisado tu bitácora y tengo algunas observaciones que podrían ayudarte a mejorarla. En primer lugar, he notado que algunas entradas son bastante esporádicas y faltan detalles importantes, como el contexto o el impacto de las actividades registradas </label>
-                </div>                
+            </div>               
         </div> 
     </div>
-
-    <div class="contenedor-boton-guardar" *ngIf="pestanas[0].activo"> 
-        <button type="button" class="btn btn-principal btn-modal btn-guardar">Guardar</button>
-    </div>
 </div>
 
 
-<div class="offcanvas offcanvas-end canvasPrimario" id="offcanvasRight"  aria-labelledby="offcanvasRightLabel" style="padding: 12px;">
-    <div class="offcanvas-header">
-        <h3>Detalles</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    
-    <div class="offcanvas-body">
-        <div class="card-body row">
-            <div class="contenedor-observaciones">
-                <div class="col-sm-6 subtitulo-modal">
-                    <label class="form-label">Observaciones</label>
-                </div>
-                
-                <div class="col-sm-12">
-                <hr>
-                </div>
-                
-                <div class="col-sm-12">
-                    <label for="identificador" class="form-label">1.- He revisado tu bitácora y tengo algunas observaciones que podrían ayudarte a mejorarla. En primer lugar, he notado que algunas entradas son bastante esporádicas y faltan detalles importantes, como el contexto o el impacto de las actividades registradas </label>
-                </div>
-            
-            </div>
-        </div>
-    </div>
-   
-</div>
+
 
 

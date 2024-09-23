@@ -1,4 +1,13 @@
-<h3>Administración de requerimientos</h3>
+
+<div class="row">
+      <div class="col-sm-1" *ngIf="mostrarFormularioRequerimiento">
+        <button style="margin-left: 2px;" class="btn btn-accion" title="atras" (click)="regresarInicio()" >
+          <i class="bi bi-arrow-90deg-left"></i></button>
+    </div>
+    <div class="col-sm-11">
+      <h3>Asignacion de requerimientos</h3>
+    </div>
+</div>
 <hr>
 <div class="card"  *ngIf="!mostrarFormularioRequerimiento">
     <div class="card-body row">
@@ -24,7 +33,7 @@
     </div>
     <div class="card-footer row" style="margin: 0px;">
         <div class="col-sm-3">
-            <button type="button" class="btn btn-secundario" (click)="nuevoRequerimiento(true, null)">Nuevo requerimiento</button>
+            <button type="button" class="btn btn-secundario" (click)="nuevoRequerimiento(true, null)">Asignar requerimiento</button>
         </div>
     </div>    
 
@@ -82,8 +91,8 @@
 </div> 
 
 
-<div class="row" *ngIf="mostrarFormularioRequerimiento">
-  <div  class="col-sm-8">
+<!-- <div class="row" *ngIf="mostrarFormularioRequerimiento">
+  <div  class="col-sm-12">
     <div class="card" style="margin-bottom: 10px; margin-top: 10px;">
       <div class="card-body row" style="padding: 5px;">
         <div class="col-sm-3">
@@ -93,10 +102,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="row" *ngIf="mostrarFormularioRequerimiento">
-  <div class="col-sm-8">
+  <div class="col-sm-12">
       <div class="card" style="margin-top: 10px;">
         <div class="card-header">
           <div class="col-sm-6"> <b>Consultor(es):  </b>Manuel Antonio</div>
@@ -157,6 +166,10 @@
                     <option value="Subdireccion de sistemas">Subdireccion de sistemas</option>
                     <option value="Area de recursos humanos">Area de recursos humanos</option>
                   </select>
+            </div>
+            <div class="col-sm-6">
+              <label for="Correo" class="form-label">Fecha asignación</label>
+              <app-input-fecha></app-input-fecha>
             </div>
           </div> 
         <div class="card-footer">
