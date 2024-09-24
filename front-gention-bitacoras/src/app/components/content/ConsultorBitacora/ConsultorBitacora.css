@@ -1,0 +1,8 @@
+.subtitle {
+  display: flex;
+  gap: 4px;
+}
+
+.lider-tecnico {
+  font-weight: 600;
+}

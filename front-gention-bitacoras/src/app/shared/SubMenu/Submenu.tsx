@@ -29,6 +29,7 @@ export const Submenu = ({ titulo, opciones }: IProps) => {
   return (
     <div>
       <Button
+        sx={{ color: "#6f6f6f" }}
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
