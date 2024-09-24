@@ -1,0 +1,29 @@
+.header-container {
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  background-color: #f7f7f7;
+  height: 68px;
+  align-items: center;
+
+  margin: 0px 12px;
+}
+
+.imagen-logo-infonavit {
+  width: 72px;
+  height: 50px;
+
+  margin: 0px 8px;
+}
+
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+  color: var(--variant-textColor) !important;
+  --variant-textColor: #6f6f6f !important;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+}
