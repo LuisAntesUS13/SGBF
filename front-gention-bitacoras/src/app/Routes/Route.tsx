@@ -3,12 +3,14 @@ import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { Contratos } from "../components/content/contratros/Contratos.tsx";
 import { ConsultorBitacora } from "../components/content/ConsultorBitacora/ConsultorBitacora.tsx";
+import { FormularioContratos } from "../components/content/contratros/FormularioContratos.tsx";
 
 export const Enrutador = () => {
   return (
     <>
       <Routes>
         <Route path="/contrato" element={<Contratos />} />
+        <Route path="/contrato/nuevo" element={<FormularioContratos />} />
         <Route path="/carga-de-perfiles" element={<h1>Carga de perfiles</h1>} />
         <Route
           path="/registro-de-equipo-y-lider"

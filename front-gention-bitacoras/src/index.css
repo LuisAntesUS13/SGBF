@@ -146,6 +146,10 @@ label {
   margin: 5px 10px;
 }
 
+.text-align-last {
+  text-align: end;
+}
+
 /* Estilo del contenedor */
 .tooltip {
   position: relative;
