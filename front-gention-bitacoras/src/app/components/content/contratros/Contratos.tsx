@@ -60,7 +60,6 @@ export const Contratos = () => {
                     </div>
                 </div>
             </div>
-
             <div className="card" >
                 <div className="card-body row">
                     <div className="col-sm-12">
@@ -96,6 +95,5 @@ export const Contratos = () => {
                 </div>
             </div>
         </div>
-        
     </>)
 };

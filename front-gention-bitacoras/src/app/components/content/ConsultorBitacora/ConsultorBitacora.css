@@ -1,0 +1,17 @@
+.subtitle {
+  display: flex;
+  gap: 4px;
+}
+
+.lider-tecnico {
+  font-weight: 600;
+}
+
+.contenedor-filtros {
+  display: flex;
+  gap: 20px;
+}
+
+.custom-input {
+  width: 100% !important;
+}

@@ -18,11 +18,6 @@
   margin: 0px 8px;
 }
 
-.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
-  color: var(--variant-textColor) !important;
-  --variant-textColor: #6f6f6f !important;
-}
-
 .menu {
   display: flex;
   gap: 8px;
