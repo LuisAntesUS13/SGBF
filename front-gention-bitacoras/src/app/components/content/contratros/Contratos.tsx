@@ -50,8 +50,7 @@ export const Contratos = () => {
                     </div>
                     <div className="col-sm-3">
                         <button type="button" className="btn btn-principal" style={{ marginTop: '30px'}} title="Buscar"
-                        onClick={() =>{ getDataContratos()}}
-                        ><SearchOutlinedIcon /> Buscar</button>
+                        onClick={() =>{ getDataContratos()}}><SearchOutlinedIcon /> Buscar</button>
                     </div>
                 </div>
                 <div className="card-footer row">
