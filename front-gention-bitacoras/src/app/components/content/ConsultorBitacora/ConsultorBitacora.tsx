@@ -11,6 +11,7 @@ export const ConsultorBitacora = () => {
           <div className="subtitle">
             <p className="lider-tecnico">Líder técnico:</p>
             <p>Juan Luis Gutiérrez López</p>
+            <input type="text" className="from-control" />
           </div>
         </div>
         <Divider />
