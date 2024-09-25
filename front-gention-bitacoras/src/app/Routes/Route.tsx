@@ -2,7 +2,7 @@ import React from "react";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { Contratos } from "../components/content/contratros/Contratos.tsx";
-import { ConsultorBitacora } from "../components/content/ConsultorBitacora/ConsultorBitacora.tsx";
+import { PeriodosBitacoraLiderTecnico } from "../components/content/PeriodosBitacoraLiderTecnico/PeriodosBitacoraLiderTecnico.tsx";
 
 export const Enrutador = () => {
   return (
@@ -25,7 +25,7 @@ export const Enrutador = () => {
         />
         <Route
           path="/autorizacion-de-bitacora"
-          element={<ConsultorBitacora />}
+          element={<PeriodosBitacoraLiderTecnico />}
         />
         <Route
           path="/registro-de-asistencia"

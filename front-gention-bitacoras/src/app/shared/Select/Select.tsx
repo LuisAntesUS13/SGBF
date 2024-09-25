@@ -25,9 +25,15 @@ export const Select: React.FC<SelectProps> = ({
   className,
 }) => {
   return (
-    <div className={className}>
+    <div className={className} style={{ width: "100%" }}>
       {label && <label htmlFor={name}>{label}</label>}
-      <select name={name} id={name} value={value} onChange={onChange}>
+      <select
+        name={name}
+        id={name}
+        value={value}
+        onChange={onChange}
+        className="form-select"
+      >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (
           <option key={option.value} value={option.value}>
