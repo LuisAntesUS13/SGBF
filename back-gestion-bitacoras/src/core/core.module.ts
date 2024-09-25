@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './config/jwt-config';
 import { LoginService } from './services/login.service';
 import { LoginController } from './controller/login-controller';
+import { ContratosService } from './services/contratos.service';
+import { ContratosController } from './controller/contratos-controller';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { LoginController } from './controller/login-controller';
     }),
     RepositoriosModule,
   ],
-  controllers: [LoginController],
-  providers: [DBConnectionService, LoginService],
+  controllers: [LoginController, ContratosController],
+  providers: [DBConnectionService, LoginService, ContratosService],
 })
 export class BusinessCoreModule {}

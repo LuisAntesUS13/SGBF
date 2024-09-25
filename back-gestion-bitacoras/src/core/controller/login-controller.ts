@@ -4,7 +4,7 @@ import { BaseResponse } from '../model/response/baseResponse';
 import { LoginRequest } from '../model/request/loginRequest';
 import { LoginResponse } from '../model/response/loginResponse';
 
-@Controller('/v1')
+@Controller('/sesion')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 

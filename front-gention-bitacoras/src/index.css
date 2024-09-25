@@ -8,6 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 h1,h2,h3,h4,h5 {
     color: #0e159d;
+    font-weight: 650;
 }
 
 .color_rojo {
