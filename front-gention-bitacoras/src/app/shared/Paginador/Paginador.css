@@ -1,0 +1,21 @@
+.derecha {
+    display: flex;                  /* Utiliza flexbox para alinear los elementos en línea */
+    justify-content: flex-end;      /* Alinea todos los elementos a la derecha */
+    align-items: center;            /* Alinea verticalmente los elementos en el centro */
+}
+
+.circulo:hover {
+    background: rgb(158,156,156);
+    background: radial-gradient(circle, rgba(158,156,156,0.5340511204481793) 0%, rgba(255,255,255,1) 80%);  
+    cursor: pointer;
+}
+
+
+.espacio {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.bajar {
+    margin-top: 2px;
+}

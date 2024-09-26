@@ -17,7 +17,7 @@ export class LoginRepository {
       const result = await this.dataSource.query('EXEC sp_login @0', [usuario]);
       return result[0];
     } catch (error) {
-      throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6cb88');
+      throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6cb90');
     }
   }
 }

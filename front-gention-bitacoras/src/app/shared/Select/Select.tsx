@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Option {
-  value: string | number;
-  label: string;
+  id: string | number;
+  nombre: string;
 }
 
 interface SelectProps {
@@ -25,13 +25,13 @@ export const Select: React.FC<SelectProps> = ({
   className,
 }) => {
   return (
-    <div className={className}>
+    <div >
       {label && <label htmlFor={name}>{label}</label>}
-      <select name={name} id={name} value={value} onChange={onChange}>
+      <select name={name} id={name} value={value} onChange={onChange} className={className}>
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+          <option key={option.id} value={option.id}>
+            {option.nombre}
           </option>
         ))}
       </select>

@@ -1,4 +1,7 @@
-import { ConsultaContrato } from "../model/contratos.model.tsx";
+
+
+import { ConsultaContrato } from "../model/request/contratos.request.tsx";
+import { RespuestaContrato } from "../model/response/contratos.response.tsx";
 import { API_ROUTES } from "../shared/rutasApi.tsx";
 
 export async function getContratosData(consultaContrato: ConsultaContrato) {
@@ -15,10 +18,10 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
+        const data: RespuestaContrato = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
       throw error; // Retorna el error para manejarlo externamente
     }
-  }
+ }

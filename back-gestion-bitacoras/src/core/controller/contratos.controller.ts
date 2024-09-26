@@ -11,7 +11,7 @@ export class ContratosController {
   @Post('/getContratos')
   async ExecuteStoredProcedure(
     @Body() consultaContratoRequest: ConsultaContratoRequest,
-  ): Promise<BaseResponse<ContratoResponse>> {
+  ): Promise<BaseResponse<ContratoResponse[]>> {
     const datos = await this.contratosService.getContratos(
       consultaContratoRequest,
     );

@@ -9,7 +9,7 @@ export class ContratosService {
 
   public async getContratos(
     consultaContratoRequest: ConsultaContratoRequest,
-  ): Promise<ContratoResponse> {
+  ): Promise<ContratoResponse[]> {
     const datosLogin = await this.contratosRepository.getContratos(
       consultaContratoRequest,
     );

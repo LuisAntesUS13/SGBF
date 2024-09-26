@@ -7,9 +7,11 @@ import { RepositoriosModule } from './repository/repository-module';
 import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './config/jwt-config';
 import { LoginService } from './services/login.service';
-import { LoginController } from './controller/login-controller';
 import { ContratosService } from './services/contratos.service';
-import { ContratosController } from './controller/contratos-controller';
+import { CatalogosService } from './services/catalogos.service';
+import { LoginController } from './controller/login.controller';
+import { ContratosController } from './controller/contratos.controller';
+import { CatalogosController } from './controller/catalogos.controller';
 
 @Module({
   imports: [
@@ -29,7 +31,12 @@ import { ContratosController } from './controller/contratos-controller';
     }),
     RepositoriosModule,
   ],
-  controllers: [LoginController, ContratosController],
-  providers: [DBConnectionService, LoginService, ContratosService],
+  controllers: [LoginController, ContratosController, CatalogosController],
+  providers: [
+    DBConnectionService,
+    LoginService,
+    ContratosService,
+    CatalogosService,
+  ],
 })
 export class BusinessCoreModule {}
