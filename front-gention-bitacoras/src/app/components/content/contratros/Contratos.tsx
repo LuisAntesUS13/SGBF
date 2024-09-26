@@ -7,7 +7,6 @@ import { ConsultaContrato } from "../../../model/request/contratos.request.tsx";
 import { DatosContratos } from "../../../model/response/contratos.response.tsx";
 import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
-import { Select } from "../../../shared/Select/Select.tsx";
 
 export const Contratos = () => {
    
@@ -18,20 +17,19 @@ export const Contratos = () => {
     // Componente para navegar entre paginas
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log("render");
-        
-    },[])
+     //Formulario busqueda
+    const [formData, setFormData] = useState({
+        consultor1: "",
+        consultor2: "",
+      });
 
-    const getDataContratos = async () => {
+      const getDataContratos = async () => {
         const datos: ConsultaContrato = {
             contrato:formData.consultor1,
             consultora: formData.consultor2,
             pagina_actual: 1,
             registros_por_pagina: 10
         }
-
-        console.log(datos);
         try {
             const result = await getContratosData(datos); // Llama a la función que encapsula fetch
             setDataContrato(result.data);
@@ -41,11 +39,11 @@ export const Contratos = () => {
         }
       };
 
-      //Formulario busqueda
-      const [formData, setFormData] = useState({
-        consultor1: "",
-        consultor2: "",
-      });
+
+    useEffect(() => {
+        getDataContratos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     
       const handleChange = (e) => {
         const { name, value } = e.target;
