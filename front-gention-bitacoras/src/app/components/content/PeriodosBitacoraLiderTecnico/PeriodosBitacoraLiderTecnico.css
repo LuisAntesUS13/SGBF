@@ -15,3 +15,11 @@
 .custom-input {
   width: 100% !important;
 }
+
+Divider {
+  margin-bottom: 40px;
+}
+
+.contenedor-tabla {
+  margin-top: 20px;
+}

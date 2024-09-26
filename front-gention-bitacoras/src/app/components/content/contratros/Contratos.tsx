@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 import { getContratosData } from "../../../services/contratos.service.tsx";
@@ -13,6 +14,9 @@ export const Contratos = () => {
     //Datos peticion cunsulta contratos
     const [dataContratos, setDataContrato] = useState<DatosContratos[]>([]);
     const [errorContratos, setErrorContratos] = useState(null);
+
+    // Componente para navegar entre paginas
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("render");
@@ -83,7 +87,7 @@ export const Contratos = () => {
                 </div>
                 <div className="card-footer row">
                     <div className="col-sm-3">
-                        <button type="button" className="btn btn-accion" title="Nuevo contrato"><ControlPointOutlinedIcon /> Nuevo Contrato</button>
+                        <button type="button" className="btn btn-accion" title="Nuevo contrato" onClick={() => navigate("/contrato/nuevo")}><ControlPointOutlinedIcon /> Nuevo Contrato</button>
                     </div>
                 </div>
             </div>
