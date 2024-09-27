@@ -128,9 +128,12 @@ export const FormularioContratos = () => {
             // Asegúrate de que el resultado sea una cadena antes de asignarlo
             if (typeof fileData === 'string') {
                 console.log("Contenido del archivo en base64:", fileData);
+
+                const extencion = file.name.split('.').pop();
                 setFormData({
                     ...formData,
                     archivoContrato: fileData, // Guarda el archivo en base64 en el estado
+                    extencion: extencion??'pdf', // Guarda el archivo en base64 en el estado
                 });
             } else {
                 console.error('El archivo no pudo ser leído como una cadena.');
@@ -151,8 +154,8 @@ export const FormularioContratos = () => {
         const datos:GuardaContrato = {
             id_contrato: null,
             no_contrato: formData.contrato,
-            fh_inicio: formData.contrato,
-            fh_termino: formData.contrato,
+            fh_inicio: formData.fechaInicio,
+            fh_termino: formData.fechaTermino,
             monto_variable: parseInt(formData.montoVariable),
             monto_fijo: parseInt(formData.montoFijo),
             monto_total: parseInt(formData.montoTotal),
@@ -169,13 +172,13 @@ export const FormularioContratos = () => {
 
 
         console.log(datos);
-        try {
-          const result = await guardaActualizaContratos(datos);
-          console.log(result);
+        // try {
+        //   const result = await guardaActualizaContratos(datos);
+        //   console.log(result);
 
-        } catch (error) {
-          console.log(error);
-        }
+        // } catch (error) {
+        //   console.log(error);
+        // }
     };
 
 
