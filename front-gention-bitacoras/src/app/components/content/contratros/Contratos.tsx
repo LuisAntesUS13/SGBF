@@ -121,7 +121,7 @@ export const Contratos = () => {
                             </tbody>
                         </table>
                     </div>
-                    <Paginador datos={dataContratos}/>
+                    <Paginador datos={dataContratos }/>
                 </div>
             </div>
         </div>
