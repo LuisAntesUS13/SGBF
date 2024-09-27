@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
 import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
@@ -6,43 +6,39 @@ import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
 import "../../shared/Paginador/Paginador.css";
 
 
-export const Paginador = ({datos}) => {
+export const Paginador = ({ totalRegistros, paginaActual, registrosPorPagina, onCambioPagina }) => {
 
-  useEffect(() => {
-    console.log(datos)
+    const totalPaginas = Math.ceil(totalRegistros / registrosPorPagina);
 
-    if(datos.length === 0){
-        setPaginaActual(0);
-        setTotalRegistros(0);
-        setNoRegistrosInicial(0);
-        setNoRegistrosFinal(0);
-    } else {
-        setPaginaActual(datos[0].pagina_actual);
-        setTotalRegistros(datos[0].total_registros);
-        setNoRegistrosInicial(datos[0].pagina_actual * parseInt(registrosPorPagina) - (parseInt(registrosPorPagina)-1))
-        setNoRegistrosFinal(((datos[0].pagina_actual * parseInt(registrosPorPagina)) > datos[0].total_registros) ? datos[0].total_registros : (datos[0].pagina_actual * parseInt(registrosPorPagina)) )
-    }
+    const cambioRegistrosPorPagina = (valor) => {
+        onCambioPagina(1, Number(valor)); // Reiniciar a la primera página si cambia el número de registros
+    };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[datos])
+    const cambioBoton = (tipo) => {
+        switch (tipo) {
+          case 1: // Primera página
+              onCambioPagina(1, registrosPorPagina);
+            break;
+          case 2: // Página anterior
+            if (paginaActual > 1) {
+              onCambioPagina(paginaActual - 1, registrosPorPagina);
+            }
+            break;
+          case 3: // Página siguiente
+            if (paginaActual < totalPaginas) {
+              onCambioPagina(paginaActual + 1, registrosPorPagina);
+            }
+            break;
+          case 4: // Última página
+             onCambioPagina(totalPaginas, registrosPorPagina);
+            break;
+          default:
+            break;
+        }
+      };
 
-  const [registrosPorPagina, setRegistrosPorPagina] = useState("10");
-  const [paginaActual, setPaginaActual] = useState(0);
-
-
-  const [totalRegistros, setTotalRegistros] = useState(0);
-  const [noRegistrosInicial, setNoRegistrosInicial] = useState(0);
-  const [noRegistrosFinal, setNoRegistrosFinal] = useState(0);
-
-  const [siguente, setSiguente] = useState(0);
-  const [atras, setAtras] = useState(0);
-  const [primero, setPrimero] = useState(0);
-  const [ultimo, setUltimo] = useState(0);
-
-  const cambioRegistrosPorPagina = (valor:string) => {
-    setRegistrosPorPagina(valor)
-  };
-
+      const esPrimeraPagina = paginaActual === 1;
+      const esUltimaPagina = paginaActual === totalPaginas;
 
   return ( <>
     <div className="derecha">
@@ -57,11 +53,12 @@ export const Paginador = ({datos}) => {
                 <option value="100">100</option>
             </select>
         </div>
-        <div className="circulo" onClick={()=>{}}><FirstPageRoundedIcon/></div>
-        <div className="circulo" onClick={()=>{}}><NavigateBeforeRoundedIcon/></div>
-        <div className="espacio bajar">{noRegistrosInicial} - {noRegistrosFinal} de {totalRegistros}</div>
-        <div className="circulo" onClick={()=>{}}><NavigateNextRoundedIcon/></div>
-        <div className="circulo" onClick={()=>{}}> <LastPageRoundedIcon/></div>
+        <div className={`circulo ${esPrimeraPagina ? 'deshabilitado' : ''}`}  onClick={()=>{!esPrimeraPagina && cambioBoton(2)}}><FirstPageRoundedIcon sx={{ fontSize: 30 }} /></div>
+        <div className={`circulo ${esPrimeraPagina ? 'deshabilitado' : ''}`}  onClick={()=>{!esPrimeraPagina && cambioBoton(2)}}><NavigateBeforeRoundedIcon sx={{ fontSize: 30 }} /></div>
+        <div className="espacio bajar">{Math.min((paginaActual - 1) * registrosPorPagina + 1, totalRegistros)} </div> -
+        <div className="espacio bajar">{Math.min(paginaActual * registrosPorPagina, totalRegistros)} de {totalRegistros}</div>
+        <div className={`circulo ${esUltimaPagina ? 'deshabilitado' : ''}`}  onClick={()=>{!esUltimaPagina && cambioBoton(3)}}><NavigateNextRoundedIcon sx={{ fontSize: 30 }} /></div>
+        <div className={`circulo ${esUltimaPagina ? 'deshabilitado' : ''}`} onClick={()=>{!esUltimaPagina && cambioBoton(4)}}> <LastPageRoundedIcon sx={{ fontSize: 30 }} /></div>
     </div>
   </>);
 };

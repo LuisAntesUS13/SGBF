@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { API } from './core/util/db-enum';
 import { RUTA_GLOBAL } from './core/util/global-enum';
+import * as bodyParser from 'body-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -34,6 +35,8 @@ async function bootstrap() {
   app.enableCors(optionsCors);
 
   app.setGlobalPrefix(RUTA_GLOBAL.PATH);
+  app.use(bodyParser.json({ limit: '10mb' })); // Aquí defines el límite de 10MB o el valor que necesites
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
   const port = process.env.SGBD_PORT || API.API_PORT;
   await app.listen(port);

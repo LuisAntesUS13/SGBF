@@ -9,46 +9,60 @@ import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
 
 export const Contratos = () => {
-   
+
+     // Componente para navegar entre paginas
+     const navigate = useNavigate();
+
     //Datos peticion cunsulta contratos
     const [dataContratos, setDataContrato] = useState<DatosContratos[]>([]);
-    const [errorContratos, setErrorContratos] = useState(null);
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [registrosPorPagina, setRegistrosPorPagina] = useState(10);
 
-    // Componente para navegar entre paginas
-    const navigate = useNavigate();
+    const getDataContratos = async (pagina = 1, registros = 10) => {
+        const datos:ConsultaContrato = {
+          contrato: formulario.contrato,
+          consultora: formulario.consultora,
+          pagina_actual: pagina,
+          registros_por_pagina: registros
+        };
+
+        try {
+          const result = await getContratosData(datos);
+          setDataContrato(result.data);
+        } catch (error) {
+          console.log(error);
+        }
+    };
+
+     // Función de búsqueda que reinicia a la página 1
+    const buscarContratos = async () => {
+        setPaginaActual(1);
+        await getDataContratos(1, registrosPorPagina); 
+    };
+
+    const handlePaginacion = (pagina, registros) => {
+        setPaginaActual(pagina);
+        setRegistrosPorPagina(registros);
+    };
 
      //Formulario busqueda
-    const [formData, setFormData] = useState({
-        consultor1: "",
-        consultor2: "",
-      });
+    const [formulario, setFormulario] = useState({
+        contrato: "",
+        consultora: "",
+    });
 
-      const getDataContratos = async () => {
-        const datos: ConsultaContrato = {
-            contrato:formData.consultor1,
-            consultora: formData.consultor2,
-            pagina_actual: 1,
-            registros_por_pagina: 10
-        }
-        try {
-            const result = await getContratosData(datos); // Llama a la función que encapsula fetch
-            setDataContrato(result.data);
-        } catch (error) {
-            setErrorContratos(error); // Maneja errores
-            console.log(errorContratos);
-        }
-      };
-
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormulario({ ...formulario, [name]: value });
+    };
 
     useEffect(() => {
-        getDataContratos();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-      };
+        getDataContratos(paginaActual, registrosPorPagina);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [paginaActual, registrosPorPagina]);
+
+
+
 
     //    const [formData2, setFormData2] = useState({
     //     consultor1: "",
@@ -69,10 +83,10 @@ export const Contratos = () => {
                 <div className="card">
                 <div className="card-body row">
                     <div className="col-sm-3">
-                        <Input label="No. contrato" type="text" name="consultor1" value={formData.consultor1} onChange={handleChange} placeholder="TEXTO" className="" />
+                        <Input label="No. contrato" type="text" name="contrato" value={formulario.contrato} onChange={handleChange} placeholder="Numero de contrato" className="" />
                     </div>
                     <div className="col-sm-3">
-                        <Input label="No. contrato 2" type="text" name="consultor2" value={formData.consultor2} onChange={handleChange} placeholder="TEXTO" className="" />
+                        <Input label="No. contrato 2" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
                     </div>
                     {/* <div className="col-sm-3">
                         <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
@@ -80,7 +94,7 @@ export const Contratos = () => {
                     </div> */}
                     <div className="col-sm-3">
                         <button type="button" className="btn btn-principal" style={{ marginTop: '30px'}} title="Buscar"
-                        onClick={() =>{ getDataContratos()}}><SearchOutlinedIcon /> Buscar</button>
+                        onClick={() =>{ buscarContratos()}}><SearchOutlinedIcon /> Buscar</button>
                     </div>
                 </div>
                 <div className="card-footer row">
@@ -121,7 +135,8 @@ export const Contratos = () => {
                             </tbody>
                         </table>
                     </div>
-                    <Paginador datos={dataContratos}/>
+                    <Paginador totalRegistros={dataContratos.length > 0 ? dataContratos[0].total_registros: 0 }   paginaActual={paginaActual} 
+                      registrosPorPagina={registrosPorPagina}   onCambioPagina={handlePaginacion} />
                 </div>
             </div>
         </div>
