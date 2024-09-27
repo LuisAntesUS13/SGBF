@@ -28,3 +28,9 @@ export declare class ContratoResponse {
   total_registros?: number;
   total_paginas?: number;
 }
+
+export declare class ActualizaRegistraResponse {
+  correcto: string;
+  mensaje: string;
+  id_contrato: number;
+}

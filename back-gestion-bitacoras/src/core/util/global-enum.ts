@@ -10,3 +10,11 @@ export enum paginador {
   pagina_acual = 1,
   registros_por_pagina = 10,
 }
+
+export enum folderArchivos {
+  ruta = 'C:/gestionBitacoras/',
+}
+
+export enum tipoArchivos {
+  pdf = 1,
+}
