@@ -35,4 +35,10 @@ export class RespuestaContrato {
     message: string;
     data: DatosContratos[];
 }
+
+export class RespuestaGuardaContrato {
+    correcto: string;
+    mensaje: string;
+    id_contrato: number;
+}
   

@@ -18,7 +18,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -42,7 +42,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -64,7 +64,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogoDocumentos[] = await response.json();
+        const data: RespuestaCatalogoDocumentos = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -86,7 +86,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -109,7 +109,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogoExtArchivo[] = await response.json();
+        const data: RespuestaCatalogoExtArchivo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -131,7 +131,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -155,7 +155,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -178,7 +178,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogoPerfilConsultor[] = await response.json();
+        const data: RespuestaCatalogoPerfilConsultor = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -201,7 +201,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -223,7 +223,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -246,7 +246,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: RespuestaCatalogo[] = await response.json();
+        const data: RespuestaCatalogo = await response.json();
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
