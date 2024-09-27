@@ -1,7 +1,7 @@
 .derecha {
-    display: flex;                  /* Utiliza flexbox para alinear los elementos en línea */
-    justify-content: flex-end;      /* Alinea todos los elementos a la derecha */
-    align-items: center;            /* Alinea verticalmente los elementos en el centro */
+    display: flex;               
+    justify-content: flex-end;      
+    align-items: center;           
 }
 
 .circulo:hover {
@@ -10,12 +10,17 @@
     cursor: pointer;
 }
 
-
 .espacio {
     margin-left: 4px;
     margin-right: 4px;
+    /* font-weight: bold; */
 }
 
 .bajar {
     margin-top: 2px;
 }
+
+.circulo.deshabilitado {
+    opacity: 0.5;
+    pointer-events: none; /* Evita que el botón pueda ser clicado */
+  }
