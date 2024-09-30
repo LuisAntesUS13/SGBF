@@ -1,0 +1,50 @@
+.contenedor-datos-proyecto {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 16px;
+}
+
+.datos-proyecto {
+  font-weight: bold;
+}
+
+.datos {
+  display: flex;
+  gap: 4px;
+}
+
+.titulo-proyecto {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.titulo-proyecto,
+.datos > p {
+  margin: 0;
+}
+
+.contenedor-componente-tabla {
+  padding: 20px 0px;
+}
+
+.contenedor-botones {
+  display: flex;
+  gap: 20px;
+}
+
+.contenedor-filtros-botones {
+  display: flex;
+}
+
+.contenedor-lista-estados {
+  margin-top: auto;
+}
+
+.contenedor-botones-autorizacion-observacion {
+  margin-left: auto;
+}
+
+.btn {
+  width: 140px;
+}

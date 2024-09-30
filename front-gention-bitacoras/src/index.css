@@ -7,14 +7,17 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-h1,h2,h3,h4,h5 {
-    color: #0e159d;
-    font-weight: 650;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #0e159d;
+  font-weight: 650;
 }
 .contenido_principal {
   margin: 15px 10%;
 }
-
 
 .color_rojo {
   color: #f80000;
@@ -298,4 +301,35 @@ label {
     rgba(30, 135, 29, 0.08867296918767509) 0%,
     rgba(30, 135, 29, 0) 100%
   ) !important;
+}
+
+.contenedor-tabla ::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-button:increment,
+.contenedor-tabla ::-webkit-scrollbar-button {
+  display: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+p {
+  margin-bottom: 0px;
 }

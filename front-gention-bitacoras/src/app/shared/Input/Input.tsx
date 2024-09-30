@@ -9,6 +9,7 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Evento para manejar cambios
   placeholder?: string; // Texto de marcador
   className?: string; // Props adicionales (ej. className)
+  disabled?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
   onChange,
   placeholder,
   className,
+  disabled = false, // Valor por defecto es "false"
 }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -35,6 +37,7 @@ export const Input: React.FC<InputProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         className={`${className || ""} form-control `}
+        disabled={disabled}
       />
     </div>
   );
