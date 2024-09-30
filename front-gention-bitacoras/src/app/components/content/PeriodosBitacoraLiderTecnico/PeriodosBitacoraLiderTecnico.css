@@ -23,3 +23,7 @@ Divider {
 .contenedor-tabla {
   margin-top: 20px;
 }
+
+.contenedor-h1-boton {
+  display: flex;
+}

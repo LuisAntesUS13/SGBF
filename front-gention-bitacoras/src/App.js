@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <BrowserRouter>
           <Menu />
-          <Enrutador />
+          <Enrutador></Enrutador>
         </BrowserRouter>
       </header>
     </div>

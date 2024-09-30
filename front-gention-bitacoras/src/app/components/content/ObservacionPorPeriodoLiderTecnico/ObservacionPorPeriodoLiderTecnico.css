@@ -1,0 +1,59 @@
+.titulo-proyecto {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.datos-proyecto {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.datos {
+  display: flex;
+}
+
+.btn-principal,
+.btn-secundario {
+  width: 100%;
+}
+
+.btn-realizar-observacion {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.contenedor-observaciones-realizadas {
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+}
+
+.contenedor-observaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+ul {
+  padding: 12px;
+  margin-top: 0;
+  margin-bottom: 0rem !important;
+}
+
+.contenedor-textarea-observaciones {
+  margin-bottom: 20px;
+}
+
+.btn-realizar-observacion {
+  width: 200px;
+}
+
+.contenedor-contenido {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.contenido_principal {
+  display: flex;
+  flex-direction: column;
+}

@@ -4,6 +4,10 @@ import { Route } from "react-router-dom";
 import { Contratos } from "../components/content/contratros/Contratos.tsx";
 import { FormularioContratos } from "../components/content/contratros/FormularioContratos.tsx";
 import { PeriodosBitacoraLiderTecnico } from "../components/content/PeriodosBitacoraLiderTecnico/PeriodosBitacoraLiderTecnico.tsx";
+import { ValidacionBitacoraLiderTecnico } from "../components/content/ValidacionBitacoraLiderTecnico/ValidacionBitacoraLiderTecnico.tsx";
+import { DetallesDeActividadLiderTecnico } from "../components/content/DetallesDeActividadLiderTecnico/DetallesDeActividadLiderTecnico.tsx";
+import { ObservacionPorPeriodoLiderTecnico } from "../components/content/ObservacionPorPeriodoLiderTecnico/ObservacionPorPeriodoLiderTecnico.tsx";
+import { BitacoraConsultor } from "../components/content/BitacoraConsultor/BitacoraConsultor.tsx";
 
 export const Enrutador = () => {
   return (
@@ -17,14 +21,23 @@ export const Enrutador = () => {
           element={<h1>Registro de equipo y líder</h1>}
         />
         <Route
+          path="/validacion-bitacora-lider-tecnico"
+          element={<ValidacionBitacoraLiderTecnico />}
+        />
+        <Route
+          path="/detalles-actividad"
+          element={<DetallesDeActividadLiderTecnico />}
+        />
+        <Route
+          path="/observacion-por-periodo-consultores"
+          element={<ObservacionPorPeriodoLiderTecnico />}
+        />
+        <Route
           path="/reasignacion-de-lider"
           element={<h1>Reasignación de líder</h1>}
         />
         <Route path="/Requerimientos" element={<h1>Requerimientos</h1>} />
-        <Route
-          path="/registro-de-bitacora"
-          element={<h1>Registro de bitacora</h1>}
-        />
+        <Route path="/registro-de-bitacora" element={<BitacoraConsultor />} />
         <Route
           path="/autorizacion-de-bitacora"
           element={<PeriodosBitacoraLiderTecnico />}
@@ -32,10 +45,6 @@ export const Enrutador = () => {
         <Route
           path="/registro-de-asistencia"
           element={<h1>Registro de asistencia</h1>}
-        />
-        <Route
-          path="/control-de-asistencia"
-          element={<h1>Control de asistencia</h1>}
         />
         <Route
           path="/control-de-asistencia"
