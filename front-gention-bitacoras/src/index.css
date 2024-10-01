@@ -13,7 +13,7 @@ h3,
 h4,
 h5 {
   color: #0e159d;
-  font-weight: 650;
+  font-weight: 650
 }
 .contenido_principal {
   margin: 15px 10%;
@@ -63,7 +63,6 @@ h5 {
   background-color: #f80000;
   color: white;
   border-color: white;
-  margin-bottom: 1px;
 }
 
 .btn-principal:hover {
@@ -82,7 +81,6 @@ h5 {
   background-color: white;
   color: #f80000;
   border-color: #f80000;
-  margin-bottom: 1px;
 }
 
 .btn-secundario:hover {
@@ -101,7 +99,6 @@ h5 {
   background-color: #0e159d;
   color: white;
   border-color: white;
-  margin-bottom: 1px;
 }
 
 .btn-accion:hover {
@@ -120,7 +117,6 @@ h5 {
   background-color: white;
   color: #0e159d;
   border-color: #0e159d;
-  margin-bottom: 1px;
 }
 
 .btn-accion-sec:hover {
@@ -257,18 +253,6 @@ label {
 .card-footer {
   margin: 0px !important;
 }
-
-/* .delete {
-  color: red!important;
-}
-
-.update {
-  color: blue!important;
-}
-
-.download {
-  color: green!important;
-} */
 
 .delete:hover {
   color: red !important;
