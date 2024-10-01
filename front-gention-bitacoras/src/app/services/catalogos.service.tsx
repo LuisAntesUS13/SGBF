@@ -2,6 +2,7 @@
 
 import { ConsultaCatalogo, ConsultaCatalogoDocumentos } from "../model/request/catalogos.request.tsx";
 import { RespuestaCatalogo, RespuestaCatalogoDocumentos, RespuestaCatalogoExtArchivo, RespuestaCatalogoPerfilConsultor } from "../model/response/catalogo.response.tsx";
+import { ErrorPersonalizado } from "../model/response/error.response.tsx";
 import { API_ROUTES } from "../shared/rutasApi.tsx";
 
 export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
@@ -15,7 +16,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -39,7 +46,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -61,7 +74,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogoDocumentos = await response.json();
@@ -83,7 +102,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -106,7 +131,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogoExtArchivo = await response.json();
@@ -128,7 +159,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -152,7 +189,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -175,7 +218,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogoPerfilConsultor = await response.json();
@@ -198,7 +247,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -220,7 +275,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();
@@ -243,7 +304,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
           });
           
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+              const errorData = await response.json();
+          // eslint-disable-next-line no-throw-literal
+          throw {
+            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
+            codigoEstatus: errorData.statusCode,
+            codigoError: errorData.codeError? errorData.codeError : "",
+          }  as ErrorPersonalizado
         }
 
         const data: RespuestaCatalogo = await response.json();

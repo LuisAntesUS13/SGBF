@@ -22,25 +22,25 @@ export class CatalogoRepository {
   ) {}
 
   async getCatalogoModuloAplicativo(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -55,25 +55,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoAreas(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -88,25 +88,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoConsultoras(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -121,25 +121,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoEstatus(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -154,25 +154,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoFormaPago(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -187,25 +187,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoProyecto(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -220,25 +220,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoTipoAccion(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -253,25 +253,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoTipoContrato(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -286,25 +286,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoPerfilConsultor(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoPerfilConsultorResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(
@@ -319,30 +319,30 @@ export class CatalogoRepository {
   }
 
   async getCatalogoDocumento(
-    catalogoRequest: CatalogoDocumentosRequest,
+    request: CatalogoDocumentosRequest,
   ): Promise<CatalogoDocumentoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
-      if (catalogoRequest.grupo != '') {
+      if (request.grupo != '') {
         condicion += ' AND grupo = @' + parametros.length;
-        parametros.push(catalogoRequest.grupo);
+        parametros.push(request.grupo);
       }
 
       const result = await this.dataSource.query(
@@ -357,25 +357,25 @@ export class CatalogoRepository {
   }
 
   async getCatalogoExtencion(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoExtArchivoResponse[]> {
     try {
       let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
       const parametros: any[] = [];
 
       // Condición para el nombre
-      if (catalogoRequest.nombre != '') {
+      if (request.nombre != '') {
         condicion +=
           ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
           parametros.length +
           '))';
-        parametros.push(`%${catalogoRequest.nombre}%`);
+        parametros.push(`%${request.nombre}%`);
       }
 
       // Condición para el campo 'activo'
-      if (catalogoRequest.activo != null) {
+      if (request.activo != null) {
         condicion += ' AND activo = @' + parametros.length;
-        parametros.push(catalogoRequest.activo);
+        parametros.push(request.activo);
       }
 
       const result = await this.dataSource.query(

@@ -3,8 +3,8 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { CustomException } from '../util/errores';
 import { DataSource } from 'typeorm';
 import DBConfig from '../config/db-config';
-import { ArchivoRequest } from '../model/request/archivoRequest';
 import { ArchivoResponse } from '../model/response/archivoResponse';
+import { ArchivoRequest } from '../model/request/archivoRequest';
 
 @Injectable()
 export class ArchivoRepository {
@@ -13,19 +13,17 @@ export class ArchivoRepository {
     private readonly dataSource: DataSource,
   ) {}
 
-  async addUpdateArchivo(
-    archivoRequest: ArchivoRequest,
-  ): Promise<ArchivoResponse> {
+  async addUpdateArchivo(request: ArchivoRequest): Promise<ArchivoResponse> {
     try {
       const result = await this.dataSource.query(
         'EXEC sp_registraActualizaArchivos @0, @1, @2, @3, @4, @5',
         [
-          archivoRequest.id_archivo,
-          archivoRequest.nombre,
-          archivoRequest.id_extencion,
-          archivoRequest.ruta,
-          archivoRequest.id_usuario,
-          archivoRequest.ip,
+          request.id_archivo,
+          request.nombre,
+          request.id_extencion,
+          request.ruta,
+          request.id_usuario,
+          request.ip,
         ],
       );
       return result[0];

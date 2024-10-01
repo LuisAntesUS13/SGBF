@@ -7,6 +7,7 @@ import { ConsultaContrato } from "../../../model/request/contratos.request.tsx";
 import { DatosContratos } from "../../../model/response/contratos.response.tsx";
 import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Contratos = () => {
 
@@ -18,7 +19,7 @@ export const Contratos = () => {
     const [paginaActual, setPaginaActual] = useState(1);
     const [registrosPorPagina, setRegistrosPorPagina] = useState(10);
 
-    const getDataContratos = async (pagina = 1, registros = 10) => {
+    const getDataContratos = async (pagina = 1, registros = 10, mosrar = false) => {
         const datos:ConsultaContrato = {
           contrato: formulario.contrato,
           consultora: formulario.consultora,
@@ -29,15 +30,22 @@ export const Contratos = () => {
         try {
           const result = await getContratosData(datos);
           setDataContrato(result.data);
+          if(mosrar){
+            toast.success(result.mensaje, {});
+            // toast.error(result.message, {});
+            // toast.warn(result.message, {});
+            // toast.info(result.message, {});
+          }
         } catch (error) {
           console.log(error);
+          toast.error(error, {});
         }
     };
 
      // Función de búsqueda que reinicia a la página 1
     const buscarContratos = async () => {
         setPaginaActual(1);
-        await getDataContratos(1, registrosPorPagina); 
+        await getDataContratos(1, registrosPorPagina, true); 
     };
 
     const handlePaginacion = (pagina, registros) => {
@@ -57,24 +65,9 @@ export const Contratos = () => {
     };
 
     useEffect(() => {
-        getDataContratos(paginaActual, registrosPorPagina);
+        getDataContratos(paginaActual, registrosPorPagina,false);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paginaActual, registrosPorPagina]);
-
-
-
-
-    //    const [formData2, setFormData2] = useState({
-    //     consultor1: "",
-    //   });
-
-    //   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const { name, value } = e.target;
-    //     setFormData2({ ...formData2, [name]: value });
-    //   };
-
-
-    //   let proveedorOpciones = [{nombre:"opicon 1", id:1},{nombre:"opicon 2", id:2},{nombre:"opicon 3", id:3}]
 
     return (<>
         <div className="contenido_principal">
@@ -140,5 +133,9 @@ export const Contratos = () => {
                 </div>
             </div>
         </div>
+
+        <ToastContainer position="top-right" limit={4} autoClose={3000} hideProgressBar={false}  newestOnTop={false}
+                closeOnClick  rtl={false}   pauseOnFocusLoss  draggable  pauseOnHover  theme="colored" />
+                
     </>)
 };

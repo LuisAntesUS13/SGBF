@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class CustomException extends HttpException {
-  constructor(mensaje: string, codeError: string) {
+  constructor(message: string, codeError: string) {
     super(
       {
-        mensaje,
+        message,
         codeError,
+        error: '',
       },
       HttpStatus.BAD_REQUEST,
     );

@@ -32,7 +32,7 @@ export class DatosContratos{
 
 export class RespuestaContrato {
     statusCode: number;
-    message: string;
+    mensaje: string;
     data: DatosContratos[];
 }
 

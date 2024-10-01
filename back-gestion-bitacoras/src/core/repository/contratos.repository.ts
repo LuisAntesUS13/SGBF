@@ -49,12 +49,14 @@ export class ContratosRepository {
         [
           registraActualizaContratoRequest.id_contrato,
           registraActualizaContratoRequest.no_contrato,
-          await this.generalRepository.StringStrinFechaSql(
-            registraActualizaContratoRequest.fh_inicio,
-          ),
-          await this.generalRepository.StringStrinFechaSql(
-            registraActualizaContratoRequest.fh_termino,
-          ),
+          registraActualizaContratoRequest.fh_inicio,
+          // await this.generalRepository.StringStrinFechaSql(
+          //   registraActualizaContratoRequest.fh_inicio,
+          // ),
+          registraActualizaContratoRequest.fh_termino,
+          // await this.generalRepository.StringStrinFechaSql(
+          //   registraActualizaContratoRequest.fh_termino,
+          // ),
           registraActualizaContratoRequest.monto_variable,
           registraActualizaContratoRequest.monto_fijo,
           registraActualizaContratoRequest.monto_total,

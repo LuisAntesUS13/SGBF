@@ -18,3 +18,7 @@ export enum folderArchivos {
 export enum tipoArchivos {
   pdf = 1,
 }
+
+export enum ipDefecto {
+  ip = '127.0.0.1',
+}
