@@ -320,8 +320,8 @@ export const FormularioContratos = () => {
                 <hr />
                 <div className="row">
                     <div className="card">
-                        <div className="card-header d-flex justify-content-start align-items-center">
-                            <div className="col-sm-3 text-start">
+                        <div className="card-header row">
+                            <div className="col-sm-3 ">
                                 <button type="button" className="btn btn-accion-sec" title="Volver"onClick={() => navigate("/contrato")}>
                                     <KeyboardReturnIcon />
                                 </button>
@@ -383,7 +383,7 @@ export const FormularioContratos = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="card-footer d-flex justify-content-end align-items-center">
+                        <div className="card-footer row">
                             <div className="col-sm-3 text-end">
                                 <button type="submit" className="btn btn-principal" title="Guardar" onClick={guardarActualizarContrato}>
                                     <SaveIcon /> Guardar

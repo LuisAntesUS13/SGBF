@@ -63,6 +63,7 @@ h5 {
   background-color: #f80000;
   color: white;
   border-color: white;
+  width: auto !important;
 }
 
 .btn-principal:hover {
@@ -81,6 +82,7 @@ h5 {
   background-color: white;
   color: #f80000;
   border-color: #f80000;
+  width: auto !important;
 }
 
 .btn-secundario:hover {
@@ -99,6 +101,7 @@ h5 {
   background-color: #0e159d;
   color: white;
   border-color: white;
+  width: auto !important;
 }
 
 .btn-accion:hover {
@@ -117,6 +120,7 @@ h5 {
   background-color: white;
   color: #0e159d;
   border-color: #0e159d;
+  width: auto !important;
 }
 
 .btn-accion-sec:hover {
