@@ -3,25 +3,26 @@ import "./PeriodosBitacoraLiderTecnico.css";
 import Divider from "@mui/material/Divider";
 import { Select } from "../../../shared/Select/Select.tsx";
 import { Tabla } from "../../../shared/Tabla/Tabla.tsx";
+import { useNavigate } from "react-router-dom";
 
 const contratoOpciones = [
-  { value: "110212A", label: "110212A" },
-  { value: "110212B", label: "110212B" },
+  { id: "110212A", nombre: "110212A" },
+  { id: "110212B", nombre: "110212B" },
 ];
 
 const proveedorOpciones = [
-  { value: "ultrasist", label: "Ultrasist" },
-  { value: "softstore", label: "Softstore" },
+  { id: "ultrasist", nombre: "Ultrasist" },
+  { id: "softstore", nombre: "Softstore" },
 ];
 
 const periodoOpciones = [
-  { value: "enero", label: "Enero" },
-  { value: "febrero", label: "Febrero" },
+  { id: "enero", nombre: "Enero" },
+  { id: "febrero", nombre: "Febrero" },
 ];
 
 const anioOpciones = [
-  { value: "2023", label: "2023" },
-  { value: "2024", label: "2024" },
+  { id: "2023", nombre: "2023" },
+  { id: "2024", nombre: "2024" },
 ];
 
 const columnas = [
@@ -51,17 +52,21 @@ export const PeriodosBitacoraLiderTecnico = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const navigate = useNavigate();
+
+  const handleRowClick = (row) => {
+    navigate("/validacion-bitacora-lider-tecnico");
+  };
+
   return (
     <>
       <div className="consultor-bitacora contenido_principal">
-        <div>
-          <h1>Validación de bitácoras</h1>
-          <div className="subtitle">
-            <p className="lider-tecnico">Líder técnico:</p>
-            <p>Juan Luis Gutiérrez López</p>
-          </div>
+        <h1>Validación de bitácoras</h1>
+        <div className="subtitle">
+          <p className="lider-tecnico">Líder técnico:</p>
+          <p>Juan Luis Gutiérrez López</p>
         </div>
-        <Divider sx={{ bgcolor: "#959595", marginBottom: "12px" }} />
+        <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
         <div className="contenedor-filtros">
           <Select
             label="Contrato"
@@ -70,7 +75,7 @@ export const PeriodosBitacoraLiderTecnico = () => {
             onChange={handleSelectChange}
             options={contratoOpciones}
             placeholder="Selecciona un contrato"
-            className="custom-select"
+            className="form-select"
           />
           <Select
             label="Proveedor"
@@ -79,7 +84,7 @@ export const PeriodosBitacoraLiderTecnico = () => {
             onChange={handleSelectChange}
             options={proveedorOpciones}
             placeholder="Selecciona un proveedor"
-            className="custom-select"
+            className="form-select"
           />
           <Select
             label="Periodo"
@@ -88,7 +93,7 @@ export const PeriodosBitacoraLiderTecnico = () => {
             onChange={handleSelectChange}
             options={periodoOpciones}
             placeholder="Selecciona un periodo"
-            className="custom-select"
+            className="form-select"
           />
           <Select
             label="Año"
@@ -97,11 +102,15 @@ export const PeriodosBitacoraLiderTecnico = () => {
             onChange={handleSelectChange}
             options={anioOpciones}
             placeholder="Selecciona un año"
-            className="custom-select"
+            className="form-select"
           />
         </div>
         <div className="contenedor-tabla">
-          <Tabla columnas={columnas} datos={datos} />
+          <Tabla
+            columnas={columnas}
+            datos={datos}
+            onRowClick={handleRowClick}
+          />
         </div>
       </div>
     </>
