@@ -1,3 +1,18 @@
 .contenedor-filtro-botones {
   display: flex;
 }
+
+.contenedor-botones {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.btn-registro-actividad,
+.btn-observacion-periodo {
+  margin-top: 30px;
+  width: auto;
+}
+
+.btn-observacion-periodo {
+  width: auto;
+}

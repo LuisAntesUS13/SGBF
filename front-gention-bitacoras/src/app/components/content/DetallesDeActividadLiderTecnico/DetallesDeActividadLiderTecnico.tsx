@@ -1,8 +1,9 @@
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import "./DetallesDeActividadLiderTecnico.css";
 import { Divider } from "@mui/material";
 import { Input } from "../../../shared/Input/Input.tsx";
+import Grid from "@mui/material/Grid2";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -53,6 +54,10 @@ export const DetallesDeActividadLiderTecnico = () => {
     setValue(newValue);
   };
 
+  const realizarObservacion = () => {
+    a11yProps(1);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -79,7 +84,7 @@ export const DetallesDeActividadLiderTecnico = () => {
         <div
           style={{
             display: "flex",
-            justifyContent: "center", // Centra horizontalmente // Opcional: Centra verticalmente
+            justifyContent: "center",
           }}
         >
           <div style={{ width: "80%" }}>
@@ -100,7 +105,7 @@ export const DetallesDeActividadLiderTecnico = () => {
             </Box>
             <CustomTabPanel value={value} index={0}>
               <Grid container spacing={2}>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Subdirección/Gerencia"
                     type="text"
@@ -110,7 +115,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Líder técnico"
                     type="text"
@@ -120,7 +125,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Aplicativo/Modulo"
                     type="text"
@@ -130,7 +135,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Tipo"
                     type="text"
@@ -140,7 +145,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Proyecto"
                     type="text"
@@ -150,7 +155,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="JIRA o SMAX/ID Incidente"
                     type="text"
@@ -160,7 +165,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Descripción corta JIRA o SMAX/incidente"
                     type="text"
@@ -170,7 +175,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Responsable"
                     type="text"
@@ -180,7 +185,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Actividad asignada"
                     type="text"
@@ -190,7 +195,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <Input
                     label="Horas  laboradas"
                     type="text"
@@ -200,7 +205,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                     disabled={true}
                   />
                 </Grid>
-                <Grid item xs={12} md={12} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 12 }} className="col-sm-6">
                   <label className="label-observaciones">
                     Actividad realizada
                   </label>
@@ -213,13 +218,17 @@ export const DetallesDeActividadLiderTecnico = () => {
                     Elaboración de junta
                   </textarea>
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <button type="button" className="btn btn-principal">
                     Descargar evidencias
                   </button>
                 </Grid>
-                <Grid item xs={12} md={6} className="col-sm-6">
-                  <button type="button" className="btn btn-principal">
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
+                  <button
+                    type="button"
+                    className="btn btn-principal"
+                    onClick={realizarObservacion}
+                  >
                     Realizar observacion
                   </button>
                 </Grid>
