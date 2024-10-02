@@ -115,7 +115,7 @@ export const ValidacionBitacoraLiderTecnico = () => {
   };
 
   const handleRowClick = () => {
-    navigate("/detalles-actividad");
+    navigate("/detalles-actividad-lider-tecnico");
   };
 
   return (
