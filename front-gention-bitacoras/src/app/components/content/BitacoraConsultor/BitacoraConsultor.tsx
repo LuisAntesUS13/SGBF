@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Select } from "../../../shared/Select/Select.tsx";
 import "./BitacoraConsultor.css";
 import { Tabla } from "../../../shared/Tabla/Tabla.tsx";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const columnas = [
   { header: "CONSULTOR", accessor: "consultor" },
@@ -102,7 +102,15 @@ export const BitacoraConsultor = () => {
   };
 
   const handleRowClick = () => {
-    navigate("/detalles-actividad");
+    navigate("/detalles-actividad-consultor");
+  };
+
+  const handleObservacionesClick = () => {
+    navigate("/observacion-por-periodo-consultor");
+  };
+
+  const handleRegistroActvidadClick = () => {
+    navigate("/registro-de-actividad-consultor");
   };
 
   return (
@@ -129,6 +137,26 @@ export const BitacoraConsultor = () => {
                 placeholder="Selecciona un contrato"
                 className="form-select"
               />
+            </div>
+
+            <div className="contenedor-botones">
+              <button
+                type="button"
+                className="btn btn-principal btn-registro-actividad"
+                title="Registrar"
+                onClick={handleRegistroActvidadClick}
+              >
+                Registrar actividad
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-principal btn-observacion-periodo"
+                title="Observacion"
+                onClick={handleObservacionesClick}
+              >
+                Observación por periodo
+              </button>
             </div>
           </div>
           <Tabla

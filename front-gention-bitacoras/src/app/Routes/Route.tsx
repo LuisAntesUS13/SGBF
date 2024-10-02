@@ -8,6 +8,9 @@ import { ValidacionBitacoraLiderTecnico } from "../components/content/Validacion
 import { DetallesDeActividadLiderTecnico } from "../components/content/DetallesDeActividadLiderTecnico/DetallesDeActividadLiderTecnico.tsx";
 import { ObservacionPorPeriodoLiderTecnico } from "../components/content/ObservacionPorPeriodoLiderTecnico/ObservacionPorPeriodoLiderTecnico.tsx";
 import { BitacoraConsultor } from "../components/content/BitacoraConsultor/BitacoraConsultor.tsx";
+import { DetallesDeActividadConsultor } from "../components/content/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
+import { DetallesPorPeriodoConsultor } from "../components/content/DetallesPorPeriodoConsultor/DetallesPorPeriodoConsultor.tsx";
+import { RegistroDeActividadConsultor } from "../components/content/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 
 export const Enrutador = () => {
   return (
@@ -25,8 +28,20 @@ export const Enrutador = () => {
           element={<ValidacionBitacoraLiderTecnico />}
         />
         <Route
-          path="/detalles-actividad"
+          path="/detalles-actividad-lider-tecnico"
           element={<DetallesDeActividadLiderTecnico />}
+        />{" "}
+        <Route
+          path="/detalles-actividad-consultor"
+          element={<DetallesDeActividadConsultor />}
+        />
+        <Route
+          path="/observacion-por-periodo-consultor"
+          element={<DetallesPorPeriodoConsultor />}
+        />
+        <Route
+          path="/registro-de-actividad-consultor"
+          element={<RegistroDeActividadConsultor />}
         />
         <Route
           path="/observacion-por-periodo-consultores"

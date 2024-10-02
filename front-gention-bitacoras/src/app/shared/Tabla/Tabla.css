@@ -24,3 +24,7 @@
 .contenedor-tabla ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
+.css-wzvhdi-MuiTableCell-root {
+  padding: 4px 16px !important;
+}
