@@ -40,7 +40,10 @@ export class ContratosService {
     }
 
     const no_contrato_valido =
-      await this.contratosRepository.validaNumeroContrato(request.no_contrato);
+      await this.contratosRepository.validaNumeroContrato(
+        request.no_contrato,
+        request.id_contrato,
+      );
 
     if (!no_contrato_valido) {
       throw new CustomException(
