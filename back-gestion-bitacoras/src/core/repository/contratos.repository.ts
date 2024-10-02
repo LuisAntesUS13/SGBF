@@ -43,9 +43,6 @@ export class ContratosRepository {
     id_contrato: number | null,
   ): Promise<boolean> {
     try {
-
-
-
       const result = await this.dataSource.query(
         'SELECT id_contrato FROM contratos where no_contrato = @0 AND id_contrato = @1',
         [no_contrato, id_contrato],
