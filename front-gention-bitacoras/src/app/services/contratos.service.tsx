@@ -15,19 +15,25 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
             },
             body: JSON.stringify(consultaContrato), // Reemplaza esto con los datos que quieres enviar
           });
-          
+
         if (!response.ok) {
           const errorData = await response.json();
           // eslint-disable-next-line no-throw-literal
           throw {
-            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
-            codigoEstatus: errorData.statusCode,
+            mensaje: errorData.mensaje + (errorData.error? " | " + errorData.error: ""),
+            correcto: errorData.correcto,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
+        const respuesta =  await response.json();
         
-
-        const data: RespuestaContrato = await response.json();
+        const data: RespuestaContrato = {
+          codigoEstatus: respuesta.statusCode,
+          mensaje: respuesta.message,
+          data: respuesta.data,
+        }
+        
         return data; // Retorna los datos obtenidos
     } catch (error) {
       console.error('Error al obtener datos:', error);
@@ -50,18 +56,18 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
           const errorData = await response.json(); 
           // eslint-disable-next-line no-throw-literal
           throw {
-            mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
-            codigoEstatus: errorData.statusCode,
-            codigoError: errorData.codeError? errorData.codeError : "",
+            mensaje: errorData.message	+ (errorData.error? " | " + errorData.error: ""),
+            correcto: errorData.success,
+            data: errorData.data
           }  as ErrorPersonalizado
         }
         
         const respuesta =  await response.json();
         
       const data: RespuestaGuardaContrato = {
-        correcto: respuesta.data.correcto,
-        mensaje: respuesta.data.mensaje,
-        id_contrato: respuesta.data.id_contrato,
+        correcto: respuesta.success,
+        mensaje: respuesta.message,
+        data: {id_contrato: respuesta.data.id_contrato ?? null, id_archivo: respuesta.data.id_archivo ?? null}
       }
       return data; // Retorna los datos obtenidos
   } catch (error) {

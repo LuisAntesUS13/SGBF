@@ -1,5 +1,5 @@
 export class ErrorPersonalizado {
     mensaje: string;
-    codigoEstatus: number;
-    codigoError: string;
+    correcto: boolean;
+    data: any;
 }

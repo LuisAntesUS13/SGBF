@@ -254,6 +254,20 @@ label {
   }
 }
 
+
+.card {
+  padding: 0px;
+  margin-bottom: 5px !important;
+}
+
+.card-header {
+  margin: 0px !important;
+}
+
+.card-body {
+  margin: 0px !important;
+}
+
 .card-footer {
   margin: 0px !important;
 }

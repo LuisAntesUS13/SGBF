@@ -23,6 +23,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoAreas(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -39,6 +40,7 @@ export class CatalogosController {
       await this.catalogosService.getCatalogoConsultoras(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -54,6 +56,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoDocumento(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -69,6 +72,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoEstatus(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -84,6 +88,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoExtencion(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -99,6 +104,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoFormaPago(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -115,6 +121,7 @@ export class CatalogosController {
       await this.catalogosService.getCatalogoModuloAplicativo(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -131,6 +138,7 @@ export class CatalogosController {
       await this.catalogosService.getCatalogoPerfilConsultor(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -146,6 +154,7 @@ export class CatalogosController {
     const datos = await this.catalogosService.getCatalogoProyecto(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -162,6 +171,7 @@ export class CatalogosController {
       await this.catalogosService.getCatalogoTipoAccion(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -178,6 +188,7 @@ export class CatalogosController {
       await this.catalogosService.getCatalogoTipoContrato(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,

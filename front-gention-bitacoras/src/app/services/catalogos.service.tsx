@@ -22,6 +22,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -52,6 +53,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -80,6 +82,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -108,6 +111,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -137,6 +141,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -165,6 +170,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -195,6 +201,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -224,6 +231,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -253,6 +261,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -281,6 +290,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 
@@ -310,6 +320,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
             mensaje: errorData.message + (errorData.error? " | " + errorData.error: ""),
             codigoEstatus: errorData.statusCode,
             codigoError: errorData.codeError? errorData.codeError : "",
+            data: null
           }  as ErrorPersonalizado
         }
 

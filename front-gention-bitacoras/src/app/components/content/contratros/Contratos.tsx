@@ -30,6 +30,7 @@ export const Contratos = () => {
         try {
           const result = await getContratosData(datos);
           setDataContrato(result.data);
+          console.log("Llega mansaje  bien " + result)
           if(mosrar){
             toast.success(result.mensaje, {});
             // toast.error(result.message, {});
@@ -37,8 +38,9 @@ export const Contratos = () => {
             // toast.info(result.message, {});
           }
         } catch (error) {
+            console.log("Llega mansaje  error ")
           console.log(error);
-          toast.error(error, {});
+          toast.error(error.mensaje, {});
         }
     };
 
@@ -71,9 +73,9 @@ export const Contratos = () => {
 
     return (<>
         <div className="contenido_principal">
-                <h3>Contol de contratos</h3>
-                <hr/>
-                <div className="card">
+            <h3>Contol de contratos</h3>
+            <hr/>
+            <div className="card">
                 <div className="card-body row">
                     <div className="col-sm-3">
                         <Input label="No. contrato" type="text" name="contrato" value={formulario.contrato} onChange={handleChange} placeholder="Numero de contrato" className="" />

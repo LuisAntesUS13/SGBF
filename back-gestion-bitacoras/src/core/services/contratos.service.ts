@@ -5,13 +5,12 @@ import {
 } from '../model/request/contratoRequest';
 import { ContratosRepository } from '../repository/contratos.repository';
 import {
-  ActualizaRegistraResponse,
+  ActualizaRegistraBaseResponse,
   ContratoResponse,
 } from '../model/response/contratoResponse';
 import { ArchivoRepository } from '../repository/archivo.repository';
 import { CustomException } from '../util/errores';
 import { folderArchivos, tipoArchivos } from '../util/global-enum';
-import { ArchivoRequest } from '../model/request/archivoRequest';
 import { GeneralRepository } from '../repository/general.repository';
 
 @Injectable()
@@ -32,46 +31,54 @@ export class ContratosService {
 
   public async addUpdateContratos(
     request: RegistraActualizaContratoRequest,
-  ): Promise<ActualizaRegistraResponse> {
-    request.id_usuario = 1;
+  ): Promise<ActualizaRegistraBaseResponse> {
+    request.id_usuario = 5;
     const valido = await this.validaAddUpdateContrato(request);
 
     if (valido != '') {
-      throw new CustomException(valido, '2fb67f0a-4af5-42e5-a8a3-a814ebe6c111');
+      throw new CustomException(valido, '');
     }
 
+    const no_contrato_valido =
+      await this.contratosRepository.validaNumeroContrato(request.no_contrato);
+
+    if (!no_contrato_valido) {
+      throw new CustomException(
+        'El numero de contrato ( ' + request.no_contrato + ' ) ya existe',
+        '',
+      );
+    }
     try {
       const nombreArchivo = 'contrato_' + request.no_contrato;
 
-      const ruta = folderArchivos.ruta + 'contratos/';
+      let rutaCompleta = '';
+      if (request.archivo != '') {
+        rutaCompleta = await this.generalRepository.guardaArchivo(
+          request.archivo,
+          folderArchivos.ruta + 'contratos/',
+          nombreArchivo,
+        );
+      }
 
-      const rutaCompleta = await this.generalRepository.guardaArchivo(
-        request.archivo,
-        ruta,
-        nombreArchivo,
-      );
-
-      const archivo: ArchivoRequest = {
-        id_archivo: request.id_archivo,
-        nombre: nombreArchivo,
-        id_extencion: tipoArchivos.pdf,
-        ruta: rutaCompleta,
-        id_usuario: request.id_usuario,
-        ip: request.ip,
-      };
-
-      const datosArchivos =
-        await this.archivoRepository.addUpdateArchivo(archivo);
-
-      request.id_archivo = datosArchivos.id_archivo;
+      request.id_extencion = tipoArchivos.pdf;
+      request.ruta = rutaCompleta;
+      request.nombre_archivo = nombreArchivo;
     } catch (error) {
       throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6c111');
     }
+    console.log(request);
+    const datos = await this.contratosRepository.addUpdateContratos(request);
 
-    const datosLogin =
-      await this.contratosRepository.addUpdateContratos(request);
-
-    return datosLogin;
+    const respuesta: ActualizaRegistraBaseResponse = {
+      mensaje: datos.mensaje,
+      correcto: datos.correcto,
+      data: {
+        id_contrato: datos.id_contrato ?? null,
+        id_archivo: datos.id_archivo ?? null,
+      },
+    };
+    console.log(respuesta);
+    return respuesta;
   }
 
   public async validaAddUpdateContrato(

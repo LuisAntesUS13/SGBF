@@ -31,7 +31,7 @@ export class DatosContratos{
 
 
 export class RespuestaContrato {
-    statusCode: number;
+    codigoEstatus: number;
     mensaje: string;
     data: DatosContratos[];
 }
@@ -39,6 +39,9 @@ export class RespuestaContrato {
 export class RespuestaGuardaContrato {
     correcto: string;
     mensaje: string;
-    id_contrato: number;
+    data: {id_contrato: number, id_archivo: number};
 }
+
+
+
   

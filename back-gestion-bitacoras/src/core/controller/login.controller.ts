@@ -15,6 +15,7 @@ export class LoginController {
     const datos = await this.loginService.login(loginRequest);
 
     const resultado = {
+      success: true,
       message: 'Inicio de secion correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,

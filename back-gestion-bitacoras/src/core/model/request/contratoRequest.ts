@@ -18,10 +18,12 @@ export class RegistraActualizaContratoRequest {
   id_consultora: number;
   id_area: number | null;
   id_gerente: number | null;
-  id_archivo: number | null;
-  archivo: string | null;
-  extencion: string | null;
   activo: boolean;
+  id_archivo: number | null;
+  nombre_archivo: string | null;
+  archivo: string | null;
+  ruta: string | null;
+  id_extencion: number | null;
   id_usuario?: number | null;
   ip?: string | null;
 }

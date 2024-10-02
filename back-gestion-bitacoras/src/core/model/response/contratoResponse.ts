@@ -29,8 +29,13 @@ export declare class ContratoResponse {
   total_paginas?: number;
 }
 
-export declare class ActualizaRegistraResponse {
-  correcto: string;
+export declare class ActualizaRegistraBaseResponse {
+  correcto: boolean;
   mensaje: string;
-  id_contrato: number;
+  data: ActualizaRegistraResponse;
+}
+
+export declare class ActualizaRegistraResponse {
+  id_contrato: number | null;
+  id_archivo: number | null;
 }

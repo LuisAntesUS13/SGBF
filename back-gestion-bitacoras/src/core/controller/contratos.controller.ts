@@ -23,6 +23,7 @@ export class ContratosController {
 
     const resultado = {
       message: 'Contratos consultados exitosamente',
+      success: true,
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
     };
@@ -38,11 +39,14 @@ export class ContratosController {
     const extractedIP = ip.match(/(?:\w+:)*(\d+\.\d+\.\d+\.\d+)/);
     const finalIP = extractedIP ? extractedIP[1] : ipDefecto.ip;
     bodyRequest.ip = finalIP;
-    const datos = await this.contratosService.addUpdateContratos(bodyRequest);
+
+    const respuesta =
+      await this.contratosService.addUpdateContratos(bodyRequest);
 
     const resultado = {
-      message: datos.mensaje,
-      data: datos,
+      message: respuesta.mensaje,
+      success: respuesta.correcto,
+      data: respuesta.data,
       statusCode: HttpStatus.ACCEPTED,
     };
 

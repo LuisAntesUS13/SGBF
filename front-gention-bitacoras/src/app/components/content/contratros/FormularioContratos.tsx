@@ -233,6 +233,8 @@ export const FormularioContratos = () => {
 
         setFieldClasses(newFieldClasses);
 
+        console.log(formData)
+
         if(isValid){
             const datos:GuardaContrato = {
                 id_contrato: formData.id_contrato === "" ? null : parseInt(formData.id_contrato),
@@ -256,16 +258,20 @@ export const FormularioContratos = () => {
             try {
                 const result = await guardaActualizaContratos(datos);
                 setShowSecondForm(true);
+
+                console.log(result)
                 if(result.correcto){
                     toast.success(result.mensaje, {});
                     setFormData((formData) => ({
                         ...formData,
-                        id_contrato: result.id_contrato.toString()
+                        id_contrato: result.data.id_contrato.toString(),
+                        id_archivo: result.data.id_archivo != null ? result.data.id_archivo.toString() : '',
                       }));
                 } else {
                     toast.warn(result.mensaje, {});
                 }
             } catch (error) {
+                console.log("llegamos aqui");
                 toast.error(error.mensaje, {});
             }
         } else {
@@ -328,64 +334,62 @@ export const FormularioContratos = () => {
                             </div>
                         </div>
                         <div className="card-body row">
-                            <div className="col-sm-12 row">
-                                <div className="col-sm-4">
-                                    <Input label="No. contrato" type="text" name="contrato" value={formData.contrato} onChange={handleChange} 
-                                          placeholder="Numero de contrato" className={fieldClasses.contrato} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <label className="form-label">Fecha de inicio</label> 
-                                    <input  type="date" className={fieldClasses.fechaInicio} name="fechaInicio" value={formData.fechaInicio} onChange={handleChange} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <label className="form-label">Fecha de término</label>
-                                    <input type="date" className={fieldClasses.fechaTermino} name="fechaTermino" value={formData.fechaTermino} onChange={handleChange} />
-                                </div>
-                                <div className="col-sm-4">
-                                        <Select  label="Selecciona forma de pago"  name="formaPago"   value={formData.formaPago}  onChange={handleChange}  options={formaPago}
-                                                 placeholder="Selecciona una opcion"   className= {fieldClasses.formaPago}/>
-                                </div>
-                                <div className="col-sm-4">
-                                        <Select  label="Selecciona tipo de contrato"  name="tipoContrato"   value={formData.tipoContrato}  onChange={handleChange}  options={tipoContrato}
-                                                 placeholder="Selecciona una opcion"   className= {fieldClasses.tipoContrato}/>
-                                </div>
-                                <div className="col-sm-4">
-                                        <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
-                                                 placeholder="Selecciona una opcion"   className= {fieldClasses.consultora}/>
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="Monto variable" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
-                                          placeholder="Monto variable" className= {fieldClasses.montoVariable} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="Monto fijo" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
-                                          placeholder="Monto fijo" className= {fieldClasses.montoFijo} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="Monto total" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
-                                          placeholder="Monto total" className= {fieldClasses.montoTotal} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
-                                          placeholder="No consultores" className= {fieldClasses.consultores} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Select  label="Selecciona el Direccion/subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
-                                          placeholder="Selecciona una opcion"   className="form-control"/>
-                                </div>
-                                <div className="col-sm-4">
-                                    <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[]}
-                                          placeholder="Selecciona una opcion"  className="form-control"/>
-                                </div>
-                                <div className="col-sm-8">
-                                    <label className="form-label">Carga de contrato</label>
-                                    <input className="form-control" type="file" placeholder="Selecciona el archivo a subir" name="archivo"  onChange={handleFileChange} />
-                                </div>
+                            <div className="col-sm-4">
+                                <Input label="No. contrato" type="text" name="contrato" value={formData.contrato} onChange={handleChange} 
+                                        placeholder="Numero de contrato" className={fieldClasses.contrato} />
+                            </div>
+                            <div className="col-sm-4">
+                                <label className="form-label">Fecha de inicio</label> 
+                                <input  type="date" className={fieldClasses.fechaInicio} name="fechaInicio" value={formData.fechaInicio} onChange={handleChange} />
+                            </div>
+                            <div className="col-sm-4">
+                                <label className="form-label">Fecha de término</label>
+                                <input type="date" className={fieldClasses.fechaTermino} name="fechaTermino" value={formData.fechaTermino} onChange={handleChange} />
+                            </div>
+                            <div className="col-sm-4">
+                                    <Select  label="Selecciona forma de pago"  name="formaPago"   value={formData.formaPago}  onChange={handleChange}  options={formaPago}
+                                                placeholder="Selecciona una opcion"   className= {fieldClasses.formaPago}/>
+                            </div>
+                            <div className="col-sm-4">
+                                    <Select  label="Selecciona tipo de contrato"  name="tipoContrato"   value={formData.tipoContrato}  onChange={handleChange}  options={tipoContrato}
+                                                placeholder="Selecciona una opcion"   className= {fieldClasses.tipoContrato}/>
+                            </div>
+                            <div className="col-sm-4">
+                                    <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
+                                                placeholder="Selecciona una opcion"   className= {fieldClasses.consultora}/>
+                            </div>
+                            <div className="col-sm-4">
+                                <Input label="Monto variable" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
+                                        placeholder="Monto variable" className= {fieldClasses.montoVariable} />
+                            </div>
+                            <div className="col-sm-4">
+                                <Input label="Monto fijo" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
+                                        placeholder="Monto fijo" className= {fieldClasses.montoFijo} />
+                            </div>
+                            <div className="col-sm-4">
+                                <Input label="Monto total" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
+                                        placeholder="Monto total" className= {fieldClasses.montoTotal} />
+                            </div>
+                            <div className="col-sm-4">
+                                <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
+                                        placeholder="No consultores" className= {fieldClasses.consultores} />
+                            </div>
+                            <div className="col-sm-4">
+                                <Select  label="Selecciona el Direccion/subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
+                                        placeholder="Selecciona una opcion"   className="form-control"/>
+                            </div>
+                            <div className="col-sm-4">
+                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[]}
+                                        placeholder="Selecciona una opcion"  className="form-control"/>
+                            </div>
+                            <div className="col-sm-8">
+                                <label className="form-label">Carga de contrato</label>
+                                <input className="form-control" type="file" placeholder="Selecciona el archivo a subir" name="archivo"  onChange={handleFileChange} />
                             </div>
                         </div>
                         <div className="card-footer row">
-                            <div className="col-sm-3 text-end">
-                                <button type="submit" className="btn btn-principal" title="Guardar" onClick={guardarActualizarContrato}>
+                            <div className="col-sm-12 text-end">
+                                <button className="btn btn-principal" title="Guardar" onClick={guardarActualizarContrato}>
                                     <SaveIcon /> Guardar
                                 </button>
                             </div>
