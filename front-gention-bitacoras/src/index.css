@@ -13,7 +13,7 @@ h3,
 h4,
 h5 {
   color: #0e159d;
-  font-weight: 650
+  font-weight: 650;
 }
 .contenido_principal {
   margin: 15px 10%;
@@ -254,7 +254,6 @@ label {
   }
 }
 
-
 .card {
   padding: 0px;
   margin-bottom: 5px !important;
@@ -306,7 +305,6 @@ label {
     rgba(30, 135, 29, 0) 100%
   ) !important;
 }
-
 
 .invalid-class {
   border: 1px solid rgb(228, 89, 89);
