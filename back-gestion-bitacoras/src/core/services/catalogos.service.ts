@@ -16,103 +16,100 @@ export class CatalogosService {
   constructor(private readonly catalogoRepository: CatalogoRepository) {}
 
   public async getCatalogoAreas(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoAreas(catalogoRequest);
+      await this.catalogoRepository.getCatalogoAreas(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoConsultoras(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoConsultoras(catalogoRequest);
+      await this.catalogoRepository.getCatalogoConsultoras(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoDocumento(
-    catalogoDocumentosRequest: CatalogoDocumentosRequest,
+    request: CatalogoDocumentosRequest,
   ): Promise<CatalogoDocumentoResponse[]> {
-    const datosCatalogo = await this.catalogoRepository.getCatalogoDocumento(
-      catalogoDocumentosRequest,
-    );
+    const datosCatalogo =
+      await this.catalogoRepository.getCatalogoDocumento(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoEstatus(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoEstatus(catalogoRequest);
+      await this.catalogoRepository.getCatalogoEstatus(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoExtencion(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoExtArchivoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoExtencion(catalogoRequest);
+      await this.catalogoRepository.getCatalogoExtencion(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoFormaPago(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoFormaPago(catalogoRequest);
+      await this.catalogoRepository.getCatalogoFormaPago(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoModuloAplicativo(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoModuloAplicativo(
-        catalogoRequest,
-      );
+      await this.catalogoRepository.getCatalogoModuloAplicativo(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoPerfilConsultor(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoPerfilConsultorResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoPerfilConsultor(catalogoRequest);
+      await this.catalogoRepository.getCatalogoPerfilConsultor(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoProyecto(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoProyecto(catalogoRequest);
+      await this.catalogoRepository.getCatalogoProyecto(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoTipoAccion(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoTipoAccion(catalogoRequest);
+      await this.catalogoRepository.getCatalogoTipoAccion(request);
 
     return datosCatalogo;
   }
 
   public async getCatalogoTipoContrato(
-    catalogoRequest: CatalogoRequest,
+    request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
-      await this.catalogoRepository.getCatalogoTipoContrato(catalogoRequest);
+      await this.catalogoRepository.getCatalogoTipoContrato(request);
 
     return datosCatalogo;
   }

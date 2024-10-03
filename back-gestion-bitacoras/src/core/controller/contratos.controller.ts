@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Ip, Post } from '@nestjs/common';
 import { BaseResponse } from '../model/response/baseResponse';
 import { ContratosService } from '../services/contratos.service';
 import {
@@ -9,6 +9,7 @@ import {
   ActualizaRegistraResponse,
   ContratoResponse,
 } from '../model/response/contratoResponse';
+import { ipDefecto } from '../util/global-enum';
 
 @Controller('/contratos')
 export class ContratosController {
@@ -16,14 +17,13 @@ export class ContratosController {
 
   @Post('/getContratos')
   async ExecuteStoredProcedure(
-    @Body() consultaContratoRequest: ConsultaContratoRequest,
+    @Body() bodyRequest: ConsultaContratoRequest,
   ): Promise<BaseResponse<ContratoResponse[]>> {
-    const datos = await this.contratosService.getContratos(
-      consultaContratoRequest,
-    );
+    const datos = await this.contratosService.getContratos(bodyRequest);
 
     const resultado = {
       message: 'Contratos consultados exitosamente',
+      success: true,
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
     };
@@ -33,15 +33,20 @@ export class ContratosController {
 
   @Post('/addUpdateContrato')
   async addUpdateContratos(
-    @Body() registraActualizaContratoRequest: RegistraActualizaContratoRequest,
+    @Body() bodyRequest: RegistraActualizaContratoRequest,
+    @Ip() ip,
   ): Promise<BaseResponse<ActualizaRegistraResponse>> {
-    const datos = await this.contratosService.addUpdateContratos(
-      registraActualizaContratoRequest,
-    );
+    const extractedIP = ip.match(/(?:\w+:)*(\d+\.\d+\.\d+\.\d+)/);
+    const finalIP = extractedIP ? extractedIP[1] : ipDefecto.ip;
+    bodyRequest.ip = finalIP;
+
+    const respuesta =
+      await this.contratosService.addUpdateContratos(bodyRequest);
 
     const resultado = {
-      message: 'Contratos consultados exitosamente',
-      data: datos,
+      message: respuesta.mensaje,
+      success: respuesta.correcto,
+      data: respuesta.data,
       statusCode: HttpStatus.ACCEPTED,
     };
 

@@ -18,11 +18,12 @@ export class CatalogosController {
 
   @Post('/getAreas')
   async getCatalogoAreas(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
-    const datos = await this.catalogosService.getCatalogoAreas(catalogoRequest);
+    const datos = await this.catalogosService.getCatalogoAreas(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -33,12 +34,13 @@ export class CatalogosController {
 
   @Post('/getConsultoras')
   async getCatalogoConsultoras(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
     const datos =
-      await this.catalogosService.getCatalogoConsultoras(catalogoRequest);
+      await this.catalogosService.getCatalogoConsultoras(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -49,13 +51,12 @@ export class CatalogosController {
 
   @Post('/getDocumentos')
   async getCatalogoDocumento(
-    @Body() catalogoDocumentosRequest: CatalogoDocumentosRequest,
+    @Body() bodyRequest: CatalogoDocumentosRequest,
   ): Promise<BaseResponse<CatalogoDocumentoResponse[]>> {
-    const datos = await this.catalogosService.getCatalogoDocumento(
-      catalogoDocumentosRequest,
-    );
+    const datos = await this.catalogosService.getCatalogoDocumento(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -66,12 +67,12 @@ export class CatalogosController {
 
   @Post('/getTipoDocumentos')
   async getCatalogoEstatus(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
-    const datos =
-      await this.catalogosService.getCatalogoEstatus(catalogoRequest);
+    const datos = await this.catalogosService.getCatalogoEstatus(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -82,12 +83,12 @@ export class CatalogosController {
 
   @Post('/getExtenciones')
   async getCatalogoExtencion(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoExtArchivoResponse[]>> {
-    const datos =
-      await this.catalogosService.getCatalogoExtencion(catalogoRequest);
+    const datos = await this.catalogosService.getCatalogoExtencion(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -98,12 +99,12 @@ export class CatalogosController {
 
   @Post('/getFormasPago')
   async getCatalogoFormaPago(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
-    const datos =
-      await this.catalogosService.getCatalogoFormaPago(catalogoRequest);
+    const datos = await this.catalogosService.getCatalogoFormaPago(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -114,12 +115,13 @@ export class CatalogosController {
 
   @Post('/getModuloAplicativo')
   async getCatalogoModuloAplicativo(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
     const datos =
-      await this.catalogosService.getCatalogoModuloAplicativo(catalogoRequest);
+      await this.catalogosService.getCatalogoModuloAplicativo(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -130,12 +132,13 @@ export class CatalogosController {
 
   @Post('/getPerfilesConsultores')
   async getCatalogoPerfilConsultor(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoPerfilConsultorResponse[]>> {
     const datos =
-      await this.catalogosService.getCatalogoPerfilConsultor(catalogoRequest);
+      await this.catalogosService.getCatalogoPerfilConsultor(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -146,12 +149,12 @@ export class CatalogosController {
 
   @Post('/getProyectos')
   async getCatalogoProyecto(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
-    const datos =
-      await this.catalogosService.getCatalogoProyecto(catalogoRequest);
+    const datos = await this.catalogosService.getCatalogoProyecto(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -162,12 +165,13 @@ export class CatalogosController {
 
   @Post('/getTipoAccion')
   async getCatalogoTipoAccion(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
     const datos =
-      await this.catalogosService.getCatalogoTipoAccion(catalogoRequest);
+      await this.catalogosService.getCatalogoTipoAccion(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,
@@ -178,12 +182,13 @@ export class CatalogosController {
 
   @Post('/getTipoContrato')
   async getCatalogoTipoContrato(
-    @Body() catalogoRequest: CatalogoRequest,
+    @Body() bodyRequest: CatalogoRequest,
   ): Promise<BaseResponse<CatalogoResponse[]>> {
     const datos =
-      await this.catalogosService.getCatalogoTipoContrato(catalogoRequest);
+      await this.catalogosService.getCatalogoTipoContrato(bodyRequest);
 
     const resultado = {
+      success: true,
       message: 'Consulta catalogo correcto',
       data: datos,
       statusCode: HttpStatus.ACCEPTED,

@@ -63,7 +63,7 @@ h5 {
   background-color: #f80000;
   color: white;
   border-color: white;
-  margin-bottom: 1px;
+  width: auto !important;
 }
 
 .btn-principal:hover {
@@ -82,7 +82,7 @@ h5 {
   background-color: white;
   color: #f80000;
   border-color: #f80000;
-  margin-bottom: 1px;
+  width: auto !important;
 }
 
 .btn-secundario:hover {
@@ -101,7 +101,7 @@ h5 {
   background-color: #0e159d;
   color: white;
   border-color: white;
-  margin-bottom: 1px;
+  width: auto !important;
 }
 
 .btn-accion:hover {
@@ -120,7 +120,7 @@ h5 {
   background-color: white;
   color: #0e159d;
   border-color: #0e159d;
-  margin-bottom: 1px;
+  width: auto !important;
 }
 
 .btn-accion-sec:hover {
@@ -254,21 +254,22 @@ label {
   }
 }
 
-.card-footer {
+.card {
+  padding: 0px;
+  margin-bottom: 5px !important;
+}
+
+.card-header {
   margin: 0px !important;
 }
 
-/* .delete {
-  color: red!important;
+.card-body {
+  margin: 0px !important;
 }
 
-.update {
-  color: blue!important;
+.card-footer {
+  margin: 0px !important;
 }
-
-.download {
-  color: green!important;
-} */
 
 .delete:hover {
   color: red !important;
@@ -301,6 +302,37 @@ label {
     rgba(30, 135, 29, 0.08867296918767509) 0%,
     rgba(30, 135, 29, 0) 100%
   ) !important;
+}
+
+.invalid-class {
+  border: 1px solid rgb(228, 89, 89);
+}
+
+.contenedor-tabla ::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-button:increment,
+.contenedor-tabla ::-webkit-scrollbar-button {
+  display: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
 
 p {

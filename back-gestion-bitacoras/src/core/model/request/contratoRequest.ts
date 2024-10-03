@@ -16,12 +16,14 @@ export class RegistraActualizaContratoRequest {
   id_forma_pago: number;
   id_tipo_contrato: number;
   id_consultora: number;
-  id_area: number;
-  id_gerente: number;
-  id_archivo: number | null;
-  archivo: string;
-  extencion: string;
+  id_area: number | null;
+  id_gerente: number | null;
   activo: boolean;
-  id_usuario?: number;
-  ip?: string;
+  id_archivo: number | null;
+  nombre_archivo: string | null;
+  archivo: string | null;
+  ruta: string | null;
+  id_extencion: number | null;
+  id_usuario?: number | null;
+  ip?: string | null;
 }
