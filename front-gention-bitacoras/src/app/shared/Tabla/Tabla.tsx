@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "./Tabla.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,25 +7,32 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import "./Tabla.css";
 
 interface TableProps {
   columnas: { header: string; accessor: string }[]; // Definición de las columnas
   datos: { [key: string]: any }[]; // Datos de la tabla
   onRowClick?: (row: { [key: string]: any }) => void;
 }
+
 export const Tabla: React.FC<TableProps> = ({
   columnas,
   datos,
   onRowClick,
 }) => {
+  useEffect(() => {
+    const contenedorTabla = document.querySelector(".contenedor-tabla");
+    if (contenedorTabla) {
+      contenedorTabla.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <Paper
       className="contenedor-tabla"
       sx={{ width: "100%", overflow: "hidden" }}
     >
-      <TableContainer component={Paper} sx={{ maxHeight: 522 }}>
-        <Table sx={{ minWidth: 650 }}>
+      <TableContainer component={Paper} sx={{ maxHeight: "522px" }}>
+        <Table sx={{ minWidth: "650px" }}>
           <TableHead>
             <TableRow>
               {columnas.map((columna) => (
