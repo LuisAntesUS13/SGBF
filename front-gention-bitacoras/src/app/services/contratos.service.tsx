@@ -75,3 +75,4 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
     throw error; // Maneja el error externamente si es necesario
   }
 }
+

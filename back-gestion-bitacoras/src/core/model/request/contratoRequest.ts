@@ -27,3 +27,9 @@ export class RegistraActualizaContratoRequest {
   id_usuario?: number | null;
   ip?: string | null;
 }
+
+export class ConsultaPErfilesContratoRequest {
+  id_contrato: number;
+  pagina_actual: number;
+  registros_por_pagina: number;
+}

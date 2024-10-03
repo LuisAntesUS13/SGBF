@@ -28,3 +28,9 @@ export class CatalogoPerfilConsultorResponse {
   activo: boolean;
   monto: number;
 }
+
+export class CatalogoAddUpdateResponse {
+  id: number;
+  correcto: string;
+  mensaje: string;
+}

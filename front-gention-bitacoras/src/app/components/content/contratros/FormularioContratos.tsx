@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import SaveIcon from "@mui/icons-material/Save";
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { Perfil } from "../../../model/response/perfiles.response";
+import { DatosPerfiles, DatosPerfilesContratos} from "../../../model/response/perfiles.response";
 import { Input } from "../../../shared/Input/Input.tsx";
 import { Select } from "../../../shared/Select/Select.tsx";
 import { Catalogo } from "../../../model/response/catalogo.response.tsx";
@@ -12,25 +10,11 @@ import { getCatalogoAreas, getCatalogoConsultoras, getCatalogoFormaPago, getCata
 import { GuardaContrato } from "../../../model/request/contratos.request.tsx";
 import { guardaActualizaContratos } from "../../../services/contratos.service.tsx";
 import { ToastContainer, toast } from 'react-toastify';
-
-interface FieldClasses {
-    id_contrato: string;
-    contrato: string;
-    fechaInicio: string;
-    fechaTermino: string;
-    formaPago: string;
-    tipoContrato: string;
-    consultora: string;
-    consultores: string;
-    montoVariable: string;
-    montoFijo: string;
-    montoTotal: string;
-    id_archivo: string;
-    archivoContrato: string;
-    extencion: string;
-    direccion: string;
-    gerente: string;
-  }
+import { FieldContratoClases, FieldPerfilContratoClases } from '../../../model/interface/contrato.interface.tsx';
+import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import { Separador } from "../../../shared/SeparadorTexto/SeparadorTexto.tsx";
+import { ConsultaPErfilesContrato, GuardaPerfil } from "../../../model/request/perfiles.request.tsx";
+import { getPerfilesContratos, guardaActualizaPerfilesContrato } from "../../../services/perfiles.service.tsx";
 
 export const FormularioContratos = () => {
     // Componente para navegar entre paginas
@@ -43,8 +27,13 @@ export const FormularioContratos = () => {
     const [gerente, setGerente] = useState<Catalogo[]>([]);
     const [area, setArea] = useState<Catalogo[]>([]);
 
+    // Estado para controlar la visibilidad del segundo formulario
+    const [showPerfiles, setShowPerfiles] = useState(false); 
+
+    const [dataPerfiles, setDataPerfiles] = useState<DatosPerfilesContratos[]>([]);
+
     // Estado para controlar los campos del formulario
-    const [formData, setFormData] = useState<FieldClasses>({
+    const [formData, setFormData] = useState<FieldContratoClases>({
         id_contrato: "",
         contrato: "",
         fechaInicio: "",
@@ -62,8 +51,11 @@ export const FormularioContratos = () => {
         direccion: "",
         gerente: "",
     });
+
     const optionalFields: string[] = ["archivoContrato", "extencion","direccion","gerente", "id_archivo", "id_contrato"]; 
-    const [fieldClasses, setFieldClasses] = useState({
+    const optionalFieldsPerfiles: string[] = ["id_perfil", "descripcion", "id_perfil_contrato", "id_contrato"]; 
+
+    const [fieldContratoClases, setFieldContratoClases] = useState({
         id_contrato: "form-control",
         contrato: "form-control",
         fechaInicio: "form-control",
@@ -80,10 +72,32 @@ export const FormularioContratos = () => {
         extencion: "form-control",
         direccion: "form-control",
         gerente: "form-control",
-      });
+    });
+    
+    // Estado para controlar los campos del fomulario de perfiles
+    const [formPerfilesContrato, setFormPerfilesContrato] = useState({
+        id_perfil_contrato: "",
+        id_contrato: "",
+        id_perfil: "",
+        perfil: "",
+        monto: "0.0",
+        descripcion: "",
+        cantidad: "1",
+    });
 
-     // Manejar cambios del primer formulario
-     const handleChange = (e) => {
+    const [formPerfilesContratoClases, setFormPerfilesContratoClases] = useState({
+        id_perfil_contrato: "form-control",
+        id_contrato: "form-control",
+        id_perfil: "form-control",
+        perfil: "form-control",
+        monto: "form-control",
+        descripcion: "form-control",
+        cantidad: "form-control",
+    });
+
+
+    // Manejar cambios del primer formulario
+    const handleChange = (e) => {
         const { name, value, files } = e.target;
         setFormData({
             ...formData,
@@ -92,17 +106,66 @@ export const FormularioContratos = () => {
 
         // Validar si el campo no está vacío
         if (value === null || value === '') {
-        setFieldClasses((prev) => ({
-            ...prev,
-            [name]: "form-control invalid-class", // Clase adicional si está vacío
-        }));
+            setFieldContratoClases((prev) => ({
+                ...prev,
+                [name]: "form-control invalid-class", // Clase adicional si está vacío
+            }));
         } else {
-        setFieldClasses((prev) => ({
-            ...prev,
-            [name]: "form-control", // Clase normal
-        }));
+            setFieldContratoClases((prev) => ({
+                ...prev,
+                [name]: "form-control", // Clase normal
+            }));
         }
     };
+
+    const handleformPerfilesChange = (e) => {
+        const { name, value } = e.target;
+        setFormPerfilesContrato((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+
+        // Validar si el campo no está vacío
+        if (value === null || value === '') {
+            setFormPerfilesContratoClases((prev) => ({
+                ...prev,
+                [name]: "form-control invalid-class", // Clase adicional si está vacío
+            }));
+        } else {
+            setFormPerfilesContratoClases((prev) => ({
+                ...prev,
+                [name]: "form-control", // Clase normal
+            }));
+        }
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files && files.length > 0) {
+          const file = files[0];
+          // Si deseas leer el archivo como base64:
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const fileData = e.target?.result;
+            // Asegúrate de que el resultado sea una cadena antes de asignarlo
+            if (typeof fileData === 'string') {
+                const extencion = file.name.split('.').pop();
+                setFormData({
+                    ...formData,
+                    archivoContrato: fileData, // Guarda el archivo en base64 en el estado
+                    extencion: extencion??'pdf', // Guarda el archivo en base64 en el estado
+                });
+            } else {
+                setFormData({
+                    ...formData,
+                    archivoContrato: '', // Guarda el archivo en base64 en el estado
+                });
+            }            
+          };
+          reader.readAsDataURL(file); // Otras opciones: readAsText, readAsArrayBuffer
+        }
+    };
+
 
     const obtenerCatalogoFormaPago = async () => {
         const datos:ConsultaCatalogo = {
@@ -165,43 +228,13 @@ export const FormularioContratos = () => {
         obtenerCatalogoTipoContrato();
         obtenerCatalogoCosultora();
         obtenerCatalogoAreas();
+       
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files && files.length > 0) {
-          const file = files[0];
-          console.log("Archivo seleccionado:", file);
-          // Si deseas leer el archivo como base64:
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const fileData = e.target?.result;
-            // Asegúrate de que el resultado sea una cadena antes de asignarlo
-            if (typeof fileData === 'string') {
-                console.log("Contenido del archivo en base64:", fileData);
-
-                const extencion = file.name.split('.').pop();
-                setFormData({
-                    ...formData,
-                    archivoContrato: fileData, // Guarda el archivo en base64 en el estado
-                    extencion: extencion??'pdf', // Guarda el archivo en base64 en el estado
-                });
-            } else {
-                console.error('El archivo no pudo ser leído como una cadena.');
-                setFormData({
-                    ...formData,
-                    archivoContrato: '', // Guarda el archivo en base64 en el estado
-                });
-            }            
-          };
-          reader.readAsDataURL(file); // Otras opciones: readAsText, readAsArrayBuffer
-        }
-    };
-
     const guardarActualizarContrato = async () => {
 
-        const newFieldClasses: FieldClasses = {
+        const newFieldContratoClases: FieldContratoClases = {
             id_contrato: "form-control",
             contrato: "form-control",
             fechaInicio: "form-control",
@@ -225,15 +258,13 @@ export const FormularioContratos = () => {
         for (const key in formData) {
             if (!optionalFields.includes(key)) { // Verifica si el campo no es opcional
                 if (formData[key] === null || formData[key] === '') {
-                    newFieldClasses[key as keyof FieldClasses] = "form-control invalid-class";
+                    newFieldContratoClases[key as keyof FieldContratoClases] = "form-control invalid-class";
                     isValid = false;
                 }
             }
         }
 
-        setFieldClasses(newFieldClasses);
-
-        console.log(formData)
+        setFieldContratoClases(newFieldContratoClases);
 
         if(isValid){
             const datos:GuardaContrato = {
@@ -257,7 +288,7 @@ export const FormularioContratos = () => {
     
             try {
                 const result = await guardaActualizaContratos(datos);
-                setShowSecondForm(true);
+                setShowPerfiles(true);
 
                 console.log(result)
                 if(result.correcto){
@@ -282,42 +313,96 @@ export const FormularioContratos = () => {
  
     };
 
+    const guardarActualizarPerfiles= async () => {
+
+        const newFieldPerfilClases: FieldPerfilContratoClases = {
+            id_perfil_contrato: "form-control",
+            id_contrato: "form-control",
+            id_perfil: "form-control",
+            perfil: "form-control",
+            monto: "form-control",
+            descripcion: "form-control",
+            cantidad: "form-control",
+          };
+
+        let isValid = true; // Variable para verificar si el formulario es válido
+    
+        for (const key in formPerfilesContrato) {
+            if (!optionalFieldsPerfiles.includes(key)) { // Verifica si el campo no es opcional
+                if (formPerfilesContrato[key] === null || formPerfilesContrato[key] === '') {
+                    newFieldPerfilClases[key as keyof FieldContratoClases] = "form-control invalid-class";
+                    isValid = false;
+                }
+            }
+        }
+
+        setFormPerfilesContratoClases(newFieldPerfilClases);
+
+        if(isValid){
+            formPerfilesContrato.id_contrato = formData.id_contrato;
+            const datos:GuardaPerfil = {
+                id_perfil_contrato: null,
+                id_contrato: parseInt(formPerfilesContrato.id_contrato),
+                id_perfil: null,
+                perfil: formPerfilesContrato.perfil,
+                descripcion: formPerfilesContrato.descripcion,
+                monto: parseFloat(formPerfilesContrato.monto),
+                cantidad: parseInt(formPerfilesContrato.cantidad),
+                activo: true,
+            };
+    
+            try {
+                const result = await guardaActualizaPerfilesContrato(datos);
+                setShowPerfiles(true);
+
+                console.log(result)
+                if(result.correcto){
+                    toast.success(result.mensaje, {});
+                    setFormPerfilesContrato((formData) => ({
+                        ...formData,
+                        id_perfil_contrato: "",
+                        id_contrato: "",
+                        id_perfil: "",
+                        perfil: "",
+                        monto: "0.0",
+                        descripcion: "",
+                        cantidad: "1",
+                      }));
+                    getDataContratos();
+                } else {
+                    toast.warn(result.mensaje, {});
+                }
+            } catch (error) {
+                toast.error(error.mensaje, {});
+            }
+        } else {
+            toast.error("Los campos  marcados son obligatorios"	, {});
+        }
 
 
-    // Estado para controlar los campos del segundo formulario
-    const [secondFormData, setSecondFormData] = useState({
-        perfil: "",
-        monto: 0.0,
-        descripcion: "",
-        cantidad: 0,
-    });
-
-    const [showSecondForm, setShowSecondForm] = useState(false); // Estado para controlar la visibilidad del segundo formulario
-    const [wordCount, setWordCount] = useState(0); // Estado para contar palabras
-    const [perfilesList, setPerfilesList] = useState<Perfil[]>([]); // Estado para la lista de perfiles
-
-   
-    // Manejar cambios del segundo formulario
-    const handleSecondFormChange = (e) => {
-        const { name, value } = e.target;
-        setSecondFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-
+ 
     };
 
-    // Manejar el cambio de la descripción con límite de 200 palabras
-    const handleDescriptionChange = (e) => {
-        const { value } = e.target;
-        const words = value.trim().split(/\s+/).filter((word) => word.length > 0);
-        const wordCount = words.length;
 
-        if (wordCount <= 200) {
-            setSecondFormData({...secondFormData, descripcion: value,});
-            setWordCount(wordCount);
+    const getDataContratos = async (pagina = 1, registros = 100) => {
+        const datos:ConsultaPErfilesContrato = {
+          id_contrato: parseInt(formPerfilesContrato.id_contrato),
+          pagina_actual: pagina,
+          registros_por_pagina: registros
+        };
+
+        try {
+          const result = await getPerfilesContratos(datos);
+          setDataPerfiles(result.data);
+          console.log("Llega mansaje  bien " + result)
+            toast.success(result.mensaje, {});
+        } catch (error) {
+            console.log("Llega mansaje  error ")
+          console.log(error);
+          toast.error(error.mensaje, {});
         }
     };
+
 
     return (
         <>
@@ -334,45 +419,48 @@ export const FormularioContratos = () => {
                             </div>
                         </div>
                         <div className="card-body row">
+                            <div className="col-sm-12">
+                                    <Separador texto="Datos del contrato"/>
+                            </div>
                             <div className="col-sm-4">
                                 <Input label="No. contrato" type="text" name="contrato" value={formData.contrato} onChange={handleChange} 
-                                        placeholder="Numero de contrato" className={fieldClasses.contrato} />
+                                        placeholder="Numero de contrato" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
                                 <label className="form-label">Fecha de inicio</label> 
-                                <input  type="date" className={fieldClasses.fechaInicio} name="fechaInicio" value={formData.fechaInicio} onChange={handleChange} />
+                                <input  type="date" className={fieldContratoClases.fechaInicio} name="fechaInicio" value={formData.fechaInicio} onChange={handleChange} />
                             </div>
                             <div className="col-sm-4">
                                 <label className="form-label">Fecha de término</label>
-                                <input type="date" className={fieldClasses.fechaTermino} name="fechaTermino" value={formData.fechaTermino} onChange={handleChange} />
+                                <input type="date" className={fieldContratoClases.fechaTermino} name="fechaTermino" value={formData.fechaTermino} onChange={handleChange} />
                             </div>
                             <div className="col-sm-4">
                                     <Select  label="Selecciona forma de pago"  name="formaPago"   value={formData.formaPago}  onChange={handleChange}  options={formaPago}
-                                                placeholder="Selecciona una opcion"   className= {fieldClasses.formaPago}/>
+                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.formaPago}/>
                             </div>
                             <div className="col-sm-4">
                                     <Select  label="Selecciona tipo de contrato"  name="tipoContrato"   value={formData.tipoContrato}  onChange={handleChange}  options={tipoContrato}
-                                                placeholder="Selecciona una opcion"   className= {fieldClasses.tipoContrato}/>
+                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.tipoContrato}/>
                             </div>
                             <div className="col-sm-4">
                                     <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
-                                                placeholder="Selecciona una opcion"   className= {fieldClasses.consultora}/>
+                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.consultora}/>
                             </div>
                             <div className="col-sm-4">
                                 <Input label="Monto variable" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
-                                        placeholder="Monto variable" className= {fieldClasses.montoVariable} />
+                                        placeholder="Monto variable" className= {fieldContratoClases.montoVariable} />
                             </div>
                             <div className="col-sm-4">
                                 <Input label="Monto fijo" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
-                                        placeholder="Monto fijo" className= {fieldClasses.montoFijo} />
+                                        placeholder="Monto fijo" className= {fieldContratoClases.montoFijo} />
                             </div>
                             <div className="col-sm-4">
                                 <Input label="Monto total" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
-                                        placeholder="Monto total" className= {fieldClasses.montoTotal} />
+                                        placeholder="Monto total" className= {fieldContratoClases.montoTotal} />
                             </div>
                             <div className="col-sm-4">
                                 <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
-                                        placeholder="No consultores" className= {fieldClasses.consultores} />
+                                        placeholder="No consultores" className= {fieldContratoClases.consultores} />
                             </div>
                             <div className="col-sm-4">
                                 <Select  label="Selecciona el Direccion/subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
@@ -390,118 +478,80 @@ export const FormularioContratos = () => {
                         <div className="card-footer row">
                             <div className="col-sm-12 text-end">
                                 <button className="btn btn-principal" title="Guardar" onClick={guardarActualizarContrato}>
-                                    <SaveIcon /> Guardar
+                                    <SaveOutlinedIcon /> Guardar
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Segundo formulario, solo se muestra si showSecondForm es true */}
-                {showSecondForm && (
-                    <form>
-                        <div className="card mt-4">
-                            <div className="card-header d-flex justify-content-start align-items-center">
-                                <div className="col-sm-3 text-start">
-                                    <button
-                                        type="button"
-                                        className="btn btn-accion"
-                                        title="Agregar perfil"
-                                        // onClick={handleAddProfile} // Evento para agregar perfil
-                                    >
-                                        <ControlPointIcon /> Agregar perfil
-                                    </button>
-                                </div>
-                            </div>
+                {showPerfiles && (
+                    <div className="row">
+                         <div className="card">
                             <div className="card-body row">
-                                <div className="col-sm-12 row">
-                                    <div className="col-sm-4">
-                                        <label className="form-label">Perfil</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="perfil"
-                                            value={secondFormData.perfil}
-                                            onChange={handleSecondFormChange}
-                                            placeholder="Ingresa el perfil"
-                                        />
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <label className="form-label">Monto</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="monto"
-                                            value={secondFormData.monto}
-                                            onChange={handleSecondFormChange}
-                                            placeholder="Ingresa el monto"
-                                        />
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <label className="form-label">Cantidad</label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="cantidad"
-                                            value={secondFormData.cantidad}
-                                            onChange={handleSecondFormChange}
-                                            placeholder="Ingresa la cantidad"
-                                        />
-                                    </div>
+                                <div className="col-sm-12">
+                                    <Separador texto="Datos del perfil"/>
                                 </div>
-                                <div className="col-sm-12 row">
-                                    <div className="col-sm-12">
-                                        <label className="form-label">Descripcion</label>
-                                        <textarea
-                                            className="form-control"
-                                            name="descripcion"
-                                            value={secondFormData.descripcion}
-                                            onChange={handleDescriptionChange}
-                                            rows={3}
-                                            placeholder="Escribe una descripción de hasta 200 palabras"
-                                        />
-                                    </div>
+                                <div className="col-sm-4">
+                                    <Input label="Perfil" type="text" name="perfil" value={formPerfilesContrato.perfil} onChange={handleformPerfilesChange} 
+                                            placeholder="Perfil" className={formPerfilesContratoClases.perfil} />
+                                </div>
+                                <div className="col-sm-4">
+                                    <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
+                                            placeholder="Monto" className={formPerfilesContratoClases.monto} />
+                                </div>
+                                <div className="col-sm-4">
+                                    <Input label="Cantidad" type="text" name="cantidad" value={formPerfilesContrato.cantidad} onChange={handleformPerfilesChange} 
+                                            placeholder="Cantidad de recurso requerido en el perfil " className={formPerfilesContratoClases.cantidad} />
+                                </div>
+                                <div className="col-sm-12">
+                                    <label className="form-label">Descripción del perfil</label>
+                                    <textarea className={formPerfilesContratoClases.descripcion} value={formPerfilesContrato.descripcion} 
+                                            onChange={handleformPerfilesChange}  rows={2} placeholder="Descripcion del perfil" name="descripcion"   />
                                 </div>
                             </div>
-                            <div className="card-footer d-flex justify-content-end align-items-center">
-                                <div className="col-sm-3 text-end">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-principal"
-                                        title="Guardar perfil"
-                                    >
-                                        <SaveIcon /> Guardar
+                            <div className="card-footer row">
+                                <div className="col-sm-12 text-end">
+                                    <button className="btn btn-principal" title="Guardar" onClick={() => {guardarActualizarPerfiles()}}>
+                                        <SaveOutlinedIcon /> Guardar Perfil
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        {/* Tabla para mostrar los perfiles agregados */}
-                        {perfilesList.length > 0 && (
-                            <div className="mt-4">
-                                <h4>Perfiles agregados:</h4>
-                                <table className="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Perfil</th>
-                                            <th>Monto</th>
-                                            <th>Cantidad</th>
-                                            <th>Descripción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {perfilesList.map((perfil:Perfil, index) => (
-                                            <tr key={index}>
-                                                <td>{perfil.perfil}</td>
-                                                <td>{perfil.monto}</td>
-                                                <td>{perfil.cantidad}</td>
-                                                <td>{perfil.descripcion}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        )}
-                    </form>
+                         </div>
+                         <div className="card">
+                                <div className="card-body row">
+                                    <div className="col-sm-12">
+                                    <Separador texto="Perfiles registrados en el contrato"/>
+                                    </div>
+                                    <div className="col-sm-12">
+                                        <table className="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th className="valoresCentrados">Perfil</th>
+                                                    <th className="valoresCentrados">Monto</th>
+                                                    <th className="valoresCentrados">Cantidad</th>
+                                                    <th className="valoresCentrados"> Descripción</th>
+                                                    <th className="valoresCentrados">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
+                                                    <tr key={i}>
+                                                        <td className="valoresCentrados">{dato.nombre}</td>
+                                                        <td className="valoresCentrados">{dato.monto}</td>
+                                                        <td className="valoresCentrados">{dato.cantidad}</td>
+                                                        <td className="valoresCentrados">{dato.descripcion}</td>
+                                                        <td className="valoresCentrados"></td>
+                                                    </tr>
+                                                ))}
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                         </div> 
+                    </div>
+                   
                 )}
             </div>
 

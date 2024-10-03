@@ -4,10 +4,12 @@ import { CustomException } from '../util/errores';
 import { DataSource } from 'typeorm';
 import DBConfig from '../config/db-config';
 import {
+  CatalogoAddUpdatePerfilRequest,
   CatalogoDocumentosRequest,
   CatalogoRequest,
 } from '../model/request/catalogosRequest';
 import {
+  CatalogoAddUpdateResponse,
   CatalogoDocumentoResponse,
   CatalogoExtArchivoResponse,
   CatalogoPerfilConsultorResponse,
@@ -315,6 +317,28 @@ export class CatalogoRepository {
       return result;
     } catch (error) {
       throw new CustomException(error, '393ccefb-2da3-426e-bf85-eb63989be180');
+    }
+  }
+
+  async addUpdatePerfilConsultor(
+    request: CatalogoAddUpdatePerfilRequest,
+  ): Promise<CatalogoAddUpdateResponse> {
+    try {
+      const result = await this.dataSource.query(
+        'EXEC sp_registraActualizaPerfil @0, @1, @2, @3, @4, @5, @6',
+        [
+          request.id_perfil,
+          request.perfil,
+          request.descripcion,
+          request.monto.toString(),
+          request.activo,
+          request.id_usuario,
+          request.ip,
+        ],
+      );
+      return result[0];
+    } catch (error) {
+      throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6c999');
     }
   }
 

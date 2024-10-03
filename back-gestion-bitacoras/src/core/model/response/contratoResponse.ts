@@ -39,3 +39,30 @@ export declare class ActualizaRegistraResponse {
   id_contrato: number | null;
   id_archivo: number | null;
 }
+
+export declare class ActualizaRegistraPerfilResponse {
+  data: ActualizaRegistraPerfilContratoResponse;
+  correcto: boolean;
+  mensaje: string;
+}
+
+export declare class ActualizaRegistraPerfilContratoResponse {
+  id_perfil_contrato: number | null;
+}
+
+export declare class PerfilContratoResponse {
+  no_registro?: number;
+  id_perfil_contrato?: number;
+  id_perfil?: number;
+  fh_registro?: string;
+  fh_baja?: string;
+  cantidad?: number;
+  nombre?: string;
+  descripcion?: string;
+  monto?: number;
+
+  //Valores comunes  paginador
+  pagina_actual?: number;
+  total_registros?: number;
+  total_paginas?: number;
+}

@@ -1,17 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import {
   ConsultaContratoRequest,
+  ConsultaPErfilesContratoRequest,
   RegistraActualizaContratoRequest,
 } from '../model/request/contratoRequest';
 import { ContratosRepository } from '../repository/contratos.repository';
 import {
   ActualizaRegistraBaseResponse,
+  ActualizaRegistraPerfilResponse,
   ContratoResponse,
+  PerfilContratoResponse,
 } from '../model/response/contratoResponse';
 import { ArchivoRepository } from '../repository/archivo.repository';
 import { CustomException } from '../util/errores';
-import { folderArchivos, tipoArchivos } from '../util/global-enum';
+import {
+  folderArchivos,
+  tipoArchivos,
+  usuarioPorDefecto,
+} from '../util/global-enum';
 import { GeneralRepository } from '../repository/general.repository';
+import {
+  CatalogoAddUpdatePerfilContratoRequest,
+  CatalogoAddUpdatePerfilRequest,
+} from '../model/request/catalogosRequest';
+import { CatalogoRepository } from '../repository/catalogos.repository';
 
 @Injectable()
 export class ContratosService {
@@ -19,6 +31,7 @@ export class ContratosService {
     private readonly contratosRepository: ContratosRepository,
     private readonly archivoRepository: ArchivoRepository,
     private readonly generalRepository: GeneralRepository,
+    private readonly catalogoRepository: CatalogoRepository,
   ) {}
 
   public async getContratos(
@@ -32,7 +45,7 @@ export class ContratosService {
   public async addUpdateContratos(
     request: RegistraActualizaContratoRequest,
   ): Promise<ActualizaRegistraBaseResponse> {
-    request.id_usuario = 5;
+    request.id_usuario = usuarioPorDefecto.id_usuario;
     const valido = await this.validaAddUpdateContrato(request);
 
     if (valido != '') {
@@ -69,7 +82,7 @@ export class ContratosService {
     } catch (error) {
       throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6c111');
     }
-    console.log(request);
+
     const datos = await this.contratosRepository.addUpdateContratos(request);
 
     const respuesta: ActualizaRegistraBaseResponse = {
@@ -129,5 +142,57 @@ export class ContratosService {
       respuesta = 'Los siguentes campos son obligatorios: ' + respuesta;
     }
     return respuesta;
+  }
+
+  public async addUpdatePerfilesContratos(
+    request: CatalogoAddUpdatePerfilContratoRequest,
+  ): Promise<ActualizaRegistraPerfilResponse> {
+    try {
+      request.id_usuario = usuarioPorDefecto.id_usuario;
+      const datosPErfil: CatalogoAddUpdatePerfilRequest = {
+        id_perfil: request.id_perfil,
+        perfil: request.perfil,
+        descripcion: request.descripcion,
+        monto: request.monto,
+        activo: request.activo,
+        ip: request.ip,
+        id_usuario: request.id_usuario,
+      };
+
+      console.log(datosPErfil);
+      const datosPerfil =
+        await this.catalogoRepository.addUpdatePerfilConsultor(datosPErfil);
+
+      if (!datosPerfil.correcto) {
+        throw new CustomException(datosPerfil.mensaje, '');
+      }
+      console.log(datosPerfil);
+      request.id_perfil = datosPerfil.id;
+      console.log(request);
+      const datos =
+        await this.contratosRepository.addUpdatePerfilesContratos(request);
+      console.log(datos);
+      const respuesta: ActualizaRegistraPerfilResponse = {
+        mensaje: datos.mensaje,
+        correcto: datos.correcto,
+        data: {
+          id_perfil_contrato: datos.id_perfil_contrato ?? null,
+        },
+      };
+
+      console.log(request);
+      return respuesta;
+    } catch (error) {
+      throw new CustomException(error, '1fb67f0a-4af6-42e6-a8a3-a814ebe6c111');
+    }
+  }
+
+  public async getPerfilesContratos(
+    request: ConsultaPErfilesContratoRequest,
+  ): Promise<PerfilContratoResponse[]> {
+    const datosLogin =
+      await this.contratosRepository.getPerfilesContratos(request);
+
+    return datosLogin;
   }
 }

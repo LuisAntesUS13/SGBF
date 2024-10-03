@@ -22,3 +22,7 @@ export enum tipoArchivos {
 export enum ipDefecto {
   ip = '127.0.0.1',
 }
+
+export enum usuarioPorDefecto {
+  id_usuario = 5,
+}
