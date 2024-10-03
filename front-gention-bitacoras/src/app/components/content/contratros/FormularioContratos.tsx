@@ -353,7 +353,6 @@ export const FormularioContratos = () => {
     
             try {
                 const result = await guardaActualizaPerfilesContrato(datos);
-                setShowPerfiles(true);
 
                 console.log(result)
                 if(result.correcto){

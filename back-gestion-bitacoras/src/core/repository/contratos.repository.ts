@@ -98,7 +98,6 @@ export class ContratosRepository {
         ],
       );
 
-      console.log(result);
       return result[0];
     } catch (error) {
       throw new CustomException(error, '2fb67f0a-4af5-42e5-a8a3-a814ebe6c100');
