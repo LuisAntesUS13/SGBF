@@ -1,9 +1,17 @@
 import { Divider } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Select } from "../../../shared/Select/Select.tsx";
 import "./BitacoraConsultor.css";
 import { Tabla } from "../../../shared/Tabla/Tabla.tsx";
 import { useNavigate } from "react-router-dom";
+import { BitacoraService } from "../../../services/bitacoras/bitacoras.service.ts";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import "dayjs/locale/es.js";
+
+const bitacorasService = new BitacoraService();
 
 const columnas = [
   { header: "CONSULTOR", accessor: "consultor" },
@@ -96,7 +104,7 @@ export const BitacoraConsultor = () => {
     periodo: "",
   });
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -112,6 +120,13 @@ export const BitacoraConsultor = () => {
   const handleRegistroActvidadClick = () => {
     navigate("/registro-de-actividad-consultor");
   };
+  const fetchBitacoras = async () => {
+    const bitacoras = await bitacorasService.getBitacoras(formData.periodo);
+  };
+
+  useEffect(() => {
+    fetchBitacoras();
+  }, [formData.periodo]);
 
   return (
     <>
@@ -125,6 +140,13 @@ export const BitacoraConsultor = () => {
           </div>
         </div>
         <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+          <DemoContainer components={["DatePicker"]}>
+            <DatePicker label="DatePicker básico" format="DD/MM/YYYY" />
+          </DemoContainer>
+        </LocalizationProvider>
+
         <div>
           <div className="contenedor-filtro-botones">
             <div className="col-sm-3">
@@ -134,7 +156,6 @@ export const BitacoraConsultor = () => {
                 value={formData.periodo}
                 onChange={handleSelectChange}
                 options={periodoOpciones}
-                placeholder="Selecciona un contrato"
                 className="form-select"
               />
             </div>
