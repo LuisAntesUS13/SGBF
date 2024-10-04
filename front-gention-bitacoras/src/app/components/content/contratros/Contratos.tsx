@@ -73,7 +73,7 @@ export const Contratos = () => {
 
     return (<>
         <div className="contenido_principal">
-            <h3>Contol de contratos</h3>
+            <h3>Control de contratos</h3>
             <hr/>
             <div className="card">
                 <div className="card-body row">
@@ -81,7 +81,7 @@ export const Contratos = () => {
                         <Input label="No. contrato" type="text" name="contrato" value={formulario.contrato} onChange={handleChange} placeholder="Numero de contrato" className="" />
                     </div>
                     <div className="col-sm-3">
-                        <Input label="No. contrato 2" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
+                        <Input label="Proveedor" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
                     </div>
                     {/* <div className="col-sm-3">
                         <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
@@ -108,7 +108,7 @@ export const Contratos = () => {
                                     <th scope="col" className="valoresCentrados">Fecha inicio</th>
                                     <th scope="col" className="valoresCentrados">Fecha termino</th>
                                     <th scope="col" className="valoresCentrados">Monto</th>
-                                    <th scope="col" className="valoresCentrados">Consultora</th>
+                                    <th scope="col" className="valoresCentrados">Proveedor</th>
                                     <th scope="col" className="valoresCentrados">Tipo contrato</th>
                                     <th scope="col" className="valoresCentrados">Forma pago</th>
                                     <th scope="col" className="valoresCentrados">Estatus</th>

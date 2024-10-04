@@ -6,7 +6,7 @@ import { Input } from "../../../shared/Input/Input.tsx";
 import { Select } from "../../../shared/Select/Select.tsx";
 import { Catalogo } from "../../../model/response/catalogo.response.tsx";
 import { ConsultaCatalogo } from "../../../model/request/catalogos.request.tsx";
-import { getCatalogoAreas, getCatalogoConsultoras, getCatalogoFormaPago, getCatalogoTipoContrato } from "../../../services/catalogos.service.tsx";
+import { getCatalogoAreas, getCatalogoConsultoras, getCatalogoFormaPago, getCatalogoPerfilesConsultores, getCatalogoTipoContrato } from "../../../services/catalogos.service.tsx";
 import { GuardaContrato } from "../../../model/request/contratos.request.tsx";
 import { guardaActualizaContratos } from "../../../services/contratos.service.tsx";
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import { Separador } from "../../../shared/SeparadorTexto/SeparadorTexto.tsx";
 import { ConsultaPErfilesContrato, GuardaPerfil } from "../../../model/request/perfiles.request.tsx";
 import { getPerfilesContratos, guardaActualizaPerfilesContrato } from "../../../services/perfiles.service.tsx";
+import { InputBuscador } from "../../../shared/InputBuscador/InputBuscador.tsx";
 
 export const FormularioContratos = () => {
     // Componente para navegar entre paginas
@@ -28,21 +29,21 @@ export const FormularioContratos = () => {
     const [area, setArea] = useState<Catalogo[]>([]);
 
     // Estado para controlar la visibilidad del segundo formulario
-    const [showPerfiles, setShowPerfiles] = useState(false); 
+    const [showPerfiles, setShowPerfiles] = useState(true); 
 
     const [dataPerfiles, setDataPerfiles] = useState<DatosPerfilesContratos[]>([]);
 
     // Estado para controlar los campos del formulario
     const [formData, setFormData] = useState<FieldContratoClases>({
-        id_contrato: "",
-        contrato: "",
+        id_contrato: "", 
+        contrato: "",  
         fechaInicio: "",
         fechaTermino: "",
         formaPago: "",
         tipoContrato: "",
         consultora: "",
         consultores: "",
-        montoVariable: "0.0",
+        montoVariable: "0.0",  
         montoFijo: "0.0",
         montoTotal: "0.0",
         id_archivo: "",
@@ -139,8 +140,8 @@ export const FormularioContratos = () => {
         }
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
+    const handleFileChange = (e) => {
+        const files = e.target.files;
         if (files && files.length > 0) {
           const file = files[0];
           // Si deseas leer el archivo como base64:
@@ -166,6 +167,65 @@ export const FormularioContratos = () => {
         }
     };
 
+  
+    const [datosPerfiles, setDatosPerfiles] = useState<any[]>([]); 
+    const [mostrarKeyPerfiles, setMostrarKeyPerfile] = useState<string[]>([]); 
+    const [resultadosPerfiles, setResultadosPerfiles] = useState<any[]>([]); 
+    const [mostrarResultadosPerfiles, setMostrarResultadosPerfiles] = useState(false);
+
+    const changeBuscadoPerfil = (e) => {
+        let busquedaKey = ['nombre','monto','descripcion'];
+        setMostrarKeyPerfile(busquedaKey);
+        const { name, value } = e.target;
+
+        setFormPerfilesContrato((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+
+        // Filtrar los datos basados en las coincidencias
+        const filtrados = datosPerfiles.filter((item) =>
+          busquedaKey.some((key) => item[key].toString().toLowerCase().includes(value.toLowerCase()))
+        );
+        setMostrarResultadosPerfiles((value !== "" && filtrados.length > 0 )? true: false);
+       
+        setResultadosPerfiles(filtrados);
+    };
+
+    const perfilSeleccionado = (perfil: any) => {
+        // console.log("Acción al seleccionar perfil:", perfil); // Ejecuta la acción
+        setFormPerfilesContrato({
+            ...formPerfilesContrato,
+            id_perfil: perfil.id, 
+            perfil: perfil.nombre, 
+            monto: perfil.monto, 
+            descripcion:  perfil.descripcion, 
+            cantidad: "1",
+        });
+        setFormPerfilesContratoClases({
+            ...formPerfilesContratoClases,
+            id_perfil: "form-control",
+            perfil: "form-control",
+            monto: "form-control",
+            descripcion: "form-control",
+            cantidad: "form-control",
+        });
+        setMostrarResultadosPerfiles(false);
+    };
+
+    const obtenerCatalogoPerfiles = async () => {
+        const datos:ConsultaCatalogo = {
+            nombre: "",
+            activo: true,
+        };
+
+        try {
+          const result = await getCatalogoPerfilesConsultores(datos);
+          setDatosPerfiles(result.data);
+        } catch (error) {
+          console.log(error);
+        }
+    };
 
     const obtenerCatalogoFormaPago = async () => {
         const datos:ConsultaCatalogo = {
@@ -228,7 +288,8 @@ export const FormularioContratos = () => {
         obtenerCatalogoTipoContrato();
         obtenerCatalogoCosultora();
         obtenerCatalogoAreas();
-       
+        obtenerCatalogoPerfiles();
+    
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
@@ -382,7 +443,6 @@ export const FormularioContratos = () => {
  
     };
 
-
     const getDataContratos = async (pagina = 1, registros = 100) => {
         const datos:ConsultaPErfilesContrato = {
           id_contrato: parseInt(formPerfilesContrato.id_contrato),
@@ -466,7 +526,7 @@ export const FormularioContratos = () => {
                                         placeholder="Selecciona una opcion"   className="form-control"/>
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[]}
+                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={gerente}
                                         placeholder="Selecciona una opcion"  className="form-control"/>
                             </div>
                             <div className="col-sm-8">
@@ -492,8 +552,10 @@ export const FormularioContratos = () => {
                                     <Separador texto="Datos del perfil"/>
                                 </div>
                                 <div className="col-sm-4">
-                                    <Input label="Perfil" type="text" name="perfil" value={formPerfilesContrato.perfil} onChange={handleformPerfilesChange} 
-                                            placeholder="Perfil" className={formPerfilesContratoClases.perfil} />
+                                    <InputBuscador label="Perfiles" type="text" name="perfil" value={formPerfilesContrato.perfil} 
+                                    placeholder="Perfiles" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
+                                    mostrarResultados={mostrarResultadosPerfiles} mostrarKey={mostrarKeyPerfiles} resultados={resultadosPerfiles} 
+                                    onSeleccionar={perfilSeleccionado} />
                                 </div>
                                 <div className="col-sm-4">
                                     <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
