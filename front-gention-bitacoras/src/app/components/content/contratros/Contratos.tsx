@@ -93,7 +93,7 @@ export const Contratos = () => {
                     </div>
                 </div>
                 <div className="card-footer row">
-                    <div className="col-sm-3">
+                    <div className="col-sm-3" style={{marginTop: '3px', marginBottom: '3px'}}>
                         <button type="button" className="btn btn-accion" title="Nuevo contrato" onClick={() => navigate("/contrato/registrar")}><ControlPointOutlinedIcon /> Nuevo Contrato</button>
                     </div>
                 </div>

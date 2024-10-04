@@ -32,7 +32,7 @@ export const FormularioContratos = () => {
     const [area, setArea] = useState<Catalogo[]>([]);
 
     // Estado para controlar la visibilidad del segundo formulario
-    const [showPerfiles, setShowPerfiles] = useState(true); 
+    const [showPerfiles, setShowPerfiles] = useState(false); 
 
     const [dataPerfiles, setDataPerfiles] = useState<DatosPerfilesContratos[]>([]);
 
@@ -452,6 +452,7 @@ export const FormularioContratos = () => {
       if (datosContrato) {
         llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
         getDataContratos(datosContrato.id_contrato);
+        setShowPerfiles(true);
       }
         obtenerCatalogoFormaPago();
         obtenerCatalogoTipoContrato();
@@ -638,20 +639,20 @@ export const FormularioContratos = () => {
                                                     <th className="valoresCentrados">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            {dataPerfiles && (
-                                            <tbody>
-                                                {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
-                                                    <tr key={i} onClick={() => {datosPerfilActualizacion(dato)}}>
-                                                        <td className="valoresCentrados">{dato.nombre}</td>
-                                                        <td className="valoresCentrados">{dato.monto}</td>
-                                                        <td className="valoresCentrados">{dato.cantidad}</td>
-                                                        <td className="valoresCentrados">{dato.descripcion}</td>
-                                                        <td className="valoresCentrados"></td>
-                                                    </tr>
-                                                ))}
-                                            
-                                            </tbody>
-                                             )}
+                                                {dataPerfiles && (
+                                                <tbody>
+                                                    {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
+                                                        <tr key={i} onClick={() => {datosPerfilActualizacion(dato)}}>
+                                                            <td className="valoresCentrados">{dato.nombre}</td>
+                                                            <td className="valoresCentrados">{dato.monto}</td>
+                                                            <td className="valoresCentrados">{dato.cantidad}</td>
+                                                            <td className="valoresCentrados">{dato.descripcion}</td>
+                                                            <td className="valoresCentrados"></td>
+                                                        </tr>
+                                                    ))}
+                                                
+                                                </tbody>
+                                                )}
                                             </table>                                    
                                     </div>
                                 </div>
