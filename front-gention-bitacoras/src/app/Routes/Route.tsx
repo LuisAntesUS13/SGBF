@@ -17,7 +17,8 @@ export const Enrutador = () => {
     <>
       <Routes>
         <Route path="/contrato" element={<Contratos />} />
-        <Route path="/contrato/nuevo" element={<FormularioContratos />} />
+        <Route path="/contrato/registrar" element={<FormularioContratos />} />
+        <Route path="/contrato/actualizar" element={<FormularioContratos />} />
         <Route path="/carga-de-perfiles" element={<h1>Carga de perfiles</h1>} />
         <Route
           path="/registro-de-equipo-y-lider"

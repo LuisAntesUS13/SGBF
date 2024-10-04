@@ -19,6 +19,8 @@ export class DatosContratos{
     fh_actualizacion: string;
     id_area: number;
     area: string;
+    no_consultores: number;
+    id_gerente: number;
     nombre: string;
     primer_apellido: string;
     segundo_apellido: string;
