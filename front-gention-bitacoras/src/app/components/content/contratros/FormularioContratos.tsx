@@ -549,15 +549,15 @@ export const FormularioContratos = () => {
                                                 placeholder="Selecciona una opcion"   className= {fieldContratoClases.consultora}/>
                             </div>
                             <div className="col-sm-4">
-                                <Input label="Monto variable" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
+                                <Input label="Monto variable (IVA Incluido)" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
                                         placeholder="Monto variable" className= {fieldContratoClases.montoVariable} />
                             </div>
                             <div className="col-sm-4">
-                                <Input label="Monto fijo" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
+                                <Input label="Monto fijo (IVA Incluido)" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
                                         placeholder="Monto fijo" className= {fieldContratoClases.montoFijo} />
                             </div>
                             <div className="col-sm-4">
-                                <Input label="Monto total" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
+                                <Input label="Monto total (IVA Incluido)" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
                                         placeholder="Monto total" className= {fieldContratoClases.montoTotal} />
                             </div>
                             <div className="col-sm-4">
@@ -565,11 +565,11 @@ export const FormularioContratos = () => {
                                         placeholder="No consultores" className= {fieldContratoClases.consultores} />
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona el Direccion/subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
+                                <Select  label="Selecciona Direccion / Subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
                                         placeholder="Selecciona una opcion"   className="form-control"/>
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={gerente}
+                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={gerente}
                                         placeholder="Selecciona una opcion"  className="form-control"/>
                             </div>
                             <div className="col-sm-8">
