@@ -1,7 +1,8 @@
 import { Divider } from "@mui/material";
 import React from "react";
+import "./ObservacionPorPeriodoConsultor.css";
 
-export const DetallesPorPeriodoConsultor = () => {
+export const ObservacionPorPeriodoConsultor = () => {
   return (
     <>
       <div className="contenido_principal">
@@ -34,7 +35,7 @@ export const DetallesPorPeriodoConsultor = () => {
             className="contenedor-observaciones-realizadas"
             style={{ width: "80%" }}
           >
-            <ul className="contenedor-observaciones">
+            <ul className="contenedor-observaciones-periodo-consultor">
               <li>
                 11/01/2024: Primero, quiero reconocer el esfuerzo que pusiste en
                 la revisión de la documentación técnica. Es evidente que te

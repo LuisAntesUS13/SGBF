@@ -1,6 +1,6 @@
 import { Box, Divider, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import { Input } from "../../../shared/Input/Input.tsx";
+import { Input } from "../../../../shared/Input/Input.tsx";
 import Grid from "@mui/material/Grid2";
 
 interface TabPanelProps {
@@ -220,7 +220,7 @@ export const DetallesDeActividadConsultor = () => {
                   direction={"row-reverse"}
                   sx={{ margin: "8px 0px" }}
                 >
-                  <Grid size={{ xs: 12, md: 6 }}>
+                  <Grid size={{ xs: 12, md: 6 }} sx={{ marginTop: "16px" }}>
                     <button
                       type="button"
                       className="btn btn-principal btn-registrar"

@@ -3,14 +3,15 @@ import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { Contratos } from "../components/content/contratros/Contratos.tsx";
 import { FormularioContratos } from "../components/content/contratros/FormularioContratos.tsx";
-import { PeriodosBitacoraLiderTecnico } from "../components/content/PeriodosBitacoraLiderTecnico/PeriodosBitacoraLiderTecnico.tsx";
-import { ValidacionBitacoraLiderTecnico } from "../components/content/ValidacionBitacoraLiderTecnico/ValidacionBitacoraLiderTecnico.tsx";
-import { DetallesDeActividadLiderTecnico } from "../components/content/DetallesDeActividadLiderTecnico/DetallesDeActividadLiderTecnico.tsx";
-import { ObservacionPorPeriodoLiderTecnico } from "../components/content/ObservacionPorPeriodoLiderTecnico/ObservacionPorPeriodoLiderTecnico.tsx";
-import { BitacoraConsultor } from "../components/content/BitacoraConsultor/BitacoraConsultor.tsx";
-import { DetallesDeActividadConsultor } from "../components/content/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
-import { DetallesPorPeriodoConsultor } from "../components/content/DetallesPorPeriodoConsultor/DetallesPorPeriodoConsultor.tsx";
-import { RegistroDeActividadConsultor } from "../components/content/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
+import { PeriodosBitacoraLiderTecnico } from "../components/content/LiderTecnico/PeriodosBitacoraLiderTecnico/PeriodosBitacoraLiderTecnico.tsx";
+import { ValidacionBitacoraLiderTecnico } from "../components/content/LiderTecnico/ValidacionBitacoraLiderTecnico/ValidacionBitacoraLiderTecnico.tsx";
+import { DetallesDeActividadLiderTecnico } from "../components/content/LiderTecnico/DetallesDeActividadLiderTecnico/DetallesDeActividadLiderTecnico.tsx";
+import { ObservacionPorPeriodoLiderTecnico } from "../components/content/LiderTecnico/ObservacionPorPeriodoLiderTecnico/ObservacionPorPeriodoLiderTecnico.tsx";
+import { BitacoraConsultor } from "../components/content/Consultor/BitacoraConsultor/BitacoraConsultor.tsx";
+import { DetallesDeActividadConsultor } from "../components/content/Consultor/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
+import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
+import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/ObservacionDetallesPorPeriodoConsultor/ObservacionPorPeriodoConsultor.tsx";
+import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
 
 export const Enrutador = () => {
   return (
@@ -30,14 +31,18 @@ export const Enrutador = () => {
         <Route
           path="/detalles-actividad-lider-tecnico"
           element={<DetallesDeActividadLiderTecnico />}
-        />{" "}
+        />
         <Route
           path="/detalles-actividad-consultor"
           element={<DetallesDeActividadConsultor />}
         />
         <Route
+          path="/consultores-lider-tecnico"
+          element={<ConsultoresLiderTecnico />}
+        />
+        <Route
           path="/observacion-por-periodo-consultor"
-          element={<DetallesPorPeriodoConsultor />}
+          element={<ObservacionPorPeriodoConsultor />}
         />
         <Route
           path="/registro-de-actividad-consultor"
