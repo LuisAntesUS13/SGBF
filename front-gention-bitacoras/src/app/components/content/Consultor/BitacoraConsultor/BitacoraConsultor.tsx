@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import "./ValidacionBitacoraLiderTecnico.css";
 import { Divider } from "@mui/material";
-import { Input } from "../../../shared/Input/Input.tsx";
-import { Tabla } from "../../../shared/Tabla/Tabla.tsx";
-import { ListaEstados } from "../../../shared/ListaEstados/ListaEstados.tsx";
+import React, { useEffect, useState } from "react";
+import { Select } from "../../../../shared/Select/Select.tsx";
+import "./BitacoraConsultor.css";
+import { Tabla } from "../../../../shared/Tabla/Tabla.tsx";
 import { useNavigate } from "react-router-dom";
+import {
+  BitacoraService,
+  PeriodosServices,
+} from "../../../../services/bitacoras/bitacoras.service.ts";
+import { ListaEstados } from "../../../../shared/ListaEstados/ListaEstados.tsx";
+
+const bitacorasService = new BitacoraService();
+const periodosService = new PeriodosServices();
 
 const columnas = [
   { header: "CONSULTOR", accessor: "consultor" },
@@ -83,7 +90,14 @@ const datos = [
   },
 ];
 
-export const ValidacionBitacoraLiderTecnico = () => {
+const periodoOpciones = [
+  { id: "1", nombre: "Enero" },
+  { id: "2", nombre: "Febrero" },
+  { id: "3", nombre: "Marzo" },
+  { id: "4", nombre: "Abril" },
+];
+
+export const BitacoraConsultor = () => {
   const [seleccionado, setSeleccionado] = useState<number | null>(null);
 
   const listadoEstatus = [
@@ -98,59 +112,70 @@ export const ValidacionBitacoraLiderTecnico = () => {
     // Aquí puedes realizar otras acciones con el estatus seleccionado si lo deseas
     console.log(`Estatus seleccionado: ${id}`);
   };
-
-  const [formData, setFormData] = useState({
-    consultor: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const navigate = useNavigate();
 
-  const irAObservaciones = () => {
-    navigate("/observacion-por-periodo-consultores");
+  const [formData, setFormData] = useState({
+    periodo: "",
+  });
+
+  const handleSelectChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    fetchBitacoras();
   };
 
   const handleRowClick = () => {
-    navigate("/detalles-actividad-lider-tecnico");
+    navigate("/detalles-actividad-consultor");
   };
+
+  const handleObservacionesClick = () => {
+    navigate("/observacion-por-periodo-consultor");
+  };
+
+  const handleRegistroActvidadClick = () => {
+    navigate("/registro-de-actividad-consultor");
+  };
+  const fetchBitacoras = async () => {
+    // const bitacoras = await bitacorasService.getBitacoras(formData.periodo);
+  };
+
+  const fetchPeriodos = async () => {
+    // const periodos = await periodosService.getPeriodos();
+  };
+
+  useEffect(() => {
+    fetchPeriodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <div className="contenido_principal">
-        <div>
-          <h1>Validación de bitácoras</h1>
-          <div className="contenedor-datos-proyecto">
-            <div className="datos-titulo-proyecto">
-              <p className="titulo-proyecto">
-                Sistema de gestión de bitácoras de fábricas. (Junio - 2024)
-              </p>
-            </div>
-            <div className="datos">
-              <p className="datos-proyecto">Líder: </p>
-              <p>Juan Guitérrez</p>
-            </div>
-            <div className="datos">
-              <p className="datos-proyecto">Responsable: </p>
-              <p>Azir Aguilar</p>
-            </div>
+        <h1>Bitácora y registro de actividades</h1>
+        <div className="contenedor-datos-proyecto">
+          <div className="datos-titulo-proyecto">
+            <p className="titulo-proyecto">
+              Periodos y actividades registradas
+            </p>
           </div>
-          <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
-          <div>
+        </div>
+        <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+
+        <div>
+          <div className="contenedor-filtro-botones">
             <div className="col-sm-3">
-              <Input
-                label="Nombre del consultor"
-                type="text"
-                name="filtro"
-                value={formData.consultor}
-                onChange={handleChange}
-                placeholder="Escriba el nombre"
+              <Select
+                label="Periodo"
+                name="periodo"
+                value={formData.periodo}
+                onChange={handleSelectChange}
+                options={periodoOpciones}
+                className="form-select"
               />
             </div>
           </div>
+
           <div className="contenedor-filtros-botones">
             <div className="contenedor-lista-estados">
               <ListaEstados
@@ -160,18 +185,27 @@ export const ValidacionBitacoraLiderTecnico = () => {
             </div>
 
             <div className="contenedor-botones-autorizacion-observacion">
-              <label>Autorización y observación por periodo</label>
               <div className="contenedor-botones">
-                <button className="btn btn-principal">Autorizar</button>
                 <button
-                  className="btn btn-principal"
-                  onClick={irAObservaciones}
+                  type="button"
+                  className="btn btn-registro-actividad  btn-principal"
+                  title="Registrar"
+                  onClick={handleRegistroActvidadClick}
                 >
-                  Observación
+                  Registrar Actividad
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-observacion-periodo btn-principal "
+                  title="Observacion"
+                  onClick={handleObservacionesClick}
+                >
+                  Observación por periodo
                 </button>
               </div>
             </div>
           </div>
+
           <div className="contenedor-componente-tabla">
             <Tabla
               columnas={columnas}

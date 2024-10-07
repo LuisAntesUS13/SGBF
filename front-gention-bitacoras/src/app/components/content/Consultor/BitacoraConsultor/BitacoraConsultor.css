@@ -4,15 +4,10 @@
 
 .contenedor-botones {
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
+  align-content: flex-end;
+  width: 440px;
 }
 .btn-registro-actividad,
 .btn-observacion-periodo {
-  margin-top: 30px;
-  width: auto;
-}
-
-.btn-observacion-periodo {
-  width: auto;
+  margin-top: 30px !important;
 }

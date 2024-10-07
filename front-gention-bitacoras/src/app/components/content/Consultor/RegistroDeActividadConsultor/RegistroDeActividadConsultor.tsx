@@ -1,8 +1,8 @@
 import { Divider } from "@mui/material";
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid2";
-import { Input } from "../../../shared/Input/Input.tsx";
-import { Select } from "../../../shared/Select/Select.tsx";
+import { Input } from "../../../../shared/Input/Input.tsx";
+import { Select } from "../../../../shared/Select/Select.tsx";
 import "./RegistroDeActividadConsultor.css";
 
 const aplicativoModuloOpciones = [
@@ -54,6 +54,10 @@ export const RegistroDeActividadConsultor = () => {
           <div className="datos">
             <p className="datos-proyecto">Periodo: </p>
             <p>Junio - 2024</p>
+          </div>
+          <div className="datos">
+            <p className="datos-proyecto">Fecha actual: </p>
+            <p>29 / 09 / 2024</p>
           </div>
         </div>
         <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
@@ -195,7 +199,7 @@ export const RegistroDeActividadConsultor = () => {
               container
               spacing={1}
               direction={"row-reverse"}
-              sx={{ margin: "8px 0px" }}
+              sx={{ margin: "20px 0px 20px 0px" }}
             >
               <Grid size={{ xs: 12, md: 6 }}>
                 <button
