@@ -6,7 +6,20 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
   return (
     <>
       <div className="consultor-bitacora contenido_principal ">
-        <h1>Observación por periodo. (Enero - 2024)</h1>
+        <h1>Observación por periodo</h1>
+        <div className="contenedor-datos-proyecto">
+          <div className="datos-titulo-proyecto">
+            <p className="titulo-proyecto">Observaciones por periodo</p>
+          </div>
+          <div className="datos">
+            <p className="datos-proyecto">Periodo: </p>
+            <p>Mayo</p>
+          </div>
+          <div className="datos">
+            <p className="datos-proyecto">Fecha actual: </p>
+            <p>30/05/2024</p>
+          </div>
+        </div>
 
         <Divider sx={{ bgcolor: "#959595", margin: "13px 0px" }} />
         <div style={{ width: "80%" }} className="contenedor-contenido">
@@ -18,13 +31,15 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
               style={{ resize: "none" }}
               placeholder="Escribir observación..."
             ></textarea>
-            <div style={{ textAlign: "right" }}>
-              <button
-                type="button"
-                className="btn btn-principal btn-realizar-observacion"
-              >
-                Realizar observación
-              </button>
+            <div className="contenedor-boton-realizar-observacion">
+              <div style={{ textAlign: "right" }} className="col-sm-3">
+                <button
+                  type="button"
+                  className="btn btn-principal btn-realizar-observacion-actividad "
+                >
+                  Realizar observación
+                </button>
+              </div>
             </div>
           </div>
 
@@ -32,8 +47,9 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
             <label className="label-observaciones">
               Observaciones realizadas
             </label>
+
             <div className="contenedor-observaciones-realizadas">
-              <ul className="contenedor-observaciones">
+              <ul className="contenedor-observaciones-periodo-lidertecnico">
                 <li>
                   11/01/2024: Primero, quiero reconocer el esfuerzo que pusiste
                   en la revisión de la documentación técnica. Es evidente que te

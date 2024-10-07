@@ -2,7 +2,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import "./DetallesDeActividadLiderTecnico.css";
 import { Divider } from "@mui/material";
-import { Input } from "../../../shared/Input/Input.tsx";
+import { Input } from "../../../../shared/Input/Input.tsx";
 import Grid from "@mui/material/Grid2";
 
 interface TabPanelProps {
@@ -77,7 +77,7 @@ export const DetallesDeActividadLiderTecnico = () => {
           </div>
           <div className="datos">
             <p className="datos-proyecto">Fecha de actividad: </p>
-            <p>13/06/2024</p>
+            <p>13 / 06 / 2024</p>
           </div>
         </div>
         <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
@@ -226,7 +226,7 @@ export const DetallesDeActividadLiderTecnico = () => {
                 <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
                   <button
                     type="button"
-                    className="btn btn-principal"
+                    className="btn btn-principal "
                     onClick={realizarObservacion}
                   >
                     Realizar observacion
@@ -244,13 +244,12 @@ export const DetallesDeActividadLiderTecnico = () => {
                     style={{ resize: "none" }}
                     placeholder="Escribir observación..."
                   ></textarea>
-                  <div style={{ textAlign: "right" }}>
-                    <button
-                      type="button"
-                      className="btn btn-principal btn-realizar-observacion"
-                    >
-                      Realizar observación
-                    </button>
+                  <div className="contenedor-boton-realizar-observacion-actividad">
+                    <div className="col-sm-3">
+                      <button type="button" className="btn btn-principal ">
+                        Realizar observación
+                      </button>
+                    </div>
                   </div>
                 </div>
 

@@ -25,7 +25,7 @@ export const Menu = () => {
                 subtitulo: "Registro de equipo y líder",
               },
               {
-                ruta: "contratos",
+                ruta: "reasignacion-de-lider",
                 subtitulo: "Reasignación de líder",
               },
             ]}
