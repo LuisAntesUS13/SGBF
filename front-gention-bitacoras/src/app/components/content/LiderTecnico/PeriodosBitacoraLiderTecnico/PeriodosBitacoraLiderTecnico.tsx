@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./PeriodosBitacoraLiderTecnico.css";
 import Divider from "@mui/material/Divider";
-import { Select } from "../../../shared/Select/Select.tsx";
-import { Tabla } from "../../../shared/Tabla/Tabla.tsx";
+import { Select } from "../../../../shared/Select/Select.tsx";
+import { Tabla } from "../../../../shared/Tabla/Tabla.tsx";
 import { useNavigate } from "react-router-dom";
 
 const contratoOpciones = [
@@ -55,7 +55,7 @@ export const PeriodosBitacoraLiderTecnico = () => {
   const navigate = useNavigate();
 
   const handleRowClick = (row) => {
-    navigate("/validacion-bitacora-lider-tecnico");
+    navigate("/consultores-lider-tecnico");
   };
 
   return (

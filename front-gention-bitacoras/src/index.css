@@ -63,7 +63,7 @@ h5 {
   background-color: #f80000;
   color: white;
   border-color: white;
-  width: auto !important;
+  width: 100% !important;
 }
 
 .btn-principal:hover {
