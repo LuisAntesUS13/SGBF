@@ -113,4 +113,13 @@ export class CatalogosService {
 
     return datosCatalogo;
   }
+
+  public async getCatalogoCargo(
+    request: CatalogoRequest,
+  ): Promise<CatalogoResponse[]> {
+    const datosCatalogo =
+      await this.catalogoRepository.getCatalogoCargo(request);
+
+    return datosCatalogo;
+  }
 }

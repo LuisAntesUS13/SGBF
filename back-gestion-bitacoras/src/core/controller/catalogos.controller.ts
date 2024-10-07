@@ -196,4 +196,20 @@ export class CatalogosController {
 
     return resultado;
   }
+
+  @Post('/getCargo')
+  async getCatalogoCargo(
+    @Body() bodyRequest: CatalogoRequest,
+  ): Promise<BaseResponse<CatalogoResponse[]>> {
+    const datos = await this.catalogosService.getCatalogoCargo(bodyRequest);
+
+    const resultado = {
+      success: true,
+      message: 'Consulta catalogo correcto',
+      data: datos,
+      statusCode: HttpStatus.ACCEPTED,
+    };
+
+    return resultado;
+  }
 }

@@ -12,6 +12,8 @@ import { CatalogosService } from './services/catalogos.service';
 import { LoginController } from './controller/login.controller';
 import { ContratosController } from './controller/contratos.controller';
 import { CatalogosController } from './controller/catalogos.controller';
+import { UsuariosService } from './services/usuarios.service';
+import { UsuarioController } from './controller/usuario.controller';
 
 @Module({
   imports: [
@@ -31,12 +33,18 @@ import { CatalogosController } from './controller/catalogos.controller';
     }),
     RepositoriosModule,
   ],
-  controllers: [LoginController, ContratosController, CatalogosController],
+  controllers: [
+    LoginController,
+    ContratosController,
+    CatalogosController,
+    UsuarioController,
+  ],
   providers: [
     DBConnectionService,
     LoginService,
     ContratosService,
     CatalogosService,
+    UsuariosService,
   ],
 })
 export class BusinessCoreModule {}

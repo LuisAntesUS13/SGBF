@@ -48,7 +48,7 @@ export const FormularioContratos = () => {
         consultores: "",
         montoVariable: "0.0",  
         montoFijo: "0.0",
-        montoTotal: "0.0",
+        montoTotal: "2,612,360.18",
         id_archivo: "",
         archivoContrato: "",
         extencion: "",
@@ -558,7 +558,7 @@ export const FormularioContratos = () => {
                             </div>
                             <div className="col-sm-4">
                                 <Input label="Monto total (IVA Incluido)" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
-                                        placeholder="Monto total" className= {fieldContratoClases.montoTotal} />
+                                        placeholder="Monto total" className= {fieldContratoClases.montoTotal} disabled={true}/>
                             </div>
                             <div className="col-sm-4">
                                 <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
@@ -569,7 +569,7 @@ export const FormularioContratos = () => {
                                         placeholder="Selecciona una opcion"   className="form-control"/>
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={gerente}
+                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[{id:1, nombre: "Verónica	Franco Pérez"}, {id:2, nombre: "Joel Cuevas	Carbajal"}]}
                                         placeholder="Selecciona una opcion"  className="form-control"/>
                             </div>
                             <div className="col-sm-8">
