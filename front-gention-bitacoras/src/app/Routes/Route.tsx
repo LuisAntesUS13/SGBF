@@ -11,8 +11,8 @@ import { BitacoraConsultor } from "../components/content/Consultor/BitacoraConsu
 import { DetallesDeActividadConsultor } from "../components/content/Consultor/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
 import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/ObservacionDetallesPorPeriodoConsultor/ObservacionPorPeriodoConsultor.tsx";
 import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
-import { RegistroDeActividadConsultor } from "../components/content/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 import { DatosPerfiles } from "../components/content/contratros/CargaPerfiles.tsx";
+import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 
 export const Enrutador = () => {
   return (
