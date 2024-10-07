@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import { DatosPerfiles, DatosPerfilesContratos} from "../../../model/response/perfiles.response";
+import { DatosPerfilesContratos} from "../../../model/response/perfiles.response";
 import { Input } from "../../../shared/Input/Input.tsx";
 import { Select } from "../../../shared/Select/Select.tsx";
 import { Catalogo } from "../../../model/response/catalogo.response.tsx";
 import { ConsultaCatalogo } from "../../../model/request/catalogos.request.tsx";
-import { getCatalogoAreas, getCatalogoConsultoras, getCatalogoFormaPago, getCatalogoTipoContrato } from "../../../services/catalogos.service.tsx";
+import { getCatalogoAreas, getCatalogoConsultoras, getCatalogoFormaPago, getCatalogoPerfilesConsultores, getCatalogoTipoContrato } from "../../../services/catalogos.service.tsx";
 import { GuardaContrato } from "../../../model/request/contratos.request.tsx";
 import { guardaActualizaContratos } from "../../../services/contratos.service.tsx";
 import { ToastContainer, toast } from 'react-toastify';
@@ -15,10 +15,14 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import { Separador } from "../../../shared/SeparadorTexto/SeparadorTexto.tsx";
 import { ConsultaPErfilesContrato, GuardaPerfil } from "../../../model/request/perfiles.request.tsx";
 import { getPerfilesContratos, guardaActualizaPerfilesContrato } from "../../../services/perfiles.service.tsx";
+import { InputBuscador } from "../../../shared/InputBuscador/InputBuscador.tsx";
 
 export const FormularioContratos = () => {
     // Componente para navegar entre paginas
     const navigate = useNavigate();
+    const location = useLocation();
+    const datosContrato = location.state; // Aquí está el objeto recibido
+
 
     //Catalogos
     const [formaPago, setFormaPago] = useState<Catalogo[]>([]);
@@ -34,15 +38,15 @@ export const FormularioContratos = () => {
 
     // Estado para controlar los campos del formulario
     const [formData, setFormData] = useState<FieldContratoClases>({
-        id_contrato: "",
-        contrato: "",
+        id_contrato: "", 
+        contrato: "",  
         fechaInicio: "",
         fechaTermino: "",
         formaPago: "",
         tipoContrato: "",
         consultora: "",
         consultores: "",
-        montoVariable: "0.0",
+        montoVariable: "0.0",  
         montoFijo: "0.0",
         montoTotal: "0.0",
         id_archivo: "",
@@ -95,7 +99,6 @@ export const FormularioContratos = () => {
         cantidad: "form-control",
     });
 
-
     // Manejar cambios del primer formulario
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -139,8 +142,8 @@ export const FormularioContratos = () => {
         }
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
+    const handleFileChange = (e) => {
+        const files = e.target.files;
         if (files && files.length > 0) {
           const file = files[0];
           // Si deseas leer el archivo como base64:
@@ -166,6 +169,64 @@ export const FormularioContratos = () => {
         }
     };
 
+  
+    const [datosPerfiles, setDatosPerfiles] = useState<any[]>([]); 
+    const [mostrarKeyPerfiles, setMostrarKeyPerfile] = useState<string[]>([]); 
+    const [resultadosPerfiles, setResultadosPerfiles] = useState<any[]>([]); 
+    const [mostrarResultadosPerfiles, setMostrarResultadosPerfiles] = useState(false);
+
+    const changeBuscadoPerfil = (e) => {
+        let busquedaKey = ['nombre','monto','descripcion'];
+        setMostrarKeyPerfile(busquedaKey);
+        const { name, value } = e.target;
+
+        setFormPerfilesContrato((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+
+        // Filtrar los datos basados en las coincidencias
+        const filtrados = datosPerfiles.filter((item) =>
+          busquedaKey.some((key) => item[key].toString().toLowerCase().includes(value.toLowerCase()))
+        );
+        setMostrarResultadosPerfiles((value !== "" && filtrados.length > 0 )? true: false);
+       
+        setResultadosPerfiles(filtrados);
+    };
+
+    const perfilSeleccionado = (perfil: any) => {
+        setFormPerfilesContrato({
+            ...formPerfilesContrato,
+            id_perfil: perfil.id, 
+            perfil: perfil.nombre, 
+            monto: perfil.monto, 
+            descripcion:  perfil.descripcion, 
+            cantidad: "1",
+        });
+        setFormPerfilesContratoClases({
+            ...formPerfilesContratoClases,
+            id_perfil: "form-control",
+            perfil: "form-control",
+            monto: "form-control",
+            descripcion: "form-control",
+            cantidad: "form-control",
+        });
+        setMostrarResultadosPerfiles(false);
+    };
+
+    const obtenerCatalogoPerfiles = async () => {
+        const datos:ConsultaCatalogo = {
+            nombre: "",
+            activo: true,
+        };
+
+        try {
+          const result = await getCatalogoPerfilesConsultores(datos);
+          setDatosPerfiles(result.data);
+        } catch (error) {
+          console.log(error);
+        }
+    };
 
     const obtenerCatalogoFormaPago = async () => {
         const datos:ConsultaCatalogo = {
@@ -223,15 +284,6 @@ export const FormularioContratos = () => {
         }
     };
 
-    useEffect(() => {
-        obtenerCatalogoFormaPago();
-        obtenerCatalogoTipoContrato();
-        obtenerCatalogoCosultora();
-        obtenerCatalogoAreas();
-       
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    
     const guardarActualizarContrato = async () => {
 
         const newFieldContratoClases: FieldContratoClases = {
@@ -289,8 +341,6 @@ export const FormularioContratos = () => {
             try {
                 const result = await guardaActualizaContratos(datos);
                 setShowPerfiles(true);
-
-                console.log(result)
                 if(result.correcto){
                     toast.success(result.mensaje, {});
                     setFormData((formData) => ({
@@ -302,7 +352,6 @@ export const FormularioContratos = () => {
                     toast.warn(result.mensaje, {});
                 }
             } catch (error) {
-                console.log("llegamos aqui");
                 toast.error(error.mensaje, {});
             }
         } else {
@@ -341,20 +390,20 @@ export const FormularioContratos = () => {
         if(isValid){
             formPerfilesContrato.id_contrato = formData.id_contrato;
             const datos:GuardaPerfil = {
-                id_perfil_contrato: null,
+                id_perfil_contrato:  formPerfilesContrato.id_perfil_contrato === ""? null: parseInt(formPerfilesContrato.id_perfil_contrato),
                 id_contrato: parseInt(formPerfilesContrato.id_contrato),
-                id_perfil: null,
+                id_perfil: formPerfilesContrato.id_perfil === ""? null:parseInt(formPerfilesContrato.id_perfil),
                 perfil: formPerfilesContrato.perfil,
                 descripcion: formPerfilesContrato.descripcion,
                 monto: parseFloat(formPerfilesContrato.monto),
                 cantidad: parseInt(formPerfilesContrato.cantidad),
                 activo: true,
             };
+
+            console.log(datos)
     
             try {
                 const result = await guardaActualizaPerfilesContrato(datos);
-
-                console.log(result)
                 if(result.correcto){
                     toast.success(result.mensaje, {});
                     setFormPerfilesContrato((formData) => ({
@@ -382,10 +431,9 @@ export const FormularioContratos = () => {
  
     };
 
-
-    const getDataContratos = async (pagina = 1, registros = 100) => {
+    const getDataContratos = async (id_contrato = null, pagina = 1, registros = 100) => {
         const datos:ConsultaPErfilesContrato = {
-          id_contrato: parseInt(formPerfilesContrato.id_contrato),
+          id_contrato: id_contrato !== null ? id_contrato : parseInt(formData.id_contrato),
           pagina_actual: pagina,
           registros_por_pagina: registros
         };
@@ -393,14 +441,69 @@ export const FormularioContratos = () => {
         try {
           const result = await getPerfilesContratos(datos);
           setDataPerfiles(result.data);
-          console.log("Llega mansaje  bien " + result)
-            toast.success(result.mensaje, {});
+          toast.success(result.mensaje, {});
         } catch (error) {
-            console.log("Llega mansaje  error ")
           console.log(error);
           toast.error(error.mensaje, {});
         }
     };
+
+    useEffect(() => {  
+      if (datosContrato) {
+        llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
+        getDataContratos(datosContrato.id_contrato);
+        setShowPerfiles(true);
+      }
+        obtenerCatalogoFormaPago();
+        obtenerCatalogoTipoContrato();
+        obtenerCatalogoCosultora();
+        obtenerCatalogoAreas();
+        obtenerCatalogoPerfiles();
+    
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [datosContrato]);
+    
+
+    const llegaronDatosActualizacion = async () => {
+        // Aquí puedes poner la lógica de tu función
+        setFormData({
+            ...formData,
+            id_contrato: datosContrato.id_contrato, 
+            contrato: datosContrato.no_contrato, 
+            fechaInicio: datosContrato.fh_inicio, 
+            fechaTermino: datosContrato.fh_fin, 
+            formaPago: datosContrato.id_forma_pago, 
+            tipoContrato: datosContrato.id_tipo_contrato, 
+            consultora: datosContrato.id_consultora, 
+            consultores: datosContrato.no_consultores, 
+            montoVariable: datosContrato.monto_variable,   
+            montoFijo: datosContrato.monto_fijo, 
+            montoTotal: datosContrato.monto_total, 
+            id_archivo: datosContrato.id_archivo, 
+            archivoContrato: "", 
+            extencion: "", 
+            direccion: datosContrato.id_area, 
+            gerente: datosContrato.id_gerente, 
+        });
+      
+       
+    };
+
+    const datosPerfilActualizacion = async ( datosPerfil: DatosPerfilesContratos) => {
+        // Aquí puedes poner la lógica de tu función
+        console.log(datosPerfil)
+        toast.info("Se agregaron los datos al formulario de perfiles para actualizar", {});
+        setFormPerfilesContrato({
+            id_perfil_contrato: datosPerfil.id_perfil_contrato.toString(),
+            id_contrato: datosPerfil.id_contrato.toString(),
+            id_perfil: datosPerfil.id_perfil.toString(),
+            perfil: datosPerfil.nombre,
+            monto: datosPerfil.monto.toString(),
+            descripcion: datosPerfil.descripcion,
+            cantidad: datosPerfil.cantidad.toString(),
+        });
+    };
+
 
 
     return (
@@ -466,7 +569,7 @@ export const FormularioContratos = () => {
                                         placeholder="Selecciona una opcion"   className="form-control"/>
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[]}
+                                <Select  label="Selecciona el gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={gerente}
                                         placeholder="Selecciona una opcion"  className="form-control"/>
                             </div>
                             <div className="col-sm-8">
@@ -492,8 +595,10 @@ export const FormularioContratos = () => {
                                     <Separador texto="Datos del perfil"/>
                                 </div>
                                 <div className="col-sm-4">
-                                    <Input label="Perfil" type="text" name="perfil" value={formPerfilesContrato.perfil} onChange={handleformPerfilesChange} 
-                                            placeholder="Perfil" className={formPerfilesContratoClases.perfil} />
+                                    <InputBuscador label="Perfiles" type="text" name="perfil" value={formPerfilesContrato.perfil} 
+                                    placeholder="Perfiles" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
+                                    mostrarResultados={mostrarResultadosPerfiles} mostrarKey={mostrarKeyPerfiles} resultados={resultadosPerfiles} 
+                                    onSeleccionar={perfilSeleccionado} />
                                 </div>
                                 <div className="col-sm-4">
                                     <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
@@ -523,7 +628,8 @@ export const FormularioContratos = () => {
                                     <Separador texto="Perfiles registrados en el contrato"/>
                                     </div>
                                     <div className="col-sm-12">
-                                        <table className="table table-hover">
+                                       
+                                            <table className="table table-hover">
                                             <thead>
                                                 <tr>
                                                     <th className="valoresCentrados">Perfil</th>
@@ -533,19 +639,21 @@ export const FormularioContratos = () => {
                                                     <th className="valoresCentrados">Acciones</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
-                                                    <tr key={i}>
-                                                        <td className="valoresCentrados">{dato.nombre}</td>
-                                                        <td className="valoresCentrados">{dato.monto}</td>
-                                                        <td className="valoresCentrados">{dato.cantidad}</td>
-                                                        <td className="valoresCentrados">{dato.descripcion}</td>
-                                                        <td className="valoresCentrados"></td>
-                                                    </tr>
-                                                ))}
-                                            
-                                            </tbody>
-                                        </table>
+                                                {dataPerfiles && (
+                                                <tbody>
+                                                    {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
+                                                        <tr key={i} onClick={() => {datosPerfilActualizacion(dato)}}>
+                                                            <td className="valoresCentrados">{dato.nombre}</td>
+                                                            <td className="valoresCentrados">{dato.monto}</td>
+                                                            <td className="valoresCentrados">{dato.cantidad}</td>
+                                                            <td className="valoresCentrados">{dato.descripcion}</td>
+                                                            <td className="valoresCentrados"></td>
+                                                        </tr>
+                                                    ))}
+                                                
+                                                </tbody>
+                                                )}
+                                            </table>                                    
                                     </div>
                                 </div>
                          </div> 

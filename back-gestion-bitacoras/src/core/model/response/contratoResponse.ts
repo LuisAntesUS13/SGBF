@@ -19,6 +19,8 @@ export declare class ContratoResponse {
   fh_actualizacion?: string;
   id_area?: number;
   area?: string;
+  no_consultores?: number;
+  id_gerente?: number;
   nombre?: string;
   primer_apellido?: string;
   segundo_apellido?: string;
@@ -54,6 +56,7 @@ export declare class PerfilContratoResponse {
   no_registro?: number;
   id_perfil_contrato?: number;
   id_perfil?: number;
+  id_contrato?: number;
   fh_registro?: string;
   fh_baja?: string;
   cantidad?: number;
