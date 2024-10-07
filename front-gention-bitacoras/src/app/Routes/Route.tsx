@@ -11,6 +11,7 @@ import { BitacoraConsultor } from "../components/content/BitacoraConsultor/Bitac
 import { DetallesDeActividadConsultor } from "../components/content/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
 import { DetallesPorPeriodoConsultor } from "../components/content/DetallesPorPeriodoConsultor/DetallesPorPeriodoConsultor.tsx";
 import { RegistroDeActividadConsultor } from "../components/content/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
+import { DatosPerfiles } from "../components/content/contratros/CargaPerfiles.tsx";
 
 export const Enrutador = () => {
   return (
@@ -19,7 +20,7 @@ export const Enrutador = () => {
         <Route path="/contrato" element={<Contratos />} />
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
-        <Route path="/carga-de-perfiles" element={<h1>Carga de perfiles</h1>} />
+        <Route path="/carga-de-perfiles" element={<DatosPerfiles />} />
         <Route
           path="/registro-de-equipo-y-lider"
           element={<h1>Registro de equipo y líder</h1>}
