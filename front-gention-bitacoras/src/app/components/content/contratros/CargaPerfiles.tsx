@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
-import { getContratosData } from "../../../services/contratos.service.tsx";
-import { ConsultaContrato } from "../../../model/request/contratos.request.tsx";
-import { DatosContratos } from "../../../model/response/contratos.response.tsx";
 import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
 import { ToastContainer, toast } from 'react-toastify';
@@ -78,11 +74,11 @@ export const DatosPerfiles = () => {
             <div className="card">
                 <div className="card-body row">
                     <div className="col-sm-3">
-                        <Input label="Perfil" type="text" name="perfil" value={formulario.perfil} onChange={handleChange} placeholder="Perfil" className="" />
+                        <Input label="No. contrato" type="text" name="contrato" value={formulario.perfil} onChange={handleChange} placeholder="SG0909" className="" />
                     </div>
                     <div className="col-sm-3">
-                        <button type="button" className="btn btn-principal" style={{ marginTop: '30px'}} title="Buscar"
-                        onClick={() =>{ buscarPerfiles()}}><SearchOutlinedIcon /> Buscar</button>
+                        <button type="button" className="btn btn-principal" style={{ marginTop: '30px' }} title="Buscar"
+                        onClick={() =>{ buscarPerfiles()}}><SearchOutlinedIcon /></button>
                     </div>
                 </div>
             </div>
@@ -92,21 +88,21 @@ export const DatosPerfiles = () => {
                         <table className="table table-hover">
                             <thead>
                                 <tr className="valoresCentrados">
-                                    <th scope="col" className="valoresCentrados">Perfil</th>
-                                    <th scope="col" className="valoresCentrados">Monto</th>
-                                    <th scope="col" className="valoresCentrados">Cantidad</th>
+                                    <th scope="col" className="valoresCentrados">Nombre</th>
                                     <th scope="col" className="valoresCentrados">Descripción</th>
-                                    <th scope="col" className="valoresCentrados">Acciones</th>
+                                    <th scope="col" className="valoresCentrados">Total recursos</th>
+                                    <th scope="col" className="valoresCentrados">Recursos asignados</th>
+                                    <th scope="col" className="valoresCentrados">Estatus</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
                                                         <tr>
                                                             <td className="valoresCentrados">{dato.nombre}</td>
+                                                            <td className="valoresCentrados">{dato.descripcion}</td>
                                                             <td className="valoresCentrados">{dato.monto}</td>
                                                             <td className="valoresCentrados">{dato.cantidad}</td>
-                                                            <td className="valoresCentrados">{dato.descripcion}</td>
-                                                            <td className="valoresCentrados"></td>
+                                                            <td className="valoresCentrados">Activo</td>
                                                         </tr>
                                                     ))}
                             </tbody>
