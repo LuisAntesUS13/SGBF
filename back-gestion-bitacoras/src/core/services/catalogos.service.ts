@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CatalogoRepository } from '../repository/catalogos.repository';
 import {
   CatalogoDocumentosRequest,
+  CatalogoPeriodoRequest,
   CatalogoRequest,
 } from '../model/request/catalogosRequest';
 import {
   CatalogoDocumentoResponse,
   CatalogoExtArchivoResponse,
   CatalogoPerfilConsultorResponse,
+  CatalogoPeriodosResponse,
   CatalogoResponse,
 } from '../model/response/catalogoResponse';
 
@@ -110,6 +112,15 @@ export class CatalogosService {
   ): Promise<CatalogoResponse[]> {
     const datosCatalogo =
       await this.catalogoRepository.getCatalogoTipoContrato(request);
+
+    return datosCatalogo;
+  }
+
+  public async getCatalogoPeriodos(
+    request: CatalogoPeriodoRequest,
+  ): Promise<CatalogoPeriodosResponse[]> {
+    const datosCatalogo =
+      await this.catalogoRepository.getCatalogoPeriodos(request);
 
     return datosCatalogo;
   }

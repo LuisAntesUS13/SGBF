@@ -3,12 +3,14 @@ import { BaseResponse } from '../model/response/baseResponse';
 import { CatalogosService } from '../services/catalogos.service';
 import {
   CatalogoDocumentosRequest,
+  CatalogoPeriodoRequest,
   CatalogoRequest,
 } from '../model/request/catalogosRequest';
 import {
   CatalogoDocumentoResponse,
   CatalogoExtArchivoResponse,
   CatalogoPerfilConsultorResponse,
+  CatalogoPeriodosResponse,
   CatalogoResponse,
 } from '../model/response/catalogoResponse';
 
@@ -186,6 +188,22 @@ export class CatalogosController {
   ): Promise<BaseResponse<CatalogoResponse[]>> {
     const datos =
       await this.catalogosService.getCatalogoTipoContrato(bodyRequest);
+
+    const resultado = {
+      success: true,
+      message: 'Consulta catalogo correcto',
+      data: datos,
+      statusCode: HttpStatus.ACCEPTED,
+    };
+
+    return resultado;
+  }
+
+  @Post('/getPeriodos')
+  async getCatalogoPeriodos(
+    @Body() bodyRequest: CatalogoPeriodoRequest,
+  ): Promise<BaseResponse<CatalogoPeriodosResponse[]>> {
+    const datos = await this.catalogosService.getCatalogoPeriodos(bodyRequest);
 
     const resultado = {
       success: true,
