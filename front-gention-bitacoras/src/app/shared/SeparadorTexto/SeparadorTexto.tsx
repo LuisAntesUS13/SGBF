@@ -12,9 +12,9 @@ export const Separador = ({ texto = "Texto", colorTexto = "#0e159d", colorLInea 
 
     return ( <>
         <div className="line-with-text">
-        <hr style={colorDinamicoLinea} />
-        <b style={colorDinamicoTexto} ><span>{texto}</span></b>
-        <hr style={colorDinamicoLinea} />
+            <hr style={colorDinamicoLinea} />
+            <b style={colorDinamicoTexto} ><span>{texto}</span></b>
+            <hr style={colorDinamicoLinea} />
         </div>
       </>);
 }

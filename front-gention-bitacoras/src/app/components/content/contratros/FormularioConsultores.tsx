@@ -16,8 +16,10 @@ import { Separador } from "../../../shared/SeparadorTexto/SeparadorTexto.tsx";
 import { ConsultaPErfilesContrato, GuardaPerfil } from "../../../model/request/perfiles.request.tsx";
 import { getPerfilesContratos, guardaActualizaPerfilesContrato } from "../../../services/perfiles.service.tsx";
 import { InputBuscador } from "../../../shared/InputBuscador/InputBuscador.tsx";
+import { FieldConsultorClases } from "../../../model/interface/consultor.interface.tsx";
+import { GuardaConsultor } from "../../../model/request/consultores.request.tsx";
 
-export const FormularioContratos = () => {
+export const FormularioConsultores = () => {
     // Componente para navegar entre paginas
     const navigate = useNavigate();
     const location = useLocation();
@@ -32,28 +34,24 @@ export const FormularioContratos = () => {
     const [area, setArea] = useState<Catalogo[]>([]);
 
     // Estado para controlar la visibilidad del segundo formulario
-    const [showPerfiles, setShowPerfiles] = useState(false); 
+    const [showConsultores, setShowConsultores] = useState(false); 
 
     const [dataPerfiles, setDataPerfiles] = useState<DatosPerfilesContratos[]>([]);
 
     // Estado para controlar los campos del formulario
-    const [formData, setFormData] = useState<FieldContratoClases>({
-        id_contrato: "", 
-        contrato: "",  
-        fechaInicio: "",
-        fechaTermino: "",
-        formaPago: "",
-        tipoContrato: "",
-        consultora: "",
-        consultores: "",
-        montoVariable: "0.0",  
-        montoFijo: "0.0",
-        montoTotal: "2,612,360.18",
-        id_archivo: "",
-        archivoContrato: "",
-        extencion: "",
-        direccion: "",
-        gerente: "",
+    const [formData, setFormData] = useState<FieldConsultorClases>({
+        id_consultor: "", 
+        nombre: "",  
+        primerAp: "",
+        segundoAp: "",
+        correo: "",
+        correoSecundario: "",
+        curp: "",
+        rfc: "",
+        archivoCurriculum: "",  
+        archivoCertificado: "",
+        archivoOtros: "",
+        id_archivo: ""
     });
 
     const optionalFields: string[] = ["archivoContrato", "extencion","direccion","gerente", "id_archivo", "id_contrato"]; 
@@ -155,13 +153,13 @@ export const FormularioContratos = () => {
                 const extencion = file.name.split('.').pop();
                 setFormData({
                     ...formData,
-                    archivoContrato: fileData, // Guarda el archivo en base64 en el estado
-                    extencion: extencion??'pdf', // Guarda el archivo en base64 en el estado
+                    archivoCurriculum: fileData, // Guarda el archivo en base64 en el estado
+                    // extencion: extencion??'pdf', // Guarda el archivo en base64 en el estado
                 });
             } else {
                 setFormData({
                     ...formData,
-                    archivoContrato: '', // Guarda el archivo en base64 en el estado
+                    archivoCurriculum: '', // Guarda el archivo en base64 en el estado
                 });
             }            
           };
@@ -319,28 +317,24 @@ export const FormularioContratos = () => {
         setFieldContratoClases(newFieldContratoClases);
 
         if(isValid){
-            const datos:GuardaContrato = {
-                id_contrato: formData.id_contrato === "" ? null : parseInt(formData.id_contrato),
-                no_contrato: formData.contrato,
-                fh_inicio: formData.fechaInicio,
-                fh_termino: formData.fechaTermino,
-                monto_variable: parseInt(formData.montoVariable),
-                monto_fijo: parseInt(formData.montoFijo),
-                monto_total: parseInt(formData.montoTotal),
-                id_forma_pago: parseInt(formData.formaPago),
-                id_tipo_contrato: parseInt(formData.tipoContrato),
-                id_consultora:  parseInt(formData.consultora),
-                id_area: formData.contrato === ""? null: parseInt(formData.contrato),
-                id_gerente: formData.contrato === ""? null: parseInt(formData.contrato),
+            const datos:GuardaConsultor= {
+                id_consultor: formData.id_consultor === "" ? null : parseInt(formData.id_consultor),
+                nombre: formData.nombre,
+                primerAp: formData.primerAp,
+                segundoAp: formData.segundoAp,
+                correo: formData.correo,
+                correoSecundario: formData.correoSecundario, 
+                curp: formData.curp ,
+                rfc: formData.rfc,
                 id_archivo: formData.id_archivo === "" ? null : parseInt(formData.id_archivo),
-                archivo: formData.archivoContrato,
-                extencion: formData.extencion,
-                activo: true,
+                archivoCurriculum: formData.archivoCurriculum,
+                archivoCertificado: formData.archivoCertificado,
+                archivoOtros: formData.archivoOtros
             };
     
             try {
                 const result = await guardaActualizaContratos(datos);
-                setShowPerfiles(true);
+                setShowConsultores(true);
                 if(result.correcto){
                     toast.success(result.mensaje, {});
                     setFormData((formData) => ({
@@ -388,7 +382,7 @@ export const FormularioContratos = () => {
         setFormPerfilesContratoClases(newFieldPerfilClases);
 
         if(isValid){
-            formPerfilesContrato.id_contrato = formData.id_contrato;
+            formPerfilesContrato.id_contrato = formData.id_consultor;
             const datos:GuardaPerfil = {
                 id_perfil_contrato:  formPerfilesContrato.id_perfil_contrato === ""? null: parseInt(formPerfilesContrato.id_perfil_contrato),
                 id_contrato: parseInt(formPerfilesContrato.id_contrato),
@@ -452,7 +446,7 @@ export const FormularioContratos = () => {
       if (datosContrato) {
         llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
         getDataContratos(datosContrato.id_contrato);
-        setShowPerfiles(true);
+        setShowConsultores(true);
       }
         obtenerCatalogoFormaPago();
         obtenerCatalogoTipoContrato();
@@ -468,8 +462,8 @@ export const FormularioContratos = () => {
         // Aquí puedes poner la lógica de tu función
         setFormData({
             ...formData,
-            id_contrato: datosContrato.id_contrato, 
-            contrato: datosContrato.no_contrato, 
+            id_consultor: datosContrato.id_contrato, 
+            nombre: datosContrato.no_contrato, 
             fechaInicio: datosContrato.fh_inicio, 
             fechaTermino: datosContrato.fh_fin, 
             formaPago: datosContrato.id_forma_pago, 
@@ -509,9 +503,9 @@ export const FormularioContratos = () => {
     return (
         <>
             <div className="contenido_principal">
-                <h3>Nuevo contrato</h3>
+                <h3>Nuevo consultor</h3>
                 <hr />
-                <div className="row">
+                <div>
                     <div className="card">
                         <div className="card-header row">
                             <div className="col-sm-3 ">
@@ -522,58 +516,49 @@ export const FormularioContratos = () => {
                         </div>
                         <div className="card-body row">
                             <div className="col-sm-12">
-                                    <Separador texto="Datos del contrato"/>
+                                    <Separador texto="Datos del consultor para perfil: Analista"/>
                             </div>
                             <div className="col-sm-4">
-                                <Input label="No. contrato" type="text" name="contrato" value={formData.contrato} onChange={handleChange} 
-                                        placeholder="Numero de contrato" className={fieldContratoClases.contrato} />
+                                <Input label="Nombre" type="text" name="nombre" value={formData.nombre} onChange={handleChange} 
+                                        placeholder="" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                <label className="form-label">Fecha de inicio</label> 
-                                <input  type="date" className={fieldContratoClases.fechaInicio} name="fechaInicio" value={formData.fechaInicio} onChange={handleChange} />
+                                <Input label="Primer apellido" type="text" name="primerap" value={formData.primerAp} onChange={handleChange} 
+                                        placeholder="" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                <label className="form-label">Fecha de término</label>
-                                <input type="date" className={fieldContratoClases.fechaTermino} name="fechaTermino" value={formData.fechaTermino} onChange={handleChange} />
+                                <Input label="Segundo apellido" type="text" name="segundoap" value={formData.segundoAp} onChange={handleChange} 
+                                        placeholder="" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                    <Select  label="Selecciona forma de pago"  name="formaPago"   value={formData.formaPago}  onChange={handleChange}  options={formaPago}
-                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.formaPago}/>
+                                <Input label="Correo" type="text" name="correo" value={formData.correo} onChange={handleChange} 
+                                        placeholder="ejemplo@correo.com" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                    <Select  label="Selecciona tipo de contrato"  name="tipoContrato"   value={formData.tipoContrato}  onChange={handleChange}  options={tipoContrato}
-                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.tipoContrato}/>
+                                <Input label="Correo secundario" type="text" name="correoSecundario" value={formData.correoSecundario} onChange={handleChange} 
+                                        placeholder="ejemplo@correo.com" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                    <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
-                                                placeholder="Selecciona una opcion"   className= {fieldContratoClases.consultora}/>
+                                <Input label="CURP" type="text" name="curp" value={formData.curp} onChange={handleChange} 
+                                        placeholder="" className={fieldContratoClases.contrato} />
                             </div>
                             <div className="col-sm-4">
-                                <Input label="Monto variable (IVA Incluido)" type="text" name="montoVariable" value={formData.montoVariable} onChange={handleChange} 
-                                        placeholder="Monto variable" className= {fieldContratoClases.montoVariable} />
+                                <Input label="RFC" type="text" name="rfc" value={formData.rfc} onChange={handleChange} 
+                                        placeholder="" className={fieldContratoClases.contrato} />
                             </div>
-                            <div className="col-sm-4">
-                                <Input label="Monto fijo (IVA Incluido)" type="text" name="montoFijo" value={formData.montoFijo} onChange={handleChange} 
-                                        placeholder="Monto fijo" className= {fieldContratoClases.montoFijo} />
-                            </div>
-                            <div className="col-sm-4">
-                                <Input label="Monto total (IVA Incluido)" type="text" name="montoTotal" value={formData.montoTotal} onChange={handleChange} 
-                                        placeholder="Monto total" className= {fieldContratoClases.montoTotal} disabled={true}/>
-                            </div>
-                            <div className="col-sm-4">
-                                <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
-                                        placeholder="No consultores" className= {fieldContratoClases.consultores} />
-                            </div>
-                            <div className="col-sm-4">
-                                <Select  label="Selecciona Direccion / Subdireccion"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={area}
-                                        placeholder="Selecciona una opcion"   className="form-control"/>
-                            </div>
-                            <div className="col-sm-4">
-                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[{id:1, nombre: "Verónica	Franco Pérez"}, {id:2, nombre: "Joel Cuevas	Carbajal"}]}
-                                        placeholder="Selecciona una opcion"  className="form-control"/>
+                            <div className="col-sm-12">
+                                    <Separador texto="Documentos que sustenta el perfil"/>
                             </div>
                             <div className="col-sm-8">
-                                <label className="form-label">Carga de contrato</label>
+                                <label className="form-label">Curriculum</label>
+                                <input className="form-control" type="file" placeholder="Selecciona el archivo a subir" name="archivo"  onChange={handleFileChange} />
+                            </div>
+                            <div className="col-sm-8">
+                                <label className="form-label">Certificados</label>
+                                <input className="form-control" type="file" placeholder="Selecciona el archivo a subir" name="archivo"  onChange={handleFileChange} />
+                            </div>
+                            <div className="col-sm-8">
+                                <label className="form-label">Otros</label>
                                 <input className="form-control" type="file" placeholder="Selecciona el archivo a subir" name="archivo"  onChange={handleFileChange} />
                             </div>
                         </div>
@@ -587,55 +572,20 @@ export const FormularioContratos = () => {
                     </div>
                 </div>
 
-                {showPerfiles && (
+                {showConsultores && (
                     <div className="row">
-                         <div className="card">
-                            <div className="card-body row">
-                                <div className="col-sm-12">
-                                    <Separador texto="Datos del perfil"/>
-                                </div>
-                                <div className="col-sm-4">
-                                    <InputBuscador label="Perfiles" type="text" name="perfil" value={formPerfilesContrato.perfil} 
-                                    placeholder="Perfiles" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
-                                    mostrarResultados={mostrarResultadosPerfiles} mostrarKey={mostrarKeyPerfiles} resultados={resultadosPerfiles} 
-                                    onSeleccionar={perfilSeleccionado} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
-                                            placeholder="Monto" className={formPerfilesContratoClases.monto} />
-                                </div>
-                                <div className="col-sm-4">
-                                    <Input label="Cantidad" type="text" name="cantidad" value={formPerfilesContrato.cantidad} onChange={handleformPerfilesChange} 
-                                            placeholder="Cantidad de recurso requerido en el perfil " className={formPerfilesContratoClases.cantidad} />
-                                </div>
-                                <div className="col-sm-12">
-                                    <label className="form-label">Descripción del perfil</label>
-                                    <textarea className={formPerfilesContratoClases.descripcion} value={formPerfilesContrato.descripcion} 
-                                            onChange={handleformPerfilesChange}  rows={2} placeholder="Descripcion del perfil" name="descripcion"   />
-                                </div>
-                            </div>
-                            <div className="card-footer row">
-                                <div className="col-sm-12 text-end">
-                                    <button className="btn btn-principal" title="Guardar" onClick={() => {guardarActualizarPerfiles()}}>
-                                        <SaveOutlinedIcon /> Guardar Perfil
-                                    </button>
-                                </div>
-                            </div>
-                         </div>
                          <div className="card">
                                 <div className="card-body row">
                                     <div className="col-sm-12">
-                                    <Separador texto="Perfiles registrados en el contrato"/>
+                                    <Separador texto="Consultores registrados como: Analistas"/>
                                     </div>
                                     <div className="col-sm-12">
                                        
                                             <table className="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th className="valoresCentrados">Perfil</th>
-                                                    <th className="valoresCentrados">Monto</th>
-                                                    <th className="valoresCentrados">Cantidad</th>
-                                                    <th className="valoresCentrados"> Descripción</th>
+                                                    <th className="valoresCentrados">Consultor</th>
+                                                    <th className="valoresCentrados">Correo</th>
                                                     <th className="valoresCentrados">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -646,8 +596,6 @@ export const FormularioContratos = () => {
                                                             <td className="valoresCentrados">{dato.nombre}</td>
                                                             <td className="valoresCentrados">{dato.monto}</td>
                                                             <td className="valoresCentrados">{dato.cantidad}</td>
-                                                            <td className="valoresCentrados">{dato.descripcion}</td>
-                                                            <td className="valoresCentrados"></td>
                                                         </tr>
                                                     ))}
                                                 
@@ -668,4 +616,4 @@ export const FormularioContratos = () => {
     );
 };
 
-export default FormularioContratos;
+export default FormularioConsultores;

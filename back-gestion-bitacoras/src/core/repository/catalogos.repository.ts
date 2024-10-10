@@ -428,4 +428,36 @@ export class CatalogoRepository {
       throw new CustomException(error, '393ccefb-2da3-426e-bf85-eb63989be180');
     }
   }
+  async getCatalogoCargo(
+    request: CatalogoRequest,
+  ): Promise<CatalogoResponse[]> {
+    try {
+      let condicion = 'WHERE 1 = 1'; // Siempre comenzamos con una condición que es verdadera
+      const parametros: any[] = [];
+
+      // Condición para el nombre
+      if (request.nombre != '') {
+        condicion +=
+          ' AND UPPER(TRIM(nombre)) LIKE UPPER(TRIM(@' +
+          parametros.length +
+          '))';
+        parametros.push(`%${request.nombre}%`);
+      }
+
+      // Condición para el campo 'activo'
+      if (request.activo != null) {
+        condicion += ' AND activo = @' + parametros.length;
+        parametros.push(request.activo);
+      }
+
+      const result = await this.dataSource.query(
+        'SELECT id_cargo as id, nombre, descripcion, tamano_maximo, activo FROM cat_cargo' +
+          condicion,
+        parametros,
+      );
+      return result;
+    } catch (error) {
+      throw new CustomException(error, '393ccefb-2da3-426e-bf85-eb63989be189');
+    }
+  }
 }

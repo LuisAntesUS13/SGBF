@@ -121,6 +121,13 @@ export class CatalogosService {
   ): Promise<CatalogoPeriodosResponse[]> {
     const datosCatalogo =
       await this.catalogoRepository.getCatalogoPeriodos(request);
+    return datosCatalogo;
+  }
+  public async getCatalogoCargo(
+    request: CatalogoRequest,
+  ): Promise<CatalogoResponse[]> {
+    const datosCatalogo =
+      await this.catalogoRepository.getCatalogoCargo(request);
 
     return datosCatalogo;
   }
