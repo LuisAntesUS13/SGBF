@@ -45,7 +45,17 @@ const datos = [
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
     actividadAsignada: "Integración de equipos y orientación de proyecto",
     actividadRealizada: "Elaboración de junta para la orientación de proyecto",
-    horasRealizadas: 8,
+    horasRealizadas: 5,
+    fecha: "13/06/2024",
+  },
+  {
+    consultor: "Luis Eduardo Antes Villa",
+    proyecto: "Continuidad operativa",
+    identificador: "S-1066361",
+    descripcion: "Sistema de gestión de Bitácoras de Fábricas",
+    actividadAsignada: "Integración de equipos y orientación de proyecto",
+    actividadRealizada: "Elaboración de junta para la orientación de proyecto",
+    horasRealizadas: 3,
     fecha: "13/06/2024",
   },
   {
@@ -55,7 +65,7 @@ const datos = [
     descripcion: "Implementación de un sistema de control de calidad",
     actividadAsignada: "Análisis de procesos actuales",
     actividadRealizada: "Recolección de datos y evaluación de puntos críticos",
-    horasRealizadas: 6,
+    horasRealizadas: 8,
     fecha: "14/06/2024",
   },
   {
@@ -65,7 +75,7 @@ const datos = [
     descripcion: "Integración de software para control automatizado",
     actividadAsignada: "Implementación de sensores y controles",
     actividadRealizada: "Pruebas y ajustes en el sistema automatizado",
-    horasRealizadas: 7,
+    horasRealizadas: 8,
     fecha: "15/06/2024",
   },
   {
@@ -75,7 +85,7 @@ const datos = [
     descripcion: "Optimización de rutas de distribución dentro de la planta",
     actividadAsignada: "Análisis y rediseño de rutas de entrega",
     actividadRealizada: "Simulación de nuevas rutas y tiempos de entrega",
-    horasRealizadas: 5,
+    horasRealizadas: 8,
     fecha: "16/06/2024",
   },
   {
@@ -91,10 +101,16 @@ const datos = [
 ];
 
 const periodoOpciones = [
-  { id: "1", nombre: "Enero" },
-  { id: "2", nombre: "Febrero" },
-  { id: "3", nombre: "Marzo" },
-  { id: "4", nombre: "Abril" },
+  { id: "1", nombre: `Enero - ${"Validado"}` },
+  { id: "2", nombre: `Febrero- ${"Validado"}` },
+  { id: "3", nombre: `Marzo - ${"Validado"}` },
+  { id: "3", nombre: `Abri - ${"Validado"}` },
+  { id: "3", nombre: `Mayo - ${"Validado"}` },
+  { id: "3", nombre: `Junio - ${"Validado"}` },
+  { id: "3", nombre: `Julio - ${"Validado"}` },
+  { id: "3", nombre: `Agosto - ${"Validado"}` },
+  { id: "3", nombre: `Septiembre - ${"Validado"}` },
+  { id: "4", nombre: `Octubre - ${"En proceso"}` },
 ];
 
 export const BitacoraConsultor = () => {
@@ -115,7 +131,7 @@ export const BitacoraConsultor = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    periodo: "",
+    periodo: "4",
   });
 
   const handleSelectChange = (e) => {

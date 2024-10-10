@@ -3,12 +3,14 @@ import { BaseResponse } from '../model/response/baseResponse';
 import { CatalogosService } from '../services/catalogos.service';
 import {
   CatalogoDocumentosRequest,
+  CatalogoPeriodoRequest,
   CatalogoRequest,
 } from '../model/request/catalogosRequest';
 import {
   CatalogoDocumentoResponse,
   CatalogoExtArchivoResponse,
   CatalogoPerfilConsultorResponse,
+  CatalogoPeriodosResponse,
   CatalogoResponse,
 } from '../model/response/catalogoResponse';
 
@@ -197,11 +199,11 @@ export class CatalogosController {
     return resultado;
   }
 
-  @Post('/getCargo')
-  async getCatalogoCargo(
-    @Body() bodyRequest: CatalogoRequest,
-  ): Promise<BaseResponse<CatalogoResponse[]>> {
-    const datos = await this.catalogosService.getCatalogoCargo(bodyRequest);
+  @Post('/getPeriodos')
+  async getCatalogoPeriodos(
+    @Body() bodyRequest: CatalogoPeriodoRequest,
+  ): Promise<BaseResponse<CatalogoPeriodosResponse[]>> {
+    const datos = await this.catalogosService.getCatalogoPeriodos(bodyRequest);
 
     const resultado = {
       success: true,
