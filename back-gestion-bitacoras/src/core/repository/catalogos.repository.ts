@@ -6,6 +6,7 @@ import DBConfig from '../config/db-config';
 import {
   CatalogoAddUpdatePerfilRequest,
   CatalogoDocumentosRequest,
+  CatalogoPeriodoRequest,
   CatalogoRequest,
 } from '../model/request/catalogosRequest';
 import {
@@ -13,6 +14,7 @@ import {
   CatalogoDocumentoResponse,
   CatalogoExtArchivoResponse,
   CatalogoPerfilConsultorResponse,
+  CatalogoPeriodosResponse,
   CatalogoResponse,
 } from '../model/response/catalogoResponse';
 
@@ -413,6 +415,19 @@ export class CatalogoRepository {
     }
   }
 
+  async getCatalogoPeriodos(
+    request: CatalogoPeriodoRequest,
+  ): Promise<CatalogoPeriodosResponse[]> {
+    try {
+      const result = await this.dataSource.query(
+        'EXEC sp_obtenerPeriodosConsultor @0',
+        [request.consultor],
+      );
+      return result;
+    } catch (error) {
+      throw new CustomException(error, '393ccefb-2da3-426e-bf85-eb63989be180');
+    }
+  }
   async getCatalogoCargo(
     request: CatalogoRequest,
   ): Promise<CatalogoResponse[]> {
