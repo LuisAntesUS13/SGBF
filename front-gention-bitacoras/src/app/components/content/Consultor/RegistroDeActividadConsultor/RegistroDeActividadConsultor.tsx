@@ -6,17 +6,18 @@ import { Select } from "../../../../shared/Select/Select.tsx";
 import "./RegistroDeActividadConsultor.css";
 
 const aplicativoModuloOpciones = [
-  { id: "1", nombre: "Opcion 1" },
-  { id: "2", nombre: "Opcion 2" },
-  { id: "3", nombre: "Opcion 3" },
-  { id: "4", nombre: "Opcion 4" },
+  { id: "1", nombre: "Acceso alterno Portal Empresarial" },
+  { id: "2", nombre: "Aclaración de pagos" },
+  { id: "3", nombre: "Acceso alterno Portal Infonavit" },
 ];
 
 const tipoOpciones = [
-  { id: "1", nombre: "Opcion 1" },
-  { id: "2", nombre: "Opcion 2" },
-  { id: "3", nombre: "Opcion 3" },
-  { id: "4", nombre: "Opcion 4" },
+  { id: "1", nombre: "Administrativo" },
+  { id: "2", nombre: "Apoyo operativo" },
+  { id: "3", nombre: "Control Cambio" },
+  { id: "4", nombre: "Jira" },
+  { id: "5", nombre: "Incidente" },
+  { id: "6", nombre: "Vacaciones" },
 ];
 
 export const RegistroDeActividadConsultor = () => {
@@ -126,7 +127,7 @@ export const RegistroDeActividadConsultor = () => {
                   name="descripcionCorta"
                   value={formData.descripcionCorta}
                   onChange={handleInputChange}
-                  disabled={true}
+                  disabled={false}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>

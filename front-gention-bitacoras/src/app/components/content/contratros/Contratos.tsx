@@ -131,68 +131,6 @@ export const Contratos = () => {
               >
                 <ControlPointOutlinedIcon /> Nuevo Contrato
               </button>
-    return (<>
-        <div className="contenido_principal">
-            <h3>Control de contratos</h3>
-            <hr/>
-            <div className="card">
-                <div className="card-body row">
-                    <div className="col-sm-3">
-                        <Input label="No. contrato" type="text" name="contrato" value={formulario.contrato} onChange={handleChange} placeholder="Numero de contrato" className="" />
-                    </div>
-                    <div className="col-sm-3">
-                        <Input label="Proveedor" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
-                    </div>
-                    {/* <div className="col-sm-3">
-                        <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
-                        placeholder="Selecciona un consultor1"   className="form-select"/>
-                    </div> */}
-                    <div className="col-sm-3">
-                        <button type="button" className="btn btn-principal" style={{ marginTop: '30px'}} title="Buscar"
-                        onClick={() =>{ buscarContratos()}}><SearchOutlinedIcon /> Buscar</button>
-                    </div>
-                </div>
-                <div className="card-footer row">
-                    <div className="col-sm-3" style={{marginTop: '3px', marginBottom: '3px'}}>
-                        <button type="button" className="btn btn-accion" title="Nuevo contrato" onClick={() => navigate("/contrato/registrar")}><ControlPointOutlinedIcon /> Nuevo Contrato</button>
-                    </div>
-                </div>
-            </div>
-            <div className="card" >
-                <div className="card-body row">
-                    <div className="col-sm-12">
-                        <table className="table table-hover">
-                            <thead>
-                                <tr className="valoresCentrados">
-                                    <th scope="col" className="valoresCentrados">No. Contrato</th>
-                                    <th scope="col" className="valoresCentrados">Fecha inicio</th>
-                                    <th scope="col" className="valoresCentrados">Fecha termino</th>
-                                    <th scope="col" className="valoresCentrados">Monto</th>
-                                    <th scope="col" className="valoresCentrados">Proveedor</th>
-                                    <th scope="col" className="valoresCentrados">Tipo contrato</th>
-                                    <th scope="col" className="valoresCentrados">Forma pago</th>
-                                    <th scope="col" className="valoresCentrados">Estatus</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    {dataContratos.map((dato:DatosContratos,i) => (
-                                        <tr key={i} style={{ cursor: 'pointer' }} onClick={() => navigate("/contrato/actualizar", { state: dato })}>
-                                            <td className="valoresCentrados">{dato.no_contrato}</td>
-                                            <td className="valoresCentrados">{dato.fh_inicio}</td>
-                                            <td className="valoresCentrados">{dato.fh_fin}</td>
-                                            <td className="valoresCentrados">{dato.monto_total}</td>
-                                            <td className="valoresCentrados">{dato.consultora}</td>
-                                            <td className="valoresCentrados">{dato.tipo_contrato}</td>
-                                            <td className="valoresCentrados">{dato.forma_pago}</td>
-                                            <td className="valoresCentrados">{dato.activo ? 'Activo': 'Inactivo'}</td>
-                                        </tr>
-                                    ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    <Paginador totalRegistros={dataContratos.length > 0 ? dataContratos[0].total_registros: 0 }   paginaActual={paginaActual} 
-                      registrosPorPagina={registrosPorPagina}   onCambioPagina={handlePaginacion} />
-                </div>
             </div>
           </div>
         </div>

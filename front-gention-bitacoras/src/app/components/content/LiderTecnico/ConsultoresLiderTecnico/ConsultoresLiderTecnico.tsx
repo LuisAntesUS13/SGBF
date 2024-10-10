@@ -12,12 +12,12 @@ const columnas = [
 const datos = [
   {
     consultor: "Luis Eduardo Antes Villa",
-    observaciones: "Con observación",
+    observaciones: "",
     autorizado: "Validado",
   },
   {
     consultor: "Mariana Ilse Borrego Campos",
-    observaciones: "Con observación",
+    observaciones: "",
     autorizado: "Validado",
   },
   {
