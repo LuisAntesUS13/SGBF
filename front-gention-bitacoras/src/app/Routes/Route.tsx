@@ -14,6 +14,7 @@ import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/Cons
 import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
 import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
+import { Requerimientos } from "../components/content/Requerimientos/Requerimientos.tsx";
 import { EquiposDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/EquiposDeTrabajo.tsx";
 import { RegistroDeEquipoDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.tsx";
 
@@ -30,10 +31,8 @@ export const Enrutador = () => {
           element={<RegistroDeEquipoDeTrabajo />}
         />
         <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
-        <Route
-          path="/reasignacion-de-lider/actualizar"
-          element={<ReasignacionLiderActualizar />}
-        />
+        <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
+        <Route path="/requerimientos" element={<Requerimientos />} />
         <Route
           path="/validacion-bitacora-lider-tecnico"
           element={<ValidacionBitacoraLiderTecnico />}

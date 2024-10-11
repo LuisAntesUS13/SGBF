@@ -17,7 +17,7 @@ export const Submenu = ({ titulo, opciones }: IProps) => {
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!validacion) {
-      navigate("/Requerimientos");
+      navigate("/requerimientos");
     }
 
     setAnchorEl(event.currentTarget);
