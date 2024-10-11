@@ -34,3 +34,7 @@ export class CatalogoAddUpdateResponse {
   correcto: string;
   mensaje: string;
 }
+
+export class CatalogoPeriodosResponse {
+  MonthName: string;
+}

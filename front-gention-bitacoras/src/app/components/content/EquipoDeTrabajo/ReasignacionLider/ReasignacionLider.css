@@ -1,0 +1,14 @@
+.btn-bscr {
+    background-color: #f80000 !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+tr {
+    cursor: pointer;
+}
+
+.sprdr {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+}

@@ -44,7 +44,7 @@ const datos = [
     fecha: "13/05/2024",
   },
   {
-    consultor: "Carlos Ramírez López",
+    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Optimización de procesos",
     identificador: "S-1066362",
     descripcion: "Implementación de un sistema de control de calidad",
@@ -54,7 +54,7 @@ const datos = [
     fecha: "14/05/2024",
   },
   {
-    consultor: "Ana María Fernández",
+    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Automatización de líneas de producción",
     identificador: "S-1066363",
     descripcion: "Integración de software para control automatizado",
@@ -64,7 +64,7 @@ const datos = [
     fecha: "15/05/2024",
   },
   {
-    consultor: "Roberto Sánchez Ruiz",
+    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Mejora de la logística interna",
     identificador: "S-1066364",
     descripcion: "Optimización de rutas de distribución dentro de la planta",
@@ -74,7 +74,7 @@ const datos = [
     fecha: "16/05/2024",
   },
   {
-    consultor: "Gabriela Torres Pineda",
+    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Reducción de tiempos de inactividad",
     identificador: "S-1066365",
     descripcion: "Implementación de sistema de monitoreo en tiempo real",
@@ -153,18 +153,7 @@ export const ValidacionBitacoraLiderTecnico = () => {
             </div>
           </div>
           <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
-          <div>
-            <div className="col-sm-3">
-              <Input
-                label="Nombre del consultor"
-                type="text"
-                name="filtro"
-                value={formData.consultor}
-                onChange={handleChange}
-                placeholder="Escriba el nombre"
-              />
-            </div>
-          </div>
+          <div></div>
           <div className="contenedor-filtros-botones">
             <div className="contenedor-lista-estados">
               <ListaEstados

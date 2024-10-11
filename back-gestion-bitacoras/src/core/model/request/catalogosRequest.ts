@@ -1,3 +1,7 @@
+export class CatalogoPeriodoRequest {
+  consultor: string;
+}
+
 export class CatalogoRequest {
   nombre: string;
   activo: boolean | null;

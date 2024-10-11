@@ -13,7 +13,8 @@ import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/
 import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
 import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 import { CargaPerfiles } from "../components/content/CargaConsultores/CargaPerfiles.tsx";
-
+import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
+import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
 
 export const Enrutador = () => {
   return (
@@ -28,6 +29,8 @@ export const Enrutador = () => {
           path="/registro-de-equipo-y-lider"
           element={<h1>Registro de equipo y líder</h1>}
         />
+        <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
+        <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
         <Route
           path="/validacion-bitacora-lider-tecnico"
           element={<ValidacionBitacoraLiderTecnico />}
