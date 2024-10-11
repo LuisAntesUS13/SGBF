@@ -30,7 +30,11 @@ export const Menu = () => {
               },
             ]}
           />
-          <Submenu titulo={"Requerimientos"} opciones={[]} />
+          <Submenu 
+            titulo={"requerimientos"} 
+            opciones={[
+              
+            ]} />
           <Submenu
             titulo={"Bitacoras"}
             opciones={[

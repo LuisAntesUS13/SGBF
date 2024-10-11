@@ -16,6 +16,7 @@ import { RegistroDeActividadConsultor } from "../components/content/Consultor/Re
 import { FormularioConsultores } from "../components/content/contratros/FormularioConsultores.tsx";
 import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
 import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
+import { Requerimientos } from "../components/content/Requerimientos/Requerimientos.tsx";
 
 export const Enrutador = () => {
   return (
@@ -32,6 +33,7 @@ export const Enrutador = () => {
         />
         <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
         <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
+        <Route path="/requerimientos" element={<Requerimientos />} />
         <Route
           path="/validacion-bitacora-lider-tecnico"
           element={<ValidacionBitacoraLiderTecnico />}
