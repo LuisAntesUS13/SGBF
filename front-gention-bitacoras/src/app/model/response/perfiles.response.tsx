@@ -27,7 +27,7 @@ export class DatosPerfilesContratos{
     id_contrato: number;
     fh_registro: string;
     fh_baja: string;
-    cantidad: number;
+    id_nivel: number;
     nombre: string;
     descripcion: string;
     monto: number;

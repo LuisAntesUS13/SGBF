@@ -11,9 +11,9 @@ import { BitacoraConsultor } from "../components/content/Consultor/BitacoraConsu
 import { DetallesDeActividadConsultor } from "../components/content/Consultor/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
 import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/ObservacionDetallesPorPeriodoConsultor/ObservacionPorPeriodoConsultor.tsx";
 import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
-import { DatosPerfiles } from "../components/content/contratros/CargaPerfiles.tsx";
 import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
-import { FormularioConsultores } from "../components/content/contratros/FormularioConsultores.tsx";
+import { CargaPerfiles } from "../components/content/CargaConsultores/CargaPerfiles.tsx";
+
 
 export const Enrutador = () => {
   return (
@@ -22,8 +22,8 @@ export const Enrutador = () => {
         <Route path="/contrato" element={<Contratos />} />
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
-        <Route path="/carga-de-perfiles" element={<DatosPerfiles />} />
-        <Route path="/carga-de-perfiles/consultor" element={<FormularioConsultores />} />
+        <Route path="/carga-de-perfiles" element={<CargaPerfiles />} />
+        {/* <Route path="/carga-de-perfiles/consultor" element={[]} /> */}
         <Route
           path="/registro-de-equipo-y-lider"
           element={<h1>Registro de equipo y líder</h1>}

@@ -86,7 +86,7 @@ export const FormularioContratos = () => {
         perfil: "",
         monto: "0.0",
         descripcion: "",
-        cantidad: "1",
+        id_nivel: "1",
     });
 
     const [formPerfilesContratoClases, setFormPerfilesContratoClases] = useState({
@@ -102,10 +102,24 @@ export const FormularioContratos = () => {
     // Manejar cambios del primer formulario
     const handleChange = (e) => {
         const { name, value, files } = e.target;
-        setFormData({
-            ...formData,
-            [name]: files ? files[0] : value,
-        });
+
+        let formattedValue = value;
+
+        // Si el campo es montoVariable o montoFijo, se formatea a decimal
+        if (name === "montoVariable" || name === "montoFijo") {
+            formattedValue = parseFloat(value.replace(/,/g, "") || 0).toFixed(2);
+        }
+
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: files ? files[0] : formattedValue,
+            // Recalcular montoTotal si cambia montoVariable o montoFijo
+            montoTotal: (parseFloat(prev.montoVariable.replace(/,/g, "")) + 
+                         parseFloat(prev.montoFijo.replace(/,/g, ""))).toFixed(2)
+        }));
+
+        
 
         // Validar si el campo no está vacío
         if (value === null || value === '') {
@@ -201,7 +215,7 @@ export const FormularioContratos = () => {
             perfil: perfil.nombre, 
             monto: perfil.monto, 
             descripcion:  perfil.descripcion, 
-            cantidad: "1",
+            id_nivel: "0",
         });
         setFormPerfilesContratoClases({
             ...formPerfilesContratoClases,
@@ -340,7 +354,6 @@ export const FormularioContratos = () => {
     
             try {
                 const result = await guardaActualizaContratos(datos);
-                setShowPerfiles(true);
                 if(result.correcto){
                     toast.success(result.mensaje, {});
                     setFormData((formData) => ({
@@ -348,6 +361,7 @@ export const FormularioContratos = () => {
                         id_contrato: result.data.id_contrato.toString(),
                         id_archivo: result.data.id_archivo != null ? result.data.id_archivo.toString() : '',
                       }));
+                    setShowPerfiles(true);
                 } else {
                     toast.warn(result.mensaje, {});
                 }
@@ -396,7 +410,7 @@ export const FormularioContratos = () => {
                 perfil: formPerfilesContrato.perfil,
                 descripcion: formPerfilesContrato.descripcion,
                 monto: parseFloat(formPerfilesContrato.monto),
-                cantidad: parseInt(formPerfilesContrato.cantidad),
+                cantidad: parseInt(formPerfilesContrato.id_nivel),
                 activo: true,
             };
 
@@ -500,7 +514,7 @@ export const FormularioContratos = () => {
             perfil: datosPerfil.nombre,
             monto: datosPerfil.monto.toString(),
             descripcion: datosPerfil.descripcion,
-            cantidad: datosPerfil.cantidad.toString(),
+            id_nivel: datosPerfil.id_nivel.toString(),
         });
     };
 
@@ -545,7 +559,7 @@ export const FormularioContratos = () => {
                                                 placeholder="Selecciona una opcion"   className= {fieldContratoClases.tipoContrato}/>
                             </div>
                             <div className="col-sm-4">
-                                    <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
+                                    <Select  label="Selecciona al proveedor"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
                                                 placeholder="Selecciona una opcion"   className= {fieldContratoClases.consultora}/>
                             </div>
                             <div className="col-sm-4">
@@ -561,7 +575,7 @@ export const FormularioContratos = () => {
                                         placeholder="Monto total" className= {fieldContratoClases.montoTotal} disabled={true}/>
                             </div>
                             <div className="col-sm-4">
-                                <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
+                                <Input label="Personal requerido inicial" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
                                         placeholder="No consultores" className= {fieldContratoClases.consultores} />
                             </div>
                             <div className="col-sm-4">
@@ -569,7 +583,7 @@ export const FormularioContratos = () => {
                                         placeholder="Selecciona una opcion"   className="form-control"/>
                             </div>
                             <div className="col-sm-4">
-                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[{id:1, nombre: "Verónica	Franco Pérez"}, {id:2, nombre: "Joel Cuevas	Carbajal"}]}
+                                <Select  label="Selecciona Gerente"  name="gerente"   value={formData.gerente}  onChange={handleChange}  options={[{id:6, nombre: "Verónica	Franco Pérez"}, {id:7, nombre: "Joel Cuevas	Carbajal"}]}
                                         placeholder="Selecciona una opcion"  className="form-control"/>
                             </div>
                             <div className="col-sm-8">
@@ -595,8 +609,12 @@ export const FormularioContratos = () => {
                                     <Separador texto="Datos del perfil"/>
                                 </div>
                                 <div className="col-sm-4">
-                                    <InputBuscador label="Perfiles" type="text" name="perfil" value={formPerfilesContrato.perfil} 
-                                    placeholder="Perfiles" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
+                                     <Select  label="Selecciona Nivel del Perfil"  name="id_nivel"   value={formPerfilesContrato.id_nivel}  onChange={handleformPerfilesChange}  options={[{id:1, nombre: "Sr."}, {id:2, nombre: "Jr."}]}
+                                        placeholder="Selecciona una opcion"  className="form-control"/>
+                                </div>
+                                <div className="col-sm-4">
+                                    <InputBuscador label="Nombre del Perfil" type="text" name="perfil" value={formPerfilesContrato.perfil} 
+                                    placeholder="Nombre del Perfil" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
                                     mostrarResultados={mostrarResultadosPerfiles} mostrarKey={mostrarKeyPerfiles} resultados={resultadosPerfiles} 
                                     onSeleccionar={perfilSeleccionado} />
                                 </div>
@@ -604,10 +622,10 @@ export const FormularioContratos = () => {
                                     <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
                                             placeholder="Monto" className={formPerfilesContratoClases.monto} />
                                 </div>
-                                <div className="col-sm-4">
+                                {/* <div className="col-sm-4">
                                     <Input label="Cantidad" type="text" name="cantidad" value={formPerfilesContrato.cantidad} onChange={handleformPerfilesChange} 
                                             placeholder="Cantidad de recurso requerido en el perfil " className={formPerfilesContratoClases.cantidad} />
-                                </div>
+                                </div> */}
                                 <div className="col-sm-12">
                                     <label className="form-label">Descripción del perfil</label>
                                     <textarea className={formPerfilesContratoClases.descripcion} value={formPerfilesContrato.descripcion} 
@@ -632,10 +650,10 @@ export const FormularioContratos = () => {
                                             <table className="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th className="valoresCentrados">Perfil</th>
+                                                    <th className="valoresCentrados">Nivel</th>
+                                                    <th className="valoresCentrados">Nombre del Perfil</th>
                                                     <th className="valoresCentrados">Monto</th>
-                                                    <th className="valoresCentrados">Cantidad</th>
-                                                    <th className="valoresCentrados"> Descripción</th>
+                                                    <th className="valoresCentrados">Descripción</th>
                                                     <th className="valoresCentrados">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -643,9 +661,9 @@ export const FormularioContratos = () => {
                                                 <tbody>
                                                     {dataPerfiles.map((dato:DatosPerfilesContratos,i) => (
                                                         <tr key={i} onClick={() => {datosPerfilActualizacion(dato)}}>
+                                                            <td className="valoresCentrados">Sr.</td>
                                                             <td className="valoresCentrados">{dato.nombre}</td>
                                                             <td className="valoresCentrados">{dato.monto}</td>
-                                                            <td className="valoresCentrados">{dato.cantidad}</td>
                                                             <td className="valoresCentrados">{dato.descripcion}</td>
                                                             <td className="valoresCentrados"></td>
                                                         </tr>
