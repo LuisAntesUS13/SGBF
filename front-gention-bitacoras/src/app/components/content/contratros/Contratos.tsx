@@ -71,68 +71,7 @@ export const Contratos = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [paginaActual, registrosPorPagina]);
 
-  useEffect(() => {
-    getDataContratos(paginaActual, registrosPorPagina, false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paginaActual, registrosPorPagina]);
 
-  return (
-    <>
-      <div className="contenido_principal">
-        <h3>Contol de contratos</h3>
-        <hr />
-        <div className="card">
-          <div className="card-body row">
-            <div className="col-sm-3">
-              <Input
-                label="No. contrato"
-                type="text"
-                name="contrato"
-                value={formulario.contrato}
-                onChange={handleChange}
-                placeholder="Numero de contrato"
-                className=""
-              />
-            </div>
-            <div className="col-sm-3">
-              <Input
-                label="No. contrato 2"
-                type="text"
-                name="consultora"
-                value={formulario.consultora}
-                onChange={handleChange}
-                placeholder="Consultora"
-                className=""
-              />
-            </div>
-            {/* <div className="col-sm-3">
-                        <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
-                        placeholder="Selecciona un consultor1"   className="form-select"/>
-                    </div> */}
-            <div className="col-sm-3">
-              <button
-                type="button"
-                className="btn btn-principal"
-                style={{ marginTop: "30px" }}
-                title="Buscar"
-                onClick={() => {
-                  buscarContratos();
-                }}
-              >
-                <SearchOutlinedIcon /> Buscar
-              </button>
-            </div>
-          </div>
-          <div className="card-footer row">
-            <div className="col-sm-3">
-              <button
-                type="button"
-                className="btn btn-accion"
-                title="Nuevo contrato"
-                onClick={() => navigate("/contrato/nuevo")}
-              >
-                <ControlPointOutlinedIcon /> Nuevo Contrato
-              </button>
     return (<>
         <div className="contenido_principal">
             <h3>Control de contratos</h3>
