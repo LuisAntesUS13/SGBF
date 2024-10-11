@@ -52,6 +52,8 @@ export class ContratosService {
       throw new CustomException(valido, '');
     }
 
+    console.log(request);
+
     const no_contrato_valido =
       await this.contratosRepository.validaNumeroContrato(
         request.no_contrato,
