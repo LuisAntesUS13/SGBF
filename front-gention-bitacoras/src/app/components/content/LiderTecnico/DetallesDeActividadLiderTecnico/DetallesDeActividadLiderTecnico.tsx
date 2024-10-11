@@ -1,7 +1,6 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import "./DetallesDeActividadLiderTecnico.css";
-import { Divider } from "@mui/material";
 import { Input } from "../../../../shared/Input/Input.tsx";
 import Grid from "@mui/material/Grid2";
 
@@ -80,7 +79,7 @@ export const DetallesDeActividadLiderTecnico = () => {
             <p>13 / 06 / 2024</p>
           </div>
         </div>
-        <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+        <hr />
         <div
           style={{
             display: "flex",

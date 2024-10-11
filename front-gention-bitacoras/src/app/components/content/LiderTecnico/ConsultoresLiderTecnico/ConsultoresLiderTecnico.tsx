@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Tabla } from "../../../../shared/Tabla/Tabla.tsx";
@@ -58,7 +57,7 @@ export const ConsultoresLiderTecnico = () => {
               <p>Azir Aguilar</p>
             </div>
           </div>
-          <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+          <hr />
 
           <div className="contenedor-componente-tabla">
             <Tabla

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./ValidacionBitacoraLiderTecnico.css";
-import { Divider } from "@mui/material";
-import { Input } from "../../../../shared/Input/Input.tsx";
 import { Tabla } from "../../../../shared/Tabla/Tabla.tsx";
 import { ListaEstados } from "../../../../shared/ListaEstados/ListaEstados.tsx";
 import { useNavigate } from "react-router-dom";
 import { ActividadConsultorService } from "../../../../services/actividades/actividades.service.ts";
-import { ActividadService } from "../../../../services/actividades/actividades.service.ts";
 
 const columnas = [
   { header: "CONSULTOR", accessor: "consultor" },
@@ -152,7 +149,7 @@ export const ValidacionBitacoraLiderTecnico = () => {
               <p>Azir Aguilar</p>
             </div>
           </div>
-          <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+          <hr />
           <div></div>
           <div className="contenedor-filtros-botones">
             <div className="contenedor-lista-estados">

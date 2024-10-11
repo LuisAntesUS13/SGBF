@@ -1,4 +1,3 @@
-import { Divider } from "@mui/material";
 import React from "react";
 import "./ObservacionPorPeriodoLiderTecnico.css";
 
@@ -21,7 +20,7 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
           </div>
         </div>
 
-        <Divider sx={{ bgcolor: "#959595", margin: "13px 0px" }} />
+        <hr />
         <div style={{ width: "80%" }} className="contenedor-contenido">
           <div className="contenedor-textarea-observaciones">
             <label className="label-observaciones">Observación</label>

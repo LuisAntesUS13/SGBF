@@ -16,22 +16,31 @@ import { RegistroDeActividadConsultor } from "../components/content/Consultor/Re
 import { FormularioConsultores } from "../components/content/contratros/FormularioConsultores.tsx";
 import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
 import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
+import { EquiposDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/EquiposDeTrabajo.tsx";
+import { RegistroDeEquipoDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.tsx";
 
 export const Enrutador = () => {
   return (
     <>
       <Routes>
-        <Route path="/contrato" element={<Contratos />} />
+        {/* <Route path="/contrato" element={<Contratos />} /> */}
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
         <Route path="/carga-de-perfiles" element={<DatosPerfiles />} />
-        <Route path="/carga-de-perfiles/consultor" element={<FormularioConsultores />} />
         <Route
-          path="/registro-de-equipo-y-lider"
-          element={<h1>Registro de equipo y líder</h1>}
+          path="/carga-de-perfiles/consultor"
+          element={<FormularioConsultores />}
+        />
+        <Route path="/equipos-de-trabajo" element={<EquiposDeTrabajo />} />
+        <Route
+          path="/registro-de-equipos-de-trabajo"
+          element={<RegistroDeEquipoDeTrabajo />}
         />
         <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
-        <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
+        <Route
+          path="/reasignacion-de-lider/actualizar"
+          element={<ReasignacionLiderActualizar />}
+        />
         <Route
           path="/validacion-bitacora-lider-tecnico"
           element={<ValidacionBitacoraLiderTecnico />}

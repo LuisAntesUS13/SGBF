@@ -21,7 +21,7 @@ export const Menu = () => {
             titulo={"Equipo de trabajo"}
             opciones={[
               {
-                ruta: "registro-de-equipo-y-lider",
+                ruta: "equipos-de-trabajo",
                 subtitulo: "Registro de equipo y líder",
               },
               {

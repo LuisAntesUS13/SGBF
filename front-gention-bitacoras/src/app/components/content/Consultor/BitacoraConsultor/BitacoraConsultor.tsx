@@ -172,7 +172,7 @@ export const BitacoraConsultor = () => {
         <div className="contenedor-datos-proyecto">
           <div className="datos-titulo-proyecto">
             <p className="titulo-proyecto">
-              Periodos y actividades registradas
+              Periodos y activida des registradas
             </p>
           </div>
         </div>
