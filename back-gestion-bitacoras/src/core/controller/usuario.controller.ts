@@ -6,12 +6,12 @@ import {
 } from '../model/request/usuariosReques';
 import { BaseResponse } from '../model/response/baseResponse';
 
-@Controller('/sesion')
+@Controller('/usuarios')
 export class UsuarioController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-  @Post('/login')
-  async ExecuteStoredProcedure(
+  @Post('/porCargo')
+  async getUsuariosPorCargo(
     @Body() request: UsuarioPorCargoRequest,
   ): Promise<BaseResponse<UsuarioCargoResponse[]>> {
     const datos = await this.usuariosService.getUsuariosPorCargo(request);

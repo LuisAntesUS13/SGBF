@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./PeriodosBitacoraLiderTecnico.css";
-import Divider from "@mui/material/Divider";
 import { Select } from "../../../../shared/Select/Select.tsx";
 import { Tabla } from "../../../../shared/Tabla/Tabla.tsx";
 import { useNavigate } from "react-router-dom";
@@ -66,7 +65,7 @@ export const PeriodosBitacoraLiderTecnico = () => {
           <p className="lider-tecnico">Líder técnico:</p>
           <p>Juan Luis Gutiérrez López</p>
         </div>
-        <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
+        <hr />
         <div className="contenedor-filtros">
           <Select
             label="Contrato"

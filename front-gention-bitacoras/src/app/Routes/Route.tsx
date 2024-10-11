@@ -11,25 +11,24 @@ import { BitacoraConsultor } from "../components/content/Consultor/BitacoraConsu
 import { DetallesDeActividadConsultor } from "../components/content/Consultor/DetallesDeActividadConsultor/DetallesDeActividadConsultor.tsx";
 import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/ObservacionDetallesPorPeriodoConsultor/ObservacionPorPeriodoConsultor.tsx";
 import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
-import { DatosPerfiles } from "../components/content/contratros/CargaPerfiles.tsx";
 import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
-import { FormularioConsultores } from "../components/content/contratros/FormularioConsultores.tsx";
 import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
 import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
 import { Requerimientos } from "../components/content/Requerimientos/Requerimientos.tsx";
+import { EquiposDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/EquiposDeTrabajo.tsx";
+import { RegistroDeEquipoDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.tsx";
 
 export const Enrutador = () => {
   return (
     <>
       <Routes>
-        <Route path="/contrato" element={<Contratos />} />
+        {/* <Route path="/contrato" element={<Contratos />} /> */}
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
-        <Route path="/carga-de-perfiles" element={<DatosPerfiles />} />
-        <Route path="/carga-de-perfiles/consultor" element={<FormularioConsultores />} />
+        <Route path="/equipos-de-trabajo" element={<EquiposDeTrabajo />} />
         <Route
-          path="/registro-de-equipo-y-lider"
-          element={<h1>Registro de equipo y líder</h1>}
+          path="/registro-de-equipos-de-trabajo"
+          element={<RegistroDeEquipoDeTrabajo />}
         />
         <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
         <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
