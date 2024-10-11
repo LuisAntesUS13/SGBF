@@ -14,7 +14,7 @@ export const Menu = () => {
             titulo={"Contratos y perfiles"}
             opciones={[
               { ruta: "contrato", subtitulo: "Contrato" },
-              { ruta: "carga-de-perfiles", subtitulo: "Carga de perfiles" },
+              { ruta: "cargaPerfiles", subtitulo: "Carga de perfiles" },
             ]}
           />
           <Submenu
