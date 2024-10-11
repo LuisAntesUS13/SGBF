@@ -8,7 +8,7 @@ import { DatosPerfilesContratos } from "../../../model/response/perfiles.respons
 import { getPerfilesContratos } from "../../../services/perfiles.service.tsx";
 import { ConsultaPErfilesContrato } from "../../../model/request/perfiles.request.tsx";
 
-export const DatosPerfiles = () => {
+export const CargaPerfiles = () => {
   // Componente para navegar entre paginas
   const navigate = useNavigate();
 

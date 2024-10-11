@@ -17,6 +17,7 @@ import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTraba
 import { Requerimientos } from "../components/content/Requerimientos/Requerimientos.tsx";
 import { EquiposDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/EquiposDeTrabajo.tsx";
 import { RegistroDeEquipoDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.tsx";
+import { CargaPerfiles } from "../components/content/CargaConsultores/CargaPerfiles.tsx";
 
 export const Enrutador = () => {
   return (
@@ -25,6 +26,7 @@ export const Enrutador = () => {
         <Route path="/contrato" element={<Contratos />} />
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
+        <Route path="/cargaPerfiles" element={<CargaPerfiles />} />
         <Route path="/equipos-de-trabajo" element={<EquiposDeTrabajo />} />
         <Route
           path="/registro-de-equipos-de-trabajo"
