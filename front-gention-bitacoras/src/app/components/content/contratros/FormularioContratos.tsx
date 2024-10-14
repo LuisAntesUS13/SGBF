@@ -545,7 +545,7 @@ export const FormularioContratos = () => {
                                                 placeholder="Selecciona una opcion"   className= {fieldContratoClases.tipoContrato}/>
                             </div>
                             <div className="col-sm-4">
-                                    <Select  label="Selecciona la consultora"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
+                                    <Select  label="Selecciona la proveedor"  name="consultora"   value={formData.consultora}  onChange={handleChange}  options={consultora}
                                                 placeholder="Selecciona una opcion"   className= {fieldContratoClases.consultora}/>
                             </div>
                             <div className="col-sm-4">
@@ -561,7 +561,7 @@ export const FormularioContratos = () => {
                                         placeholder="Monto total" className= {fieldContratoClases.montoTotal} disabled={true}/>
                             </div>
                             <div className="col-sm-4">
-                                <Input label="No. consultores requeridos" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
+                                <Input label="Personal requerido inicial" type="text" name="consultores" value={formData.consultores} onChange={handleChange} 
                                         placeholder="No consultores" className= {fieldContratoClases.consultores} />
                             </div>
                             <div className="col-sm-4">
@@ -595,7 +595,11 @@ export const FormularioContratos = () => {
                                     <Separador texto="Datos del perfil"/>
                                 </div>
                                 <div className="col-sm-4">
-                                    <InputBuscador label="Perfiles" type="text" name="perfil" value={formPerfilesContrato.perfil} 
+                                   <Select  label="Seleccione  nivel del perfil"  name="direccion"   value={formData.direccion}  onChange={handleChange}  options={[{id: 1, nombre:"Sr"}, {id: 1, nombre:"Jr"}]}
+                                        placeholder="Selecciona una opcion"   className="form-control"/>
+                                </div>
+                                <div className="col-sm-4">
+                                    <InputBuscador label="Nombre del perfil" type="text" name="perfil" value={formPerfilesContrato.perfil} 
                                     placeholder="Perfiles" className={formPerfilesContratoClases.perfil} onChange={changeBuscadoPerfil}
                                     mostrarResultados={mostrarResultadosPerfiles} mostrarKey={mostrarKeyPerfiles} resultados={resultadosPerfiles} 
                                     onSeleccionar={perfilSeleccionado} />
@@ -604,10 +608,10 @@ export const FormularioContratos = () => {
                                     <Input label="Monto" type="text" name="monto" value={formPerfilesContrato.monto} onChange={handleformPerfilesChange} 
                                             placeholder="Monto" className={formPerfilesContratoClases.monto} />
                                 </div>
-                                <div className="col-sm-4">
+                                {/* <div className="col-sm-4">
                                     <Input label="Cantidad" type="text" name="cantidad" value={formPerfilesContrato.cantidad} onChange={handleformPerfilesChange} 
                                             placeholder="Cantidad de recurso requerido en el perfil " className={formPerfilesContratoClases.cantidad} />
-                                </div>
+                                </div> */}
                                 <div className="col-sm-12">
                                     <label className="form-label">Descripción del perfil</label>
                                     <textarea className={formPerfilesContratoClases.descripcion} value={formPerfilesContrato.descripcion} 

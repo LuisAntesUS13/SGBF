@@ -1,9 +1,10 @@
-import { respuestaPuebaController } from '../controller/controller';
-import {RUTA_BASE} from '../util/constantes';
-import { Router } from 'express';
+
+import { getCatalogoModuloAplicativo } from "../controller/catalogoController";
+import { RUTA_BASE } from "../util/constantes";
+import { Router } from "express";
 
 const rutas = Router();
 
-rutas.get(`${RUTA_BASE}/prueba` , respuestaPuebaController);
+rutas.post(`${RUTA_BASE}/modulo_aplicativo`, getCatalogoModuloAplicativo);
 
 export default rutas;

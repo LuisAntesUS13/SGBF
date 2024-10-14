@@ -11,4 +11,4 @@ export const DB_DATABASE = process.env.SGBD_DB_NAME || 'admingastos';
 
 export const SECRET_KEY = process.env.SGBD_JWT_SECRET || '21c7e331-949a-5fdc-b364-1299ef81a298';
 
-export const VALIDA_TOKEN = process.env.VALIDA_TOKEN || true;
+export const PROD = (process.env.SGBD_PROD == 'false' ? false : true);

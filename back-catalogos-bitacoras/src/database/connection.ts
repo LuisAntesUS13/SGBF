@@ -15,7 +15,7 @@ const dbConfig = {
 };
 
 // Función para conectar a la base de datos
-export const connectToDatabase = async () => {
+export const connection = async () => {
   try {
     const pool = await sql.connect(dbConfig);
     console.log('Conexión a la base de datos exitosa');
