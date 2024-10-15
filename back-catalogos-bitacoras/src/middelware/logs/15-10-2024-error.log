@@ -1,0 +1,12 @@
+error: 2024-10-15T16:48:45.871Z RequestError: Invalid column name 'tamano_maximo'.
+    at handleError (D:\Trabajo Infonavit Ultra\Codigo Infornavit\SGBF\back-catalogos-bitacoras\node_modules\mssql\lib\tedious\request.js:384:15)
+    at Connection.emit (node:events:519:28)
+    at Connection.emit (node:domain:488:12)
+    at Connection.emit (D:\Trabajo Infonavit Ultra\Codigo Infornavit\SGBF\back-catalogos-bitacoras\node_modules\tedious\src\connection.ts:1927:18)
+    at RequestTokenHandler.onErrorMessage (D:\Trabajo Infonavit Ultra\Codigo Infornavit\SGBF\back-catalogos-bitacoras\node_modules\tedious\src\token\handler.ts:386:21)
+    at Readable.<anonymous> (D:\Trabajo Infonavit Ultra\Codigo Infornavit\SGBF\back-catalogos-bitacoras\node_modules\tedious\src\token\token-stream-parser.ts:23:55)
+    at Readable.emit (node:events:519:28)
+    at Readable.emit (node:domain:488:12)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushObjectMode (node:internal/streams/readable:536:3)
+[POST :: /catalogo/cargo :: ::1]

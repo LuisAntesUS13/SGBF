@@ -322,6 +322,8 @@ export class CatalogoRepository {
     }
   }
 
+
+  //pendientee $$$$$$$$$$$$$$$$$$$$$$
   async addUpdatePerfilConsultor(
     request: CatalogoAddUpdatePerfilRequest,
   ): Promise<CatalogoAddUpdateResponse> {
@@ -415,6 +417,8 @@ export class CatalogoRepository {
     }
   }
 
+
+  //EN ESPERA %%%%%
   async getCatalogoPeriodos(
     request: CatalogoPeriodoRequest,
   ): Promise<CatalogoPeriodosResponse[]> {

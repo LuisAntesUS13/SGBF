@@ -1,6 +1,6 @@
 import { connection } from "../database/connection";
-import { CatalogoRequest } from "../model/request/request";
-import { CatalogoResponse } from "../model/response/response";
+import { CatalogoDocumentosRequest, CatalogoRequest } from "../model/request/request";
+import { CatalogoDocumentoResponse, CatalogoExtArchivoResponse, CatalogoPerfilConsultorResponse, CatalogoResponse } from "../model/response/response";
 import mssql from "mssql";
 import { mapToInterface } from "../util/util";
 
@@ -278,6 +278,260 @@ export const catalogoServicio = {
 
     // Crear la consulta con la condición dinámica
     const query = `SELECT id_proyecto as id, nombre, descripcion, activo FROM cat_proyecto ${condicion}`;
+
+    // Crear el request y asignar los parámetros
+    let req = pool.request();
+
+    parametros.forEach((param) => {
+      req = req.input(param.name, param.type, param.value); // Asignar los parámetros correctamente
+    });
+
+    // Ejecutar la consulta
+    const result = await req.query(query);
+
+    // Mapeamos los valores
+    const respuesta: CatalogoResponse[] = mapToInterface<CatalogoResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+  async getCatalogoTipoContrato(
+    request: CatalogoRequest
+  ): Promise<CatalogoResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let condicion = "WHERE 1 = 1"; // Condición base
+    const parametros: any[] = [];
+    // Condición para el nombre
+    if (request.nombre && request.nombre.trim() !== "") {
+      condicion += " AND UPPER(TRIM(nombre)) LIKE @nombre";
+      parametros.push({
+        name: "nombre",
+        value: `%${request.nombre}%`,
+        type: mssql.VarChar,
+      });
+    }
+
+    // Condición para el campo 'activo'
+    if (request.activo != null) {
+      condicion += " AND activo = @activo";
+      parametros.push({
+        name: "activo",
+        value: request.activo,
+        type: mssql.Bit,
+      }); // Asumiendo que 'activo' es de tipo bit
+    }
+
+    // Crear la consulta con la condición dinámica
+    const query = `SELECT id_tipo_contrato as id, nombre, descripcion, activo FROM cat_tipo_contrato ${condicion}`;
+
+    // Crear el request y asignar los parámetros
+    let req = pool.request();
+
+    parametros.forEach((param) => {
+      req = req.input(param.name, param.type, param.value); // Asignar los parámetros correctamente
+    });
+
+    // Ejecutar la consulta
+    const result = await req.query(query);
+
+    // Mapeamos los valores
+    const respuesta: CatalogoResponse[] = mapToInterface<CatalogoResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+
+  async getCatalogoPerfilConsultor(
+    request: CatalogoRequest
+  ): Promise<CatalogoPerfilConsultorResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let condicion = "WHERE 1 = 1"; // Condición base
+    const parametros: any[] = [];
+    // Condición para el nombre
+    if (request.nombre && request.nombre.trim() !== "") {
+      condicion += " AND UPPER(TRIM(nombre)) LIKE @nombre";
+      parametros.push({
+        name: "nombre",
+        value: `%${request.nombre}%`,
+        type: mssql.VarChar,
+      });
+    }
+
+    // Condición para el campo 'activo'
+    if (request.activo != null) {
+      condicion += " AND activo = @activo";
+      parametros.push({
+        name: "activo",
+        value: request.activo,
+        type: mssql.Bit,
+      }); // Asumiendo que 'activo' es de tipo bit
+    }
+
+    // Crear la consulta con la condición dinámica
+    const query = `SELECT id_perfil as id, nombre, descripcion, monto, activo FROM cat_perfil_consultor ${condicion}`;
+
+    // Crear el request y asignar los parámetros
+    let req = pool.request();
+
+    parametros.forEach((param) => {
+      req = req.input(param.name, param.type, param.value); // Asignar los parámetros correctamente
+    });
+
+    // Ejecutar la consulta
+    const result = await req.query(query);
+
+    // Mapeamos los valores
+    const respuesta: CatalogoPerfilConsultorResponse[] = mapToInterface<CatalogoPerfilConsultorResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+
+  async getCatalogoDocumento(
+    request: CatalogoDocumentosRequest
+  ): Promise<CatalogoDocumentoResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let condicion = "WHERE 1 = 1"; // Condición base
+    const parametros: any[] = [];
+    // Condición para el nombre
+    if (request.nombre && request.nombre.trim() !== "") {
+      condicion += " AND UPPER(TRIM(nombre)) LIKE @nombre";
+      parametros.push({
+        name: "nombre",
+        value: `%${request.nombre}%`,
+        type: mssql.VarChar,
+      });
+    }
+
+    // Condición para el campo 'activo'
+    if (request.activo != null) {
+      condicion += " AND activo = @activo";
+      parametros.push({
+        name: "activo",
+        value: request.activo,
+        type: mssql.Bit,
+      }); // Asumiendo que 'activo' es de tipo bit
+    }
+
+    if (request.grupo != null) {
+      condicion += " AND grupo = @grupo";
+      parametros.push({
+        name: "grupo",
+        value: request.grupo,
+        type: mssql.VarChar,
+      }); // Asumiendo que 'grupo' es de tipo bit
+    }
+
+
+    // Crear la consulta con la condición dinámica
+    const query = `SELECT id_documento as id, nombre, descripcion, activo, grupo FROM cat_documento ${condicion}`;
+
+    // Crear el request y asignar los parámetros
+    let req = pool.request();
+
+    parametros.forEach((param) => {
+      req = req.input(param.name, param.type, param.value); // Asignar los parámetros correctamente
+    });
+
+    // Ejecutar la consulta
+    const result = await req.query(query);
+
+    // Mapeamos los valores
+    const respuesta: CatalogoDocumentoResponse[] = mapToInterface<CatalogoDocumentoResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+
+  async getCatalogoExtencion(
+    request: CatalogoRequest
+  ): Promise<CatalogoExtArchivoResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let condicion = "WHERE 1 = 1"; // Condición base
+    const parametros: any[] = [];
+    // Condición para el nombre
+    if (request.nombre && request.nombre.trim() !== "") {
+      condicion += " AND UPPER(TRIM(nombre)) LIKE @nombre";
+      parametros.push({
+        name: "nombre",
+        value: `%${request.nombre}%`,
+        type: mssql.VarChar,
+      });
+    }
+
+    // Condición para el campo 'activo'
+    if (request.activo != null) {
+      condicion += " AND activo = @activo";
+      parametros.push({
+        name: "activo",
+        value: request.activo,
+        type: mssql.Bit,
+      }); // Asumiendo que 'activo' es de tipo bit
+    }
+
+    // Crear la consulta con la condición dinámica
+    const query = `SELECT id_extencion as id, nombre, descripcion, tamano_maximo, activo FROM cat_extencion_archivo ${condicion}`;
+
+    // Crear el request y asignar los parámetros
+    let req = pool.request();
+
+    parametros.forEach((param) => {
+      req = req.input(param.name, param.type, param.value); // Asignar los parámetros correctamente
+    });
+
+    // Ejecutar la consulta
+    const result = await req.query(query);
+
+    // Mapeamos los valores
+    const respuesta: CatalogoExtArchivoResponse[] = mapToInterface<CatalogoExtArchivoResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+
+  async getCatalogoCargo(
+    request: CatalogoRequest
+  ): Promise<CatalogoResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let condicion = "WHERE 1 = 1"; // Condición base
+    const parametros: any[] = [];
+    // Condición para el nombre
+    if (request.nombre && request.nombre.trim() !== "") {
+      condicion += " AND UPPER(TRIM(nombre)) LIKE @nombre";
+      parametros.push({
+        name: "nombre",
+        value: `%${request.nombre}%`,
+        type: mssql.VarChar,
+      });
+    }
+
+    // Condición para el campo 'activo'
+    if (request.activo != null) {
+      condicion += " AND activo = @activo";
+      parametros.push({
+        name: "activo",
+        value: request.activo,
+        type: mssql.Bit,
+      }); // Asumiendo que 'activo' es de tipo bit
+    }
+
+    // Crear la consulta con la condición dinámica
+    const query = `SELECT id_cargo as id, nombre, descripcion, activo FROM cat_cargo ${condicion}`;
 
     // Crear el request y asignar los parámetros
     let req = pool.request();
