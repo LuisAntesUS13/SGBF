@@ -6,6 +6,7 @@ import { CatalogoRepository } from './catalogos.repository';
 import { ArchivoRepository } from './archivo.repository';
 import { GeneralRepository } from './general.repository';
 import { UsuariosRepository } from './usuarios.repository';
+import { EquiposDeTrabajoRepository } from './equiposDeTrabajo.repository';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsuariosRepository } from './usuarios.repository';
     ArchivoRepository,
     GeneralRepository,
     UsuariosRepository,
+    EquiposDeTrabajoRepository,
   ],
   exports: [
     LoginRepository,
@@ -28,6 +30,7 @@ import { UsuariosRepository } from './usuarios.repository';
     ArchivoRepository,
     GeneralRepository,
     UsuariosRepository,
+    EquiposDeTrabajoRepository,
   ], // Exporta el repositorio si necesitas usarlo en otros módulos
 })
 export class RepositoriosModule {}

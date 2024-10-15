@@ -56,6 +56,7 @@ export const RegistroDeActividadConsultor = () => {
             <p className="datos-proyecto">Periodo: </p>
             <p>Junio - 2024</p>
           </div>
+
           <div className="datos">
             <p className="datos-proyecto">Fecha actual: </p>
             <p>29 / 09 / 2024</p>

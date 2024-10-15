@@ -14,7 +14,6 @@ const bitacorasService = new BitacoraService();
 const periodosService = new PeriodosServices();
 
 const columnas = [
-  { header: "CONSULTOR", accessor: "consultor" },
   { header: "PROYECTO", accessor: "proyecto" },
   { header: "JIRA o SMAX ASOCIADO/ID INCIDENTE ", accessor: "identificador" },
   {
@@ -29,7 +28,6 @@ const columnas = [
 
 const datos = [
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Continuidad operativa",
     identificador: "S-1066361",
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
@@ -39,7 +37,6 @@ const datos = [
     fecha: "13/06/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Continuidad operativa",
     identificador: "S-1066361",
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
@@ -49,7 +46,6 @@ const datos = [
     fecha: "13/06/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Continuidad operativa",
     identificador: "S-1066361",
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
@@ -59,7 +55,6 @@ const datos = [
     fecha: "13/06/2024",
   },
   {
-    consultor: "Carlos Ramírez López",
     proyecto: "Optimización de procesos",
     identificador: "S-1066362",
     descripcion: "Implementación de un sistema de control de calidad",
@@ -69,7 +64,6 @@ const datos = [
     fecha: "14/06/2024",
   },
   {
-    consultor: "Ana María Fernández",
     proyecto: "Automatización de líneas de producción",
     identificador: "S-1066363",
     descripcion: "Integración de software para control automatizado",
@@ -79,7 +73,6 @@ const datos = [
     fecha: "15/06/2024",
   },
   {
-    consultor: "Roberto Sánchez Ruiz",
     proyecto: "Mejora de la logística interna",
     identificador: "S-1066364",
     descripcion: "Optimización de rutas de distribución dentro de la planta",
@@ -89,7 +82,6 @@ const datos = [
     fecha: "16/06/2024",
   },
   {
-    consultor: "Gabriela Torres Pineda",
     proyecto: "Reducción de tiempos de inactividad",
     identificador: "S-1066365",
     descripcion: "Implementación de sistema de monitoreo en tiempo real",
@@ -172,8 +164,18 @@ export const BitacoraConsultor = () => {
         <div className="contenedor-datos-proyecto">
           <div className="datos-titulo-proyecto">
             <p className="titulo-proyecto">
-              Periodos y activida des registradas
+              Periodos y actividades registradas
             </p>
+          </div>
+          <div className="contenedor-datos-proyecto">
+            <div className="datos">
+              <p className="datos-proyecto">Fabrica: </p>
+              <p>Ultrasist</p>
+            </div>
+            <div className="datos">
+              <p className="datos-proyecto">Nombre del consultor: </p>
+              <p>Luis Eduardo Antes Villa</p>
+            </div>
           </div>
         </div>
         <Divider sx={{ bgcolor: "#959595", margin: "12px 0px" }} />
