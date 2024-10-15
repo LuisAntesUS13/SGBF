@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Option {
+export interface Option {
   id: string | number;
   nombre: string;
 }

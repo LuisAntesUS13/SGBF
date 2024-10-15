@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { ActividadConsultorService } from "../../../../services/actividades/actividades.service.ts";
 
 const columnas = [
-  { header: "CONSULTOR", accessor: "consultor" },
   { header: "PROYECTO", accessor: "proyecto" },
   { header: "JIRA o SMAX ASOCIADO/ID INCIDENTE ", accessor: "identificador" },
   {
@@ -21,7 +20,6 @@ const columnas = [
 
 const datos = [
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Continuidad operativa",
     identificador: "S-1066361",
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
@@ -31,7 +29,6 @@ const datos = [
     fecha: "13/05/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Continuidad operativa",
     identificador: "S-1066361",
     descripcion: "Sistema de gestión de Bitácoras de Fábricas",
@@ -41,7 +38,6 @@ const datos = [
     fecha: "13/05/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Optimización de procesos",
     identificador: "S-1066362",
     descripcion: "Implementación de un sistema de control de calidad",
@@ -51,7 +47,6 @@ const datos = [
     fecha: "14/05/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Automatización de líneas de producción",
     identificador: "S-1066363",
     descripcion: "Integración de software para control automatizado",
@@ -61,7 +56,6 @@ const datos = [
     fecha: "15/05/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Mejora de la logística interna",
     identificador: "S-1066364",
     descripcion: "Optimización de rutas de distribución dentro de la planta",
@@ -71,7 +65,6 @@ const datos = [
     fecha: "16/05/2024",
   },
   {
-    consultor: "Luis Eduardo Antes Villa",
     proyecto: "Reducción de tiempos de inactividad",
     identificador: "S-1066365",
     descripcion: "Implementación de sistema de monitoreo en tiempo real",
@@ -147,6 +140,14 @@ export const ValidacionBitacoraLiderTecnico = () => {
             <div className="datos">
               <p className="datos-proyecto">Responsable: </p>
               <p>Azir Aguilar</p>
+            </div>
+            <div className="datos">
+              <p className="datos-proyecto">Fabrica: </p>
+              <p>Ultrasist</p>
+            </div>
+            <div className="datos">
+              <p className="datos-proyecto">Consultor </p>
+              <p>Luis Eduardo Antes Villa</p>
             </div>
           </div>
           <hr />

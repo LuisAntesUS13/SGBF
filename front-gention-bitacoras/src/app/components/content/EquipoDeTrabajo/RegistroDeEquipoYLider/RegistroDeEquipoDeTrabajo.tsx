@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Separador } from "../../../../shared/SeparadorTexto/SeparadorTexto.tsx";
 
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import { Select } from "../../../../shared/Select/Select.tsx";
+import { Option, Select } from "../../../../shared/Select/Select.tsx";
 import { Paginador } from "../../../../shared/Paginador/Paginador.tsx";
-
-const contratoOpciones = [
-  { id: "1", nombre: "123ASD7-A" },
-  { id: "2", nombre: "123ASD7-B" },
-  { id: "3", nombre: "123ASD7-C" },
-];
+import { useNavigate } from "react-router-dom";
+import {
+  getConsultores,
+  getContratos,
+  getLideresTecnicos,
+} from "../../../../services/equipoDeTrabajo.service.tsx";
 
 const liderTecnicoOpciones = [
   { id: "1", nombre: "Jose Luis Jimenez" },
@@ -18,13 +18,22 @@ const liderTecnicoOpciones = [
 ];
 
 const consultoresOpciones = [
-  { id: "1", nombre: "Jose Luis Jimenez" },
-  { id: "2", nombre: "Raul Astorga" },
-  { id: "3", nombre: "Karla Trasviña" },
+  { id: "1", nombre: "Luis Antes" },
+  { id: "2", nombre: "Miguel Favela" },
+  { id: "3", nombre: "Omar Torres" },
 ];
 
 export const RegistroDeEquipoDeTrabajo = () => {
+  const navigate = useNavigate();
+
+  const handleAsginarEquipoClick = () => {
+    navigate("/equipos-de-trabajo");
+  };
+
   const [dataPerfiles, setDataPerfiles] = useState([]);
+  const [contrato, setContrato] = useState<Option[]>([]);
+  const [liderTecnico, setLiderTecnico] = useState<Option[]>([]);
+  const [consultor, setConsultor] = useState<Option[]>([]);
   const [paginaActual, setPaginaActual] = useState(1);
   const [registrosPorPagina, setRegistrosPorPagina] = useState(10);
 
@@ -36,12 +45,63 @@ export const RegistroDeEquipoDeTrabajo = () => {
     contrato: "",
     liderTecnico: "",
     consultores: "",
+    fechaInicio: "",
   });
 
   const handleSelectChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const getContrato = async () => {
+    try {
+      const result = await getContratos();
+      const resultadoFormateado: Option[] = result.data.map((contrato) => ({
+        id: contrato.id_contrato,
+        nombre: contrato.no_contrato,
+      }));
+      setContrato(resultadoFormateado);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getLiderTecnico = async () => {
+    try {
+      const result = await getLideresTecnicos();
+      const resultadoFormateado: Option[] = result.data.map((liderTecnico) => ({
+        id: liderTecnico.id_usuario,
+        nombre: liderTecnico.nombre_completo,
+      }));
+      setLiderTecnico(resultadoFormateado);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getContrato();
+    getLiderTecnico();
+  }, []);
+
+  const getConsultor = async () => {
+    try {
+      const result = await getConsultores();
+      const resultadoFormateado: Option[] = result.data.map((consultor) => ({
+        id: consultor.id_usuario,
+        nombre: consultor.nombre_completo,
+      }));
+      setConsultor(resultadoFormateado);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getContrato();
+    getLiderTecnico();
+    getConsultor();
+  }, []);
 
   return (
     <>
@@ -56,6 +116,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   type="button"
                   className="btn btn-accion-sec"
                   title="Buscar"
+                  onClick={handleAsginarEquipoClick}
                 >
                   <KeyboardReturnIcon />
                 </button>
@@ -70,7 +131,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     name="contrato"
                     value={formData.contrato}
                     onChange={handleSelectChange}
-                    options={contratoOpciones}
+                    options={contrato}
                     className="form-select"
                   />
                 </div>
@@ -78,9 +139,9 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   <Select
                     label="Líder técnico"
                     name="liderTecnico"
-                    value={formData.contrato}
+                    value={formData.liderTecnico}
                     onChange={handleSelectChange}
-                    options={liderTecnicoOpciones}
+                    options={liderTecnico}
                     className="form-select"
                   />
                 </div>
@@ -95,10 +156,19 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     name="consultores"
                     value={formData.consultores}
                     onChange={handleSelectChange}
-                    options={liderTecnicoOpciones}
+                    options={consultor}
                     className="form-select"
                   />
                 </div>
+                <div className="col-sm-3">
+                  <label className="form-label">Fecha de inicio</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    name="fechaTermino"
+                  />
+                </div>
+
                 <div className="col-sm-2">
                   <button
                     type="button"
