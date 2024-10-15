@@ -40,3 +40,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/back-catalogos-bitacoras/src/middelware/logs/
