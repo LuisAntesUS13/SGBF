@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../../../../shared/Input/Input.tsx";
 import { Paginador } from "../../../../shared/Paginador/Paginador.tsx";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ export const EquiposDeTrabajo = () => {
     const { name, value } = e.target;
     setFormulario({ ...formulario, [name]: value });
   };
+
   return (
     <>
       <div className="contenido_principal">
@@ -54,7 +55,7 @@ export const EquiposDeTrabajo = () => {
                 name="contrato"
                 value={formulario.consultor}
                 onChange={handleChange}
-                placeholder="SG0909"
+                placeholder="Luis Eduardo Antes Villa"
                 className=""
               />
             </div>
@@ -65,7 +66,7 @@ export const EquiposDeTrabajo = () => {
                 name="contrato"
                 value={formulario.lider}
                 onChange={handleChange}
-                placeholder="SG0909"
+                placeholder="Jose Luis Aguilar Lopez"
                 className=""
               />
             </div>
