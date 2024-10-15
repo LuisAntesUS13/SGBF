@@ -14,6 +14,8 @@ import { ContratosController } from './controller/contratos.controller';
 import { CatalogosController } from './controller/catalogos.controller';
 import { UsuariosService } from './services/usuarios.service';
 import { UsuarioController } from './controller/usuario.controller';
+import { EquiposDeTrabajoController } from './controller/equiposDeTrabajo.controller';
+import { EquiposDeTrabajoService } from './services/equiposDeTrabajo.service';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { UsuarioController } from './controller/usuario.controller';
     RepositoriosModule,
   ],
   controllers: [
+    EquiposDeTrabajoController,
     LoginController,
     ContratosController,
     CatalogosController,
@@ -42,6 +45,7 @@ import { UsuarioController } from './controller/usuario.controller';
   providers: [
     DBConnectionService,
     LoginService,
+    EquiposDeTrabajoService,
     ContratosService,
     CatalogosService,
     UsuariosService,
