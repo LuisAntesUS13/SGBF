@@ -6,7 +6,7 @@ import  {PROD} from '../config/config';
 import { CustomResponseError } from '../util/response';
 import { MENSAJES } from '../util/constantes';
 
-export const authMiddelware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
   if(PROD){
     const token = req.headers['authorization']?.split(' ')[1] || '';

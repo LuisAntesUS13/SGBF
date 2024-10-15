@@ -18,4 +18,5 @@ rutas.post(`${RUTA_BASE}/extencion`, getCatalogoExtencion);
 rutas.post(`${RUTA_BASE}/cargo`, getCatalogoCargo);
 
 
+
 export default rutas;

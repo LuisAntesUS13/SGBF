@@ -25,17 +25,50 @@ const anioOpciones = [
 ];
 
 const columnas = [
+  { header: "Contrato", accessor: "contrato" },
+  { header: "Proveedor", accessor: "proveedor" },
   { header: "Periodo", accessor: "periodo" },
   { header: "Año", accessor: "anio" },
+  { header: "Estado", accessor: "estado" },
   { header: "Estado", accessor: "estado" },
 ];
 
 const datos = [
-  { periodo: "Enero", anio: 2024, estado: "Validado" },
-  { periodo: "Febrero", anio: 2024, estado: "Validado" },
-  { periodo: "Marzo", anio: 2024, estado: "Validado" },
-  { periodo: "Abril", anio: 2024, estado: "Validado" },
-  { periodo: "Mayo", anio: 2024, estado: "En proceso" },
+  {
+    contrato: "110212A",
+    proveedor: "Ultrasist",
+    periodo: "Enero",
+    anio: 2024,
+    estado: "Validado",
+  },
+  {
+    contrato: "110212A",
+    proveedor: "Ultrasist",
+    periodo: "Febrero",
+    anio: 2024,
+    estado: "Validado",
+  },
+  {
+    contrato: "110212A",
+    proveedor: "Ultrasist",
+    periodo: "Marzo",
+    anio: 2024,
+    estado: "Validado",
+  },
+  {
+    contrato: "110212A",
+    proveedor: "Ultrasist",
+    periodo: "Abril",
+    anio: 2024,
+    estado: "Validado",
+  },
+  {
+    contrato: "110212A",
+    proveedor: "Ultrasist",
+    periodo: "Mayo",
+    anio: 2024,
+    estado: "En proceso",
+  },
 ];
 
 export const PeriodosBitacoraLiderTecnico = () => {
