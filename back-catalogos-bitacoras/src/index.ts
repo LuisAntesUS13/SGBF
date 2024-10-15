@@ -12,20 +12,15 @@ const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({extended: false}));
+
 // Usar CORS con las opciones configuradas
 app.use(cors(CORS_OPTION));
 
 // Middleware de autenticación
 app.use(authMiddelware);
 
-// Usa el middleware de morgan para registrar las solicitudes
-// app.use(morganMiddleware);
-
 // Usa las rutas
 app.use(rutas);
-
-// Usa el middleware para manejar errores y registrar log
-// app.use(errorMiddleware);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
