@@ -3,7 +3,7 @@ import cors from 'cors';
 import {PORT} from './config/config';
 import {CORS_OPTION} from './util/constantes';
 import rutas from './routes/routes'
-import { authMiddelware } from './middelware/authMiddelware';
+import { authMiddleware } from './middleware/authMiddleware';
 // import { errorMiddleware, morganMiddleware } from './middelware/errorMiddelware';
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors(CORS_OPTION));
 
 // Middleware de autenticación
-app.use(authMiddelware);
+app.use(authMiddleware);
 
 // Usa las rutas
 app.use(rutas);

@@ -7,4 +7,5 @@ const rutas = Router();
 
 rutas.post(`${RUTA_BASE}/modulo_aplicativo`, getCatalogoModuloAplicativo);
 
+
 export default rutas;

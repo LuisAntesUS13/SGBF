@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Trabajo Infonavit Ultra\\Codigo Infornavit\\SGBF\\back-catalogos-bitacoras\\src\\middleware\\logs\\.adae7f4b5aa0e08edba30a811536d2cdac2c2ddb-audit.json",
+    "files": [
+        {
+            "date": 1729035829461,
+            "name": "D:\\Trabajo Infonavit Ultra\\Codigo Infornavit\\SGBF\\back-catalogos-bitacoras\\src\\middleware\\logs\\15-10-2024-error.log",
+            "hash": "cea30a350f178daf4049265c48bd7ac60436dcbb4f4039f5353a2fcab51dcebb"
+        }
+    ],
+    "hashType": "sha256"
+}

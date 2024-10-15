@@ -3,4 +3,4 @@ export interface CatalogoResponse {
     nombre: string;
     descripcion: string;
     activo: boolean;
-  }
+}

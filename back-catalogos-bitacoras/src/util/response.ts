@@ -1,5 +1,6 @@
-import { logger } from '../middelware/errorMiddelware';
+
 import { Request, Response} from 'express';
+import { logger } from '../middleware/errorMiddleware';
 
 export function CustomResponse(res: Response, message: string, data?: any, success: boolean = true) {
   // Formato de la respuesta

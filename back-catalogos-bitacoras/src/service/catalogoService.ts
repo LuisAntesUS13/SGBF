@@ -11,6 +11,7 @@ export const catalogoServicio = {
   ): Promise<CatalogoResponse[]> {
     // Ejecuta tu consulta
     const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    
     let condicion = "WHERE 1 = 1"; // Condición base
     const parametros: any[] = [];
     // Condición para el nombre
