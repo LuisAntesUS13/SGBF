@@ -1,5 +1,16 @@
-
-import { getCatalogoAreas, getCatalogoCargo, getCatalogoConsultoras, getCatalogoDocumento, getCatalogoEstatus, getCatalogoExtencion, getCatalogoFormaPago, getCatalogoModuloAplicativo, getCatalogoPerfilConsultor, getCatalogoProyecto, getCatalogoTipoContrato } from "../controller/catalogoController";
+import {
+  getCatalogoAreas,
+  getCatalogoCargo,
+  getCatalogoConsultoras,
+  getCatalogoDocumento,
+  getCatalogoEstatus,
+  getCatalogoExtencion,
+  getCatalogoFormaPago,
+  getCatalogoModuloAplicativo,
+  getCatalogoPerfilConsultor,
+  getCatalogoProyecto,
+  getCatalogoTipoContrato,
+} from "../controller/catalogoController";
 import { RUTA_BASE } from "../util/constantes";
 import { Router } from "express";
 
@@ -16,7 +27,5 @@ rutas.post(`${RUTA_BASE}/perfil_consultor`, getCatalogoPerfilConsultor);
 rutas.post(`${RUTA_BASE}/documento`, getCatalogoDocumento);
 rutas.post(`${RUTA_BASE}/extencion`, getCatalogoExtencion);
 rutas.post(`${RUTA_BASE}/cargo`, getCatalogoCargo);
-
-
 
 export default rutas;
