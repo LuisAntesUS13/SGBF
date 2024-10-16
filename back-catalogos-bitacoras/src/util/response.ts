@@ -1,6 +1,6 @@
 
 import { Request, Response} from 'express';
-import { logger } from '../middleware/errorMiddleware';
+import { loggerError } from './log/errorLog';
 
 export function CustomResponse(res: Response, message: string, data?: any, success: boolean = true) {
   // Formato de la respuesta
@@ -17,7 +17,7 @@ export function CustomResponse(res: Response, message: string, data?: any, succe
 export function CustomResponseError(res: Response, req: Request, message: string, code: number = 400) {
 
   let formattedMessage = message + '\n' + '[' + req.method +  ' :: ' +  req.originalUrl + ' :: ' + req.ip + ']';
-  logger.error(formattedMessage);
+  loggerError.error(formattedMessage);
 
   // Formato de la respuesta
   const response = {

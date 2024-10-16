@@ -5,8 +5,11 @@ export const CORS_OPTION = {
     allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
 };
 
+export const NOMBRE_BASE_MS = "catalogo";
 
-export const RUTA_BASE = "/catalogo";
+export const RUTA_BASE = `/${NOMBRE_BASE_MS}`;
+
+export const CARPETA_LOGS = `${NOMBRE_BASE_MS}Log`;
 
 export const MENSAJES = {
     DATOS_OBTENIDOS: 'Datos obtenidos correctamente', 
