@@ -1,0 +1,26 @@
+.contenedor-tabla ::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:vertical {
+  width: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-button:increment,
+.contenedor-tabla ::-webkit-scrollbar-button {
+  display: none;
+}
+
+.contenedor-tabla ::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.contenedor-tabla ::-webkit-scrollbar-track {
+  border-radius: 10px;
+}

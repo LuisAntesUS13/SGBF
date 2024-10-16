@@ -1,0 +1,47 @@
+.titulo-proyecto {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.datos-proyecto {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.datos {
+  display: flex;
+}
+
+.contenedor-observaciones-realizadas {
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+}
+
+.contenedor-observaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+ul {
+  padding: 12px;
+  margin-top: 0;
+  margin-bottom: 0rem !important;
+}
+
+.btn-realizar-observacion {
+  width: 200px;
+}
+
+.realizar-observacion-por-actividad {
+  margin-top: 12px;
+  width: 300px;
+}
+
+.contenedor-boton-realizar-observacion-actividad {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 8px;
+}

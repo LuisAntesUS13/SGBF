@@ -1,0 +1,26 @@
+.derecha {
+    display: flex;               
+    justify-content: flex-end;      
+    align-items: center;           
+}
+
+.circulo:hover {
+    background: rgb(158,156,156);
+    background: radial-gradient(circle, rgba(158,156,156,0.5340511204481793) 0%, rgba(255,255,255,1) 80%);  
+    cursor: pointer;
+}
+
+.espacio {
+    margin-left: 4px;
+    margin-right: 4px;
+    /* font-weight: bold; */
+}
+
+.bajar {
+    margin-top: 2px;
+}
+
+.circulo.deshabilitado {
+    opacity: 0.5;
+    pointer-events: none; /* Evita que el botón pueda ser clicado */
+  }

@@ -1,0 +1,29 @@
+.subtitle {
+  display: flex;
+  gap: 4px;
+}
+
+.lider-tecnico {
+  font-weight: 600;
+}
+
+.contenedor-filtros {
+  display: flex;
+  gap: 20px;
+}
+
+.custom-input {
+  width: 100% !important;
+}
+
+Divider {
+  margin-bottom: 40px;
+}
+
+.contenedor-tabla {
+  margin-top: 20px;
+}
+
+.contenedor-h1-boton {
+  display: flex;
+}
