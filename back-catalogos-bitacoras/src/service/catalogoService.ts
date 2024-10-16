@@ -1,6 +1,6 @@
 import { connection } from "../database/connection";
-import { CatalogoDocumentosRequest, CatalogoRequest } from "../model/request/request";
-import { CatalogoDocumentoResponse, CatalogoExtArchivoResponse, CatalogoPerfilConsultorResponse, CatalogoResponse } from "../model/response/response";
+import { CatalogoDocumentosRequest, CatalogoRequest, RegActCatalogoRequest } from "../model/request/request";
+import { ActRegCatalogoResponse, CatalogoDocumentoResponse, CatalogoExtArchivoResponse, CatalogoPerfilConsultorResponse, CatalogoResponse } from "../model/response/response";
 import mssql from "mssql";
 import { mapToInterface } from "../util/util";
 
@@ -49,6 +49,29 @@ export const catalogoServicio = {
 
     // Mapeamos los valores
     const respuesta: CatalogoResponse[] = mapToInterface<CatalogoResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+  async RegActCatalogoModuloAplicativo(
+    request: RegActCatalogoRequest
+  ): Promise<ActRegCatalogoResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+
+    let result = await pool.request()
+      .input('id', mssql.Int, request.id) // Puedes añadir más parámetros según sea necesario
+      .input('nombre', mssql.VarChar, request.nombre)
+      .input('desc', mssql.VarChar, request.desc)
+      .input('activo', mssql.Bit, request.activo)
+      .input('id_usuario', mssql.Int, request.id_usuario)
+      .input('ip', mssql.VarChar, request.ip)
+      .execute('sp_regActCatAplicativoModulo'); // Reemplaza con el nombre de tu procedimiento almacenado
+
+    // Mapeamos los valores
+    const respuesta: ActRegCatalogoResponse[] = mapToInterface<ActRegCatalogoResponse>(
       result.recordset
     );
 

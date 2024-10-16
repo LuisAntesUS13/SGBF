@@ -28,3 +28,10 @@ export interface CatalogoExtArchivoResponse {
   activo: boolean;
   tamano_maximo: number;
 }
+
+
+export interface ActRegCatalogoResponse {
+  correcto: boolean;
+  mensaje: string;
+  id: string;
+}

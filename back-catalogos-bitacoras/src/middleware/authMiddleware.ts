@@ -26,7 +26,10 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         // Accede a los valores incluidos en el token
         const { id_usuario, id_rol, rol } = decoded;
         datos =  '[' + id_usuario +  ' :: ' +  id_rol + ' :: ' + rol + ']';
+        req.body.ip = req.ip;
+        req.body.id_usuario = id_usuario; 
       }
+
   
       const bodyString = JSON.stringify(req.body);
       const message =  '[' + req.method +  ' :: ' +  req.originalUrl + ' :: ' + req.ip + ']'+ '\n' + datos + '\n' + bodyString  ;
@@ -35,6 +38,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
       next();
     });
   } else {
+
+    req.body.ip = req.ip;
+    req.body.id_usuario = "5"; 
     const bodyString = JSON.stringify(req.body);
     const message =  '[' + req.method +  ' :: ' +  req.originalUrl + ' :: ' + req.ip + ']' + '\n' + bodyString  ;
     loggerReq.info(message);

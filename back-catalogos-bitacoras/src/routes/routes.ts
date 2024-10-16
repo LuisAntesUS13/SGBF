@@ -10,6 +10,7 @@ import {
   getCatalogoPerfilConsultor,
   getCatalogoProyecto,
   getCatalogoTipoContrato,
+  RegActCatalogoModuloAplicativo,
 } from "../controller/catalogoController";
 import { RUTA_BASE } from "../util/constantes";
 import { Router } from "express";
@@ -17,6 +18,8 @@ import { Router } from "express";
 const rutas = Router();
 
 rutas.post(`${RUTA_BASE}/modulo_aplicativo`, getCatalogoModuloAplicativo);
+rutas.post(`${RUTA_BASE}/reg_act_modulo_aplicativo`, RegActCatalogoModuloAplicativo);
+
 rutas.post(`${RUTA_BASE}/areas`, getCatalogoAreas);
 rutas.post(`${RUTA_BASE}/consultores`, getCatalogoConsultoras);
 rutas.post(`${RUTA_BASE}/estatus`, getCatalogoEstatus);
