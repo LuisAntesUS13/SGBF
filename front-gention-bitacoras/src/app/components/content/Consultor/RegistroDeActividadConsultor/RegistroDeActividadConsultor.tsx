@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid2";
 import { Input } from "../../../../shared/Input/Input.tsx";
 import { Select } from "../../../../shared/Select/Select.tsx";
 import "./RegistroDeActividadConsultor.css";
+import { Actividad } from "../../../../model/interface/equiposDeTrabajo.interface.tsx";
+import { ToastContainer, toast } from "react-toastify";
 
 const aplicativoModuloOpciones = [
   { id: "1", nombre: "Acceso alterno Portal Empresarial" },
@@ -35,6 +37,53 @@ export const RegistroDeActividadConsultor = () => {
     actividadRealizada: "",
   });
 
+  const [fieldActividadClases, setFieldActividadClases] = useState({
+    jiraSmax: "form-control",
+    descripcionCorta: "form-control",
+    aplicativoModulo: "form-control",
+    tipo: "form-control",
+    actividadAsignada: "form-control",
+    horasLaboradas: "form-control",
+    actividadRealizada: "form-control",
+  });
+
+  const guardarActividad = async () => {
+    const newFieldActividadClases: Actividad = {
+      subdireccionGerencia: "form-control",
+      liderTecnico: "form-control",
+      proyecto: "form-control",
+      responsable: "form-control",
+      jiraSmax: "form-control",
+      descripcionCorta: "form-control",
+      aplicativoModulo: "form-control",
+      tipo: "form-control",
+      actividadAsignada: "form-control",
+      horasLaboradas: "form-control",
+      actividadRealizada: "form-control",
+    };
+
+    let isValid = true; // Variable para verificar si el formulario es válido
+    console.log(isValid);
+
+    for (const key in formData) {
+      // Verifica si el campo no es opcional
+      if (formData[key] === null || formData[key] === "") {
+        newFieldActividadClases[key as keyof Actividad] =
+          "form-control invalid-class";
+        isValid = false;
+        console.log(isValid);
+      }
+    }
+
+    setFieldActividadClases(newFieldActividadClases);
+
+    if (isValid) {
+      toast.success("Se agregó el equipo correctamente", {});
+    } else {
+      toast.error("Los campos  marcados son obligatorios", {});
+    }
+  };
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -43,7 +92,20 @@ export const RegistroDeActividadConsultor = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (value === null || value === "") {
+      setFieldActividadClases((prev) => ({
+        ...prev,
+        [name]: "form-control invalid-class", // Clase adicional si está vacío
+      }));
+    } else {
+      setFieldActividadClases((prev) => ({
+        ...prev,
+        [name]: "form-control", // Clase normal
+      }));
+    }
   };
+
   return (
     <>
       <div className="contenido_principal">
@@ -119,6 +181,7 @@ export const RegistroDeActividadConsultor = () => {
                   value={formData.jiraSmax}
                   onChange={handleInputChange}
                   disabled={false}
+                  className={fieldActividadClases.jiraSmax}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -129,6 +192,7 @@ export const RegistroDeActividadConsultor = () => {
                   value={formData.descripcionCorta}
                   onChange={handleInputChange}
                   disabled={false}
+                  className={fieldActividadClases.descripcionCorta}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -139,7 +203,7 @@ export const RegistroDeActividadConsultor = () => {
                   onChange={handleSelectChange}
                   options={aplicativoModuloOpciones}
                   placeholder="Seleccione una opcion"
-                  className="form-select"
+                  className={fieldActividadClases.aplicativoModulo}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -150,7 +214,7 @@ export const RegistroDeActividadConsultor = () => {
                   onChange={handleSelectChange}
                   options={tipoOpciones}
                   placeholder="Seleccione una opcion"
-                  className="form-select"
+                  className={fieldActividadClases.aplicativoModulo}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -161,6 +225,7 @@ export const RegistroDeActividadConsultor = () => {
                   value={formData.actividadAsignada}
                   onChange={handleInputChange}
                   disabled={false}
+                  className={fieldActividadClases.actividadAsignada}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -171,6 +236,7 @@ export const RegistroDeActividadConsultor = () => {
                   value={formData.horasLaboradas}
                   onChange={handleInputChange}
                   disabled={false}
+                  className={fieldActividadClases.horasLaboradas}
                 />
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
@@ -178,13 +244,11 @@ export const RegistroDeActividadConsultor = () => {
                   Actividad realizada
                 </label>
                 <textarea
-                  className="form-control textarea"
                   aria-label="With textarea"
                   value={formData.actividadRealizada}
                   style={{ resize: "none" }}
-                >
-                  Elaboración de junta
-                </textarea>
+                  className={fieldActividadClases.actividadRealizada}
+                ></textarea>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
                 <label className="form-label">Carga de evidencias</label>
@@ -207,6 +271,9 @@ export const RegistroDeActividadConsultor = () => {
                 <button
                   type="button"
                   className="btn btn-principal btn-registrar"
+                  onClick={() => {
+                    guardarActividad();
+                  }}
                 >
                   Registrar actividad
                 </button>
@@ -215,6 +282,19 @@ export const RegistroDeActividadConsultor = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        limit={4}
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };
