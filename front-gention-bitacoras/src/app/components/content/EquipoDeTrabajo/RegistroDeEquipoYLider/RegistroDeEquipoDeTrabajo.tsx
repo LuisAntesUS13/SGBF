@@ -10,18 +10,8 @@ import {
   getContratos,
   getLideresTecnicos,
 } from "../../../../services/equipoDeTrabajo.service.tsx";
-
-const liderTecnicoOpciones = [
-  { id: "1", nombre: "Jose Luis Jimenez" },
-  { id: "2", nombre: "Raul Astorga" },
-  { id: "3", nombre: "Karla Trasviña" },
-];
-
-const consultoresOpciones = [
-  { id: "1", nombre: "Luis Antes" },
-  { id: "2", nombre: "Miguel Favela" },
-  { id: "3", nombre: "Omar Torres" },
-];
+import ResponsiveDatePickers from "../../../../shared/DatePicker/DatePicker.tsx";
+import "../RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.css";
 
 export const RegistroDeEquipoDeTrabajo = () => {
   const navigate = useNavigate();
@@ -161,13 +151,14 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   />
                 </div>
                 <div className="col-sm-3">
-                  <label className="form-label">Fecha de inicio</label>
+                  <ResponsiveDatePickers />
+                </div>
+                {/* <label className="form-label">Fecha de inicio</label>
                   <input
                     type="date"
                     className="form-control"
                     name="fechaTermino"
-                  />
-                </div>
+                  /> */}
 
                 <div className="col-sm-2">
                   <button
