@@ -29,9 +29,8 @@ export interface CatalogoExtArchivoResponse {
   tamano_maximo: number;
 }
 
-
 export interface ActRegCatalogoResponse {
   correcto: boolean;
   mensaje: string;
-  id: string;
+  id?: number | null;
 }

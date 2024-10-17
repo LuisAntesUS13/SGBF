@@ -9,7 +9,6 @@ export interface CatalogoDocumentosRequest {
     grupo: string;
 }
 
-
 export interface RegActCatalogoRequest {
     id: number | null;
     nombre: string | null;
