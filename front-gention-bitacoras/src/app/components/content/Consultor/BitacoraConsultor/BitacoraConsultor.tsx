@@ -92,21 +92,23 @@ const datos = [
   },
 ];
 
-const periodoOpciones = [
-  { id: "1", nombre: `Enero - ${"Validado"}` },
-  { id: "2", nombre: `Febrero- ${"Validado"}` },
-  { id: "3", nombre: `Marzo - ${"Validado"}` },
-  { id: "3", nombre: `Abri - ${"Validado"}` },
-  { id: "3", nombre: `Mayo - ${"Validado"}` },
-  { id: "3", nombre: `Junio - ${"Validado"}` },
-  { id: "3", nombre: `Julio - ${"Validado"}` },
-  { id: "3", nombre: `Agosto - ${"Validado"}` },
-  { id: "3", nombre: `Septiembre - ${"Validado"}` },
-  { id: "4", nombre: `Octubre - ${"En proceso"}` },
-];
-
 export const BitacoraConsultor = () => {
   const [seleccionado, setSeleccionado] = useState<number | null>(null);
+  const [estatus, setEstatus] = useState(true);
+  const [validado, setValidado] = useState("");
+
+  const periodoOpciones = [
+    { id: "1", nombre: `Enero -  ${validado}` },
+    { id: "2", nombre: `Febrero -  ${validado}` },
+    { id: "3", nombre: `Marzo -  ${validado}` },
+    { id: "3", nombre: `Abri -  ${validado}` },
+    { id: "3", nombre: `Mayo -  ${validado}` },
+    { id: "3", nombre: `Junio -  ${validado}` },
+    { id: "3", nombre: `Julio -  ${validado}` },
+    { id: "3", nombre: `Agosto -  ${validado}` },
+    { id: "3", nombre: `Septiembre -  ${validado}` },
+    { id: "4", nombre: `Octubre - ${validado}` },
+  ];
 
   const listadoEstatus = [
     { idStatus: 1, nombre: "Espera de revisión", activo: true, total: 0 },
@@ -154,6 +156,9 @@ export const BitacoraConsultor = () => {
 
   useEffect(() => {
     fetchPeriodos();
+    if (estatus) {
+      setValidado("Validado");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
