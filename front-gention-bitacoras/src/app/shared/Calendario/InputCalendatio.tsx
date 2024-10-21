@@ -212,7 +212,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
             <span className="input-group-text calendario" onClick={clickCalendario}> <CalendarMonthOutlinedIcon /> </span>
         </div>
         {showCalendario && (
-            <div className="border" onBlur={handleBlur} tabIndex={0}>
+            <div className="border" onBlur={handleBlur} tabIndex={0} style={{ marginTop: '0px' }}>
                 <div className="contenido-botones">
                    <div className="col-sm-1 izquierda-cal" onClick={() => {cambioMesFlechas(false)}} >
                          <ChevronLeftOutlinedIcon/>
