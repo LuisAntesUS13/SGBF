@@ -167,6 +167,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
           setSelectedDay(parseInt(partesFecha[0]));
           setMes(parseInt(partesFecha[1]));
           setAnio(partesFecha[2]);
+          setShowCalendario(false);
         }
     
         // Llamar al onChange del componente padre para actualizar el valor
