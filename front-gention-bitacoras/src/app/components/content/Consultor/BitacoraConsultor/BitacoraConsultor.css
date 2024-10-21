@@ -5,7 +5,6 @@
 .contenedor-botones {
   display: flex;
   align-content: flex-end;
-  width: 440px;
 }
 .btn-registro-actividad,
 .btn-observacion-periodo {

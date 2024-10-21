@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ObservacionPorPeriodoLiderTecnico.css";
 
 export const ObservacionPorPeriodoLiderTecnico = () => {
+  const [observacion, setObservacion] = useState("");
+  const [listaObservacion, setListObservacion] = useState<string[]>([]);
+  const [remitente, setRemitente] = useState("Luis Eduardo Antes Villa");
+
+  const fechaActual = new Date().toLocaleDateString();
+
+  const handleObservacionChange = (event) => {
+    setObservacion(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (observacion.trim() !== "") {
+      setListObservacion([...listaObservacion, observacion]); // Agrega el valor actual del textarea a la lista
+      setObservacion(""); // Limpia el textarea
+    }
+  };
+
   return (
     <>
       <div className="consultor-bitacora contenido_principal ">
@@ -27,14 +44,17 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
             <textarea
               className="form-control textarea textarea-observaciones"
               aria-label="With textarea"
+              value={observacion}
               style={{ resize: "none" }}
               placeholder="Escribir observación..."
+              onChange={handleObservacionChange}
             ></textarea>
             <div className="contenedor-boton-realizar-observacion">
               <div style={{ textAlign: "right" }} className="col-sm-3">
                 <button
                   type="button"
                   className="btn btn-principal btn-realizar-observacion-actividad "
+                  onClick={handleSubmit}
                 >
                   Realizar observación
                 </button>
@@ -49,22 +69,11 @@ export const ObservacionPorPeriodoLiderTecnico = () => {
 
             <div className="contenedor-observaciones-realizadas">
               <ul className="contenedor-observaciones-periodo-lidertecnico">
-                <li>
-                  Juan Guitérrez(11/01/2024): Primero, quiero reconocer el
-                  esfuerzo que pusiste en la revisión de la documentación
-                  técnica. Es evidente que te tomaste el tiempo de leerla
-                  detenidamente y subrayar los puntos más importantes. Sin
-                  embargo, hay algunas áreas que creo que podrías mejorar para
-                  obtener mejores resultados en futuras revisiones.
-                </li>
-                <li>
-                  Azir Aguilar(12/01/2024): Quiero destacar tu dedicación al
-                  completar el análisis del informe técnico. Has demostrado una
-                  buena comprensión del material al resaltar los aspectos clave.
-                  Sin embargo, considero que podrías profundizar más en ciertos
-                  detalles y ofrecer sugerencias adicionales para enriquecer aún
-                  más el análisis en futuras revisiones.
-                </li>
+                {listaObservacion.map((item) => (
+                  <li>
+                    {remitente}({fechaActual}): {item}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

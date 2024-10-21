@@ -29,19 +29,15 @@ ul {
   margin-bottom: 0rem !important;
 }
 
-.btn-realizar-observacion {
-  width: 200px;
-}
-
-.realizar-observacion-por-actividad {
-  margin-top: 12px;
-  width: 300px;
-}
-
 .contenedor-boton-realizar-observacion-actividad {
-  width: 100%;
   display: flex;
   justify-content: flex-end;
 
   margin-top: 8px;
+}
+
+.contenedor-descargar-evidencia-realizar-observacion {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }

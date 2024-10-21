@@ -12,6 +12,7 @@ import {
 } from "../../../../services/equipoDeTrabajo.service.tsx";
 import ResponsiveDatePickers from "../../../../shared/DatePicker/DatePicker.tsx";
 import "../RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.css";
+import CurrencyInput from "react-currency-input-field";
 
 export const RegistroDeEquipoDeTrabajo = () => {
   const navigate = useNavigate();
@@ -151,14 +152,17 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   />
                 </div>
                 <div className="col-sm-3">
-                  <ResponsiveDatePickers />
-                </div>
-                {/* <label className="form-label">Fecha de inicio</label>
-                  <input
-                    type="date"
+                  <CurrencyInput
                     className="form-control"
-                    name="fechaTermino"
-                  /> */}
+                    id="input-example"
+                    name="input-name"
+                    placeholder="Please enter a number"
+                    decimalsLimit={2}
+                    onValueChange={(value, name, values) =>
+                      console.log(value, name, values)
+                    }
+                  />
+                </div>
 
                 <div className="col-sm-2">
                   <button
