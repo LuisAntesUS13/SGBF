@@ -156,19 +156,13 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     
         // Expresión regular para validar el formato dd/mm/yyyy
         const datePattern = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
-        console.log(inputValue);
 
         const partesFecha = inputValue.split("/");
-        console.log(partesFecha);
 
-       
         // Validar el formato de la fecha
         if (inputValue && !datePattern.test(inputValue)) {
           setError('  El formato debe ser dd/mm/yyyy');
         } else {
-            console.log(partesFecha[0]);
-            console.log(partesFecha[1]);
-            console.log(partesFecha[2]);
           setError(''); // Limpiar el error si la fecha es válida
           setSelectedDay(parseInt(partesFecha[0]));
           setMes(parseInt(partesFecha[1]));
@@ -181,7 +175,6 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
 
     const cambioMesFlechas = (cambio: boolean) => {
         const mesInterno = mes;
-        console.log(mesInterno)
         if(cambio){ 
             if(mesInterno === 12){
                 setMes(1);
