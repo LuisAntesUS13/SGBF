@@ -8,6 +8,7 @@ import { DatosContratos } from "../../../model/response/contratos.response.tsx";
 import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
 import { ToastContainer, toast } from 'react-toastify';
+import { InputCalendario } from "../../../shared/Calendario/InputCalendatio.tsx";
 
 export const Contratos = () => {
 
@@ -30,7 +31,6 @@ export const Contratos = () => {
         try {
           const result = await getContratosData(datos);
           setDataContrato(result.data);
-          console.log("Llega mansaje  bien " + result)
           if(mosrar){
             toast.success(result.mensaje, {});
             // toast.error(result.message, {});
@@ -83,6 +83,10 @@ export const Contratos = () => {
                     <div className="col-sm-3">
                         <Input label="Proveedor" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
                     </div>
+                    <div className="col-sm-3">
+                        <InputCalendario label="Proveedor" name="consultora" value={formulario.consultora} onChange={handleChange} />
+                    </div>
+
                     {/* <div className="col-sm-3">
                         <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
                         placeholder="Selecciona un consultor1"   className="form-select"/>
