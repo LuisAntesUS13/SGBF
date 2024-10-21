@@ -34,6 +34,12 @@ function a11yProps(index: number) {
 }
 
 export const DetallesDeActividadLiderTecnico = () => {
+  const [observacion, setObservacion] = useState("");
+  const [listaObservacion, setListObservacion] = useState<string[]>([]);
+  const [remitente, setRemitente] = useState("Luis Eduardo Antes Villa");
+
+  const fechaActual = new Date().toLocaleDateString();
+
   const [value, setValue] = React.useState(0);
 
   const [formData, setFormData] = useState({
@@ -48,6 +54,17 @@ export const DetallesDeActividadLiderTecnico = () => {
     actividadAsignada: "Integración de equipos y orientación de equipos",
     horasLaboradas: "8",
   });
+
+  const handleObservacionChange = (event) => {
+    setObservacion(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (observacion.trim() !== "") {
+      setListObservacion([...listaObservacion, observacion]);
+      setObservacion("");
+    }
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -217,20 +234,21 @@ export const DetallesDeActividadLiderTecnico = () => {
                     Elaboración de junta
                   </textarea>
                 </Grid>
-                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
-                  <button type="button" className="btn btn-principal">
-                    Descargar evidencias
-                  </button>
+                <Grid size={{ xs: 12, md: 12 }} className="col-sm-6">
+                  <div className="contenedor-descargar-evidencia-realizar-observacion">
+                    <button type="button" className="btn btn-principal">
+                      Descargar evidencias
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-principal "
+                      onClick={realizarObservacion}
+                    >
+                      Realizar observacion
+                    </button>
+                  </div>
                 </Grid>
-                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6">
-                  <button
-                    type="button"
-                    className="btn btn-principal "
-                    onClick={realizarObservacion}
-                  >
-                    Realizar observacion
-                  </button>
-                </Grid>
+                <Grid size={{ xs: 12, md: 6 }} className="col-sm-6"></Grid>
               </Grid>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
@@ -242,13 +260,17 @@ export const DetallesDeActividadLiderTecnico = () => {
                     aria-label="With textarea"
                     style={{ resize: "none" }}
                     placeholder="Escribir observación..."
+                    value={observacion}
+                    onChange={handleObservacionChange}
                   ></textarea>
                   <div className="contenedor-boton-realizar-observacion-actividad">
-                    <div className="col-sm-3">
-                      <button type="button" className="btn btn-principal ">
-                        Realizar observación
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-principal "
+                      onClick={handleSubmit}
+                    >
+                      Realizar observación
+                    </button>
                   </div>
                 </div>
 
@@ -257,23 +279,11 @@ export const DetallesDeActividadLiderTecnico = () => {
                 </label>
                 <div className="contenedor-observaciones-realizadas">
                   <ul className="contenedor-observaciones">
-                    <li>
-                      Juan Guitérrez(11/01/2024): Primero, quiero reconocer el
-                      esfuerzo que pusiste en la revisión de la documentación
-                      técnica. Es evidente que te tomaste el tiempo de leerla
-                      detenidamente y subrayar los puntos más importantes. Sin
-                      embargo, hay algunas áreas que creo que podrías mejorar
-                      para obtener mejores resultados en futuras revisiones.
-                    </li>
-                    <li>
-                      Azir Aguilar(12/01/2024): Quiero destacar tu dedicación al
-                      completar el análisis del informe técnico. Has demostrado
-                      una buena comprensión del material al resaltar los
-                      aspectos clave. Sin embargo, considero que podrías
-                      profundizar más en ciertos detalles y ofrecer sugerencias
-                      adicionales para enriquecer aún más el análisis en futuras
-                      revisiones.
-                    </li>
+                    {listaObservacion.map((item) => (
+                      <li>
+                        {remitente}({fechaActual}): {item}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

@@ -162,12 +162,14 @@ export const ValidacionBitacoraLiderTecnico = () => {
             <div className="contenedor-botones-autorizacion-observacion">
               <label>Autorización y observación por periodo</label>
               <div className="contenedor-botones">
-                <button className="btn btn-principal">Autorizar</button>
+                <button className="btn btn-principal">
+                  Autorizar bitacora
+                </button>
                 <button
                   className="btn btn-principal"
                   onClick={irAObservaciones}
                 >
-                  Observación
+                  Realizar observación
                 </button>
               </div>
             </div>
