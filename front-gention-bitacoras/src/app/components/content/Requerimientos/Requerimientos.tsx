@@ -16,7 +16,7 @@ export const Requerimientos = () => {
     // Componente para navegar entre paginas
     const navigate = useNavigate();
     const location = useLocation();
-    const datosContrato = location.state; // Aquí está el objeto recibido
+    // const datosContrato = location.state; // Aquí está el objeto recibido
 
 
     //Catalogos
@@ -199,20 +199,6 @@ export const Requerimientos = () => {
     //     }
     // };
 
-    // const obtenerCatalogoCosultora = async () => {
-    //     const datos:ConsultaCatalogo = {
-    //         nombre: "",
-    //         activo: true,
-    //     };
-
-    //     try {
-    //       const result = await getCatalogoConsultoras(datos);
-    //       setConsultora(result.data);
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    // };
-
     // const obtenerCatalogoAreas = async () => {
     //     const datos:ConsultaCatalogo = {
     //         nombre: "",
@@ -227,7 +213,7 @@ export const Requerimientos = () => {
     //     }
     // };
 
-    const guardarActualizarContrato = async () => {
+    const guardarRequerimiento = async () => {
 
         const newFieldContratoClases: FieldRequerimientoClases = {
             id_requerimiento: "form-control",
@@ -241,33 +227,32 @@ export const Requerimientos = () => {
             areaAtencion: "form-control",
             fechaAsignada: "form-control",
         };
-
+    
         let isValid = true; // Variable para verificar si el formulario es válido
-
-        // for (const key in formData) {
-        //     if (!optionalFields.includes(key)) { // Verifica si el campo no es opcional
-        //         if (formData[key] === null || formData[key] === '') {
-        //             newFieldContratoClases[key as keyof FieldContratoClases] = "form-control invalid-class";
-        //             isValid = false;
-        //         }
-        //     }
-        // }
-
+    
+        // Recorrer todos los campos del formulario
+        for (const key in formData) {
+            if (formData[key] === "" || formData[key] === null) {
+                // Si algún campo está vacío, marcarlo como inválido y establecer isValid en false
+                newFieldContratoClases[key as keyof FieldRequerimientoClases] = "form-control invalid-class";
+                isValid = false;
+            }
+        }
         setFieldRequerimientoClases(newFieldContratoClases);
+
     };
 
     useEffect(() => {
-        if (datosContrato) {
-            // llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
-            // setShowPerfiles(true);
-        }
+        // if (datosContrato) {
+        //     // llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
+        //     // setShowPerfiles(true);
+        // }
         // obtenerCatalogoFormaPago();
         // obtenerCatalogoTipoContrato();
-        // obtenerCatalogoCosultora();
         // obtenerCatalogoAreas();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [datosContrato]);
+    }, []);
 
 
     // const llegaronDatosActualizacion = async () => {
@@ -355,7 +340,7 @@ export const Requerimientos = () => {
                         </div>
                         <div className="card-footer row">
                             <div className="col-sm-12 text-end">
-                                <button className="btn btn-bscr" title="Guardar" onClick={guardarActualizarContrato}>
+                                <button className="btn btn-bscr" title="Guardar" onClick={guardarRequerimiento}>
                                     <SaveOutlinedIcon /> Guardar
                                 </button>
                             </div>
