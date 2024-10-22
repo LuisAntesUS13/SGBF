@@ -245,8 +245,10 @@ export const RegistroDeActividadConsultor = () => {
                 </label>
                 <textarea
                   aria-label="With textarea"
+                  name="actividadRealizada"
                   value={formData.actividadRealizada}
                   style={{ resize: "none" }}
+                  onChange={handleInputChange}
                   className={fieldActividadClases.actividadRealizada}
                 ></textarea>
               </Grid>
