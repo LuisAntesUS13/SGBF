@@ -10,9 +10,16 @@ import {
   getContratos,
   getLideresTecnicos,
 } from "../../../../services/equipoDeTrabajo.service.tsx";
-import ResponsiveDatePickers from "../../../../shared/DatePicker/DatePicker.tsx";
 import "../RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.css";
-import CurrencyInput from "react-currency-input-field";
+import { InputCalendario } from "../../../../shared/Calendario/InputCalendatio.tsx";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
+
+interface Fila {
+  contrato: string;
+  liderTecnico: string;
+  consultores: string;
+  fechaInicio: string;
+}
 
 export const RegistroDeEquipoDeTrabajo = () => {
   const navigate = useNavigate();
@@ -32,7 +39,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
     setPaginaActual(pagina);
     setRegistrosPorPagina(registros);
   };
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Fila>({
     contrato: "",
     liderTecnico: "",
     consultores: "",
@@ -70,11 +77,6 @@ export const RegistroDeEquipoDeTrabajo = () => {
     }
   };
 
-  useEffect(() => {
-    getContrato();
-    getLiderTecnico();
-  }, []);
-
   const getConsultor = async () => {
     try {
       const result = await getConsultores();
@@ -88,11 +90,26 @@ export const RegistroDeEquipoDeTrabajo = () => {
     }
   };
 
+  const [filas, setFilas] = useState<Fila[]>([]);
+
+  const agregarFila = () => {
+    setFilas((prev) => [...prev, formData]);
+    setFormData({
+      contrato: "",
+      liderTecnico: "",
+      consultores: "",
+      fechaInicio: "",
+    });
+    console.log(filas);
+    console.log(formData);
+  };
+
   useEffect(() => {
     getContrato();
     getLiderTecnico();
     getConsultor();
   }, []);
+  // Ejecuta funciones cada vez que se agrega una nueva fila
 
   return (
     <>
@@ -120,6 +137,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   <Select
                     label="Contrato"
                     name="contrato"
+                    placeholder="Seleccione una opción"
                     value={formData.contrato}
                     onChange={handleSelectChange}
                     options={contrato}
@@ -130,6 +148,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   <Select
                     label="Líder técnico"
                     name="liderTecnico"
+                    placeholder="Seleccione una opción"
                     value={formData.liderTecnico}
                     onChange={handleSelectChange}
                     options={liderTecnico}
@@ -145,6 +164,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   <Select
                     label="Consultores"
                     name="consultores"
+                    placeholder="Seleccione una opción"
                     value={formData.consultores}
                     onChange={handleSelectChange}
                     options={consultor}
@@ -152,15 +172,11 @@ export const RegistroDeEquipoDeTrabajo = () => {
                   />
                 </div>
                 <div className="col-sm-3">
-                  <CurrencyInput
-                    className="form-control"
-                    id="input-example"
-                    name="input-name"
-                    placeholder="Please enter a number"
-                    decimalsLimit={2}
-                    onValueChange={(value, name, values) =>
-                      console.log(value, name, values)
-                    }
+                  <InputCalendario
+                    label="Fecha de inicio de actividades"
+                    name="fechaInicio"
+                    value={formData.fechaInicio}
+                    onChange={handleSelectChange}
                   />
                 </div>
 
@@ -170,6 +186,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     className="btn btn-principal"
                     title="Buscar"
                     style={{ marginTop: "30px" }}
+                    onClick={agregarFila}
                   >
                     Asignar
                   </button>
@@ -179,7 +196,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
             <div className="col-sm-12">
               <div className="card-body row">
                 <hr />
-                <table className="table table-hover">
+                <table className="table ">
                   <thead>
                     <tr className="valoresCentrados">
                       <th scope="col" className="valoresCentrados">
@@ -194,16 +211,19 @@ export const RegistroDeEquipoDeTrabajo = () => {
                       <th scope="col" className="valoresCentrados">
                         Estatus
                       </th>
+                      <th className="valoresCentrados"> Algo</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {dataPerfiles.map((dato, i) => (
-                      <tr>
-                        <td className="valoresCentrados"></td>
-                        <td className="valoresCentrados"></td>
-                        <td className="valoresCentrados"></td>
-                        <td className="valoresCentrados"></td>
-                        <td className="valoresCentrados"></td>
+                  <tbody className="">
+                    {filas.map((fila, index) => (
+                      <tr key={index} className="valoresCentrados">
+                        <td>td{fila.contrato}</td>
+                        <td>{fila.liderTecnico}</td>
+                        <td>{fila.consultores}</td>
+                        <td>{fila.fechaInicio}</td>
+                        <td>
+                          <PersonRemoveIcon className="person-remove-icon" />
+                        </td>
                       </tr>
                     ))}
                   </tbody>

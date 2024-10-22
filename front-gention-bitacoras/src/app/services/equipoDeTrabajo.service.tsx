@@ -8,15 +8,12 @@ import { API_ROUTES } from "../shared/rutasApi.tsx";
 
 export async function getContratos() {
   try {
-    const response = await fetch(
-      `${API_ROUTES.equiposDeTrabajo}/getContratos`,
-      {
-        method: "POST", // Especifica que es un POST
-        headers: {
-          "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
-        }, // Reemplaza esto con los datos que quieres enviar
-      }
-    );
+    const response = await fetch(`${API_ROUTES.equiposDeTrabajo}/contratos`, {
+      method: "POST", // Especifica que es un POST
+      headers: {
+        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+      }, // Reemplaza esto con los datos que quieres enviar
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,7 +30,7 @@ export async function getContratos() {
 export async function getLideresTecnicos() {
   try {
     const response = await fetch(
-      `${API_ROUTES.equiposDeTrabajo}/getLiderTecnico`,
+      `${API_ROUTES.equiposDeTrabajo}/lideresTecnicos`,
       {
         method: "POST", // Especifica que es un POST
         headers: {
@@ -56,15 +53,12 @@ export async function getLideresTecnicos() {
 
 export async function getConsultores() {
   try {
-    const response = await fetch(
-      `${API_ROUTES.equiposDeTrabajo}/getConsultor`,
-      {
-        method: "POST", // Especifica que es un POST
-        headers: {
-          "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
-        }, // Reemplaza esto con los datos que quieres enviar
-      }
-    );
+    const response = await fetch(`${API_ROUTES.equiposDeTrabajo}/consultores`, {
+      method: "POST", // Especifica que es un POST
+      headers: {
+        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+      }, // Reemplaza esto con los datos que quieres enviar
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
