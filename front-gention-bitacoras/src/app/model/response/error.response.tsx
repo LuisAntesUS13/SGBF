@@ -3,3 +3,4 @@ export class ErrorPersonalizado {
     correcto: boolean;
     data: any;
 }
+

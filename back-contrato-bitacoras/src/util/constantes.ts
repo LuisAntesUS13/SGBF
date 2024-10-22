@@ -5,7 +5,7 @@ export const CORS_OPTION = {
     allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
 };
 
-export const NOMBRE_BASE_MS = "contrato";
+export const NOMBRE_BASE_MS = "contratos";
 
 export const RUTA_BASE = `/${NOMBRE_BASE_MS}`;
 

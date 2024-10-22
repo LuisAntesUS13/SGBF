@@ -33,7 +33,7 @@ export class DatosContratos{
 
 
 export class RespuestaContrato {
-    codigoEstatus: number;
+    correcto: boolean;
     mensaje: string;
     data: DatosContratos[];
 }

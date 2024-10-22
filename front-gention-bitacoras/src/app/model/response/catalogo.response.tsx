@@ -1,6 +1,6 @@
 export class RespuestaCatalogo {
-    statusCode: number;
-    message: string;
+    correcto: boolean;
+    mensaje: string;
     data: Catalogo[];
 }
 
@@ -12,8 +12,8 @@ export class Catalogo {
 }
 
 export class RespuestaCatalogoDocumentos {
-    statusCode: number;
-    message: string;
+    correcto: boolean;
+    mensaje: string;
     data: CatalogoDocumento[];
 }
   

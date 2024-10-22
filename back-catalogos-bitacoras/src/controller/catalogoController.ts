@@ -256,3 +256,46 @@ export const getCatalogoCargo = async (req: Request, res: Response) => {
     CustomResponseError(res, req, mensaje);
   }
 };
+
+
+
+export const getCatalogoTipoAccion = async (req: Request, res: Response) => {
+  try {
+    const objetoBody: CatalogoRequest = mapToInterfaceobject<CatalogoRequest>(
+      req.body
+    );
+
+    const respuesta = await catalogoServicio.getCatalogoTipoAccion(objetoBody);
+
+    if (respuesta.length > 0) {
+      CustomResponse(res, MENSAJES.DATOS_OBTENIDOS, respuesta, true);
+    } else {
+      CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
+    }
+  } catch (error) {
+    const mensaje = (error as Error).stack + "";
+    CustomResponseError(res, req, mensaje);
+  }
+};
+
+
+
+export const getCatalogoPorCargo = async (req: Request, res: Response) => {
+  try {
+    const objetoBody: CatalogoRequest = mapToInterfaceobject<CatalogoRequest>(
+      req.body
+    );
+
+    const respuesta = await catalogoServicio.getCatalogoPorCargo(objetoBody);
+
+    if (respuesta.length > 0) {
+      CustomResponse(res, MENSAJES.DATOS_OBTENIDOS, respuesta, true);
+    } else {
+      CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
+    }
+  } catch (error) {
+    const mensaje = (error as Error).stack + "";
+    CustomResponseError(res, req, mensaje);
+  }
+};
+

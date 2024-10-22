@@ -3,3 +3,5 @@ ALTER TABLE GestionBitacora.dbo.archivos DROP CONSTRAINT FK_archivos_catExtencio
 ALTER TABLE GestionBitacora.dbo.archivos DROP COLUMN id_extencion;
 
 
+EXEC GestionBitacora.sys.sp_rename N'GestionBitacora.dbo.cat_proveedor.descripocion' , N'descripcion', 'COLUMN';
+

@@ -8,7 +8,9 @@ import {
   getCatalogoFormaPago,
   getCatalogoModuloAplicativo,
   getCatalogoPerfilConsultor,
+  getCatalogoPorCargo,
   getCatalogoProyecto,
+  getCatalogoTipoAccion,
   getCatalogoTipoContrato,
   RegActCatalogoModuloAplicativo,
 } from "../controller/catalogoController";
@@ -27,8 +29,12 @@ rutas.post(`${RUTA_BASE}/forma_pago`, getCatalogoFormaPago);
 rutas.post(`${RUTA_BASE}/proyecto`, getCatalogoProyecto);
 rutas.post(`${RUTA_BASE}/tipo_contrato`, getCatalogoTipoContrato);
 rutas.post(`${RUTA_BASE}/perfil_consultor`, getCatalogoPerfilConsultor);
-rutas.post(`${RUTA_BASE}/documento`, getCatalogoDocumento);
+rutas.post(`${RUTA_BASE}/documentos`, getCatalogoDocumento);
 rutas.post(`${RUTA_BASE}/extencion`, getCatalogoExtencion);
 rutas.post(`${RUTA_BASE}/cargo`, getCatalogoCargo);
+rutas.post(`${RUTA_BASE}/tipo_accion`, getCatalogoTipoAccion);
+
+rutas.post(`${RUTA_BASE}/usuario_por_cargo`, getCatalogoPorCargo);
+
 
 export default rutas;

@@ -20,16 +20,15 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
           const errorData = await response.json();
           // eslint-disable-next-line no-throw-literal
           throw {
-            mensaje: errorData.mensaje + (errorData.error? " | " + errorData.error: ""),
-            correcto: errorData.correcto,
-            codigoError: errorData.codeError? errorData.codeError : "",
-            data: null
+            correcto: errorData.success,
+            mensaje: errorData.message,
+            data: null,
           }  as ErrorPersonalizado
         }
         const respuesta =  await response.json();
-        
+
         const data: RespuestaContrato = {
-          codigoEstatus: respuesta.statusCode,
+          correcto: respuesta.success,
           mensaje: respuesta.message,
           data: respuesta.data,
         }
@@ -53,12 +52,12 @@ export async function getContratosData(consultaContrato: ConsultaContrato) {
         });
 
         if (!response.ok) {
-          const errorData = await response.json(); 
+          const errorData = await response.json();
           // eslint-disable-next-line no-throw-literal
           throw {
-            mensaje: errorData.message	+ (errorData.error? " | " + errorData.error: ""),
             correcto: errorData.success,
-            data: errorData.data
+            mensaje: errorData.message,
+            data: null,
           }  as ErrorPersonalizado
         }
         

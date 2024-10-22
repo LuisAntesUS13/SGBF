@@ -9,6 +9,7 @@ interface CalendarioProps {
     name: string; // Nombre del input
     value: string; // Valor del input
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Evento para manejar cambios
+    className?: string; // Props adicionales (ej. className)
     disabled?: boolean;
 }
   
@@ -17,6 +18,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     name,
     value,
     onChange,
+    className,
     disabled = false, // Valor por defecto es "false"
   }) => {
     const [error, setError] = useState('');
@@ -153,7 +155,23 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
 
     const handleChangeInput = (e) => {
         const inputValue = e.target.value;
-    
+
+        const regexParcial =/^(?:\d{0,2}\/)?(?:\d{0,2}\/)?(?:\d{0,4})?$/;
+        if (!regexParcial.test(inputValue)) {
+
+            let modificado = inputValue.slice(0, -1);
+
+            const event = {
+                target: {
+                    value: modificado, // Retornar valor vacío
+                    name: name,
+                },
+                } as React.ChangeEvent<HTMLInputElement>;
+            
+                // Llamar al onChange del componente padre con el valor vacío
+                onChange(event);
+                return;
+        }
         // Expresión regular para validar el formato dd/mm/yyyy
         const datePattern = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
 
@@ -161,7 +179,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
 
         // Validar el formato de la fecha
         if (inputValue && !datePattern.test(inputValue)) {
-          setError('  El formato debe ser dd/mm/yyyy');
+          setError('');
         } else {
           setError(''); // Limpiar el error si la fecha es válida
           setSelectedDay(parseInt(partesFecha[0]));
@@ -209,11 +227,11 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
         {error && <span style={{ color: 'red' }}>{error}</span>}
         <div className="input-group">
             <input  type='text' name={name}  id={name} value={value} onChange={handleChangeInput} 
-             placeholder='dd/mm/yyyy'className='form-control'disabled={disabled}/>
+             placeholder='dd/mm/yyyy' disabled={disabled}  className={`${className || ""} form-control `} />
             <span className="input-group-text calendario" onClick={clickCalendario}> <CalendarMonthOutlinedIcon /> </span>
         </div>
         {showCalendario && (
-            <div className="border" onBlur={handleBlur} tabIndex={0} style={{ marginTop: '0px' }}>
+            <div className="border-calendario" onBlur={handleBlur} tabIndex={0} style={{ marginTop: '0px' }}>
                 <div className="contenido-botones">
                    <div className="col-sm-1 izquierda-cal" onClick={() => {cambioMesFlechas(false)}} >
                          <ChevronLeftOutlinedIcon/>
@@ -240,7 +258,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
                     <div className="col-sm-1 derecha-cal" onClick={() => {cambioMesFlechas(true)}}  >
                           <ChevronRightOutlinedIcon/>
                     </div>
-                </div>
+                </div>  
                 <ol className="class-ol">
                     {semanas.map((option) => (
                         <li className="class-li day-name"  key={option} >{option}</li>

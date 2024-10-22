@@ -19,9 +19,10 @@ export class GuardaContrato {
   id_consultora: number;
   id_area: number | null;
   id_gerente: number | null;
-  id_archivo: number | null;
-  archivo: string;
-  extencion: string;
   activo: boolean;
+  id_archivo: number | null;
+  nombre: string | null;
+  ruta: string | null;
+  id_contrato_convenio: number | null;
 
 }  
