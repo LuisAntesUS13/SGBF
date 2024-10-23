@@ -12,7 +12,7 @@ interface CalendarioProps {
     className?: string; // Props adicionales (ej. className)
     disabled?: boolean;
 }
-  
+
 export const InputCalendario: React.FC<CalendarioProps> = ({
     label,
     name,
@@ -20,21 +20,21 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     onChange,
     className,
     disabled = false, // Valor por defecto es "false"
-  }) => {
+}) => {
     const [error, setError] = useState('');
     const [showCalendario, setShowCalendario] = useState(false);
 
-    const [anios, setAnios] = useState<number[]>([]); 
-    const [meses, setMeses] = useState<any[]>([]); 
-    const [semanas, setSemanas] = useState<string[]>([]); 
-    const [dias, setDias] = useState<any[]>([]); 
+    const [anios, setAnios] = useState<number[]>([]);
+    const [meses, setMeses] = useState<any[]>([]);
+    const [semanas, setSemanas] = useState<string[]>([]);
+    const [dias, setDias] = useState<any[]>([]);
 
 
-    const today = new Date(); 
+    const today = new Date();
     const [selectedDay, setSelectedDay] = useState<number>(today.getDate());
     // const [dia, setDia] = useState<number>(today.getDate()); 
-    const [mes, setMes] = useState<number>(today.getMonth() + 1); 
-    const [anio, setAnio] = useState<number>(today.getFullYear()); 
+    const [mes, setMes] = useState<number>(today.getMonth() + 1);
+    const [anio, setAnio] = useState<number>(today.getFullYear());
 
 
 
@@ -49,8 +49,8 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
         let contador = inicio;
         let nuevosAnios: number[] = [];
         do {
-          contador++;
-          nuevosAnios.push(contador);
+            contador++;
+            nuevosAnios.push(contador);
         } while (contador !== final);
         setAnios(nuevosAnios);
     };
@@ -69,9 +69,9 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
             { id: 10, mes: 'Octubre' },
             { id: 11, mes: 'Noviembre' },
             { id: 12, mes: 'Diciembre' },
-          ];
+        ];
 
-          setMeses(meses);
+        setMeses(meses);
     };
 
     const generaSemana = () => {
@@ -91,19 +91,19 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     const generaDias = (month: number, year: number) => {
         console.log(month, " mes");
         console.log(year, " años");
-        const numberDays =  new Date(Date.UTC(year, (month - 1), 1)).getDate();
+        const numberDays = new Date(Date.UTC(year, (month - 1), 1)).getDate();
 
         console.log(numberDays, " DIAS");
         const arrayDays = Array.from({ length: numberDays }, (_, index) => {
-        const day = index + 1; // Días comienzan en 1
-        const dayObject = new Date(Date.UTC(year, month - 1, day));
+            const day = index + 1; // Días comienzan en 1
+            const dayObject = new Date(Date.UTC(year, month - 1, day));
 
-        // Formatear el nombre del día usando Intl.DateTimeFormat
-        const dayNameFormatter = new Intl.DateTimeFormat('es-ES', { weekday: 'long' });
-        const name = dayNameFormatter.format(dayObject);
+            // Formatear el nombre del día usando Intl.DateTimeFormat
+            const dayNameFormatter = new Intl.DateTimeFormat('es-ES', { weekday: 'long' });
+            const name = dayNameFormatter.format(dayObject);
 
-        // Obtener el día de la semana (1 = lunes, 7 = domingo)
-        const indexWeek = dayObject.getUTCDay() === 0 ? 7 : dayObject.getUTCDay();
+            // Obtener el día de la semana (1 = lunes, 7 = domingo)
+            const indexWeek = dayObject.getUTCDay() === 0 ? 7 : dayObject.getUTCDay();
 
             return {
                 name,
@@ -119,21 +119,21 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
         generaAnios();
         generaMeses();
         generaSemana();
-        generaDias(today.getMonth(),today.getFullYear());
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+        generaDias(today.getMonth(), today.getFullYear());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
- 
-    const  diaSeleccionado = (day: any) => {
+
+    const diaSeleccionado = (day: any) => {
         const dia = day > 9 ? day : '0' + day;
         setSelectedDay(day);
         // console.log(`${dia}/${mes}/${anio}`);
-        const fecha = `${dia}/${mes > 9? mes : '0' + mes }/${anio}`;
+        const fecha = `${dia}/${mes > 9 ? mes : '0' + mes}/${anio}`;
 
         const event = {
             target: {
-              value: fecha,
-              name: name,
+                value: fecha,
+                name: name,
             },
         } as React.ChangeEvent<HTMLInputElement>;
 
@@ -143,12 +143,12 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if(name === 'anio'){
+        if (name === 'anio') {
             setAnio(value);
-            generaDias(mes,value);
-        } else if (name === 'mes')  {
+            generaDias(mes, value);
+        } else if (name === 'mes') {
             setMes(value);
-            generaDias(value,anio);
+            generaDias(value, anio);
         }
     };
 
@@ -159,7 +159,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     const handleChangeInput = (e) => {
         const inputValue = e.target.value;
 
-        const regexParcial =/^(?:\d{0,2}\/)?(?:\d{0,2}\/)?(?:\d{0,4})?$/;
+        const regexParcial = /^(?:\d{0,2}\/)?(?:\d{0,2}\/)?(?:\d{0,4})?$/;
         if (!regexParcial.test(inputValue)) {
 
             let modificado = inputValue.slice(0, -1);
@@ -169,11 +169,11 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
                     value: modificado, // Retornar valor vacío
                     name: name,
                 },
-                } as React.ChangeEvent<HTMLInputElement>;
-            
-                // Llamar al onChange del componente padre con el valor vacío
-                onChange(event);
-                return;
+            } as React.ChangeEvent<HTMLInputElement>;
+
+            // Llamar al onChange del componente padre con el valor vacío
+            onChange(event);
+            return;
         }
         // Expresión regular para validar el formato dd/mm/yyyy
         const datePattern = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[012])\/\d{4}$/;
@@ -182,108 +182,107 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
 
         // Validar el formato de la fecha
         if (inputValue && !datePattern.test(inputValue)) {
-          setError('');
+            setError('');
         } else {
-          setError(''); // Limpiar el error si la fecha es válida
-          setSelectedDay(parseInt(partesFecha[0]));
-          setMes(parseInt(partesFecha[1]));
-          setAnio(partesFecha[2]);
-          setShowCalendario(false);
+            setError(''); // Limpiar el error si la fecha es válida
+            setSelectedDay(parseInt(partesFecha[0]));
+            setMes(parseInt(partesFecha[1]));
+            setAnio(partesFecha[2]);
+            setShowCalendario(false);
         }
-    
+
         // Llamar al onChange del componente padre para actualizar el valor
         onChange(e);
     };
 
     const cambioMesFlechas = (cambio: boolean) => {
-        if(cambio){ 
-            if(mes === 12){
+        if (cambio) {
+            if (mes === 12) {
                 setMes(1);
                 setAnio(anio + 1);
             } else {
                 setMes(mes + 1);
             }
-            generaDias(mes,anio);
+            generaDias(mes, anio);
         } else {
-            if(mes === 1){
+            if (mes === 1) {
                 setMes(12);
-                setAnio(anio -1);
+                setAnio(anio - 1);
             } else {
                 setMes(mes - 1);
             }
-            generaDias(mes,anio);
+            generaDias(mes, anio);
         }
     };
 
 
 
     return (
-      <div style={{ width: "100%" }}  className="contenedor-calendario">
-        {label && (
-          <label className="form-label" htmlFor={name}>
-            {label}
-          </label>  
-        )}
-        {error && <span style={{ color: 'red' }}>{error}</span>}
-        <div className="input-group">
-            <input  type='text' name={name}  id={name} value={value} onChange={handleChangeInput} 
-             placeholder='dd/mm/yyyy' disabled={disabled}  className={`${className || ""} form-control `} />
-            <span className="input-group-text calendario" onClick={clickCalendario}> <CalendarMonthOutlinedIcon /> </span>
-        </div>
-        {showCalendario && (
-            <div className="border-calendario" onBlur={handleBlur} tabIndex={0} style={{ marginTop: '0px' }}>
-                <div className="contenido-botones">
-                   <div className="col-sm-1 izquierda-cal" onClick={() => {cambioMesFlechas(false)}} >
-                         <ChevronLeftOutlinedIcon/>
-                    </div>
-                    <div className="col-sm-4 anios">
-                        <select  name='anio' id='anio' className='form-select' value={anio} onChange={handleChange} >
-                            {anios.map((option) => (
-                            <option key={option} value={option}>
-                                {option}
-                            </option>
-                            ))}
-                        </select>
-                    </div>
+        <div style={{ width: "100%" }} className="contenedor-calendario">
+            {label && (
+                <label className="form-label" htmlFor={name}>
+                    {label}
+                </label>
+            )}
+            {error && <span style={{ color: 'red' }}>{error}</span>}
+            <div className="input-group">
+                <input type='text' name={name} id={name} value={value} onChange={handleChangeInput}
+                    placeholder='dd/mm/yyyy' disabled={disabled} className={`${className || ""} form-control `} />
+                <span className="input-group-text calendario" onClick={clickCalendario}> <CalendarMonthOutlinedIcon /> </span>
+            </div>
+            {showCalendario && (
+                <div className="border-calendario" onBlur={handleBlur} tabIndex={0} style={{ marginTop: '0px' }}>
+                    <div className="contenido-botones">
+                        <div className="col-sm-1 izquierda-cal" onClick={() => { cambioMesFlechas(false) }} >
+                            <ChevronLeftOutlinedIcon />
+                        </div>
+                        <div className="col-sm-4 anios">
+                            <select name='anio' id='anio' className='form-select' value={anio} onChange={handleChange} >
+                                {anios.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                    <div className="col-sm-6 meses">
-                        <select  name='mes' id='mes' className='form-select'  value={mes} onChange={handleChange}>
-                            {meses.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.mes}
-                            </option>
-                            ))}
-                        </select>
+                        <div className="col-sm-6 meses">
+                            <select name='mes' id='mes' className='form-select' value={mes} onChange={handleChange}>
+                                {meses.map((option) => (
+                                    <option key={option.id} value={option.id}>
+                                        {option.mes}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="col-sm-1 derecha-cal" onClick={() => { cambioMesFlechas(true) }}  >
+                            <ChevronRightOutlinedIcon />
+                        </div>
                     </div>
-                    <div className="col-sm-1 derecha-cal" onClick={() => {cambioMesFlechas(true)}}  >
-                          <ChevronRightOutlinedIcon/>
-                    </div>
-                </div>  
-                <ol className="class-ol">
-                    {semanas.map((option) => (
-                        <li className="class-li day-name"  key={option} >{option}</li>
-                     ))}
+                    <ol className="class-ol">
+                        {semanas.map((option) => (
+                            <li className="class-li day-name" key={option} >{option}</li>
+                        ))}
 
-                    {dias.map((day, index) => {
+                        {dias.map((day, index) => {
                             const isFirst = index === 0;
                             const isActive = day.value === selectedDay;
                             return (
-                            <li
-                                key={day.value}
-                                style={{gridColumnStart: isFirst ? day.indexWeek : 'auto',}}
-                                className={`day ${isActive ? 'activo' : ''}`}
-                                onClick={() => diaSeleccionado(day.value)} // Set selected day on click
-                            >
-                                <span>{day.value}</span>
-                            </li>
+                                <li
+                                    key={day.value}
+                                    style={{ gridColumnStart: isFirst ? day.indexWeek : 'auto', }}
+                                    className={`day ${isActive ? 'activo' : ''}`}
+                                    onClick={() => diaSeleccionado(day.value)} // Set selected day on click
+                                >
+                                    <span>{day.value}</span>
+                                </li>
                             );
                         })}
 
-                </ol>
-            </div>
-        )}
-        
-      </div>
+                    </ol>
+                </div>
+            )}
+
+        </div>
     );
-  };
-  
+};
