@@ -13,6 +13,7 @@ interface SelectProps {
   options: Option[]; // Lista de opciones que se mostrarán
   placeholder?: string;
   className?: string; // Para estilos adicionales
+  disabled?: boolean;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -23,6 +24,7 @@ export const Select: React.FC<SelectProps> = ({
   options,
   placeholder,
   className,
+  disabled,
 }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -33,6 +35,7 @@ export const Select: React.FC<SelectProps> = ({
         value={value}
         onChange={onChange}
         className={className}
+        disabled={disabled}
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (

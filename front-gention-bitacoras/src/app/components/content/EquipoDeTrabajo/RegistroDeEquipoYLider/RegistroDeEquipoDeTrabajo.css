@@ -1,3 +1,32 @@
 .person-remove-icon {
   color: red;
 }
+
+.card-body-consultores {
+  display: flex;
+}
+
+.person-remove-button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.person-remove-button:hover {
+  background-color: red;
+  border-radius: 8px;
+}
+
+.person-remove-button:hover {
+  background-color: red;
+  border-radius: 8px;
+}
+
+.person-remove-button:hover .person-remove-icon {
+  color: rgb(255, 255, 255);
+}
+
+.contenedor-input-sleccion-consultores {
+  display: flex;
+  gap: 30px;
+}
