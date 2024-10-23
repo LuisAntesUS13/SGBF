@@ -39,7 +39,7 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
   }
 }
 
-export async function getCatalogoConsultoras(
+export async function getCatalogoProveedor(
   consultaCatalogo: ConsultaCatalogo
 ) {
   try {
@@ -348,6 +348,36 @@ export async function getCatalogoUsuarioPorCago(
 ) {
   try {
     const response = await fetch(`${API_ROUTES.catalogos}/usuario_por_cargo`, {
+      method: "POST", // Especifica que es un POST
+      headers: {
+        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+      },
+      body: JSON.stringify(consultaCatalogo), // Reemplaza esto con los datos que quieres enviar
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
+    }
+
+    const data: RespuestaCatalogo = await response.json();
+    return data; // Retorna los datos obtenidos
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    throw error; // Retorna el error para manejarlo externamente
+  }
+}
+
+export async function getCatalogoNivelPerfil(
+  consultaCatalogo: ConsultaCatalogo
+) {
+  try {
+    const response = await fetch(`${API_ROUTES.catalogos}/nivel_perfil`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON

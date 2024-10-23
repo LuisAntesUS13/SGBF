@@ -7,6 +7,7 @@ import {
   getCatalogoExtencion,
   getCatalogoFormaPago,
   getCatalogoModuloAplicativo,
+  getCatalogoNivelPerfil,
   getCatalogoPerfilConsultor,
   getCatalogoPorCargo,
   getCatalogoProyecto,
@@ -33,8 +34,8 @@ rutas.post(`${RUTA_BASE}/documentos`, getCatalogoDocumento);
 rutas.post(`${RUTA_BASE}/extencion`, getCatalogoExtencion);
 rutas.post(`${RUTA_BASE}/cargo`, getCatalogoCargo);
 rutas.post(`${RUTA_BASE}/tipo_accion`, getCatalogoTipoAccion);
+rutas.post(`${RUTA_BASE}/nivel_perfil`, getCatalogoNivelPerfil);
 
 rutas.post(`${RUTA_BASE}/usuario_por_cargo`, getCatalogoPorCargo);
-
 
 export default rutas;

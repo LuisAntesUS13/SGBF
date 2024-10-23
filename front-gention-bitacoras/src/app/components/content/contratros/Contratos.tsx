@@ -33,12 +33,9 @@ export const Contratos = () => {
           setDataContrato(result.data);
           if(mosrar){
             toast.success(result.mensaje, {});
-            // toast.error(result.message, {});
-            // toast.warn(result.message, {});
-            // toast.info(result.message, {});
           }
         } catch (error) {
-            console.log("Llega mansaje  error ")
+          console.log("Llega mansaje  error ")
           console.log(error);
           toast.error(error.mensaje, {});
         }

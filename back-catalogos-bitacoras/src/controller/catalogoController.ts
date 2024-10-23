@@ -28,7 +28,7 @@ export const getCatalogoModuloAplicativo = async (
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -44,19 +44,17 @@ export const RegActCatalogoModuloAplicativo = async (
     const respuesta = await catalogoServicio.RegActCatalogoModuloAplicativo(
       objetoBody
     );
-
-    const mensaje =
-      objetoBody.id != null
-        ? respuesta[0].correcto
-          ? MENSAJES.ACTUALIZADO_CORRECTO
-          : MENSAJES.ACTUALIZADO_INCORRECTO
-        : respuesta[0].correcto
-        ? MENSAJES.GUARDADO_CORRECTO
-        : MENSAJES.GUARDADO_INCORRECTO;
+    
+    let mensaje = "";
+    if(respuesta[0].correcto){
+      mensaje = objetoBody.id != null ? MENSAJES.ACTUALIZADO_CORRECTO : MENSAJES.GUARDADO_CORRECTO;
+    } else {
+      throw new Error(respuesta[0].mensaje);
+    }
         
     CustomResponse(res, mensaje, respuesta[0].id, respuesta[0].correcto);
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -75,7 +73,7 @@ export const getCatalogoAreas = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -94,7 +92,7 @@ export const getCatalogoConsultoras = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -113,7 +111,7 @@ export const getCatalogoEstatus = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -132,7 +130,7 @@ export const getCatalogoFormaPago = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -151,7 +149,7 @@ export const getCatalogoProyecto = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -172,7 +170,7 @@ export const getCatalogoTipoContrato = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -196,7 +194,7 @@ export const getCatalogoPerfilConsultor = async (
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -214,7 +212,7 @@ export const getCatalogoDocumento = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -233,7 +231,7 @@ export const getCatalogoExtencion = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -252,7 +250,7 @@ export const getCatalogoCargo = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
@@ -273,10 +271,30 @@ export const getCatalogoTipoAccion = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };
+
+export const getCatalogoNivelPerfil = async (req: Request, res: Response) => {
+  try {
+    const objetoBody: CatalogoRequest = mapToInterfaceobject<CatalogoRequest>(
+      req.body
+    );
+
+    const respuesta = await catalogoServicio.getCatalogoNivelPerfil(objetoBody);
+
+    if (respuesta.length > 0) {
+      CustomResponse(res, MENSAJES.DATOS_OBTENIDOS, respuesta, true);
+    } else {
+      CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
+    }
+  } catch (error) {
+    const mensaje = (error as Error).message;
+    CustomResponseError(res, req, mensaje);
+  }
+};
+
 
 
 
@@ -294,7 +312,7 @@ export const getCatalogoPorCargo = async (req: Request, res: Response) => {
       CustomResponse(res, MENSAJES.SIN_INFORMACION, respuesta, false);
     }
   } catch (error) {
-    const mensaje = (error as Error).stack + "";
+    const mensaje = (error as Error).message;
     CustomResponseError(res, req, mensaje);
   }
 };

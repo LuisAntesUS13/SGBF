@@ -41,7 +41,7 @@ export class RespuestaContrato {
 export class RespuestaGuardaContrato {
     correcto: string;
     mensaje: string;
-    data: {id_contrato: number, id_archivo: number};
+    data: number;
 }
 
 

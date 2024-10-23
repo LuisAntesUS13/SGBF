@@ -51,24 +51,24 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
         do {
           contador++;
           nuevosAnios.push(contador);
-        } while (contador != final);
+        } while (contador !== final);
         setAnios(nuevosAnios);
     };
 
     const generaMeses = () => {
         const meses: any[] = [
-            { id: '1', mes: 'Enero' },
-            { id: '2', mes: 'Febrero' },
-            { id: '3', mes: 'Marzo' },
-            { id: '4', mes: 'Abril' },
-            { id: '5', mes: 'Mayo' },
-            { id: '6', mes: 'Junio' },
-            { id: '7', mes: 'Julio' },
-            { id: '8', mes: 'Agosto' },
-            { id: '9', mes: 'Septiembre' },
-            { id: '10', mes: 'Octubre' },
-            { id: '11', mes: 'Noviembre' },
-            { id: '12', mes: 'Diciembre' },
+            { id: 1, mes: 'Enero' },
+            { id: 2, mes: 'Febrero' },
+            { id: 3, mes: 'Marzo' },
+            { id: 4, mes: 'Abril' },
+            { id: 5, mes: 'Mayo' },
+            { id: 6, mes: 'Junio' },
+            { id: 7, mes: 'Julio' },
+            { id: 8, mes: 'Agosto' },
+            { id: 9, mes: 'Septiembre' },
+            { id: 10, mes: 'Octubre' },
+            { id: 11, mes: 'Noviembre' },
+            { id: 12, mes: 'Diciembre' },
           ];
 
           setMeses(meses);
@@ -89,8 +89,11 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     };
 
     const generaDias = (month: number, year: number) => {
+        console.log(month, " mes");
+        console.log(year, " años");
         const numberDays =  new Date(Date.UTC(year, (month - 1), 1)).getDate();
 
+        console.log(numberDays, " DIAS");
         const arrayDays = Array.from({ length: numberDays }, (_, index) => {
         const day = index + 1; // Días comienzan en 1
         const dayObject = new Date(Date.UTC(year, month - 1, day));
@@ -193,9 +196,8 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     };
 
     const cambioMesFlechas = (cambio: boolean) => {
-        const mesInterno = mes;
         if(cambio){ 
-            if(mesInterno === 12){
+            if(mes === 12){
                 setMes(1);
                 setAnio(anio + 1);
             } else {
@@ -203,14 +205,12 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
             }
             generaDias(mes,anio);
         } else {
-
-            if(mesInterno === 1){
+            if(mes === 1){
                 setMes(12);
                 setAnio(anio -1);
             } else {
                 setMes(mes - 1);
             }
-
             generaDias(mes,anio);
         }
     };

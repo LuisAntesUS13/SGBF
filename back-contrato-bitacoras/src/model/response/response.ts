@@ -5,6 +5,7 @@ export interface ActRegResponse {
   mensaje: string;
   id: string;
 }
+
 export interface ConsultaContratosResponse {
   no_registro: number;
   id_contrato: number;
@@ -36,6 +37,25 @@ export interface ConsultaContratosResponse {
   fh_fin_periodo: string;
   no_periodos: number;
   id_convenio: number;
+  pagina_actual: number;
+  total_registros: number;
+  total_paginas: number;
+
+}
+
+
+export interface ConsultaPerfilContratosResponse {
+  no_registro: number;
+  id_perfil_contrato: number;
+  fh_registro: string;
+  fh_baja: string | null;
+  id_contrato: number;
+	id_nivel: number;
+  nivel: string;
+	id_perfil: number;
+  perfil: string;
+	descripcion: string;
+  monto: number;
   pagina_actual: number;
   total_registros: number;
   total_paginas: number;
