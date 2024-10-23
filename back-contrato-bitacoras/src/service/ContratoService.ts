@@ -110,7 +110,7 @@ export const ContratoServicio = {
       .input("id_perfil_contrato", mssql.Int, request.id_perfil_contrato)
       .input("id_contrato", mssql.Int, request.id_contrato)
       .input("id_perfil", mssql.Int, request.id_perfil)
-      .input("perfil", mssql.VarChar, request.descripcion)
+      .input("perfil", mssql.VarChar, request.perfil)
       .input("descripcion", mssql.VarChar, request.descripcion)
       .input("monto",  mssql.Decimal(15,5), StringComaToFloat(request.monto))
       .input("id_nivel", mssql.Int, request.id_nivel)

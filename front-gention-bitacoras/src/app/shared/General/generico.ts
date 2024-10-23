@@ -1,4 +1,4 @@
-export default function convertirNumeroSeparadoComas(numero : string) : string {
+export function convertirNumeroSeparadoComas(numero : string) : string {
     let monto_variable = numero;
     try {
         const [integerPart, decimalPart] = numero.toString().split(".");
@@ -11,3 +11,8 @@ export default function convertirNumeroSeparadoComas(numero : string) : string {
     return monto_variable
 }
   
+
+export function convertirAFecha(fechaString) {
+    const [dia, mes, anio] = fechaString.split("/"); // Separar en día, mes y año
+    return new Date(anio, mes - 1, dia);
+}

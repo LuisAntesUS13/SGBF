@@ -23,6 +23,7 @@ import {
   FieldPerfilContratoClases,
 } from "../../../model/interface/contrato.interface.tsx";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
 import { Separador } from "../../../shared/SeparadorTexto/SeparadorTexto.tsx";
 import {
   ConsultaPerfilesContratos,
@@ -35,7 +36,7 @@ import {
 import { InputBuscador } from "../../../shared/InputBuscador/InputBuscador.tsx";
 import { InputCalendario } from "../../../shared/Calendario/InputCalendatio.tsx";
 import { InputFormat } from "../../../shared/InputFormato/InputFormato.tsx";
-import convertirNumeroSeparadoComas from "../../../shared/General/generico.ts";
+import { convertirAFecha, convertirNumeroSeparadoComas } from "../../../shared/General/generico.ts";
 
 export const FormularioContratos = () => {
   // Componente para navegar entre paginas
@@ -50,6 +51,9 @@ export const FormularioContratos = () => {
   const [gerente, setGerente] = useState<Catalogo[]>([]);
   const [area, setArea] = useState<Catalogo[]>([]);
   const [nivel, setNivel] = useState<Catalogo[]>([]);
+
+  const [textoGuardarContrato, setTextoGuardarContrato] = useState<string>('Guardar contrato');
+  const [textoGuardarPerfil, setTextoGuardarPerfil] = useState<string>('Guardar perfil');
 
   // Estado para controlar la visibilidad del segundo formulario
   const [showPerfiles, setShowPerfiles] = useState(false);
@@ -160,10 +164,6 @@ export const FormularioContratos = () => {
 
       
     });
-      // Restaurar la posición del cursor
-      // setTimeout(() => {
-      //   e.target.setSelectionRange(cursorPosition, cursorPosition);
-      // }, 0); // Restaurar el cursor después del ciclo de renderizado
 
     // Validar si el campo no está vacío
     if (value === null || value === "") {
@@ -411,6 +411,21 @@ export const FormularioContratos = () => {
       }
     }
 
+    if(isValid) {
+      try {
+        if(convertirAFecha(formData.fechaInicio) >=  convertirAFecha(formData.fechaTermino)){
+          isValid = false;
+          toast.error("La fecha de inicio debe ser mayor a la fecha de termino", {});
+          return;
+        }
+      }catch (ex){
+        isValid = false;
+        toast.error("Las fecha son invalidas", {});
+        return;
+      }
+    }
+    
+
     setFieldContratoClases(newFieldContratoClases);
 
     if (isValid) {
@@ -429,7 +444,7 @@ export const FormularioContratos = () => {
         id_area: formData.area === "" ? null : parseInt(formData.area),
         id_gerente:
           formData.gerente === "" ? null : parseInt(formData.gerente),
-        no_consultores: formData.consultores === "" ? null : parseInt(formData.area),
+        no_consultores: formData.consultores === "" ? null : parseInt(formData.consultores),
         activo: 1,
         id_archivo: null,
         nombre:  null,
@@ -456,6 +471,32 @@ export const FormularioContratos = () => {
       toast.error("Los campos  marcados son obligatorios", {});
     }
   };
+
+   const limpiarFormPerfil = async () => {
+         setFormPerfilesContrato((formData) => ({
+             ...formData,
+             id_perfil_contrato: "",
+             id_contrato: "",
+             id_perfil: "",
+             perfil: "",
+             monto: "0",
+             descripcion: "",
+             id_nivel: "",
+           }));
+
+           const newFieldPerfilClases: FieldPerfilContratoClases = {
+            id_perfil_contrato: "form-control",
+            id_contrato: "form-control",
+            id_perfil: "form-control",
+            perfil: "form-control",
+            monto: "form-control",
+            descripcion: "form-control",
+            id_nivel: "form-control",
+          };  
+      
+          setFormPerfilesContratoClases(newFieldPerfilClases);
+          setTextoGuardarPerfil("Guardar perfil");
+   }
 
   const guardarActualizarPerfiles = async () => {
     const newFieldPerfilClases: FieldPerfilContratoClases = {
@@ -509,17 +550,10 @@ export const FormularioContratos = () => {
         const result = await guardaActualizaPerfilesContrato(datos);
         if (result.correcto) {
           toast.success(result.mensaje, {});
-          setFormPerfilesContrato((formData) => ({
-            ...formData,
-            id_perfil_contrato: "",
-            id_contrato: "",
-            id_perfil: "",
-            perfil: "",
-            monto: "0",
-            descripcion: "",
-            id_nivel: "",
-          }));
+          await limpiarFormPerfil();
           getDataContratos();
+          setTextoGuardarPerfil("Guardar perfil");
+          obtenerCatalogoPerfiles();
         } else {
           toast.warn(result.mensaje, {});
         }
@@ -557,6 +591,7 @@ export const FormularioContratos = () => {
   useEffect(() => {
     if (datosContrato) {
       llegaronDatosActualizacion(); // Ejecutar la función si el objeto está presente
+      setTextoGuardarContrato("Actualizar contrato");
       getDataContratos(datosContrato.id_contrato);
       setShowPerfiles(true);
     }
@@ -572,7 +607,7 @@ export const FormularioContratos = () => {
   }, [datosContrato]);
 
   const llegaronDatosActualizacion = async () => {
-
+   
      let monto_variable =  convertirNumeroSeparadoComas(datosContrato.monto_variable);
      let monto_fijo =  convertirNumeroSeparadoComas(datosContrato.monto_fijo);
      let monto_total = convertirNumeroSeparadoComas(datosContrato.monto_total);
@@ -601,17 +636,19 @@ export const FormularioContratos = () => {
   const datosPerfilActualizacion = async (
     datosPerfil: DatosPerfilesContratos
   ) => {
-    // Aquí puedes poner la lógica de tu función
+    limpiarFormPerfil();
     toast.info(
       "Se agregaron los datos al formulario de perfiles para actualizar",
       {}
     );
+    setTextoGuardarPerfil("Actualizar perfil");
+    let datosPerfil_monto = convertirNumeroSeparadoComas(datosPerfil.monto.toString());
     setFormPerfilesContrato({
       id_perfil_contrato: datosPerfil.id_perfil_contrato.toString(),
       id_contrato: datosPerfil.id_contrato.toString(),
       id_perfil: datosPerfil.id_perfil.toString(),
       perfil: datosPerfil.perfil,
-      monto: datosPerfil.monto.toString(),
+      monto: datosPerfil_monto,
       descripcion: datosPerfil.descripcion,
       id_nivel: datosPerfil.id_nivel.toString(),
     });
@@ -694,8 +731,8 @@ export const FormularioContratos = () => {
             </div>
             <div className="card-footer row">
               <div className="col-sm-12 text-end">
-                <button className="btn btn-principal" title="Guardar" onClick={guardarActualizarContrato} >
-                  <SaveOutlinedIcon /> Guardar
+                <button className="btn btn-principal" title={textoGuardarContrato} onClick={guardarActualizarContrato} >
+                  <SaveOutlinedIcon /> {textoGuardarContrato}
                 </button>
               </div>
             </div>
@@ -731,8 +768,11 @@ export const FormularioContratos = () => {
               </div>
               <div className="card-footer row">
                 <div className="col-sm-12 text-end">
-                  <button className="btn btn-principal" title="Guardar"  onClick={() => { guardarActualizarPerfiles();}} >
-                    <SaveOutlinedIcon /> Guardar Perfil
+                <button className="btn btn-principal" title="Limpiar"  onClick={() => { limpiarFormPerfil();}} >
+                    <CleaningServicesOutlinedIcon /> Limpiar
+                  </button>
+                  <button className="btn btn-principal" title={textoGuardarPerfil}  onClick={() => { guardarActualizarPerfiles();}} >
+                    <SaveOutlinedIcon /> {textoGuardarPerfil}
                   </button>
                 </div>
               </div>
