@@ -11,3 +11,10 @@ export interface Actividad {
   horasLaboradas: string;
   actividadRealizada: string;
 }
+
+export interface EquipoDeTrabajo {
+  contrato: string;
+  liderTecnico: string;
+  consultor: string;
+  fechaInicio: string;
+}
