@@ -5,7 +5,7 @@ export  interface FieldContratoClases {
     fechaTermino: string;
     formaPago: string;
     tipoContrato: string;
-    consultora: string;
+    proveedor: string;
     consultores: string;
     montoVariable: string;
     montoFijo: string;
@@ -13,7 +13,7 @@ export  interface FieldContratoClases {
     id_archivo: string;
     archivoContrato: string;
     extencion: string;
-    direccion: string;
+    area: string;
     gerente: string;
 }
 
@@ -24,5 +24,5 @@ export  interface FieldPerfilContratoClases {
     perfil: string;
     monto: string;
     descripcion:  string;
-    cantidad:  string;
+    id_nivel:  string;
 }

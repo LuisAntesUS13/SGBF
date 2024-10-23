@@ -33,12 +33,9 @@ export const Contratos = () => {
           setDataContrato(result.data);
           if(mosrar){
             toast.success(result.mensaje, {});
-            // toast.error(result.message, {});
-            // toast.warn(result.message, {});
-            // toast.info(result.message, {});
           }
         } catch (error) {
-            console.log("Llega mansaje  error ")
+          console.log("Llega mansaje  error ")
           console.log(error);
           toast.error(error.mensaje, {});
         }
@@ -83,14 +80,6 @@ export const Contratos = () => {
                     <div className="col-sm-3">
                         <Input label="Proveedor" type="text" name="consultora" value={formulario.consultora} onChange={handleChange} placeholder="Consultora" className="" />
                     </div>
-                    <div className="col-sm-3">
-                        <InputCalendario label="Proveedor" name="consultora" value={formulario.consultora} onChange={handleChange} />
-                    </div>
-
-                    {/* <div className="col-sm-3">
-                        <Select  label="consultor1"  name="consultor1"   value={formData2.consultor1}  onChange={handleSelectChange}  options={proveedorOpciones}
-                        placeholder="Selecciona un consultor1"   className="form-select"/>
-                    </div> */}
                     <div className="col-sm-3">
                         <button type="button" className="btn btn-principal" style={{ marginTop: '30px'}} title="Buscar"
                         onClick={() =>{ buscarContratos()}}><SearchOutlinedIcon /> Buscar</button>

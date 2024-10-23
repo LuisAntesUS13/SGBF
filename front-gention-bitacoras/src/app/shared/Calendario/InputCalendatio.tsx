@@ -9,6 +9,7 @@ interface CalendarioProps {
   name: string; // Nombre del input
   value: string; // Valor del input
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Evento para manejar cambios
+  className?: string; // Props adicionales (ej. className)
   disabled?: boolean;
 }
 
@@ -17,6 +18,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
   name,
   value,
   onChange,
+  className,
   disabled = false, // Valor por defecto es "false"
 }) => {
   const [error, setError] = useState("");

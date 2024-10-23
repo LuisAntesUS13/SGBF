@@ -1,8 +1,6 @@
-export const API_BASE_URL = "http://localhost:3502";
+export const API_BASE_URL = "http://localhost";
 export const API_ROUTES = {
-  login: `${API_BASE_URL}/bitacora/contratos`,
-  contratos: `${API_BASE_URL}/bitacora/contratos`,
-  catalogos: `${API_BASE_URL}/bitacora/catalogo`,
-  usuarios: `${API_BASE_URL}/bitacora/usuarios`,
-  equiposDeTrabajo: `${API_BASE_URL}/asignacion/bitacora/equiposDeTrabajo`,
+  contratos: `${API_BASE_URL}:3505/contratos`,
+  catalogos: `${API_BASE_URL}:3500/catalogo`,
+  equiposDeTrabajo: `${API_BASE_URL}/bitacora/equiposDeTrabajo`,
 };

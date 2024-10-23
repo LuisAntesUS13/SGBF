@@ -23,12 +23,13 @@ export class DatosPerfiles{
 export class DatosPerfilesContratos{
     no_registro: number;
     id_perfil_contrato: number;
-    id_perfil: number;
     id_contrato: number;
     fh_registro: string;
     fh_baja: string;
-    cantidad: number;
-    nombre: string;
+    id_nivel: number;
+    nivel: string;
+    id_perfil: number;
+    perfil: string;
     descripcion: string;
     monto: number;
     //Valores comunes  paginador
@@ -38,8 +39,8 @@ export class DatosPerfilesContratos{
   }
 
 
-export class RespuestaPerfilesContrato {
-    codigoEstatus: number;
+  export class RespuestaPerfilContrato {
+    correcto: boolean;
     mensaje: string;
     data: DatosPerfilesContratos[];
 }

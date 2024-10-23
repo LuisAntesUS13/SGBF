@@ -8,11 +8,12 @@ import {
   RespuestaCatalogoExtArchivo,
   RespuestaCatalogoPerfilConsultor,
 } from "../model/response/catalogo.response.tsx";
+import { ErrorPersonalizado } from "../model/response/error.response.tsx";
 import { API_ROUTES } from "../shared/rutasApi.tsx";
 
 export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getAreas`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/areas`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -21,7 +22,13 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -32,11 +39,11 @@ export async function getCatalogoAreas(consultaCatalogo: ConsultaCatalogo) {
   }
 }
 
-export async function getCatalogoConsultoras(
+export async function getCatalogoProveedor(
   consultaCatalogo: ConsultaCatalogo
 ) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getConsultoras`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/consultores`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -45,7 +52,13 @@ export async function getCatalogoConsultoras(
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -60,7 +73,7 @@ export async function getCatalogoDocumentos(
   consultaCatalogoDocumentos: ConsultaCatalogoDocumentos
 ) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getDocumentos`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/documentos`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -69,7 +82,13 @@ export async function getCatalogoDocumentos(
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogoDocumentos = await response.json();
@@ -80,35 +99,35 @@ export async function getCatalogoDocumentos(
   }
 }
 
-export async function getCatalogoTipoDocumentos(
-  consultaCatalogo: ConsultaCatalogo
-) {
-  try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getTipoDocumentos`, {
-      method: "POST", // Especifica que es un POST
-      headers: {
-        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
-      },
-      body: JSON.stringify(consultaCatalogo), // Reemplaza esto con los datos que quieres enviar
-    });
+// export async function getCatalogoTipoDocumentos(
+//   consultaCatalogo: ConsultaCatalogo
+// ) {
+//   try {
+//     const response = await fetch(`${API_ROUTES.catalogos}/getTipoDocumentos`, {
+//       method: "POST", // Especifica que es un POST
+//       headers: {
+//         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+//       },
+//       body: JSON.stringify(consultaCatalogo), // Reemplaza esto con los datos que quieres enviar
+//     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
 
-    const data: RespuestaCatalogo = await response.json();
-    return data; // Retorna los datos obtenidos
-  } catch (error) {
-    console.error("Error al obtener datos:", error);
-    throw error; // Retorna el error para manejarlo externamente
-  }
-}
+//     const data: RespuestaCatalogo = await response.json();
+//     return data; // Retorna los datos obtenidos
+//   } catch (error) {
+//     console.error("Error al obtener datos:", error);
+//     throw error; // Retorna el error para manejarlo externamente
+//   }
+// }
 
 export async function getCatalogoExtenciones(
   consultaCatalogo: ConsultaCatalogo
 ) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getExtenciones`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/extencion`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -117,7 +136,13 @@ export async function getCatalogoExtenciones(
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogoExtArchivo = await response.json();
@@ -130,7 +155,7 @@ export async function getCatalogoExtenciones(
 
 export async function getCatalogoFormaPago(consultaCatalogo: ConsultaCatalogo) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getFormasPago`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/forma_pago`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -139,7 +164,13 @@ export async function getCatalogoFormaPago(consultaCatalogo: ConsultaCatalogo) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -155,7 +186,7 @@ export async function getCatalogoModuloAplicativo(
 ) {
   try {
     const response = await fetch(
-      `${API_ROUTES.catalogos}/getModuloAplicativo`,
+      `${API_ROUTES.catalogos}/modulo_aplicativo`,
       {
         method: "POST", // Especifica que es un POST
         headers: {
@@ -166,7 +197,13 @@ export async function getCatalogoModuloAplicativo(
     );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -182,7 +219,7 @@ export async function getCatalogoPerfilesConsultores(
 ) {
   try {
     const response = await fetch(
-      `${API_ROUTES.catalogos}/getPerfilesConsultores`,
+      `${API_ROUTES.catalogos}/perfil_consultor`,
       {
         method: "POST", // Especifica que es un POST
         headers: {
@@ -193,7 +230,13 @@ export async function getCatalogoPerfilesConsultores(
     );
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogoPerfilConsultor = await response.json();
@@ -206,7 +249,7 @@ export async function getCatalogoPerfilesConsultores(
 
 export async function getCatalogoProyectos(consultaCatalogo: ConsultaCatalogo) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getProyectos`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/proyecto`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -215,7 +258,13 @@ export async function getCatalogoProyectos(consultaCatalogo: ConsultaCatalogo) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -230,7 +279,7 @@ export async function getCatalogoTipoAccion(
   consultaCatalogo: ConsultaCatalogo
 ) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getTipoAccion`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/tipo_accion`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -239,10 +288,23 @@ export async function getCatalogoTipoAccion(
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
-    const data: RespuestaCatalogo = await response.json();
+    const respuesta = await response.json();
+
+
+    const data: RespuestaCatalogo = {
+      correcto: respuesta.success,
+      mensaje: respuesta.message,
+      data: respuesta.data,
+    }
     return data; // Retorna los datos obtenidos
   } catch (error) {
     console.error("Error al obtener datos:", error);
@@ -254,7 +316,7 @@ export async function getCatalogoTipoContrato(
   consultaCatalogo: ConsultaCatalogo
 ) {
   try {
-    const response = await fetch(`${API_ROUTES.catalogos}/getTipoContrato`, {
+    const response = await fetch(`${API_ROUTES.catalogos}/tipo_contrato`, {
       method: "POST", // Especifica que es un POST
       headers: {
         "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
@@ -263,7 +325,13 @@ export async function getCatalogoTipoContrato(
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
     }
 
     const data: RespuestaCatalogo = await response.json();
@@ -274,15 +342,63 @@ export async function getCatalogoTipoContrato(
   }
 }
 
-export class Periodos {
-  async getPeriodos() {
-    const response = await fetch(
-      "http://localhost:3500/bitacora/catalogo/getPeriodos",
-      {
-        method: "POST",
-      }
-    );
 
-    return response.json();
+export async function getCatalogoUsuarioPorCago(
+  consultaCatalogo: ConsultaCatalogo
+) {
+  try {
+    const response = await fetch(`${API_ROUTES.catalogos}/usuario_por_cargo`, {
+      method: "POST", // Especifica que es un POST
+      headers: {
+        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+      },
+      body: JSON.stringify(consultaCatalogo), // Reemplaza esto con los datos que quieres enviar
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
+    }
+
+    const data: RespuestaCatalogo = await response.json();
+    return data; // Retorna los datos obtenidos
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    throw error; // Retorna el error para manejarlo externamente
+  }
+}
+
+export async function getCatalogoNivelPerfil(
+  consultaCatalogo: ConsultaCatalogo
+) {
+  try {
+    const response = await fetch(`${API_ROUTES.catalogos}/nivel_perfil`, {
+      method: "POST", // Especifica que es un POST
+      headers: {
+        "Content-Type": "application/json", // Indica que el cuerpo de la solicitud es JSON
+      },
+      body: JSON.stringify(consultaCatalogo), // Reemplaza esto con los datos que quieres enviar
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      // eslint-disable-next-line no-throw-literal
+      throw {
+        correcto: errorData.success,
+        mensaje: errorData.message,
+        data: null,
+      }  as ErrorPersonalizado
+    }
+
+    const data: RespuestaCatalogo = await response.json();
+    return data; // Retorna los datos obtenidos
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    throw error; // Retorna el error para manejarlo externamente
   }
 }
