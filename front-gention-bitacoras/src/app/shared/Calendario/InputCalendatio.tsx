@@ -208,7 +208,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
           value={value}
           onChange={handleChangeInput}
           placeholder="dd/mm/yyyy"
-          className="form-control"
+          className={className}
           disabled={disabled}
         />
         <span className="input-group-text calendario" onClick={clickCalendario}>
