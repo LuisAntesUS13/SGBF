@@ -26,3 +26,11 @@ export  interface FieldPerfilContratoClases {
     descripcion:  string;
     id_nivel:  string;
 }
+
+
+
+export  interface FieldPeridosContratoClases {
+    fh_inicio:  string;
+    fh_termino:  string;
+    no_periodo:   string;
+}

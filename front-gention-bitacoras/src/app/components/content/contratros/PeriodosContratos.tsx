@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import ControlPointOutlinedIcon from '@mui/icons-material/ControlPointOutlined';
 import { getContratosData } from "../../../services/contratos.service.tsx";
 import { ConsultaContrato } from "../../../model/request/contratos.request.tsx";
 import { DatosContratos } from "../../../model/response/contratos.response.tsx";
@@ -9,7 +8,7 @@ import { Paginador } from "../../../shared/Paginador/Paginador.tsx";
 import { Input } from "../../../shared/Input/Input.tsx";
 import { ToastContainer, toast } from 'react-toastify';
 
-export const Contratos = () => {
+export const PeriodosContratos = () => {
 
     // Componente para navegar entre paginas
     const navigate = useNavigate();
@@ -69,7 +68,7 @@ export const Contratos = () => {
 
     return (<>
         <div className="contenido_principal">
-            <h3>Control de contratos</h3>
+            <h3>Control de periodos del contrato</h3>
             <hr />
             <div className="card">
                 <div className="card-body row">
@@ -84,11 +83,6 @@ export const Contratos = () => {
                             onClick={() => { buscarContratos() }}><SearchOutlinedIcon /> Buscar</button>
                     </div>
                 </div>
-                <div className="card-footer row">
-                    <div className="col-sm-3" style={{ marginTop: '3px', marginBottom: '3px' }}>
-                        <button type="button" className="btn btn-accion" title="Nuevo contrato" onClick={() => navigate("/contrato/registrar")}><ControlPointOutlinedIcon /> Nuevo Contrato</button>
-                    </div>
-                </div>
             </div>
             <div className="card" >
                 <div className="card-body row">
@@ -99,24 +93,19 @@ export const Contratos = () => {
                                     <th scope="col" className="valoresCentrados">No. Contrato</th>
                                     <th scope="col" className="valoresCentrados">Fecha inicio</th>
                                     <th scope="col" className="valoresCentrados">Fecha termino</th>
-                                    <th scope="col" className="valoresCentrados">Monto</th>
-                                    <th scope="col" className="valoresCentrados">Proveedor</th>
-                                    <th scope="col" className="valoresCentrados">Tipo contrato</th>
-                                    <th scope="col" className="valoresCentrados">Forma pago</th>
-                                    <th scope="col" className="valoresCentrados">Estatus</th>
+                                    <th scope="col" className="valoresCentrados">Fechas del primer periodo</th>
+                                    <th scope="col" className="valoresCentrados">Numero de periodos</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {dataContratos.map((dato: DatosContratos, i) => (
-                                    <tr key={i} style={{ cursor: 'pointer' }} onClick={() => navigate("/contrato/actualizar", { state: dato })}>
+                                    <tr key={i} style={{ cursor: 'pointer' }} onClick={() => navigate("/periodosContrato/actualizar", { state: dato })}>
                                         <td className="valoresCentrados">{dato.no_contrato}</td>
                                         <td className="valoresCentrados">{dato.fh_inicio}</td>
                                         <td className="valoresCentrados">{dato.fh_fin}</td>
-                                        <td className="valoresCentrados">{dato.monto_total}</td>
-                                        <td className="valoresCentrados">{dato.consultora}</td>
-                                        <td className="valoresCentrados">{dato.tipo_contrato}</td>
-                                        <td className="valoresCentrados">{dato.forma_pago}</td>
-                                        <td className="valoresCentrados">{dato.activo ? 'Activo' : 'Inactivo'}</td>
+                                        <td className="valoresCentrados">{(dato.fh_inicio_periodo === null || dato.fh_fin_periodo === null) ? 
+                                                                           "Sin periodo inicial": dato.fh_inicio_periodo + " - " + dato.fh_fin_periodo }</td>
+                                        <td className="valoresCentrados">{dato.no_periodos === null? "Sin numero de periodos" : dato.no_periodos}</td>
                                     </tr>
                                 ))}
                             </tbody>

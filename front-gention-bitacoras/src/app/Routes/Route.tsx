@@ -13,11 +13,11 @@ import { ObservacionPorPeriodoConsultor } from "../components/content/Consultor/
 import { ConsultoresLiderTecnico } from "../components/content/LiderTecnico/ConsultoresLiderTecnico/ConsultoresLiderTecnico.tsx";
 import { RegistroDeActividadConsultor } from "../components/content/Consultor/RegistroDeActividadConsultor/RegistroDeActividadConsultor.tsx";
 import { ReasignacionLider } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasingacionLider.tsx";
-import { ReasignacionLiderActualizar } from "../components/content/EquipoDeTrabajo/ReasignacionLider/ReasinacionLiderActualizar.tsx";
 import { Requerimientos } from "../components/content/Requerimientos/Requerimientos.tsx";
 import { EquiposDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/EquiposDeTrabajo.tsx";
 import { RegistroDeEquipoDeTrabajo } from "../components/content/EquipoDeTrabajo/RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.tsx";
-import { CargaPerfiles } from "../components/content/CargaConsultores/CargaPerfiles.tsx";
+import { PeriodosContratos } from "../components/content/contratros/PeriodosContratos.tsx";
+import { FormularioPeriodosContratos } from "../components/content/contratros/FormularioPeriodosContrato.tsx";
 
 export const Enrutador = () => {
   return (
@@ -26,14 +26,16 @@ export const Enrutador = () => {
         <Route path="/contrato" element={<Contratos />} />
         <Route path="/contrato/registrar" element={<FormularioContratos />} />
         <Route path="/contrato/actualizar" element={<FormularioContratos />} />
-        <Route path="/cargaPerfiles" element={<CargaPerfiles />} />
+        <Route path="/periodosContrato" element={<PeriodosContratos />} />
+        <Route path="/periodosContrato/actualizar" element={<FormularioPeriodosContratos />} />
+        {/* <Route path="/cargaPerfiles" element={<CargaPerfiles />} /> */}
         <Route path="/equipos-de-trabajo" element={<EquiposDeTrabajo />} />
         <Route
           path="/registro-de-equipos-de-trabajo"
           element={<RegistroDeEquipoDeTrabajo />}
         />
         <Route path="/reasignacion-de-lider" element={<ReasignacionLider />} />
-        <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} />
+        {/* <Route path="/reasignacion-de-lider/actualizar" element={<ReasignacionLiderActualizar />} /> */}
         <Route path="/requerimientos" element={<Requerimientos />} />
         <Route
           path="/validacion-bitacora-lider-tecnico"

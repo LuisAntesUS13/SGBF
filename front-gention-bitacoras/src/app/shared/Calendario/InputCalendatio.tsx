@@ -89,11 +89,7 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     };
 
     const generaDias = (month: number, year: number) => {
-        console.log(month, " mes");
-        console.log(year, " años");
         const numberDays = new Date(Date.UTC(year, (month - 1), 1)).getDate();
-
-        console.log(numberDays, " DIAS");
         const arrayDays = Array.from({ length: numberDays }, (_, index) => {
             const day = index + 1; // Días comienzan en 1
             const dayObject = new Date(Date.UTC(year, month - 1, day));
@@ -127,7 +123,6 @@ export const InputCalendario: React.FC<CalendarioProps> = ({
     const diaSeleccionado = (day: any) => {
         const dia = day > 9 ? day : '0' + day;
         setSelectedDay(day);
-        // console.log(`${dia}/${mes}/${anio}`);
         const fecha = `${dia}/${mes > 9 ? mes : '0' + mes}/${anio}`;
 
         const event = {

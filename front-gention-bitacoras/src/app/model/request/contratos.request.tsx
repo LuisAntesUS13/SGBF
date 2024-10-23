@@ -27,3 +27,17 @@ export class GuardaContrato {
   id_contrato_convenio: number | null;
 
 }  
+
+export class GuardaPeriodosContrato {
+  id_contrato: number;
+  fh_inicio: string;
+  fh_final: string;
+  no_periodos: number
+}  
+
+
+export class ConsultaPeriodosContrato {
+  id_contrato: number;
+  pagina_actual: number;
+  registros_por_pagina: number;
+} 

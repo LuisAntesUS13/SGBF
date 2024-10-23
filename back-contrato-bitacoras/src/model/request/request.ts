@@ -48,3 +48,22 @@ export interface ConsultaPerfilesContratosRequest {
     pagina_actual?: number;
     registros_por_pagina?: number;
 }
+
+
+export interface RegistraActualizaPeriodosContratoRequest {
+    id_contrato: number;
+    fh_inicio: string;
+    fh_final: string;
+    no_periodos: number;
+    id_usuario?: number | null;
+    ip?: string | null;
+}
+
+
+export interface ConsultaPeriodosContratosRequest {
+    id_contrato: string;
+    pagina_actual?: number;
+    registros_por_pagina?: number;
+    id_usuario?: number | null;
+    ip?: string | null;
+}

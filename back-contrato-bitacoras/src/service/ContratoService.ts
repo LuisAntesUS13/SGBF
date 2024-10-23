@@ -4,13 +4,16 @@ import { mapToInterface, StringComaToFloat, StringFecha } from "../util/util";
 import {
   ConsultaContratosRequest,
   ConsultaPerfilesContratosRequest,
+  ConsultaPeriodosContratosRequest,
   RegistraActualizaContratoRequest,
   RegistraActualizaPerfilContratoRequest,
+  RegistraActualizaPeriodosContratoRequest,
 } from "../model/request/request";
 import {
   ActRegResponse,
   ConsultaContratosResponse,
   ConsultaPerfilContratosResponse,
+  ConsultaPeriodosContratosResponse,
 } from "../model/response/response";
 
 export const ContratoServicio = {
@@ -52,10 +55,14 @@ export const ContratoServicio = {
         mssql.Decimal,
         StringComaToFloat(request.monto_variable)
       )
-      .input("monto_fijo", mssql.Decimal(15,5), StringComaToFloat(request.monto_fijo))
+      .input(
+        "monto_fijo",
+        mssql.Decimal(15, 5),
+        StringComaToFloat(request.monto_fijo)
+      )
       .input(
         "monto_total",
-        mssql.Decimal(15,5),
+        mssql.Decimal(15, 5),
         StringComaToFloat(request.monto_total)
       )
       .input("id_forma_pago", mssql.Int, request.id_forma_pago)
@@ -112,7 +119,7 @@ export const ContratoServicio = {
       .input("id_perfil", mssql.Int, request.id_perfil)
       .input("perfil", mssql.VarChar, request.perfil)
       .input("descripcion", mssql.VarChar, request.descripcion)
-      .input("monto",  mssql.Decimal(15,5), StringComaToFloat(request.monto))
+      .input("monto", mssql.Decimal(15, 5), StringComaToFloat(request.monto))
       .input("id_nivel", mssql.Int, request.id_nivel)
       .input("activo", mssql.Bit, request.activo)
       .input("id_usuario", mssql.Int, request.id_usuario)
@@ -120,8 +127,51 @@ export const ContratoServicio = {
       .execute("sp_registraActualizaPerfilesContrato"); // Reemplaza con el nombre de tu procedimiento almacenado
 
     // Mapeamos los valores
-    const respuesta: ActRegResponse[] =
-      mapToInterface<ActRegResponse>(result.recordset);
+    const respuesta: ActRegResponse[] = mapToInterface<ActRegResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+  async ActRegPeriodosContrato(
+    request: RegistraActualizaPeriodosContratoRequest
+  ): Promise<ActRegResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let result = await pool
+      .request()
+      .input("id_contrato", mssql.Int, request.id_contrato)
+      .input("fh_inicio", mssql.Date, StringFecha(request.fh_inicio))
+      .input("fh_final", mssql.Date, StringFecha(request.fh_final))
+      .input("no_periodos", mssql.Int, request.no_periodos)
+      .input("id_usuario", mssql.Int, request.id_usuario)
+      .input("ip", mssql.VarChar, request.ip)
+      .execute("sp_registraContratoPeriodos"); // Reemplaza con el nombre de tu procedimiento almacenado
+
+    // Mapeamos los valores
+    const respuesta: ActRegResponse[] = mapToInterface<ActRegResponse>(
+      result.recordset
+    );
+
+    return respuesta;
+  },
+
+  async getPeriodosContrato(
+    request: ConsultaPeriodosContratosRequest
+  ): Promise<ConsultaPeriodosContratosResponse[]> {
+    // Ejecuta tu consulta
+    const pool = await connection(); // Asegúrate de obtener la conexión correctamente
+    let result = await pool
+      .request()
+      .input("id_contrato", mssql.Int, request.id_contrato)
+      .input("pagina_actual", mssql.Int, request.pagina_actual)
+      .input("registros_por_pagina", mssql.Int, request.registros_por_pagina)
+      .execute("sp_consultaPeriodosContrato"); // Reemplaza con el nombre de tu procedimiento almacenado
+
+    // Mapeamos los valores
+    const respuesta: ConsultaPeriodosContratosResponse[] =
+      mapToInterface<ConsultaPeriodosContratosResponse>(result.recordset);
 
     return respuesta;
   },

@@ -59,9 +59,19 @@ export interface ConsultaPerfilContratosResponse {
   pagina_actual: number;
   total_registros: number;
   total_paginas: number;
-
 }
 
+export interface ConsultaPeriodosContratosResponse {
+  no_registro: number;
+  id_contrato: number;
+  no_periodo: number;
+  fh_inicio: string;
+  fh_fin: string;
+  pagina_actual: number;
+  total_registros: number;
+  total_paginas: number;
+
+}
 
 
 

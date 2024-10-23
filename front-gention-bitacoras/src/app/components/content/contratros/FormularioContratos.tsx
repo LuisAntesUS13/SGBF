@@ -657,7 +657,7 @@ export const FormularioContratos = () => {
   return (
     <>
       <div className="contenido_principal">
-        <h3>Nuevo contrato</h3>
+        <h3>Contrato</h3>
         <hr />
         <div className="row">
           <div className="card">
