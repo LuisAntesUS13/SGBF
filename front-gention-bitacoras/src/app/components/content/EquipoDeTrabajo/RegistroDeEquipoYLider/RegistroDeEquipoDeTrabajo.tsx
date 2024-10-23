@@ -13,11 +13,13 @@ import {
 import "../RegistroDeEquipoYLider/RegistroDeEquipoDeTrabajo.css";
 import { InputCalendario } from "../../../../shared/Calendario/InputCalendatio.tsx";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
+import { ToastContainer, toast } from "react-toastify";
+import { EquipoDeTrabajo } from "../../../../model/interface/equiposDeTrabajo.interface.tsx";
 
 interface Fila {
   contrato: string;
   liderTecnico: string;
-  consultores: string;
+  consultor: string;
   fechaInicio: string;
 }
 
@@ -42,7 +44,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
   const [formData, setFormData] = useState<Fila>({
     contrato: "",
     liderTecnico: "",
-    consultores: "",
+    consultor: "",
     fechaInicio: "",
   });
 
@@ -93,23 +95,81 @@ export const RegistroDeEquipoDeTrabajo = () => {
   const [filas, setFilas] = useState<Fila[]>([]);
 
   const agregarFila = () => {
-    setFilas((prev) => [...prev, formData]);
-    setFormData({
-      contrato: "",
-      liderTecnico: "",
-      consultores: "",
-      fechaInicio: "",
-    });
-    console.log(filas);
-    console.log(formData);
-  };
+    const datoDeContrato = contrato.find((e) => e.id == formData.contrato);
+    const datoDeLiderTecnico = liderTecnico.find(
+      (e) => e.id == formData.liderTecnico
+    );
+    const datoDeConsultor = consultor.find((e) => e.id == formData.consultor);
 
+    setFilas((prev) => [
+      ...prev,
+      {
+        contrato: datoDeContrato?.nombre || "",
+        liderTecnico: datoDeLiderTecnico?.nombre || "",
+        consultor: datoDeConsultor?.nombre || "",
+        fechaInicio: formData.fechaInicio,
+      },
+    ]);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData, // Mantén los demás campos intactos
+      consultor: "",
+      fechaInicio: "",
+    }));
+  };
   useEffect(() => {
     getContrato();
     getLiderTecnico();
     getConsultor();
   }, []);
   // Ejecuta funciones cada vez que se agrega una nueva fila
+
+  const eliminarFila = (index: number) => {
+    setFilas((prev) => prev.filter((_, i) => i !== index));
+    console.log(filas);
+    console.log(formData);
+  };
+
+  const [habilitarCampos, setHabilitarCampos] = useState(false); // Estado para habilitar/deshabilitar
+
+  const [fieldEquipoDeTrabajo, setFieldEquipoDeTrabajo] = useState({
+    liderTecnico: "form-control",
+    contrato: "form-control",
+    consultor: "form-control",
+    fechaInicio: "form-control",
+  });
+
+  const asignarConsultorAEquipoDeTrabajo = () => {
+    const newFieldEquipoDeTrabajo: EquipoDeTrabajo = {
+      liderTecnico: "form-control",
+      contrato: "form-control",
+      consultor: "form-control",
+      fechaInicio: "form-control",
+    };
+
+    let isValid = true; // Variable para verificar si el formulario es válido
+    console.log(isValid);
+
+    for (const key in formData) {
+      // Verifica si el campo no es opcional
+      if (formData[key] === null || formData[key] === "") {
+        newFieldEquipoDeTrabajo[key as keyof EquipoDeTrabajo] =
+          "form-control invalid-class";
+        isValid = false;
+        console.log(isValid);
+      }
+    }
+
+    setFieldEquipoDeTrabajo(newFieldEquipoDeTrabajo);
+
+    if (isValid) {
+      toast.success("Se agregó el equipo correctamente", {});
+
+      agregarFila();
+    } else {
+      toast.error("Los campos  marcados son obligatorios", {});
+    }
+  };
 
   return (
     <>
@@ -123,7 +183,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                 <button
                   type="button"
                   className="btn btn-accion-sec"
-                  title="Buscar"
+                  title="asignar"
                   onClick={handleAsginarEquipoClick}
                 >
                   <KeyboardReturnIcon />
@@ -141,7 +201,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     value={formData.contrato}
                     onChange={handleSelectChange}
                     options={contrato}
-                    className="form-select"
+                    className={fieldEquipoDeTrabajo.contrato}
                   />
                 </div>
                 <div className="col-sm-3">
@@ -152,7 +212,7 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     value={formData.liderTecnico}
                     onChange={handleSelectChange}
                     options={liderTecnico}
-                    className="form-select"
+                    className={fieldEquipoDeTrabajo.liderTecnico}
                   />
                 </div>
               </div>
@@ -163,12 +223,12 @@ export const RegistroDeEquipoDeTrabajo = () => {
                 <div className="col-sm-3">
                   <Select
                     label="Consultores"
-                    name="consultores"
+                    name="consultor"
                     placeholder="Seleccione una opción"
-                    value={formData.consultores}
+                    value={formData.consultor}
                     onChange={handleSelectChange}
                     options={consultor}
-                    className="form-select"
+                    className={fieldEquipoDeTrabajo.consultor}
                   />
                 </div>
                 <div className="col-sm-3">
@@ -179,16 +239,15 @@ export const RegistroDeEquipoDeTrabajo = () => {
                     onChange={handleSelectChange}
                   />
                 </div>
-
                 <div className="col-sm-2">
                   <button
                     type="button"
                     className="btn btn-principal"
                     title="Buscar"
                     style={{ marginTop: "30px" }}
-                    onClick={agregarFila}
+                    onClick={asignarConsultorAEquipoDeTrabajo}
                   >
-                    Asignar
+                    Agregar
                   </button>
                 </div>
               </div>
@@ -206,23 +265,28 @@ export const RegistroDeEquipoDeTrabajo = () => {
                         Perfil
                       </th>
                       <th scope="col" className="valoresCentrados">
-                        Fecha de Inicio
+                        Fecha de Inicio de actividades
                       </th>
                       <th scope="col" className="valoresCentrados">
                         Estatus
                       </th>
-                      <th className="valoresCentrados"> Algo</th>
+                      <th className="valoresCentrados">Eliminar</th>
                     </tr>
                   </thead>
-                  <tbody className="">
+                  <tbody>
                     {filas.map((fila, index) => (
-                      <tr key={index} className="valoresCentrados">
-                        <td>td{fila.contrato}</td>
-                        <td>{fila.liderTecnico}</td>
-                        <td>{fila.consultores}</td>
+                      <tr key={index} className="valoresCentrados rows-tabla">
+                        <td>{fila.consultor}</td>
+                        <td>Desarrollador sr. Java</td>
                         <td>{fila.fechaInicio}</td>
+                        <td>Activo</td>
                         <td>
-                          <PersonRemoveIcon className="person-remove-icon" />
+                          <button
+                            onClick={() => eliminarFila(index)}
+                            className="person-remove-button"
+                          >
+                            <PersonRemoveIcon className="person-remove-icon" />
+                          </button>{" "}
                         </td>
                       </tr>
                     ))}
